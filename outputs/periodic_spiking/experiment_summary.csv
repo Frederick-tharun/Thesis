@@ -1,0 +1,2 @@
+timestamp,regime,optimizer,samples,states,rmse_x,nrmse_x,rmse_all_states,nrmse_all_states,N_res,density_p,spectral_radius,leak_rate,input_scaling,ridge,washout
+2026-05-13 09:29:56,periodic_spiking,gp,150000,3,0.00085224,0.00164169,0.00120892,0.00100566,250,0.2,0.45,0.247776,0.440754,1e-08,500

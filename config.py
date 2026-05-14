@@ -1,0 +1,225 @@
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "DRG3_MdFoF.csv")
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# -------------------------------------------------------------------
+# data
+# -------------------------------------------------------------------
+
+SAMPLING_INTERVAL = 0.25
+
+TRAIN_RATIO = 0.70
+VAL_RATIO = 0.15
+TEST_RATIO = 0.15
+
+BASELINE_PERCENTILE = 10
+SPIKE_THRESHOLD_STD = 1.0
+MIN_SPIKE_DISTANCE = 20
+NORMALIZATION_METHOD = "zscore"
+EPS = 1e-8
+
+DATASET_MODE = "real"   # changed automatically by main.py: "real" or "hr"
+
+# -------------------------------------------------------------------
+# ESN defaults
+# -------------------------------------------------------------------
+
+DEFAULT_ESN_PARAMS = {
+    "reservoir_size": 600,
+    "spectral_radius": 0.90,
+    "leak_rate": 0.35,
+    "input_scaling": 0.50,
+    "regularization": 1e-6,
+    "sparsity": 0.10,
+    "washout": 200,
+    "noise_std": 0.0,
+}
+
+RESERVOIR_BIAS_SCALE = 0.1
+WINDOW_SIZE = 20
+RANDOM_SEED = 42
+
+# -------------------------------------------------------------------
+# optimizer settings
+# -------------------------------------------------------------------
+
+OPTIMIZERS_TO_COMPARE = ["gp", "dummy", "forest", "gbrt"]
+
+BO_N_CALLS = 30
+BO_N_RANDOM_STARTS = 8
+
+# For final thesis run later:
+# BO_N_CALLS = 80
+# BO_N_RANDOM_STARTS = 15
+
+BO_SEARCH_SPACE = {
+    "reservoir_size":  (250, 800, "int", False),
+    "spectral_radius": (0.50, 1.20, "float", False),
+    "leak_rate":       (0.10, 0.80, "float", False),
+    "input_scaling":   (0.05, 1.00, "float", False),
+    "regularization":  (1e-10, 1e-3, "float", True),
+    "sparsity":        (0.02, 0.20, "float", False),
+    "washout":         (50, 500, "int", False),
+}
+
+TS_FOLDS = 3
+TS_VAL_LEN = 80
+
+# -------------------------------------------------------------------
+# Hindmarsh-Rose settings
+# -------------------------------------------------------------------
+
+HR_DT = 0.01
+HR_TOTAL_STEPS = 150000
+HR_TRANSIENT = 5000
+
+# Choose one:
+# "periodic_spiking"
+# "periodic_bursting"
+# "chaotic_bursting"
+HR_MODE = "periodic_bursting"
+
+HR_PARAMETER_SETS = {
+    "periodic_spiking": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "xr": -1.6,
+        "I": 2.5,
+        "x0": [0.1, 0.0, 0.0],
+    },
+
+    "periodic_bursting": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.003,
+        "s": 4.0,
+        "xr": -1.6,
+        "I": 3.0,
+        "x0": [0.1, 0.0, 0.0],
+    },
+
+    "chaotic_bursting": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "xr": -1.6,
+        "I": 3.25,
+        "x0": [-1.0, -3.0, 3.0],
+    },
+}
+
+
+_hr = HR_PARAMETER_SETS[HR_MODE]
+HR_A = _hr["a"]
+HR_B = _hr["b"]
+HR_C = _hr["c"]
+HR_D = _hr["d"]
+HR_R = _hr["r"]
+HR_S = _hr["s"]
+HR_XR = _hr["xr"]
+HR_I = _hr["I"]
+
+# ============================================================
+# Clean output organization
+# ============================================================
+
+OUTPUT_ROOT = "outputs"
+OUTPUT_DIR = "outputs"
+
+# True = each regime folder is cleaned before a new run.
+# This prevents old confusing files from mixing with new files.
+CLEAR_OUTPUT_FOLDER_EACH_RUN = True
+
+# ============================================================
+# HR regime selection
+# ============================================================
+
+HR_MODE = "periodic_bursting"
+
+# Optional aliases for compatibility with different loader versions.
+HR_REGIME = HR_MODE
+HR_DYNAMICS_MODE = HR_MODE
+HINDMARSH_ROSE_MODE = HR_MODE
+
+# ============================================================
+# Plot settings
+# ============================================================
+
+SPIKE_THRESHOLD = 1.0
+SPIKE_TOLERANCE_STEPS = 5
+
+# For recursive zoom plot.
+# 1200 steps is clearer than only 120 for long HR data.
+ZOOM_STEPS = 1200
+
+# ============================================================
+# Linear-feedback control settings
+# ============================================================
+
+# Main control intensity sweep for the ESN digital twin.
+CONTROL_LINEAR_K_SWEEP = [0.05, 0.10, 0.20, 0.35, 0.50, 0.75, 1.00, 1.25, 1.50]
+
+# Fraction of the test horizon after which linear feedback starts.
+# Example: 0.20 means first 20% of the test segment is free-run,
+# then control is switched on.
+CONTROL_START_FRAC = 0.20
+
+# How to choose the control target.
+# "rest_state" = median of non-spike training states
+# "zero"       = exact zero vector
+# "mean"       = mean of the full training state
+CONTROL_TARGET_MODE = "rest_state"
+
+# Settling-time rule:
+# error norm must stay below CONTROL_SETTLING_TOL for
+# CONTROL_SETTLING_HOLD_STEPS consecutive samples.
+CONTROL_SETTLING_TOL = 0.15
+CONTROL_SETTLING_HOLD_STEPS = 100
+
+# Optional clamp on corrected ESN input after control is applied.
+# Set to None to disable.
+# Examples:
+#   None
+#   5.0
+#   (-5.0, 5.0)
+CONTROL_INPUT_CLIP = None
+
+# Flag a controlled rollout as diverged if any state magnitude exceeds this.
+CONTROL_DIVERGENCE_ABS_LIMIT = 20.0
+
+# ============================================================
+# Automatic K selection settings
+# ============================================================
+
+# Used when running:
+# python main.py --dataset hr --hr-mode periodic_bursting --control --auto-control-k
+
+CONTROL_AUTO_K_MIN = 0.05
+CONTROL_AUTO_K_MAX = 2.00
+CONTROL_AUTO_K_NUM = 25
+CONTROL_AUTO_K_REFINE_NUM = 15
+CONTROL_AUTO_K_REFINE_WIDTH_FRAC = 0.15
+
+# K-selection score:
+# lower score = better K
+#
+# score = target_rmse_state
+#       + CONTROL_SCORE_ENERGY_WEIGHT * control_energy
+#       + CONTROL_SCORE_SETTLING_WEIGHT * settling_time
+#       - CONTROL_SCORE_SPIKE_WEIGHT * spike_reduction_percent / 100
+
+CONTROL_SCORE_ENERGY_WEIGHT = 0.01
+CONTROL_SCORE_SETTLING_WEIGHT = 0.001
+CONTROL_SCORE_SPIKE_WEIGHT = 0.0

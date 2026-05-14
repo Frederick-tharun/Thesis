@@ -1,0 +1,15 @@
+{
+  "N_res": 715,
+  "p": 0.07362546039225804,
+  "spectral_radius": 0.5125521677201456,
+  "leaky_coefficient": 0.14748072561580206,
+  "input_scaling": 0.2808673344659844,
+  "regularization": 3.2827576158867195e-08,
+  "washout": 372,
+  "validation_score": 0.0007503659978986118,
+  "validation_nrmse": 0.0006006928401526791,
+  "validation_nrmse_x": 0.000814511636932583,
+  "validation_std_ratio": 1.000000213865893,
+  "validation_mean_gap": 3.2038652470288916e-06,
+  "validation_penalty": 0.0
+}
