@@ -335,40 +335,62 @@ def _plot_controlled_vs_uncontrolled_x(
     controlled = controlled[:n]
 
     control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+    t0 = times[control_start_idx]
 
-    plt.figure(figsize=(15, 6))
+    # zoom window
+    left = max(0, control_start_idx - 80)
+    right = min(n, control_start_idx + 120)
 
-    plt.plot(times, truth[:, 0], color="black", linewidth=1.4, label="True x")
-    plt.plot(times, uncontrolled[:, 0], linewidth=1.2, label="Uncontrolled ESN x")
-    plt.plot(times, controlled[:, 0], linestyle="--", linewidth=1.4, label="Controlled ESN x")
-    plt.axhline(target_state[0], linestyle=":", linewidth=1.4, label="Target x")
-    plt.axvline(times[control_start_idx], linestyle="--", linewidth=1.4, label="Control start")
+    fig, axes = plt.subplots(
+        2, 1, figsize=(14, 8), sharex=False,
+        gridspec_kw={"height_ratios": [2, 1.3]}
+    )
+
+    # -------- top: full trajectory --------
+    ax = axes[0]
+    ax.plot(times, truth[:, 0], color="black", linewidth=1.6, label="True x")
+    ax.plot(times, uncontrolled[:, 0], linewidth=1.3, label="Uncontrolled ESN x")
+    ax.plot(times, controlled[:, 0], linestyle="--", linewidth=1.6, label="Controlled ESN x")
+    ax.axhline(target_state[0], linestyle=":", linewidth=1.4, label="Target x")
+    ax.axvline(t0, linestyle="--", linewidth=1.3, label="Control start")
+    ax.axvspan(t0, times[-1], alpha=0.08)
 
     txt = (
-        f"K = {metrics.get('K')}\n"
-        f"Target RMSE = {metrics.get('target_rmse_state'):.4f}\n"
-        f"Spike reduction = {metrics.get('spike_reduction_percent'):.2f}%\n"
-        f"Energy = {metrics.get('control_energy'):.4f}"
+        f"K = {metrics.get('K'):.4f}\n"
+        f"Target RMSE = {metrics.get('target_rmse_state'):.3e}\n"
+        f"Spike reduction = {metrics.get('spike_reduction_percent'):.1f}%\n"
+        f"Energy = {metrics.get('control_energy'):.3e}"
     )
 
-    plt.text(
-        0.01,
-        0.97,
-        txt,
-        transform=plt.gca().transAxes,
-        verticalalignment="top",
-        bbox=dict(boxstyle="round", facecolor="white", alpha=0.85),
+    ax.text(
+        0.015, 0.97, txt,
+        transform=ax.transAxes,
+        va="top",
+        bbox=dict(boxstyle="round", facecolor="white", alpha=0.9)
     )
 
-    plt.title("Linear feedback control: x-state comparison", fontsize=14, fontweight="bold")
-    plt.xlabel("Time (s)")
-    plt.ylabel("x state")
-    plt.grid(True, alpha=0.25)
-    plt.legend(loc="best")
+    ax.set_title("Linear feedback control: x-state comparison", fontsize=14, fontweight="bold")
+    ax.set_ylabel("x state")
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="upper right")
+
+    # -------- bottom: zoom near control start --------
+    ax2 = axes[1]
+    ax2.plot(times[left:right], truth[left:right, 0], color="black", linewidth=1.6, label="True x")
+    ax2.plot(times[left:right], uncontrolled[left:right, 0], linewidth=1.3, label="Uncontrolled ESN x")
+    ax2.plot(times[left:right], controlled[left:right, 0], linestyle="--", linewidth=1.6, label="Controlled ESN x")
+    ax2.axhline(target_state[0], linestyle=":", linewidth=1.4, label="Target x")
+    ax2.axvline(t0, linestyle="--", linewidth=1.3, label="Control start")
+    ax2.axvspan(t0, times[right - 1], alpha=0.08)
+
+    ax2.set_title("Zoom around control start", fontsize=12, fontweight="bold")
+    ax2.set_xlabel("Time (s)")
+    ax2.set_ylabel("x state")
+    ax2.grid(True, alpha=0.25)
+
     plt.tight_layout()
-
-    path = os.path.join(output_dir, "controlled_vs_uncontrolled_x.png")
-    plt.savefig(path, dpi=180)
+    path = os.path.join(output_dir, "controlled_vs_uncontrolled_x_better.png")
+    plt.savefig(path, dpi=240, bbox_inches="tight")
     plt.close()
 
     print(f"[Plot] Saved -> {path}")
