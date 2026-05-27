@@ -6,10 +6,10 @@
   "input_scaling": 0.21824601084898726,
   "regularization": 1.0742280610798986e-06,
   "washout": 105,
-  "validation_score": 0.00045756843155140116,
-  "validation_nrmse": 0.00035773411900991744,
-  "validation_nrmse_x": 0.0005003545654977514,
-  "validation_std_ratio": 0.9999510994961007,
-  "validation_mean_gap": 0.00018013429815547417,
+  "validation_score": 0.00045719740510515277,
+  "validation_nrmse": 0.00035759824558135477,
+  "validation_nrmse_x": 0.0004998827591867805,
+  "validation_std_ratio": 0.9999511017462421,
+  "validation_mean_gap": 0.0001801299841182823,
   "validation_penalty": 0.0
 }

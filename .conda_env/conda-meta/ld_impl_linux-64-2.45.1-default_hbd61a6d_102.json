@@ -1,0 +1,53 @@
+{
+  "build": "default_hbd61a6d_102",
+  "build_number": 102,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [
+    "binutils_impl_linux-64 2.45.1"
+  ],
+  "depends": [
+    "__glibc >=2.17,<3.0.a0",
+    "zstd >=1.5.7,<1.6.0a0"
+  ],
+  "extracted_package_dir": "/home/hpc/rlvl/rlvl177v/.conda/pkgs/ld_impl_linux-64-2.45.1-default_hbd61a6d_102",
+  "files": [
+    "bin/x86_64-conda-linux-gnu-ld",
+    "x86_64-conda-linux-gnu/bin/ld"
+  ],
+  "fn": "ld_impl_linux-64-2.45.1-default_hbd61a6d_102.conda",
+  "license": "GPL-3.0-only",
+  "link": {
+    "source": "/home/hpc/rlvl/rlvl177v/.conda/pkgs/ld_impl_linux-64-2.45.1-default_hbd61a6d_102",
+    "type": 1
+  },
+  "md5": "18335a698559cdbcd86150a48bf54ba6",
+  "name": "ld_impl_linux-64",
+  "package_tarball_full_path": "/home/hpc/rlvl/rlvl177v/.conda/pkgs/ld_impl_linux-64-2.45.1-default_hbd61a6d_102.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/x86_64-conda-linux-gnu-ld",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/home/conda/feedstock_root/build_artifacts/binutils_split_1774197133318/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "569cb6ad7db15e66d540e4dab54ae02d5c4660308fdf19cb8d75837f96b2cbd7",
+        "sha256_in_prefix": "28a2194a26cbb5099acb4757a9e593b58a17acddff3212348bc9cab64df2bd1b",
+        "size_in_bytes": 2917192
+      },
+      {
+        "_path": "x86_64-conda-linux-gnu/bin/ld",
+        "path_type": "softlink",
+        "sha256": "569cb6ad7db15e66d540e4dab54ae02d5c4660308fdf19cb8d75837f96b2cbd7",
+        "size_in_bytes": 2917192
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "3d584956604909ff5df353767f3a2a2f60e07d070b328d109f30ac40cd62df6c",
+  "size": 728002,
+  "subdir": "linux-64",
+  "timestamp": 1774197446000,
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.45.1-default_hbd61a6d_102.conda",
+  "version": "2.45.1"
+}

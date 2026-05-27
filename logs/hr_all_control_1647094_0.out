@@ -1,0 +1,336 @@
+### Starting TaskPrologue of job 1647736 on tg093 at Tue May 26 10:16:08 AM CEST 2026
+Running on cores 32-63 with governor ondemand
+Tue May 26 10:16:08 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:41:00.0 Off |                    0 |
+| N/A   43C    P0             56W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+==========================================
+Running HR mode: periodic_spiking
+Job ID: 1647736
+Array task ID: 0
+Python: /home/hpc/rlvl/rlvl177v/Thesis/.conda_env/bin/python
+Python 3.12.13
+==========================================
+
+################################################################################
+STARTING EXPERIMENT
+################################################################################
+[Main] dataset mode  = hr
+[Main] HR mode       = periodic_spiking
+[Main] output folder = outputs/periodic_spiking
+
+========================================================================
+LOADING DATA
+========================================================================
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_spiking
+[DataLoader] HR input current I: 2.5
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 40 HR x-spikes detected
+
+========================================================
+DATASET SUMMARY
+========================================================
+File              : /home/hpc/rlvl/rlvl177v/Thesis/DRG3_MdFoF.csv
+Total samples     : 150000
+Total neurons     : 3
+Duration          : 25.00 min (1500 s)
+First neuron      : hr_x
+Last neuron       : hr_z
+Split ratios      : train=0.70, val=0.15, test=0.15
+Spike range       : 0–40 per neuron
+Spike mean        : 13.3 per neuron
+========================================================
+
+
+First 3 neurons:
+  [   0]  hr_x                 spikes: 40
+  [   1]  hr_y                 spikes: 0
+  [   2]  hr_z                 spikes: 0
+… and 0 more.
+
+
+========================================================================
+MODEL SELECTION
+========================================================================
+Training series : hr_full_state
+Input size      : 3
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : hr_full_state
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Validation    : long recursive stability objective
+======================================================================
+[GP] iter   1/30 score=0.762867 best=0.762867 x_nrmse=0.856662 all_nrmse=0.544012 penalty=0.000 N=688 p=0.053 rho=0.918 leak=0.510 scale=0.290 ridge=3.2e-08 washout=257
+[GP] iter   2/30 score=1.219290 best=0.762867 x_nrmse=1.177876 all_nrmse=1.315923 penalty=0.000 N=434 p=0.046 rho=0.841 leak=0.121 scale=0.444 ridge=4.9e-04 washout=50
+[GP] iter   3/30 score=1000000.000000 best=0.762867 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.131 rho=0.817 leak=0.085 scale=0.053 ridge=4.2e-06 washout=230
+[GP] iter   4/30 score=0.025008 best=0.025008 x_nrmse=0.028088 all_nrmse=0.017823 penalty=0.000 N=276 p=0.195 rho=0.590 leak=0.145 scale=0.386 ridge=8.2e-07 washout=492
+[GP] iter   5/30 score=0.732699 best=0.025008 x_nrmse=0.817366 all_nrmse=0.535143 penalty=0.000 N=507 p=0.175 rho=0.858 leak=0.404 scale=0.047 ridge=5.1e-04 washout=303
+[GP] iter   6/30 score=0.047673 best=0.025008 x_nrmse=0.053320 all_nrmse=0.034498 penalty=0.000 N=462 p=0.023 rho=0.589 leak=0.254 scale=0.423 ridge=1.1e-05 washout=425
+[GP] iter   7/30 score=0.001966 best=0.001966 x_nrmse=0.002202 all_nrmse=0.001414 penalty=0.000 N=345 p=0.090 rho=0.559 leak=0.624 scale=0.278 ridge=1.1e-07 washout=305
+[GP] iter   8/30 score=0.023772 best=0.001966 x_nrmse=0.026644 all_nrmse=0.017070 penalty=0.000 N=267 p=0.172 rho=0.720 leak=0.365 scale=0.559 ridge=4.3e-05 washout=197
+[GP] iter   9/30 score=13.247587 best=0.001966 x_nrmse=7.326455 all_nrmse=4.545015 penalty=6.756 N=626 p=0.020 rho=0.450 leak=0.800 scale=0.600 ridge=1.0e-08 washout=500
+[GP] iter  10/30 score=1000000.000000 best=0.001966 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.200 rho=1.050 leak=0.080 scale=0.040 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=2.508707 best=0.001966 x_nrmse=2.792668 all_nrmse=1.846132 penalty=0.000 N=250 p=0.200 rho=1.050 leak=0.564 scale=0.040 ridge=1.0e-03 washout=283
+[GP] iter  12/30 score=1.217624 best=0.001966 x_nrmse=1.233678 all_nrmse=1.180163 penalty=0.000 N=250 p=0.200 rho=0.796 leak=0.600 scale=0.535 ridge=7.3e-04 washout=480
+[GP] iter  13/30 score=1.187372 best=0.001966 x_nrmse=1.157333 all_nrmse=1.257463 penalty=0.000 N=800 p=0.200 rho=1.050 leak=0.800 scale=0.410 ridge=1.0e-08 washout=50
+[GP] iter  14/30 score=0.026709 best=0.001966 x_nrmse=0.029980 all_nrmse=0.019076 penalty=0.000 N=250 p=0.200 rho=1.050 leak=0.482 scale=0.127 ridge=1.0e-03 washout=50
+[GP] iter  15/30 score=1000000.000000 best=0.001966 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=800 p=0.020 rho=0.450 leak=0.800 scale=0.040 ridge=1.0e-08 washout=500
+[GP] iter  16/30 score=0.735074 best=0.001966 x_nrmse=0.823862 all_nrmse=0.527902 penalty=0.000 N=416 p=0.134 rho=0.626 leak=0.800 scale=0.062 ridge=6.9e-05 washout=471
+[GP] iter  17/30 score=0.001116 best=0.001116 x_nrmse=0.001253 all_nrmse=0.000797 penalty=0.000 N=665 p=0.020 rho=0.900 leak=0.800 scale=0.405 ridge=1.0e-08 washout=402
+[GP] iter  18/30 score=0.000432 best=0.000432 x_nrmse=0.000485 all_nrmse=0.000310 penalty=0.000 N=489 p=0.200 rho=1.050 leak=0.502 scale=0.210 ridge=1.0e-08 washout=50
+[GP] iter  19/30 score=0.001468 best=0.000432 x_nrmse=0.001621 all_nrmse=0.001111 penalty=0.000 N=800 p=0.020 rho=0.450 leak=0.080 scale=0.600 ridge=1.0e-03 washout=500
+[GP] iter  20/30 score=0.000727 best=0.000432 x_nrmse=0.000815 all_nrmse=0.000521 penalty=0.000 N=475 p=0.200 rho=0.450 leak=0.800 scale=0.600 ridge=1.0e-08 washout=500
+[GP] iter  21/30 score=0.000381 best=0.000381 x_nrmse=0.000423 all_nrmse=0.000282 penalty=0.000 N=597 p=0.188 rho=0.450 leak=0.713 scale=0.322 ridge=1.0e-08 washout=500
+[GP] iter  22/30 score=1000000.000000 best=0.000381 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=471 p=0.020 rho=1.050 leak=0.080 scale=0.064 ridge=1.0e-03 washout=500
+[GP] iter  23/30 score=0.052275 best=0.000381 x_nrmse=0.058658 all_nrmse=0.037383 penalty=0.000 N=250 p=0.020 rho=0.450 leak=0.800 scale=0.212 ridge=1.0e-03 washout=500
+[GP] iter  24/30 score=0.871327 best=0.000381 x_nrmse=0.748657 all_nrmse=1.157556 penalty=0.000 N=250 p=0.200 rho=1.021 leak=0.123 scale=0.565 ridge=2.6e-07 washout=50
+[GP] iter  25/30 score=0.000918 best=0.000381 x_nrmse=0.001023 all_nrmse=0.000673 penalty=0.000 N=250 p=0.020 rho=0.450 leak=0.674 scale=0.462 ridge=2.8e-07 washout=500
+[GP] iter  26/30 score=1.556934 best=0.000381 x_nrmse=1.498598 all_nrmse=1.693050 penalty=0.000 N=250 p=0.153 rho=0.450 leak=0.800 scale=0.040 ridge=1.0e-03 washout=500
+[GP] iter  27/30 score=0.015120 best=0.000381 x_nrmse=0.015477 all_nrmse=0.014288 penalty=0.000 N=250 p=0.020 rho=0.450 leak=0.800 scale=0.600 ridge=1.0e-03 washout=500
+[GP] iter  28/30 score=0.000153 best=0.000153 x_nrmse=0.000168 all_nrmse=0.000119 penalty=0.000 N=250 p=0.200 rho=0.450 leak=0.248 scale=0.441 ridge=1.0e-08 washout=500
+[GP] iter  29/30 score=0.499715 best=0.000153 x_nrmse=0.561857 all_nrmse=0.354715 penalty=0.000 N=250 p=0.200 rho=0.450 leak=0.141 scale=0.507 ridge=1.8e-05 washout=500
+[GP] iter  30/30 score=0.000971 best=0.000153 x_nrmse=0.001041 all_nrmse=0.000808 penalty=0.000 N=250 p=0.020 rho=0.450 leak=0.800 scale=0.383 ridge=1.2e-05 washout=500
+[Save] -> outputs/periodic_spiking/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : hr_full_state
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Validation    : long recursive stability objective
+======================================================================
+[DUMMY] iter   1/30 score=0.001146 best=0.001146 x_nrmse=0.001287 all_nrmse=0.000816 penalty=0.000 N=447 p=0.120 rho=0.844 leak=0.679 scale=0.152 ridge=4.3e-08 washout=189
+[DUMMY] iter   2/30 score=11.682907 best=0.001146 x_nrmse=6.425967 all_nrmse=4.117446 penalty=5.949 N=689 p=0.098 rho=0.681 leak=0.644 scale=0.480 ridge=6.5e-08 washout=361
+[DUMMY] iter   3/30 score=1.737274 best=0.001146 x_nrmse=1.713644 all_nrmse=1.792410 penalty=0.000 N=581 p=0.080 rho=0.811 leak=0.712 scale=0.384 ridge=1.3e-06 washout=314
+[DUMMY] iter   4/30 score=1000000.000000 best=0.001146 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=336 p=0.159 rho=0.975 leak=0.136 scale=0.058 ridge=3.4e-05 washout=343
+[DUMMY] iter   5/30 score=1.149474 best=0.001146 x_nrmse=1.125473 all_nrmse=1.205476 penalty=0.000 N=602 p=0.192 rho=0.735 leak=0.475 scale=0.451 ridge=4.9e-06 washout=346
+[DUMMY] iter   6/30 score=0.052577 best=0.001146 x_nrmse=0.059065 all_nrmse=0.037437 penalty=0.000 N=585 p=0.124 rho=0.556 leak=0.625 scale=0.571 ridge=2.4e-04 washout=461
+[DUMMY] iter   7/30 score=0.008910 best=0.001146 x_nrmse=0.009937 all_nrmse=0.006514 penalty=0.000 N=501 p=0.092 rho=0.620 leak=0.786 scale=0.557 ridge=1.0e-06 washout=55
+[DUMMY] iter   8/30 score=0.015193 best=0.001146 x_nrmse=0.017052 all_nrmse=0.010854 penalty=0.000 N=295 p=0.188 rho=0.541 leak=0.714 scale=0.599 ridge=8.7e-06 washout=410
+[DUMMY] iter   9/30 score=0.000263 best=0.000263 x_nrmse=0.000295 all_nrmse=0.000190 penalty=0.000 N=715 p=0.074 rho=0.513 leak=0.147 scale=0.281 ridge=3.3e-08 washout=372
+[DUMMY] iter  10/30 score=0.004840 best=0.000263 x_nrmse=0.005426 all_nrmse=0.003474 penalty=0.000 N=272 p=0.180 rho=0.794 leak=0.260 scale=0.256 ridge=7.3e-05 washout=85
+[DUMMY] iter  11/30 score=7.185984 best=0.000263 x_nrmse=4.612317 all_nrmse=2.932565 penalty=3.078 N=788 p=0.159 rho=0.875 leak=0.293 scale=0.588 ridge=2.3e-04 washout=380
+[DUMMY] iter  12/30 score=1.319608 best=0.000263 x_nrmse=1.020950 all_nrmse=1.071267 penalty=0.284 N=398 p=0.176 rho=0.964 leak=0.710 scale=0.300 ridge=5.6e-05 washout=134
+[DUMMY] iter  13/30 score=1.424070 best=0.000263 x_nrmse=1.034370 all_nrmse=1.469425 penalty=0.259 N=586 p=0.041 rho=0.985 leak=0.179 scale=0.327 ridge=2.9e-05 washout=287
+[DUMMY] iter  14/30 score=0.004234 best=0.000263 x_nrmse=0.004756 all_nrmse=0.003016 penalty=0.000 N=567 p=0.144 rho=0.496 leak=0.569 scale=0.435 ridge=4.9e-08 washout=345
+[DUMMY] iter  15/30 score=0.002697 best=0.000263 x_nrmse=0.002993 all_nrmse=0.002007 penalty=0.000 N=384 p=0.035 rho=0.802 leak=0.363 scale=0.293 ridge=3.0e-06 washout=102
+[DUMMY] iter  16/30 score=0.001785 best=0.000263 x_nrmse=0.001941 all_nrmse=0.001421 penalty=0.000 N=473 p=0.101 rho=0.827 leak=0.335 scale=0.103 ridge=1.5e-06 washout=178
+[DUMMY] iter  17/30 score=0.007199 best=0.000263 x_nrmse=0.008041 all_nrmse=0.005236 penalty=0.000 N=606 p=0.022 rho=0.478 leak=0.672 scale=0.440 ridge=7.2e-06 washout=341
+[DUMMY] iter  18/30 score=0.005713 best=0.000263 x_nrmse=0.006411 all_nrmse=0.004084 penalty=0.000 N=778 p=0.117 rho=0.595 leak=0.468 scale=0.211 ridge=1.1e-04 washout=66
+[DUMMY] iter  19/30 score=0.001857 best=0.000263 x_nrmse=0.002086 all_nrmse=0.001322 penalty=0.000 N=355 p=0.171 rho=0.987 leak=0.706 scale=0.428 ridge=2.0e-08 washout=413
+[DUMMY] iter  20/30 score=0.000625 best=0.000263 x_nrmse=0.000697 all_nrmse=0.000457 penalty=0.000 N=392 p=0.137 rho=0.718 leak=0.246 scale=0.242 ridge=5.5e-07 washout=146
+[DUMMY] iter  21/30 score=0.001617 best=0.000263 x_nrmse=0.001806 all_nrmse=0.001177 penalty=0.000 N=472 p=0.080 rho=0.580 leak=0.697 scale=0.155 ridge=1.0e-05 washout=430
+[DUMMY] iter  22/30 score=0.000844 best=0.000263 x_nrmse=0.000941 all_nrmse=0.000618 penalty=0.000 N=648 p=0.172 rho=0.867 leak=0.695 scale=0.090 ridge=2.2e-06 washout=295
+[DUMMY] iter  23/30 score=0.056843 best=0.000263 x_nrmse=0.063856 all_nrmse=0.040481 penalty=0.000 N=682 p=0.058 rho=0.477 leak=0.548 scale=0.555 ridge=8.0e-05 washout=62
+[DUMMY] iter  24/30 score=9.578577 best=0.000263 x_nrmse=5.258251 all_nrmse=3.269216 penalty=4.917 N=475 p=0.020 rho=0.831 leak=0.699 scale=0.497 ridge=5.3e-04 washout=478
+[DUMMY] iter  25/30 score=1.565724 best=0.000263 x_nrmse=1.590361 all_nrmse=1.508236 penalty=0.000 N=475 p=0.168 rho=0.570 leak=0.137 scale=0.511 ridge=5.8e-04 washout=83
+[DUMMY] iter  26/30 score=0.019273 best=0.000263 x_nrmse=0.021638 all_nrmse=0.013754 penalty=0.000 N=252 p=0.087 rho=0.780 leak=0.280 scale=0.468 ridge=2.1e-05 washout=55
+[DUMMY] iter  27/30 score=0.002410 best=0.000263 x_nrmse=0.002697 all_nrmse=0.001739 penalty=0.000 N=546 p=0.022 rho=0.579 leak=0.147 scale=0.437 ridge=4.0e-04 washout=318
+[DUMMY] iter  28/30 score=0.001737 best=0.000263 x_nrmse=0.001940 all_nrmse=0.001263 penalty=0.000 N=409 p=0.136 rho=0.746 leak=0.309 scale=0.135 ridge=1.2e-05 washout=245
+[DUMMY] iter  29/30 score=0.014960 best=0.000263 x_nrmse=0.016785 all_nrmse=0.010702 penalty=0.000 N=614 p=0.104 rho=0.633 leak=0.579 scale=0.220 ridge=7.3e-04 washout=265
+[DUMMY] iter  30/30 score=0.003699 best=0.000263 x_nrmse=0.004145 all_nrmse=0.002660 penalty=0.000 N=446 p=0.169 rho=0.458 leak=0.378 scale=0.316 ridge=1.0e-04 washout=236
+[Save] -> outputs/periodic_spiking/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : hr_full_state
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Validation    : long recursive stability objective
+======================================================================
+[FOREST] iter   1/30 score=0.212125 best=0.212125 x_nrmse=0.238239 all_nrmse=0.151192 penalty=0.000 N=353 p=0.030 rho=0.839 leak=0.497 scale=0.229 ridge=3.4e-08 washout=389
+[FOREST] iter   2/30 score=6.707075 best=0.212125 x_nrmse=3.899269 all_nrmse=2.489773 penalty=3.231 N=544 p=0.045 rho=0.791 leak=0.190 scale=0.307 ridge=1.4e-04 washout=172
+[FOREST] iter   3/30 score=0.000945 best=0.000945 x_nrmse=0.001061 all_nrmse=0.000674 penalty=0.000 N=679 p=0.115 rho=0.487 leak=0.481 scale=0.336 ridge=1.4e-08 washout=153
+[FOREST] iter   4/30 score=0.056376 best=0.000945 x_nrmse=0.063326 all_nrmse=0.040161 penalty=0.000 N=502 p=0.023 rho=0.967 leak=0.119 scale=0.520 ridge=1.8e-06 washout=271
+[FOREST] iter   5/30 score=3.321754 best=0.000945 x_nrmse=2.584502 all_nrmse=1.619738 penalty=1.027 N=622 p=0.189 rho=0.767 leak=0.448 scale=0.584 ridge=3.6e-04 washout=91
+[FOREST] iter   6/30 score=10.000916 best=0.000945 x_nrmse=5.449952 all_nrmse=3.278015 penalty=5.203 N=733 p=0.165 rho=0.833 leak=0.603 scale=0.473 ridge=2.0e-04 washout=495
+[FOREST] iter   7/30 score=0.001176 best=0.000945 x_nrmse=0.001270 all_nrmse=0.000955 penalty=0.000 N=658 p=0.044 rho=0.720 leak=0.567 scale=0.206 ridge=1.2e-04 washout=156
+[FOREST] iter   8/30 score=1.270570 best=0.000945 x_nrmse=1.207972 all_nrmse=1.416631 penalty=0.000 N=531 p=0.156 rho=0.790 leak=0.761 scale=0.473 ridge=1.4e-06 washout=422
+[FOREST] iter   9/30 score=0.001492 best=0.000945 x_nrmse=0.001676 all_nrmse=0.001063 penalty=0.000 N=452 p=0.033 rho=0.979 leak=0.573 scale=0.074 ridge=2.7e-06 washout=248
+[FOREST] iter  10/30 score=0.024922 best=0.000945 x_nrmse=0.027994 all_nrmse=0.017752 penalty=0.000 N=758 p=0.041 rho=0.989 leak=0.552 scale=0.193 ridge=1.5e-05 washout=306
+[FOREST] iter  11/30 score=0.005233 best=0.000945 x_nrmse=0.005867 all_nrmse=0.003754 penalty=0.000 N=647 p=0.032 rho=1.026 leak=0.534 scale=0.110 ridge=3.1e-05 washout=408
+[FOREST] iter  12/30 score=0.001137 best=0.000945 x_nrmse=0.001246 all_nrmse=0.000882 penalty=0.000 N=776 p=0.023 rho=1.008 leak=0.607 scale=0.109 ridge=6.4e-05 washout=316
+[FOREST] iter  13/30 score=0.763061 best=0.000945 x_nrmse=0.858040 all_nrmse=0.541442 penalty=0.000 N=653 p=0.044 rho=0.988 leak=0.272 scale=0.085 ridge=7.8e-05 washout=163
+[FOREST] iter  14/30 score=0.016109 best=0.000945 x_nrmse=0.018095 all_nrmse=0.011475 penalty=0.000 N=707 p=0.021 rho=0.938 leak=0.484 scale=0.135 ridge=8.9e-05 washout=267
+[FOREST] iter  15/30 score=0.081773 best=0.000945 x_nrmse=0.091828 all_nrmse=0.058311 penalty=0.000 N=644 p=0.028 rho=1.035 leak=0.692 scale=0.159 ridge=1.0e-04 washout=75
+[FOREST] iter  16/30 score=0.015016 best=0.000945 x_nrmse=0.016835 all_nrmse=0.010771 penalty=0.000 N=526 p=0.035 rho=1.018 leak=0.785 scale=0.202 ridge=1.1e-04 washout=291
+[FOREST] iter  17/30 score=0.006680 best=0.000945 x_nrmse=0.007491 all_nrmse=0.004788 penalty=0.000 N=713 p=0.022 rho=0.814 leak=0.564 scale=0.206 ridge=1.2e-04 washout=499
+[FOREST] iter  18/30 score=0.012411 best=0.000945 x_nrmse=0.013938 all_nrmse=0.008849 penalty=0.000 N=696 p=0.031 rho=0.737 leak=0.473 scale=0.125 ridge=1.3e-04 washout=271
+[FOREST] iter  19/30 score=0.001571 best=0.000945 x_nrmse=0.001743 all_nrmse=0.001168 penalty=0.000 N=410 p=0.033 rho=0.745 leak=0.467 scale=0.239 ridge=1.2e-04 washout=304
+[FOREST] iter  20/30 score=0.020796 best=0.000945 x_nrmse=0.023343 all_nrmse=0.014853 penalty=0.000 N=323 p=0.028 rho=0.695 leak=0.629 scale=0.387 ridge=1.2e-04 washout=53
+[FOREST] iter  21/30 score=1.025419 best=0.000945 x_nrmse=1.054398 all_nrmse=0.957803 penalty=0.000 N=491 p=0.030 rho=0.980 leak=0.720 scale=0.317 ridge=1.3e-04 washout=149
+[FOREST] iter  22/30 score=0.005447 best=0.000945 x_nrmse=0.006113 all_nrmse=0.003891 penalty=0.000 N=759 p=0.198 rho=0.636 leak=0.572 scale=0.186 ridge=2.9e-05 washout=432
+[FOREST] iter  23/30 score=0.042896 best=0.000945 x_nrmse=0.048193 all_nrmse=0.030538 penalty=0.000 N=774 p=0.110 rho=0.537 leak=0.559 scale=0.489 ridge=2.9e-05 washout=283
+[FOREST] iter  24/30 score=0.050136 best=0.000945 x_nrmse=0.056300 all_nrmse=0.035753 penalty=0.000 N=519 p=0.046 rho=0.949 leak=0.580 scale=0.176 ridge=1.3e-04 washout=417
+[FOREST] iter  25/30 score=1.395065 best=0.000945 x_nrmse=1.070983 all_nrmse=1.518215 penalty=0.190 N=765 p=0.170 rho=0.614 leak=0.550 scale=0.517 ridge=1.9e-05 washout=269
+[FOREST] iter  26/30 score=0.013742 best=0.000945 x_nrmse=0.015421 all_nrmse=0.009823 penalty=0.000 N=255 p=0.022 rho=0.706 leak=0.573 scale=0.399 ridge=1.3e-04 washout=473
+[FOREST] iter  27/30 score=0.011088 best=0.000945 x_nrmse=0.012452 all_nrmse=0.007906 penalty=0.000 N=510 p=0.033 rho=0.630 leak=0.466 scale=0.276 ridge=1.3e-04 washout=55
+[FOREST] iter  28/30 score=0.065340 best=0.000945 x_nrmse=0.073397 all_nrmse=0.046538 penalty=0.000 N=674 p=0.024 rho=0.882 leak=0.483 scale=0.372 ridge=1.3e-04 washout=471
+[FOREST] iter  29/30 score=0.151058 best=0.000945 x_nrmse=0.169657 all_nrmse=0.107659 penalty=0.000 N=645 p=0.026 rho=0.969 leak=0.674 scale=0.291 ridge=1.3e-04 washout=433
+[FOREST] iter  30/30 score=0.009832 best=0.000945 x_nrmse=0.011038 all_nrmse=0.007019 penalty=0.000 N=496 p=0.063 rho=0.651 leak=0.438 scale=0.227 ridge=1.3e-04 washout=121
+[Save] -> outputs/periodic_spiking/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : hr_full_state
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Validation    : long recursive stability objective
+======================================================================
+[GBRT] iter   1/30 score=0.001762 best=0.001762 x_nrmse=0.001933 all_nrmse=0.001362 penalty=0.000 N=437 p=0.168 rho=0.474 leak=0.495 scale=0.563 ridge=4.0e-07 washout=184
+[GBRT] iter   2/30 score=1.210231 best=0.001762 x_nrmse=1.276037 all_nrmse=1.056684 penalty=0.000 N=790 p=0.105 rho=0.987 leak=0.190 scale=0.158 ridge=1.1e-06 washout=111
+[GBRT] iter   3/30 score=0.010435 best=0.001762 x_nrmse=0.011618 all_nrmse=0.007676 penalty=0.000 N=594 p=0.054 rho=0.762 leak=0.354 scale=0.564 ridge=1.1e-04 washout=217
+[GBRT] iter   4/30 score=0.001538 best=0.001538 x_nrmse=0.001727 all_nrmse=0.001097 penalty=0.000 N=530 p=0.158 rho=0.729 leak=0.084 scale=0.235 ridge=7.5e-06 washout=358
+[GBRT] iter   5/30 score=0.909150 best=0.001538 x_nrmse=0.867394 all_nrmse=1.006581 penalty=0.000 N=773 p=0.025 rho=1.032 leak=0.755 scale=0.265 ridge=1.9e-05 washout=256
+[GBRT] iter   6/30 score=4.108138 best=0.001538 x_nrmse=2.697011 all_nrmse=1.750296 penalty=1.695 N=655 p=0.044 rho=0.813 leak=0.556 scale=0.454 ridge=7.9e-07 washout=218
+[GBRT] iter   7/30 score=0.000750 best=0.000750 x_nrmse=0.000839 all_nrmse=0.000541 penalty=0.000 N=525 p=0.160 rho=0.726 leak=0.152 scale=0.218 ridge=1.1e-06 washout=105
+[GBRT] iter   8/30 score=0.034826 best=0.000750 x_nrmse=0.039116 all_nrmse=0.024818 penalty=0.000 N=294 p=0.150 rho=1.003 leak=0.543 scale=0.122 ridge=1.1e-04 washout=363
+[GBRT] iter   9/30 score=0.000960 best=0.000750 x_nrmse=0.001062 all_nrmse=0.000720 penalty=0.000 N=350 p=0.038 rho=0.481 leak=0.621 scale=0.367 ridge=8.6e-07 washout=323
+[GBRT] iter  10/30 score=0.003831 best=0.000750 x_nrmse=0.004282 all_nrmse=0.002779 penalty=0.000 N=555 p=0.065 rho=0.699 leak=0.603 scale=0.384 ridge=6.6e-07 washout=407
+[GBRT] iter  11/30 score=0.002169 best=0.000750 x_nrmse=0.002435 all_nrmse=0.001548 penalty=0.000 N=622 p=0.030 rho=0.641 leak=0.555 scale=0.238 ridge=8.2e-07 washout=82
+[GBRT] iter  12/30 score=0.732730 best=0.000750 x_nrmse=0.771715 all_nrmse=0.641763 penalty=0.000 N=761 p=0.039 rho=0.999 leak=0.592 scale=0.467 ridge=7.5e-07 washout=300
+[GBRT] iter  13/30 score=1.298578 best=0.000750 x_nrmse=0.998346 all_nrmse=1.079174 penalty=0.276 N=661 p=0.047 rho=0.730 leak=0.254 scale=0.469 ridge=7.8e-05 washout=87
+[GBRT] iter  14/30 score=0.002497 best=0.000750 x_nrmse=0.002784 all_nrmse=0.001828 penalty=0.000 N=379 p=0.023 rho=0.902 leak=0.418 scale=0.577 ridge=7.9e-07 washout=223
+[GBRT] iter  15/30 score=9.598234 best=0.000750 x_nrmse=5.555321 all_nrmse=3.626265 penalty=4.622 N=425 p=0.148 rho=0.714 leak=0.403 scale=0.312 ridge=8.0e-07 washout=446
+[GBRT] iter  16/30 score=0.951850 best=0.000750 x_nrmse=1.056213 all_nrmse=0.708339 penalty=0.000 N=651 p=0.023 rho=1.014 leak=0.389 scale=0.461 ridge=1.1e-07 washout=444
+[GBRT] iter  17/30 score=1.396111 best=0.000750 x_nrmse=1.002598 all_nrmse=1.354690 penalty=0.288 N=755 p=0.116 rho=1.013 leak=0.664 scale=0.577 ridge=9.6e-04 washout=489
+[GBRT] iter  18/30 score=1.299075 best=0.000750 x_nrmse=1.367160 all_nrmse=1.140210 penalty=0.000 N=392 p=0.080 rho=0.925 leak=0.294 scale=0.426 ridge=8.1e-07 washout=89
+[GBRT] iter  19/30 score=0.006198 best=0.000750 x_nrmse=0.006962 all_nrmse=0.004416 penalty=0.000 N=344 p=0.075 rho=0.596 leak=0.400 scale=0.385 ridge=8.0e-07 washout=134
+[GBRT] iter  20/30 score=0.000069 best=0.000069 x_nrmse=0.000077 all_nrmse=0.000051 penalty=0.000 N=693 p=0.179 rho=0.735 leak=0.150 scale=0.311 ridge=1.4e-08 washout=447
+[GBRT] iter  21/30 score=1.294917 best=0.000069 x_nrmse=1.323359 all_nrmse=1.228552 penalty=0.000 N=592 p=0.122 rho=0.925 leak=0.771 scale=0.048 ridge=8.0e-07 washout=395
+[GBRT] iter  22/30 score=0.000890 best=0.000069 x_nrmse=0.000999 all_nrmse=0.000635 penalty=0.000 N=750 p=0.196 rho=0.506 leak=0.086 scale=0.522 ridge=2.4e-07 washout=446
+[GBRT] iter  23/30 score=0.001144 best=0.000069 x_nrmse=0.001255 all_nrmse=0.000886 penalty=0.000 N=621 p=0.196 rho=0.592 leak=0.629 scale=0.348 ridge=8.0e-07 washout=204
+[GBRT] iter  24/30 score=0.003639 best=0.000069 x_nrmse=0.004064 all_nrmse=0.002648 penalty=0.000 N=320 p=0.181 rho=0.577 leak=0.403 scale=0.570 ridge=3.7e-07 washout=446
+[GBRT] iter  25/30 score=0.000697 best=0.000069 x_nrmse=0.000768 all_nrmse=0.000531 penalty=0.000 N=355 p=0.066 rho=0.503 leak=0.410 scale=0.328 ridge=8.4e-06 washout=462
+[GBRT] iter  26/30 score=0.000873 best=0.000069 x_nrmse=0.000960 all_nrmse=0.000672 penalty=0.000 N=282 p=0.059 rho=0.554 leak=0.730 scale=0.317 ridge=8.0e-07 washout=153
+[GBRT] iter  27/30 score=0.001149 best=0.000069 x_nrmse=0.001290 all_nrmse=0.000819 penalty=0.000 N=464 p=0.036 rho=0.651 leak=0.542 scale=0.213 ridge=2.1e-07 washout=473
+[GBRT] iter  28/30 score=0.001036 best=0.000069 x_nrmse=0.001163 all_nrmse=0.000738 penalty=0.000 N=264 p=0.090 rho=0.709 leak=0.153 scale=0.262 ridge=3.5e-07 washout=154
+[GBRT] iter  29/30 score=0.004878 best=0.000069 x_nrmse=0.005476 all_nrmse=0.003483 penalty=0.000 N=343 p=0.158 rho=0.720 leak=0.506 scale=0.357 ridge=6.8e-07 washout=465
+[GBRT] iter  30/30 score=0.002250 best=0.000069 x_nrmse=0.002528 all_nrmse=0.001603 penalty=0.000 N=736 p=0.029 rho=0.712 leak=0.087 scale=0.263 ridge=3.0e-05 washout=312
+[Save] -> outputs/periodic_spiking/best_params_gbrt.json
+[Save] -> outputs/periodic_spiking/optimizer_summary.json
+[Save] -> outputs/periodic_spiking/optimizer_history.csv
+[Save] -> outputs/periodic_spiking/optimizer_results.csv
+[Plot] Saved -> outputs/periodic_spiking/optimizer_convergence.png
+[Plot] Saved -> outputs/periodic_spiking/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+    gbrt | score=0.000069 | x_nrmse=0.000077 | N=693 | rho=0.735 | leak=0.150 | scale=0.311 | washout=447
+      gp | score=0.000153 | x_nrmse=0.000168 | N=250 | rho=0.450 | leak=0.248 | scale=0.441 | washout=500
+   dummy | score=0.000263 | x_nrmse=0.000295 | N=715 | rho=0.513 | leak=0.147 | scale=0.281 | washout=372
+  forest | score=0.000945 | x_nrmse=0.001061 | N=679 | rho=0.487 | leak=0.481 | scale=0.336 | washout=153
+[Save] -> outputs/periodic_spiking/optimizer_ranking_table.csv
+[Save] -> outputs/periodic_spiking/best_params_auto.json
+[Save] -> outputs/periodic_spiking/best_params.json
+
+========================================================================
+FINAL TRAINING WITH SELECTED PARAMETERS
+========================================================================
+Selected optimizer : gbrt
+Warmup steps              : 104999
+Training washout          : 447
+Held-out prediction steps : 45000
+NRMSE recursive x         : 0.001087
+RMSE recursive x          : 0.000564
+NRMSE recursive all states: 0.000667
+RMSE recursive all states : 0.000807
+
+========================================================================
+PLOTTING
+========================================================================
+[Plot] Saved -> outputs/periodic_spiking/results_full_zoom.png
+[Plot] Saved -> outputs/periodic_spiking/results_zoom_comparison.png
+[Plot] Saved -> outputs/periodic_spiking/spike_event_comparison.png
+[Plot] Saved -> outputs/periodic_spiking/results_all_states.png
+[Save] -> outputs/periodic_spiking/metrics.json
+[Report] Saved optimizer ranking table -> outputs/periodic_spiking/optimizer_ranking_table.csv
+[Report] Saved single-run summary -> outputs/periodic_spiking/experiment_summary.csv
+[Report] Saved global comparison -> outputs/experiment_comparison.csv
+
+========================================================================
+LINEAR FEEDBACK CONTROL EXPERIMENT
+========================================================================
+[Control] Skipped: control_experiment.py is missing or could not be imported.
+[Control] Import error: '(' was never closed (control_experiment.py, line 504)
+
+========================================================================
+FINAL SUMMARY
+========================================================================
+Series    : hr_full_state
+Optimizer : gbrt
+RMSE x    : 0.000564
+NRMSE x   : 0.001087
+Full-state prediction: x, y, z
+[Done] Files saved inside: outputs/periodic_spiking
+[Report] Saved final comparison CSV -> outputs/final_prediction_control_comparison.csv
+[Report] Saved final comparison Markdown -> outputs/final_prediction_control_comparison.md
+[Plot] Saved -> outputs/final_prediction_control_comparison.png
+
+========================================================================
+FINAL PREDICTION + CONTROL COMPARISON TABLE
+========================================================================
+    periodic_spiking | opt=    gbrt | pred NRMSE x=  0.001087 | K=           | control RMSE=           | stable=
+========================================================================
+=== JOB_STATISTICS ===
+=== current date     : Tue May 26 10:25:56 AM CEST 2026
+= Job-ID             : 1647736 on tinygpu
+= Job-Name           : hr_all_control
+= Job-Command        : /home/hpc/rlvl/rlvl177v/Thesis/run_all_three_control.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl177v/Thesis
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 08:00:00
+= Elapsed runtime    : 00:09:59
+= Total RAM usage    : 0.9 GiB of requested  GiB (%)   
+= Node list          : tg093
+= Subm/Elig/Start/End: 2026-05-26T09:13:14 / 2026-05-26T09:13:14 / 2026-05-26T10:15:57 / 2026-05-26T10:25:56
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc               9.6G   104.9G   209.7G        N/A      59K     500K   1,000K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]

@@ -1,0 +1,144 @@
+### Starting TaskPrologue of job 1605792 on tg094 at Sat May 16 01:00:30 PM CEST 2026
+Running on cores 0-7,16-39 with governor ondemand
+Sat May 16 13:00:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:01:00.0 Off |                    0 |
+| N/A   43C    P0             58W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+Job started on: tg094
+Start time: Sat May 16 01:00:33 PM CEST 2026
+Python path: /home/hpc/rlvl/rlvl177v/Thesis/.conda_env/bin/python
+Python 3.12.13
+
+################################################################################
+STARTING EXPERIMENT
+################################################################################
+[Main] dataset mode  = hr
+[Main] HR mode       = periodic_spiking
+[Main] output folder = outputs/periodic_spiking
+
+========================================================================
+LOADING DATA
+========================================================================
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_spiking
+[DataLoader] HR input current I: 2.5
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 40 HR x-spikes detected
+
+========================================================
+DATASET SUMMARY
+========================================================
+File              : /home/hpc/rlvl/rlvl177v/Thesis/DRG3_MdFoF.csv
+Total samples     : 150000
+Total neurons     : 3
+Duration          : 25.00 min (1500 s)
+First neuron      : hr_x
+Last neuron       : hr_z
+Split ratios      : train=0.70, val=0.15, test=0.15
+Spike range       : 0–40 per neuron
+Spike mean        : 13.3 per neuron
+========================================================
+
+
+First 3 neurons:
+  [   0]  hr_x                 spikes: 40
+  [   1]  hr_y                 spikes: 0
+  [   2]  hr_z                 spikes: 0
+… and 0 more.
+
+
+========================================================================
+MODEL SELECTION
+========================================================================
+Training series : hr_full_state
+Input size      : 3
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : hr_full_state
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Validation    : long recursive stability objective
+======================================================================
+[GP] iter   1/30 score=0.752406 best=0.752406 x_nrmse=0.845833 all_nrmse=0.534410 penalty=0.000 N=688 p=0.053 rho=0.918 leak=0.510 scale=0.290 ridge=3.2e-08 washout=257
+[GP] iter   2/30 score=1.219290 best=0.752406 x_nrmse=1.177877 all_nrmse=1.315923 penalty=0.000 N=434 p=0.046 rho=0.841 leak=0.121 scale=0.444 ridge=4.9e-04 washout=50
+[GP] iter   3/30 score=1000000.000000 best=0.752406 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.131 rho=0.817 leak=0.085 scale=0.053 ridge=4.2e-06 washout=230
+[GP] iter   4/30 score=0.024714 best=0.024714 x_nrmse=0.027758 all_nrmse=0.017613 penalty=0.000 N=276 p=0.195 rho=0.590 leak=0.145 scale=0.386 ridge=8.2e-07 washout=492
+[GP] iter   5/30 score=0.732699 best=0.024714 x_nrmse=0.817366 all_nrmse=0.535143 penalty=0.000 N=507 p=0.175 rho=0.858 leak=0.404 scale=0.047 ridge=5.1e-04 washout=303
+[GP] iter   6/30 score=0.047674 best=0.024714 x_nrmse=0.053320 all_nrmse=0.034498 penalty=0.000 N=462 p=0.023 rho=0.589 leak=0.254 scale=0.423 ridge=1.1e-05 washout=425
+[GP] iter   7/30 score=0.001967 best=0.001967 x_nrmse=0.002204 all_nrmse=0.001415 penalty=0.000 N=345 p=0.090 rho=0.559 leak=0.624 scale=0.278 ridge=1.1e-07 washout=305
+[GP] iter   8/30 score=0.023762 best=0.001967 x_nrmse=0.026633 all_nrmse=0.017063 penalty=0.000 N=267 p=0.172 rho=0.720 leak=0.365 scale=0.559 ridge=4.3e-05 washout=197
+[GP] iter   9/30 score=13.165327 best=0.001967 x_nrmse=7.286816 all_nrmse=4.524162 penalty=6.707 N=626 p=0.020 rho=0.450 leak=0.800 scale=0.600 ridge=1.0e-08 washout=500
+[GP] iter  10/30 score=1000000.000000 best=0.001967 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.200 rho=1.050 leak=0.080 scale=0.040 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=2.508707 best=0.001967 x_nrmse=2.792668 all_nrmse=1.846132 penalty=0.000 N=250 p=0.200 rho=1.050 leak=0.564 scale=0.040 ridge=1.0e-03 washout=283
+[GP] iter  12/30 score=1.217629 best=0.001967 x_nrmse=1.233681 all_nrmse=1.180173 penalty=0.000 N=250 p=0.200 rho=0.796 leak=0.600 scale=0.535 ridge=7.3e-04 washout=480
+[GP] iter  13/30 score=1.179144 best=0.001967 x_nrmse=1.150173 all_nrmse=1.246745 penalty=0.000 N=800 p=0.200 rho=1.050 leak=0.800 scale=0.410 ridge=1.0e-08 washout=50
+[GP] iter  14/30 score=0.026709 best=0.001967 x_nrmse=0.029980 all_nrmse=0.019076 penalty=0.000 N=250 p=0.200 rho=1.050 leak=0.482 scale=0.127 ridge=1.0e-03 washout=50
+[GP] iter  15/30 score=1000000.000000 best=0.001967 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=800 p=0.020 rho=0.450 leak=0.800 scale=0.040 ridge=1.0e-08 washout=500
+[GP] iter  16/30 score=0.735074 best=0.001967 x_nrmse=0.823862 all_nrmse=0.527902 penalty=0.000 N=416 p=0.134 rho=0.626 leak=0.800 scale=0.062 ridge=6.9e-05 washout=471
+[GP] iter  17/30 score=0.000963 best=0.000963 x_nrmse=0.001080 all_nrmse=0.000688 penalty=0.000 N=665 p=0.020 rho=0.827 leak=0.800 scale=0.405 ridge=1.0e-08 washout=393
+[GP] iter  18/30 score=0.000030 best=0.000030 x_nrmse=0.000030 all_nrmse=0.000030 penalty=0.000 N=489 p=0.200 rho=1.050 leak=0.299 scale=0.210 ridge=1.0e-08 washout=50
+[GP] iter  19/30 score=0.001468 best=0.000030 x_nrmse=0.001621 all_nrmse=0.001111 penalty=0.000 N=800 p=0.020 rho=0.450 leak=0.080 scale=0.600 ridge=1.0e-03 washout=500
+[GP] iter  20/30 score=0.000729 best=0.000030 x_nrmse=0.000818 all_nrmse=0.000523 penalty=0.000 N=475 p=0.200 rho=0.450 leak=0.800 scale=0.600 ridge=1.0e-08 washout=500
+[GP] iter  21/30 score=0.000464 best=0.000030 x_nrmse=0.000514 all_nrmse=0.000348 penalty=0.000 N=597 p=0.020 rho=0.491 leak=0.800 scale=0.322 ridge=1.0e-08 washout=500
+[GP] iter  22/30 score=1000000.000000 best=0.000030 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=471 p=0.020 rho=1.050 leak=0.080 scale=0.064 ridge=1.0e-03 washout=500
+[GP] iter  23/30 score=1.266865 best=0.000030 x_nrmse=1.008643 all_nrmse=1.332257 penalty=0.161 N=800 p=0.200 rho=1.050 leak=0.800 scale=0.228 ridge=1.0e-03 washout=50
+[GP] iter  24/30 score=0.000908 best=0.000030 x_nrmse=0.001018 all_nrmse=0.000650 penalty=0.000 N=252 p=0.200 rho=1.050 leak=0.271 scale=0.436 ridge=1.0e-08 washout=50
+[GP] iter  25/30 score=1.447633 best=0.000030 x_nrmse=1.429889 all_nrmse=1.489035 penalty=0.000 N=800 p=0.200 rho=1.050 leak=0.715 scale=0.386 ridge=2.9e-06 washout=50
+[GP] iter  26/30 score=0.740610 best=0.000030 x_nrmse=0.831563 all_nrmse=0.528385 penalty=0.000 N=250 p=0.200 rho=0.450 leak=0.800 scale=0.064 ridge=1.0e-03 washout=118
+[GP] iter  27/30 score=1.472889 best=0.000030 x_nrmse=1.421084 all_nrmse=1.593769 penalty=0.000 N=250 p=0.200 rho=1.050 leak=0.080 scale=0.571 ridge=5.5e-07 washout=50
+[GP] iter  28/30 score=2.044111 best=0.000030 x_nrmse=2.138405 all_nrmse=1.824091 penalty=0.000 N=800 p=0.200 rho=1.050 leak=0.800 scale=0.600 ridge=1.0e-03 washout=50
+[GP] iter  29/30 score=1.234692 best=0.000030 x_nrmse=1.072415 all_nrmse=1.536439 penalty=0.023 N=800 p=0.200 rho=1.050 leak=0.545 scale=0.600 ridge=1.0e-08 washout=50
+[GP] iter  30/30 score=9.008992 best=0.000030 x_nrmse=5.217543 all_nrmse=3.164937 penalty=4.407 N=800 p=0.200 rho=1.050 leak=0.660 scale=0.600 ridge=3.4e-06 washout=50
+[Save] -> outputs/periodic_spiking/best_params_gp.json
+End time: Sat May 16 01:03:49 PM CEST 2026
+Job finished.
+=== JOB_STATISTICS ===
+=== current date     : Sat May 16 01:03:50 PM CEST 2026
+= Job-ID             : 1605792 on tinygpu
+= Job-Name           : hr_periodic_spiking
+= Job-Command        : /home/hpc/rlvl/rlvl177v/Thesis/run_periodic_spiking.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl177v/Thesis
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 08:00:00
+= Elapsed runtime    : 00:03:24
+= Total RAM usage    : 0.7 GiB of requested  GiB (%)   
+= Node list          : tg094
+= Subm/Elig/Start/End: 2026-05-16T11:55:54 / 2026-05-16T11:55:54 / 2026-05-16T13:00:25 / 2026-05-16T13:03:49
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc               5.6G   104.9G   209.7G        N/A  34,582      500K   1,000K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]

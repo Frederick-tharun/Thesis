@@ -23,8 +23,8 @@ from plotting import (
     plot_results,
     plot_all_states,
     plot_optimizer_convergence,
-    plot_optimizer_heatmap,
     plot_bo_objective_landscape,
+    plot_final_comparison_table,
 )
 
 
@@ -297,64 +297,10 @@ def _write_rows_table_png(path, rows):
     if not rows:
         return
     try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
+        plot_final_comparison_table(path, rows, formatter=_format_table_value)
     except Exception as e:
         print(f"[Report] Final comparison PNG skipped: {e}")
-        return
 
-    # Keep the PNG readable by using the most important professor-facing columns.
-    columns = [
-        "Regime",
-        "Optimizer",
-        "Pred_NRMSE_x",
-        "Pred_NRMSE_all",
-        "Best_K",
-        "Control_target_RMSE_state",
-        "Spike_reduction_percent",
-        "Control_energy",
-        "Settling_time",
-        "Control_stable",
-    ]
-    columns = [c for c in columns if c in rows[0]]
-
-    cell_text = [
-        [_format_table_value(row.get(c, "")) for c in columns]
-        for row in rows
-    ]
-
-    fig_height = max(2.2, 1.0 + 0.45 * len(rows))
-    fig_width = max(12.0, 1.3 * len(columns))
-    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-    ax.axis("off")
-
-    table = ax.table(
-        cellText=cell_text,
-        colLabels=columns,
-        loc="center",
-        cellLoc="center",
-    )
-    table.auto_set_font_size(False)
-    table.set_fontsize(8)
-    table.scale(1.0, 1.4)
-
-    for (r, c), cell in table.get_celld().items():
-        if r == 0:
-            cell.set_text_props(weight="bold")
-        cell.set_linewidth(0.4)
-
-    ax.set_title(
-        "Final ESN + BO + Control comparison",
-        fontsize=13,
-        fontweight="bold",
-        pad=12,
-    )
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    plt.tight_layout()
-    plt.savefig(path, dpi=220, bbox_inches="tight")
-    plt.close()
-    print(f"[Report] Saved final comparison PNG -> {path}")
 
 
 def save_final_comparison_table(results):
@@ -534,14 +480,10 @@ def run_all_optimizers(loader, neuron_id):
     plot_bo_objective_landscape(
         all_history,
         optimizer=str(best.get("optimizer", "forest")),
-        params=("spectral_radius", "leaky_coefficient", "input_scaling"),
+        params=("input_scaling", "spectral_radius", "leaky_coefficient"),
         filename="bo_objective_landscape_best_optimizer.png",
     )
 
-    try:
-        plot_optimizer_heatmap(summary)
-    except Exception as e:
-        print(f"[Plot] Heatmap skipped: {e}")
 
     print("\n" + "=" * 72)
     print("OPTIMIZER RANKING")
@@ -787,10 +729,9 @@ def run_single_experiment(args, hr_mode: str | None = None):
         plot_bo_objective_landscape(
             optimizer_history,
             optimizer=best_name,
-            params=("spectral_radius", "leaky_coefficient", "input_scaling"),
+            params=("input_scaling", "spectral_radius", "leaky_coefficient"),
             filename="bo_objective_landscape_best_optimizer.png",
         )
-        plot_optimizer_heatmap(optimizer_summary)
 
     save_json(best_params, "best_params.json")
 

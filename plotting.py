@@ -701,118 +701,252 @@ def plot_optimizer_heatmap(rows, filename="optimizer_heatmap.png"):
     plt.tight_layout()
     _savefig(filename)
 
+
+def _parameter_label_map():
+    return {
+        "N_res": r"$N_{res}$",
+        "p": r"$p$",
+        "spectral_radius": r"$\rho$",
+        "leaky_coefficient": r"$\alpha$",
+        "input_scaling": r"$\epsilon$",
+        "regularization": r"$\lambda$",
+        "washout": "washout",
+    }
+
+
+def _score_from_row(row):
+    """Return the candidate objective value. Smaller is better."""
+    return _safe_float(
+        row.get(
+            "score",
+            row.get("validation_score", row.get("best_score", np.nan)),
+        )
+    )
+
+
+def _candidate_matrix(rows, optimizer, params):
+    """Collect valid BO samples for one optimizer."""
+    X, y = [], []
+    optimizer = str(optimizer).strip().lower()
+
+    for row in rows:
+        if optimizer and str(row.get("optimizer", "")).strip().lower() != optimizer:
+            continue
+
+        score = _score_from_row(row)
+
+        # Failed/exploded candidates are normally stored near 1e6.
+        # Keep them out of the colour scale because they make every useful region flat.
+        if not np.isfinite(score) or score >= 1e5:
+            continue
+
+        values = []
+        ok = True
+        for p in params:
+            v = _safe_float(row.get(p, np.nan))
+            if not np.isfinite(v):
+                ok = False
+                break
+            values.append(v)
+
+        if ok:
+            X.append(values)
+            y.append(score)
+
+    if len(y) == 0:
+        return np.empty((0, len(params))), np.asarray([], dtype=float)
+
+    return np.asarray(X, dtype=float), np.asarray(y, dtype=float)
+
+
+def _choose_optimizer_for_landscape(rows, requested_optimizer, params):
+    requested_optimizer = str(requested_optimizer or "").strip().lower()
+    if requested_optimizer:
+        X, y = _candidate_matrix(rows, requested_optimizer, params)
+        if len(y) >= max(6, len(params) + 2):
+            return requested_optimizer, X, y
+
+    # Fallback: choose the optimizer with the largest number of valid BO points.
+    names = sorted({str(r.get("optimizer", "")).strip().lower() for r in rows if r.get("optimizer")})
+    best = None
+    for name in names:
+        X, y = _candidate_matrix(rows, name, params)
+        if best is None or len(y) > len(best[2]):
+            best = (name, X, y)
+
+    if best is None:
+        return requested_optimizer, np.empty((0, len(params))), np.asarray([], dtype=float)
+    return best
+
+
+def _normalize_objective(y):
+    """0 = best candidate, 1 = worst visible candidate."""
+    y = np.asarray(y, dtype=float)
+    y_best = float(np.min(y))
+    y_worst = float(np.percentile(y, 95))
+
+    if abs(y_worst - y_best) < 1e-15:
+        return np.zeros_like(y), y_best, y_worst
+
+    yn = (y - y_best) / (y_worst - y_best)
+    return np.clip(yn, 0.0, 1.0), y_best, y_worst
+
+
+def _padded_limits(values, pad_frac=0.04):
+    values = np.asarray(values, dtype=float)
+    lo, hi = float(np.min(values)), float(np.max(values))
+    if not np.isfinite(lo) or not np.isfinite(hi):
+        return 0.0, 1.0
+    if abs(hi - lo) < 1e-12:
+        pad = 0.5 if abs(lo) < 1e-12 else 0.05 * abs(lo)
+        return lo - pad, hi + pad
+    pad = pad_frac * (hi - lo)
+    return lo - pad, hi + pad
+
+
+def _smooth_curve(xs, ys, n_grid=160):
+    xs = np.asarray(xs, dtype=float)
+    ys = np.asarray(ys, dtype=float)
+
+    mask = np.isfinite(xs) & np.isfinite(ys)
+    xs, ys = xs[mask], ys[mask]
+    if len(xs) < 2:
+        return xs, ys
+
+    order = np.argsort(xs)
+    xs, ys = xs[order], ys[order]
+
+    # Average duplicate x values.
+    unique_x = []
+    unique_y = []
+    for x in np.unique(xs):
+        m = xs == x
+        unique_x.append(float(x))
+        unique_y.append(float(np.mean(ys[m])))
+    xs = np.asarray(unique_x, dtype=float)
+    ys = np.asarray(unique_y, dtype=float)
+
+    if len(xs) < 3:
+        return xs, ys
+
+    grid = np.linspace(xs.min(), xs.max(), n_grid)
+    try:
+        from scipy.interpolate import PchipInterpolator
+        curve = PchipInterpolator(xs, ys, extrapolate=True)(grid)
+    except Exception:
+        curve = np.interp(grid, xs, ys)
+
+    # Gentle moving average so the diagonal looks thesis/paper friendly.
+    if len(curve) >= 9:
+        window = max(5, int(len(curve) * 0.04))
+        if window % 2 == 0:
+            window += 1
+        kernel = np.ones(window) / window
+        pad = window // 2
+        curve = np.convolve(np.pad(curve, pad, mode="edge"), kernel, mode="valid")
+
+    return grid, np.clip(curve, 0.0, 1.0)
+
+
+def _binned_lower_curve(x, y_norm, n_bins=15):
+    x = np.asarray(x, dtype=float)
+    y_norm = np.asarray(y_norm, dtype=float)
+    if len(x) == 0:
+        return x, y_norm
+
+    if len(np.unique(x)) < 3:
+        return _smooth_curve(x, y_norm)
+
+    n_bins = int(max(5, min(n_bins, len(x))))
+    edges = np.linspace(np.min(x), np.max(x), n_bins + 1)
+    xs, ys = [], []
+
+    for left, right in zip(edges[:-1], edges[1:]):
+        if right == edges[-1]:
+            mask = (x >= left) & (x <= right)
+        else:
+            mask = (x >= left) & (x < right)
+        if np.any(mask):
+            xs.append(float(np.mean(x[mask])))
+            # Lower envelope: BO is interested in the best value found in that region.
+            ys.append(float(np.min(y_norm[mask])))
+
+    return _smooth_curve(np.asarray(xs), np.asarray(ys))
+
+
+def _interpolated_surface(x, y, z, grid_size=180):
+    x = np.asarray(x, dtype=float)
+    y = np.asarray(y, dtype=float)
+    z = np.asarray(z, dtype=float)
+
+    xlim = _padded_limits(x, pad_frac=0.0)
+    ylim = _padded_limits(y, pad_frac=0.0)
+    gx = np.linspace(xlim[0], xlim[1], grid_size)
+    gy = np.linspace(ylim[0], ylim[1], grid_size)
+    GX, GY = np.meshgrid(gx, gy)
+
+    if len(np.unique(x)) < 2 or len(np.unique(y)) < 2 or len(z) < 4:
+        return GX, GY, None
+
+    try:
+        from scipy.interpolate import griddata
+        points = np.column_stack([x, y])
+        Z = griddata(points, z, (GX, GY), method="linear")
+        # Fill convex-hull holes with nearest-neighbour values so the heatmap is a full rectangle.
+        if np.any(~np.isfinite(Z)):
+            Z_nearest = griddata(points, z, (GX, GY), method="nearest")
+            Z = np.where(np.isfinite(Z), Z, Z_nearest)
+        return GX, GY, np.clip(Z, 0.0, 1.0)
+    except Exception:
+        return GX, GY, None
+
+
 def plot_bo_objective_landscape(
     rows,
     optimizer="forest",
-    params=("spectral_radius", "leaky_coefficient", "input_scaling"),
+    params=("input_scaling", "spectral_radius", "leaky_coefficient"),
     labels=None,
     filename=None,
 ):
     """
-    Paper-style Bayesian Optimization objective landscape / partial-dependence plot.
+    Paper-style BO objective landscape.
 
-    This is intended to replace the simple optimizer heatmap for thesis figures.
-    It shows:
-      - diagonal: 1D objective sensitivity for each hyperparameter
-      - lower triangle: 2D objective landscape for hyperparameter pairs
-      - black dots: sampled BO points
-      - red star/dotted line: best sampled hyperparameter value
+    Layout is intentionally similar to common Bayesian-optimization papers:
+    - diagonal: 1D partial-dependence-like objective curve
+    - lower triangle: 2D objective landscape for each hyperparameter pair
+    - black dots: BO samples tested by the optimizer
+    - red star / red dashed line: best sampled hyperparameter value
 
-    Lower objective value is better. For visualization, objective values are normalized
-    from 0 to 1, where 0 is best and 1 is worst among valid points.
+    Objective value is normalized so 0 is best and 1 is worst in the visible range.
     """
     if not rows:
         print("[Plot] BO objective landscape skipped: empty rows")
         return
 
-    if labels is None:
-        labels = {
-            "N_res": r"$N_{res}$",
-            "p": r"density $p$",
-            "spectral_radius": r"$\rho$",
-            "leaky_coefficient": r"leak $\alpha$",
-            "input_scaling": "input scale",
-            "regularization": "ridge",
-            "washout": "washout",
-        }
-
-    optimizer = str(optimizer).strip().lower()
     params = tuple(params)
+    if labels is None:
+        labels = _parameter_label_map()
 
-    clean_values = []
-    clean_scores = []
-
-    for row in rows:
-        if str(row.get("optimizer", "")).strip().lower() != optimizer:
-            continue
-
-        score = _safe_float(
-            row.get("score", row.get("validation_score", row.get("best_score", np.nan)))
-        )
-
-        # Failed/exploded ESN candidates are usually stored as 1e6.
-        # They destroy the colour scale, so keep only meaningful BO points.
-        if not np.isfinite(score) or score >= 1e5:
-            continue
-
-        vals = []
-        ok = True
-        for name in params:
-            v = _safe_float(row.get(name, np.nan))
-            if not np.isfinite(v):
-                ok = False
-                break
-            vals.append(v)
-
-        if ok:
-            clean_values.append(vals)
-            clean_scores.append(score)
-
-    if len(clean_scores) < max(6, len(params) + 2):
+    optimizer, X, y = _choose_optimizer_for_landscape(rows, optimizer, params)
+    min_needed = max(6, len(params) + 2)
+    if len(y) < min_needed:
         print(
-            f"[Plot] BO objective landscape skipped: not enough valid points for {optimizer}"
+            f"[Plot] BO objective landscape skipped: not enough valid points "
+            f"for optimizer='{optimizer}'. Need at least {min_needed}, found {len(y)}."
         )
         return
 
-    X = np.asarray(clean_values, dtype=float)
-    y = np.asarray(clean_scores, dtype=float)
+    y_norm, y_best, _ = _normalize_objective(y)
     best_idx = int(np.argmin(y))
-
-    # Robust normalization: 0=best, 1=bad. Use 95th percentile so one bad point
-    # does not flatten all meaningful colour differences.
-    y_best = float(np.min(y))
-    y_worst = float(np.percentile(y, 95))
-    if abs(y_worst - y_best) < 1e-15:
-        y_norm = np.zeros_like(y)
-    else:
-        y_norm = np.clip((y - y_best) / (y_worst - y_best), 0.0, 1.0)
-
     d = len(params)
-    fig, axes = plt.subplots(d, d, figsize=(3.6 * d + 1.6, 3.35 * d))
-    if d == 1:
-        axes = np.asarray([[axes]])
 
     cmap = plt.cm.viridis
-
-    def _binned_curve(x_values, scores, n_bins=18):
-        """Return a simple 1D partial-dependence-like curve from sampled points."""
-        x_values = np.asarray(x_values, dtype=float)
-        scores = np.asarray(scores, dtype=float)
-        if len(np.unique(x_values)) < 2:
-            return x_values, scores
-
-        edges = np.linspace(np.min(x_values), np.max(x_values), n_bins + 1)
-        xs, ys = [], []
-        for left, right in zip(edges[:-1], edges[1:]):
-            if right == edges[-1]:
-                mask = (x_values >= left) & (x_values <= right)
-            else:
-                mask = (x_values >= left) & (x_values < right)
-            if np.any(mask):
-                xs.append(float(np.mean(x_values[mask])))
-                # Use the lower envelope, because BO cares about the best achievable value.
-                ys.append(float(np.min(scores[mask])))
-        return np.asarray(xs), np.asarray(ys)
+    fig, axes = plt.subplots(
+        d,
+        d,
+        figsize=(2.25 * d + 1.35, 2.05 * d + 0.7),
+        squeeze=False,
+    )
 
     for i in range(d):
         for j in range(d):
@@ -823,97 +957,373 @@ def plot_bo_objective_landscape(
                 continue
 
             xj = X[:, j]
-            xi = X[:, i]
+            yi = X[:, i]
 
             if i == j:
-                xs, ys = _binned_curve(xi, y_norm, n_bins=min(18, max(5, len(y_norm)//2)))
-                order = np.argsort(xs)
-                xs = xs[order]
-                ys = ys[order]
-
-                ax.plot(xs, ys, linewidth=1.4)
-                ax.scatter(xi, y_norm, s=12, alpha=0.35)
-                ax.axvline(X[best_idx, i], color="red", linestyle=":", linewidth=1.4)
+                curve_x, curve_y = _binned_lower_curve(yi, y_norm, n_bins=15)
+                ax.plot(curve_x, curve_y, color="#1f77b4", linewidth=1.35)
+                ax.scatter(yi, y_norm, s=9, color="#1f77b4", alpha=0.30)
+                ax.axvline(X[best_idx, i], color="red", linestyle="--", linewidth=1.0, alpha=0.80)
                 ax.scatter(
                     [X[best_idx, i]],
                     [y_norm[best_idx]],
-                    color="red",
                     marker="*",
-                    s=80,
+                    s=70,
+                    color="red",
+                    edgecolor="red",
                     zorder=5,
                 )
-                ax.set_ylim(-0.05, 1.05)
-                ax.set_ylabel("Partial dep.\nobj. func.", fontsize=9)
-                ax.set_title(labels.get(params[i], params[i]), fontsize=11)
-
+                ax.set_ylim(-0.04, 1.04)
+                ax.set_title(labels.get(params[i], params[i]), fontsize=11, pad=5)
+                ax.yaxis.tick_right()
+                ax.yaxis.set_label_position("right")
+                ax.set_ylabel("Partial dep.\nobj. func.", fontsize=8, labelpad=6)
+                ax.set_xlim(*_padded_limits(yi))
             else:
-                # 2D objective landscape. Interpolate only if enough unique points exist.
-                drew_surface = False
-                try:
-                    from scipy.interpolate import griddata
-
-                    if len(np.unique(xj)) >= 3 and len(np.unique(xi)) >= 3:
-                        gx = np.linspace(np.min(xj), np.max(xj), 120)
-                        gy = np.linspace(np.min(xi), np.max(xi), 120)
-                        GX, GY = np.meshgrid(gx, gy)
-                        Z = griddata(
-                            points=np.column_stack([xj, xi]),
-                            values=y_norm,
-                            xi=(GX, GY),
-                            method="linear",
-                        )
-
-                        ax.imshow(
-                            Z,
-                            origin="lower",
-                            aspect="auto",
-                            extent=[gx.min(), gx.max(), gy.min(), gy.max()],
-                            cmap=cmap,
-                            vmin=0,
-                            vmax=1,
-                            alpha=0.88,
-                        )
-                        drew_surface = True
-                except Exception:
-                    drew_surface = False
-
-                if not drew_surface:
-                    ax.scatter(xj, xi, c=y_norm, cmap=cmap, vmin=0, vmax=1, s=22)
+                GX, GY, Z = _interpolated_surface(xj, yi, y_norm)
+                if Z is not None:
+                    ax.imshow(
+                        Z,
+                        origin="lower",
+                        extent=[GX.min(), GX.max(), GY.min(), GY.max()],
+                        aspect="auto",
+                        cmap=cmap,
+                        vmin=0,
+                        vmax=1,
+                        interpolation="bilinear",
+                    )
+                    ax.scatter(xj, yi, s=8, color="black", edgecolor="none", alpha=0.90, zorder=4)
                 else:
-                    ax.scatter(xj, xi, c="black", s=9, alpha=0.85)
+                    ax.scatter(xj, yi, c=y_norm, cmap=cmap, vmin=0, vmax=1, s=18, edgecolor="black", linewidth=0.25)
 
                 ax.scatter(
-                    X[best_idx, j],
-                    X[best_idx, i],
-                    color="red",
+                    [X[best_idx, j]],
+                    [X[best_idx, i]],
                     marker="*",
-                    s=90,
+                    s=80,
+                    color="red",
+                    edgecolor="red",
                     zorder=6,
                 )
+                ax.set_xlim(*_padded_limits(xj))
+                ax.set_ylim(*_padded_limits(yi))
 
+            # Only show the outer labels, like a compact paper figure.
             if i == d - 1:
                 ax.set_xlabel(labels.get(params[j], params[j]), fontsize=10)
+            else:
+                ax.set_xticklabels([])
+
             if j == 0 and i != j:
                 ax.set_ylabel(labels.get(params[i], params[i]), fontsize=10)
+            elif i != j:
+                ax.set_yticklabels([])
 
-            ax.grid(True, alpha=0.15)
+            ax.tick_params(axis="both", labelsize=8, direction="out", length=3)
+            ax.grid(False)
 
-    sm = plt.cm.ScalarMappable(cmap=cmap)
-    sm.set_array(y_norm)
-    cbar = fig.colorbar(sm, ax=axes.ravel().tolist(), shrink=0.78, pad=0.02)
-    cbar.set_label("Value of obj. func. (normalized)", fontsize=10)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=1))
+    sm.set_array([])
+    cax = fig.add_axes([0.885, 0.17, 0.026, 0.68])
+    cbar = fig.colorbar(sm, cax=cax)
+    cbar.set_label("Value of obj. func.", fontsize=10)
+    cbar.ax.tick_params(labelsize=8)
 
     best_text = ", ".join(
         f"{labels.get(p, p)}={X[best_idx, k]:.4g}" for k, p in enumerate(params)
     )
     fig.suptitle(
         f"BO objective landscape ({optimizer})\nBest score={y_best:.3e}; {best_text}",
-        fontsize=14,
+        fontsize=12,
         fontweight="bold",
+        y=0.985,
     )
+
+    fig.subplots_adjust(left=0.10, right=0.84, bottom=0.10, top=0.88, wspace=0.18, hspace=0.12)
 
     if filename is None:
         filename = f"bo_objective_landscape_{optimizer}.png"
 
-    plt.tight_layout(rect=[0, 0, 0.90, 0.92])
     _savefig(filename)
+
+
+def _savefig_to_path(path, fig=None, dpi=220):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    if fig is None:
+        fig = plt.gcf()
+    fig.savefig(path, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[Plot] Saved -> {path}")
+
+
+def plot_controlled_vs_uncontrolled_x(
+    times,
+    truth,
+    uncontrolled,
+    controlled,
+    target_state,
+    control_start_idx,
+    metrics,
+    output_dir,
+):
+    times = _as_1d(times)
+    truth = _as_2d(truth)
+    uncontrolled = _as_2d(uncontrolled)
+    controlled = _as_2d(controlled)
+    target_state = _as_1d(target_state)
+
+    n = min(len(times), len(truth), len(uncontrolled), len(controlled))
+    if n == 0:
+        return
+    times = times[:n]
+    truth = truth[:n]
+    uncontrolled = uncontrolled[:n]
+    controlled = controlled[:n]
+    control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+
+    fig, ax = plt.subplots(figsize=(15, 6))
+    ax.plot(times, truth[:, 0], color="black", linewidth=1.4, label="True x")
+    ax.plot(times, uncontrolled[:, 0], linewidth=1.2, label="Uncontrolled ESN x")
+    ax.plot(times, controlled[:, 0], linestyle="--", linewidth=1.4, label="Controlled ESN x")
+    ax.axhline(target_state[0], linestyle=":", linewidth=1.4, label="Target x")
+    ax.axvline(times[control_start_idx], linestyle="--", linewidth=1.4, label="Control start")
+
+    txt = (
+        f"K = {metrics.get('K')}\n"
+        f"Target RMSE = {_safe_float(metrics.get('target_rmse_state')):.4f}\n"
+        f"Spike reduction = {_safe_float(metrics.get('spike_reduction_percent')):.2f}%\n"
+        f"Energy = {_safe_float(metrics.get('control_energy')):.4f}"
+    )
+    ax.text(
+        0.01,
+        0.97,
+        txt,
+        transform=ax.transAxes,
+        va="top",
+        ha="left",
+        fontsize=9,
+        bbox=dict(boxstyle="round", facecolor="white", alpha=0.88),
+    )
+
+    ax.set_title("Linear feedback control: x-state comparison", fontsize=14, fontweight="bold")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("x state")
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="best", fontsize=9)
+    fig.tight_layout()
+    _savefig_to_path(os.path.join(output_dir, "controlled_vs_uncontrolled_x.png"), fig=fig, dpi=220)
+
+
+def plot_controlled_all_states(
+    times,
+    truth,
+    uncontrolled,
+    controlled,
+    target_state,
+    control_start_idx,
+    output_dir,
+):
+    times = _as_1d(times)
+    truth = _as_2d(truth)
+    uncontrolled = _as_2d(uncontrolled)
+    controlled = _as_2d(controlled)
+    target_state = _as_1d(target_state)
+
+    n = min(len(times), len(truth), len(uncontrolled), len(controlled))
+    if n == 0:
+        return
+    times = times[:n]
+    truth = truth[:n]
+    uncontrolled = uncontrolled[:n]
+    controlled = controlled[:n]
+    control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+
+    labels_short = ["x", "y", "z"]
+    names = [
+        "x: membrane voltage / spike variable",
+        "y: recovery variable",
+        "z: slow adaptation variable",
+    ]
+
+    n_states = min(3, truth.shape[1], uncontrolled.shape[1], controlled.shape[1])
+    fig, axes = plt.subplots(n_states, 1, figsize=(15, 3.2 * n_states), sharex=True)
+    if n_states == 1:
+        axes = [axes]
+
+    for i, ax in enumerate(axes):
+        ax.plot(times, truth[:, i], color="black", linewidth=1.2, label=f"True {labels_short[i]}")
+        ax.plot(times, uncontrolled[:, i], linewidth=1.1, label=f"Uncontrolled {labels_short[i]}")
+        ax.plot(times, controlled[:, i], linestyle="--", linewidth=1.3, label=f"Controlled {labels_short[i]}")
+        ax.axhline(target_state[i], linestyle=":", linewidth=1.2, label=f"Target {labels_short[i]}")
+        ax.axvline(times[control_start_idx], linestyle="--", linewidth=1.1, label="Control start")
+        ax.set_ylabel(labels_short[i])
+        ax.set_title(names[i], fontsize=11, fontweight="bold")
+        ax.grid(True, alpha=0.25)
+        ax.legend(loc="best", fontsize=8)
+
+    axes[-1].set_xlabel("Time (s)")
+    fig.suptitle("Linear feedback control: all HR states", fontsize=15, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.96])
+    _savefig_to_path(os.path.join(output_dir, "controlled_all_states.png"), fig=fig, dpi=220)
+
+
+def plot_control_signal(times, control_signal, control_start_idx, output_dir):
+    times = _as_1d(times)
+    control_signal = _as_2d(control_signal)
+
+    n = min(len(times), len(control_signal))
+    if n == 0:
+        return
+    times = times[:n]
+    control_signal = control_signal[:n]
+    control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+    control_norm = np.linalg.norm(control_signal, axis=1)
+
+    fig, ax = plt.subplots(figsize=(15, 5))
+    ax.plot(times, control_norm, linewidth=1.4, label=r"$||u(t)||$")
+    ax.plot(times, control_signal[:, 0], linestyle="--", linewidth=1.2, label=r"$u_x(t)$")
+    ax.axvline(times[control_start_idx], linestyle="--", linewidth=1.3, label="Control start")
+    ax.set_title("Linear feedback control signal", fontsize=14, fontweight="bold")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Control signal")
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="best")
+    fig.tight_layout()
+    _savefig_to_path(os.path.join(output_dir, "control_signal.png"), fig=fig, dpi=220)
+
+
+def plot_control_error(
+    times,
+    uncontrolled_error_norm,
+    controlled_error_norm,
+    control_start_idx,
+    settling_tolerance,
+    output_dir,
+):
+    times = _as_1d(times)
+    uncontrolled_error_norm = _as_1d(uncontrolled_error_norm)
+    controlled_error_norm = _as_1d(controlled_error_norm)
+
+    n = min(len(times), len(uncontrolled_error_norm), len(controlled_error_norm))
+    if n == 0:
+        return
+    times = times[:n]
+    uncontrolled_error_norm = uncontrolled_error_norm[:n]
+    controlled_error_norm = controlled_error_norm[:n]
+    control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+
+    fig, ax = plt.subplots(figsize=(15, 5))
+    ax.plot(times, uncontrolled_error_norm, linewidth=1.2, label="Uncontrolled error")
+    ax.plot(times, controlled_error_norm, linestyle="--", linewidth=1.4, label="Controlled error")
+    ax.axhline(settling_tolerance, linestyle=":", linewidth=1.3, label="Settling tolerance")
+    ax.axvline(times[control_start_idx], linestyle="--", linewidth=1.3, label="Control start")
+    ax.set_title("Target-tracking error", fontsize=14, fontweight="bold")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel(r"$||state - target||$")
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="best")
+    fig.tight_layout()
+    _savefig_to_path(os.path.join(output_dir, "control_error.png"), fig=fig, dpi=220)
+
+
+def plot_k_sweep_summary(rows, output_dir):
+    if not rows:
+        return
+
+    stable_rows = [r for r in rows if bool(r.get("stable", False))]
+    if not stable_rows:
+        stable_rows = rows
+
+    k = np.array([_safe_float(r.get("K", np.nan)) for r in stable_rows], dtype=float)
+    rmse_vals = np.array([_safe_float(r.get("target_rmse_state", np.nan)) for r in stable_rows], dtype=float)
+    spike = np.array([_safe_float(r.get("spike_reduction_percent", np.nan)) for r in stable_rows], dtype=float)
+    energy = np.array([_safe_float(r.get("control_energy", np.nan)) for r in stable_rows], dtype=float)
+
+    order = np.argsort(k)
+    k, rmse_vals, spike, energy = k[order], rmse_vals[order], spike[order], energy[order]
+
+    fig, axes = plt.subplots(3, 1, figsize=(10, 10), sharex=True)
+    axes[0].plot(k, rmse_vals, marker="o")
+    axes[0].set_ylabel("Target RMSE")
+    axes[0].grid(True, alpha=0.25)
+
+    axes[1].plot(k, spike, marker="o")
+    axes[1].set_ylabel("Spike reduction (%)")
+    axes[1].grid(True, alpha=0.25)
+
+    axes[2].plot(k, energy, marker="o")
+    axes[2].set_ylabel("Control energy")
+    axes[2].set_xlabel("K")
+    axes[2].grid(True, alpha=0.25)
+
+    fig.suptitle("Linear-feedback K sweep summary", fontsize=14, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.96])
+    _savefig_to_path(os.path.join(output_dir, "control_sweep_summary.png"), fig=fig, dpi=220)
+
+
+def _default_table_format(value):
+    if value == "" or value is None:
+        return ""
+    if isinstance(value, bool):
+        return "Yes" if value else "No"
+    try:
+        v = float(value)
+        if not np.isfinite(v):
+            return ""
+        if abs(v) >= 1000 or (abs(v) > 0 and abs(v) < 1e-4):
+            return f"{v:.2e}"
+        if abs(v) >= 10:
+            return f"{v:.3f}"
+        return f"{v:.6f}"
+    except Exception:
+        return str(value)
+
+
+def plot_final_comparison_table(path, rows, formatter=None):
+    if not rows:
+        return
+    formatter = formatter or _default_table_format
+
+    columns = [
+        "Regime",
+        "Optimizer",
+        "Pred_NRMSE_x",
+        "Pred_NRMSE_all",
+        "Best_K",
+        "Control_target_RMSE_state",
+        "Spike_reduction_percent",
+        "Control_energy",
+        "Settling_time",
+        "Control_stable",
+    ]
+    columns = [c for c in columns if c in rows[0]]
+    cell_text = [[formatter(row.get(c, "")) for c in columns] for row in rows]
+
+    fig_height = max(2.2, 1.0 + 0.45 * len(rows))
+    fig_width = max(12.0, 1.3 * len(columns))
+    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+    ax.axis("off")
+
+    table = ax.table(
+        cellText=cell_text,
+        colLabels=columns,
+        loc="center",
+        cellLoc="center",
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(8)
+    table.scale(1.0, 1.4)
+
+    for (r, _c), cell in table.get_celld().items():
+        if r == 0:
+            cell.set_text_props(weight="bold")
+        cell.set_linewidth(0.4)
+
+    ax.set_title(
+        "Final ESN + BO + Control comparison",
+        fontsize=13,
+        fontweight="bold",
+        pad=12,
+    )
+    fig.tight_layout()
+    _savefig_to_path(path, fig=fig, dpi=220)

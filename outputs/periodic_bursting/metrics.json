@@ -4,10 +4,10 @@
   "series": "hr_full_state",
   "optimizer": "forest",
   "input_size": 3,
-  "rmse_recursive_x": 0.000299461815311193,
-  "nrmse_recursive_x": 0.0005031021045263594,
-  "rmse_recursive_all_states": 0.0004207206377632648,
-  "nrmse_recursive_all_states": 0.00034303533258950823,
+  "rmse_recursive_x": 0.0003456868755590727,
+  "nrmse_recursive_x": 0.0005807611712370812,
+  "rmse_recursive_all_states": 0.0004912202686084453,
+  "nrmse_recursive_all_states": 0.0003970645220752004,
   "selected_params": {
     "N_res": 679,
     "p": 0.11479874712145936,
@@ -16,10 +16,10 @@
     "input_scaling": 0.3363627344025843,
     "regularization": 1.391976354588756e-08,
     "washout": 153,
-    "validation_score": 6.198836858196123e-05,
-    "validation_nrmse": 3.9987103240541755e-05,
-    "validation_nrmse_x": 7.141748229971244e-05,
-    "validation_std_ratio": 0.9999935643887323,
-    "validation_mean_gap": 1.4691922017624409e-05
+    "validation_score": 5.740248254183363e-05,
+    "validation_nrmse": 3.783922492858392e-05,
+    "validation_nrmse_x": 6.578673580465494e-05,
+    "validation_std_ratio": 0.9999936005252068,
+    "validation_mean_gap": 1.4586948171470752e-05
   }
 }

@@ -1,15 +1,15 @@
 {
   "N_res": 665,
   "p": 0.02,
-  "spectral_radius": 0.901190106567431,
+  "spectral_radius": 0.9011538038874369,
   "leaky_coefficient": 0.8,
-  "input_scaling": 0.40528976445579207,
+  "input_scaling": 0.4052898520397465,
   "regularization": 1e-08,
   "washout": 403,
-  "validation_score": 6.54419485942287e-05,
-  "validation_nrmse": 8.863380374710367e-05,
-  "validation_nrmse_x": 5.5502582100139444e-05,
-  "validation_std_ratio": 1.00000302933967,
-  "validation_mean_gap": 2.3604423808691672e-05,
+  "validation_score": 7.064887460257196e-05,
+  "validation_nrmse": 9.495298873754017e-05,
+  "validation_nrmse_x": 6.023282568758559e-05,
+  "validation_std_ratio": 1.0000015142553866,
+  "validation_mean_gap": 2.095868160982392e-05,
   "validation_penalty": 0.0
 }

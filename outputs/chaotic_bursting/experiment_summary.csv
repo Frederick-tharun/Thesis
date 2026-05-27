@@ -1,2 +1,2 @@
 timestamp,regime,optimizer,samples,states,rmse_x,nrmse_x,rmse_all_states,nrmse_all_states,N_res,density_p,spectral_radius,leak_rate,input_scaling,ridge,washout
-2026-05-13 11:24:51,chaotic_bursting,gbrt,150000,3,0.01331178,0.02697974,0.01849607,0.01818635,419,0.166094,0.571785,0.329853,0.194551,4.885115772339261e-08,388
+2026-05-26 10:53:50,chaotic_bursting,dummy,150000,3,0.02653267,0.05377526,0.03644313,0.03611758,715,0.073625,0.512552,0.147481,0.280867,3.2827576158867195e-08,372
