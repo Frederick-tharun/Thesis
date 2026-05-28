@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+timestamp,regime,optimizer,samples,states,rmse_x,nrmse_x,rmse_all_states,nrmse_all_states,N_res,density_p,spectral_radius,leak_rate,input_scaling,ridge,washout
+2026-05-16 11:48:19,periodic_spiking,gp,150000,3,0.00085224,0.00164169,0.00120892,0.00100566,250,0.2,0.45,0.247776,0.440754,1e-08,500
+=======
 timestamp,regime,optimizer,samples,states,rmse_x,nrmse_x,rmse_all_states,nrmse_all_states,N_res,density_p,spectral_radius,leak_rate,input_scaling,ridge,washout
 2026-05-26 10:53:30,periodic_spiking,gbrt,150000,3,0.00056442,0.00108725,0.0008069,0.00066734,693,0.179044,0.734714,0.150128,0.310743,1.432860909587606e-08,447
+>>>>>>> d87eeb28 (Adde linear feedback control)

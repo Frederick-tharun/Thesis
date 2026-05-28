@@ -1,4 +1,11 @@
+<<<<<<< HEAD
+regime,optimizer,best_K,selection_score,target_mode,target_rmse_state,target_rmse_x,spike_reduction_percent,control_energy,settling_time,control_start_frac,control_start_time,output_dir
+periodic_spiking,gp,0.9832142857142858,2.7341894866519445e-05,rest_state,2.7265377328803403e-05,5.703659793524756e-06,100.0,7.651753771604162e-06,0.0,0.2,1140.0,outputs\periodic_spiking\control\linear_feedback
+periodic_bursting,forest,0.9832142857142858,5.591164916148645e-05,rest_state,5.5593532437053764e-05,1.2283700366557471e-05,100.0,3.181167244326834e-05,0.0,0.2,1140.0,outputs\periodic_bursting\control\linear_feedback
+chaotic_bursting,gbrt,0.9832142857142858,2.0323652446355726e-05,rest_state,2.0281314463823675e-05,5.625059748834802e-06,100.0,4.233798253205083e-06,0.0,0.2,1140.0,outputs\chaotic_bursting\control\linear_feedback
+=======
 regime,optimizer,best_K,selection_score,target_mode,target_rmse_state,target_rmse_x,spike_reduction_percent,control_energy,settling_time,control_start_frac,control_start_time,output_dir
 periodic_spiking,forest,0.9832142857142858,2.9035507488345285e-05,rest_state,2.8949246882979646e-05,1.5495859281309508e-05,100.0,8.626060536563704e-06,0.0,0.2,1140.0,outputs/periodic_spiking/control/linear_feedback
 periodic_bursting,forest,0.9832142857142858,5.594087340441689e-05,rest_state,5.56224259260205e-05,1.2300302827348915e-05,100.0,3.1844747839639046e-05,0.0,0.2,1140.0,outputs/periodic_bursting/control/linear_feedback
 chaotic_bursting,dummy,0.9832142857142858,2.7012621362469895e-05,rest_state,2.6937930680699692e-05,6.913784364390281e-06,100.0,7.469068177020272e-06,0.0,0.2,1140.0,outputs/chaotic_bursting/control/linear_feedback
+>>>>>>> d87eeb28 (Adde linear feedback control)
