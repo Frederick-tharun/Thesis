@@ -1,0 +1,16 @@
+{
+  "regime": "chaotic_bursting",
+  "optimizer": "bo_loaded",
+  "controller": "pyragas",
+  "K": 0.05,
+  "finite_s": 0.8,
+  "pyragas_delay": 100,
+  "stable": true,
+  "target_mode": "rest_state",
+  "target_rmse_state": 1.1179320766337557,
+  "target_rmse_x": 0.6340027588939958,
+  "spike_reduction_percent": 45.45454545454545,
+  "control_energy": 0.0003657930435047732,
+  "settling_time": 37.75999999999999,
+  "output_dir": "outputs/chaotic_bursting/pyragas/control/pyragas/K_0p050000"
+}

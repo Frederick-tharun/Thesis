@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+=======
+.conda_env/
+.venv/
+__pycache__/
+logs/
+archive_old_files/
+*.pyc
+*.zip
+.DS_Store
+>>>>>>> e4c16f8a (Update final ESN control outputs and clean repository tracking)

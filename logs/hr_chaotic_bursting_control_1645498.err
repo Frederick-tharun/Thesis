@@ -1,2 +1,0 @@
-/home/hpc/rlvl/rlvl177v/Thesis/plotting.py:918: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout(rect=[0, 0, 0.90, 0.92])
