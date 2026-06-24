@@ -80,7 +80,7 @@ HR_TRANSIENT = 5000
 # "periodic_spiking"
 # "periodic_bursting"
 # "chaotic_bursting"
-HR_MODE = "periodic_bursting"
+HR_MODE = "chaotic_bursting"
 
 HR_PARAMETER_SETS = {
     "periodic_spiking": {
@@ -142,12 +142,6 @@ OUTPUT_DIR = "outputs"
 # This prevents old confusing files from mixing with new files.
 CLEAR_OUTPUT_FOLDER_EACH_RUN = False
 
-# ============================================================
-# HR regime selection
-# ============================================================
-
-HR_MODE = "periodic_bursting"
-
 # Optional aliases for compatibility with different loader versions.
 HR_REGIME = HR_MODE
 HR_DYNAMICS_MODE = HR_MODE
@@ -187,6 +181,14 @@ CONTROL_TARGET_MODE = "rest_state"
 # CONTROL_SETTLING_HOLD_STEPS consecutive samples.
 CONTROL_SETTLING_TOL = 0.15
 CONTROL_SETTLING_HOLD_STEPS = 100
+
+# Names consumed by control_experiment.py.
+CONTROL_SETTLING_TOLERANCE = CONTROL_SETTLING_TOL
+CONTROL_SETTLING_CONSECUTIVE = CONTROL_SETTLING_HOLD_STEPS
+
+CONTROL_FINITE_S = 0.8
+PYRAGAS_DELAY = 20
+PYRAGAS_SIGN = -1
 
 # Optional clamp on corrected ESN input after control is applied.
 # Set to None to disable.
@@ -246,6 +248,14 @@ PYRAGAS_TARGET_INTERVAL_CV = 0.05
 PYRAGAS_TARGET_PERIODICITY_NORM = 0.15
 PYRAGAS_TARGET_DELAY_MISMATCH = 0.20
 
+# Current metric names used by control_experiment.py. Keep the aliases above
+# for compatibility with older result-analysis scripts.
+PYRAGAS_MIN_EVALUATION_CYCLES = 3
+PYRAGAS_TARGET_RHYTHM_CV = PYRAGAS_TARGET_INTERVAL_CV
+PYRAGAS_TARGET_CYCLE_WINDOW_COVERAGE = 0.50
+PYRAGAS_MAX_EMPIRICAL_RECURRENCE_ERROR_NORM = PYRAGAS_TARGET_PERIODICITY_NORM
+PYRAGAS_MIN_EMPIRICAL_RECURRENCE_CORRELATION = 0.65
+
 # Require activity throughout the evaluation interval.
 PYRAGAS_TARGET_PEAK_WINDOW_COVERAGE = 0.75
 PYRAGAS_MAX_PEAK_AMPLITUDE_CV = 0.25
@@ -255,6 +265,7 @@ PYRAGAS_MIN_TAIL_ACTIVITY_RATIO = 0.50
 
 # The final two delayed trajectory segments should form the same orbit.
 PYRAGAS_MAX_TAIL_CLOSURE_ERROR_NORM = 0.20
+PYRAGAS_MAX_EMPIRICAL_TAIL_CLOSURE_ERROR_NORM = PYRAGAS_MAX_TAIL_CLOSURE_ERROR_NORM
 
 # Classical Pyragas feedback should become small after stabilization.
 PYRAGAS_TARGET_NONINVASIVENESS = 0.10

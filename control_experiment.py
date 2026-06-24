@@ -535,7 +535,11 @@ def _settling_time(times, error_norm, control_start_idx, tolerance, consecutive)
     start = int(max(0, min(control_start_idx, n - 1)))
     consecutive = int(max(1, consecutive))
 
-    for i in range(start, max(start + 1, n - consecutive)):
+    last_start = n - consecutive
+    if start > last_start:
+        return float("nan")
+
+    for i in range(start, last_start + 1):
         if np.all(error_norm[i : i + consecutive] <= tolerance):
             return float(times[i] - times[start])
 
@@ -1308,6 +1312,7 @@ def run_control_experiment(
         control_start_idx,
         {**best_row, "K": best_K},
         output_dir,
+        controller_name=controller,
     )
 
     plot_controlled_all_states(
@@ -1318,7 +1323,8 @@ def run_control_experiment(
         target_raw,
         control_start_idx,
         output_dir,
-        metrics=best_row if controller == "pyragas" else None,
+        controller_name=controller,
+        metrics=best_row,
     )
 
     plot_control_signal(
@@ -1326,6 +1332,7 @@ def run_control_experiment(
         best_control_signal,
         control_start_idx,
         output_dir,
+        controller_name=controller,
     )
 
     uncontrolled_error = _compute_error_norms(uncontrolled, target_raw)
@@ -1338,9 +1345,10 @@ def run_control_experiment(
         control_start_idx,
         settling_tolerance,
         output_dir,
+        controller_name=controller,
     )
 
-    plot_k_sweep_summary(rows, output_dir)
+    plot_k_sweep_summary(rows, output_dir, controller_name=controller)
 
     global_row = {
         "regime": hr_mode,

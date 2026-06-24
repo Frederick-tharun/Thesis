@@ -12,4 +12,5 @@ controller_debug_backup/
 /outputs_finite_s_sweep/
 /outputs_pyragas_periodic_sweep/
 /selected_pyragas_results/
+/thesis_results_summary/
 /outputs/*/control/

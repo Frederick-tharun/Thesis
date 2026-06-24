@@ -256,6 +256,7 @@ def _make_final_comparison_row(result):
     params = result.get("selected_params") or {}
 
     controller_name = control.get("controller", "")
+    is_pyragas = controller_name == "pyragas"
     if controller_name == "linear_feedback":
         control_method = "Linear feedback"
     elif controller_name == "finite_time":
@@ -281,12 +282,21 @@ def _make_final_comparison_row(result):
         "Pred_NRMSE_all": result.get("nrmse_all", ""),
         "Control_method": control_method,
         "Best_K": control.get("best_K", ""),
-        "Control_target_RMSE_state": control.get("best_target_rmse_state", ""),
-        "Control_target_RMSE_x": control.get("best_target_rmse_x", ""),
+        "Control_target_RMSE_state": (
+            "" if is_pyragas else control.get("best_target_rmse_state", "")
+        ),
+        "Control_target_RMSE_x": (
+            "" if is_pyragas else control.get("best_target_rmse_x", "")
+        ),
         "Spike_reduction_percent": control.get("best_spike_reduction_percent", ""),
         "Control_energy": control.get("best_control_energy", ""),
         "Settling_time": control.get("best_settling_time", ""),
         "Control_stable": control.get("best_stable", ""),
+        "Pyragas_quality_pass": control.get("best_pyragas_quality_pass", ""),
+        "Pyragas_rhythm_CV": control.get("best_pyragas_rhythm_interval_cv", ""),
+        "Pyragas_recurrence_error": control.get(
+            "best_pyragas_empirical_recurrence_error_norm", ""
+        ),
         "Output_folder": result.get("output_dir", ""),
     }
 
@@ -887,7 +897,20 @@ def run_single_experiment(args, hr_mode: str | None = None):
     if control_result is not None:
         print(f"Controller                : {control_result.get('controller')}")
         print(f"Control best K            : {control_result.get('best_K')}")
-        print(f"Control best target RMSE  : {control_result.get('best_target_rmse_state')}")
+        if control_result.get("controller") == "pyragas":
+            print(
+                "Pyragas quality pass      : "
+                f"{control_result.get('best_pyragas_quality_pass')}"
+            )
+            print(
+                "Pyragas rhythm CV         : "
+                f"{control_result.get('best_pyragas_rhythm_interval_cv')}"
+            )
+        else:
+            print(
+                "Control best target RMSE  : "
+                f"{control_result.get('best_target_rmse_state')}"
+            )
         print(f"Control outputs saved in  : {control_result.get('output_dir')}")
 
     print(f"[Done] Files saved inside: {config.OUTPUT_DIR}")

@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import numpy as np
-from scipy import linalg
+
+try:
+    from scipy import linalg as scipy_linalg
+except ImportError:  # NumPy fallback for lightweight test environments.
+    scipy_linalg = None
 
 from neuron_controllers import compute_control_signal
 
@@ -206,7 +210,10 @@ class EchoStateNetwork:
         A = XtX + ridge * I
 
         try:
-            solution = linalg.solve(A, XtY, assume_a="pos")
+            if scipy_linalg is not None:
+                solution = scipy_linalg.solve(A, XtY, assume_a="pos")
+            else:
+                solution = np.linalg.solve(A, XtY)
         except Exception:
             solution = np.linalg.pinv(A) @ XtY
 

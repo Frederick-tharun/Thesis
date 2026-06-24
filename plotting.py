@@ -1903,6 +1903,10 @@ def plot_control_error(
     controlled_error_norm = controlled_error_norm[:n]
     control_start_idx = int(max(0, min(control_start_idx, n - 1)))
     label = _controller_label(controller_name, output_dir=output_dir)
+    is_pyragas = _is_pyragas_context(
+        output_dir=output_dir,
+        controller_name=controller_name,
+    )
 
     fig, ax = plt.subplots(figsize=(16, 5.4))
     ax.plot(times, uncontrolled_error_norm, color=_COLOR_UNCONTROLLED, linewidth=1.25, label="Uncontrolled error")
@@ -1910,7 +1914,12 @@ def plot_control_error(
     ax.axhline(settling_tolerance, color=_COLOR_TARGET, linestyle=":", linewidth=1.35, label="Settling tolerance")
     ax.axvline(times[control_start_idx], color=_COLOR_EVENT, linestyle="--", linewidth=1.3, label="Control start")
     ax.axvspan(times[control_start_idx], times[-1], color=_COLOR_EVENT, alpha=0.045, zorder=0)
-    ax.set_title(f"{label}: target-tracking error", fontsize=15, fontweight="bold", pad=12)
+    error_title = (
+        "reference-state distance (diagnostic only)"
+        if is_pyragas
+        else "target-tracking error"
+    )
+    ax.set_title(f"{label}: {error_title}", fontsize=15, fontweight="bold", pad=12)
     ax.set_xlabel("Time (s)")
     ax.set_ylabel(r"$||state - target||$")
     _style_axis(ax)

@@ -1,4 +1,4 @@
-# Corrected Hindmarsh-Rose ESN Project
+# Hindmarsh-Rose ESN Prediction and Control
 
 This keeps your original structure, but fixes the HR pipeline to use the full state:
 
@@ -30,4 +30,29 @@ Outputs go to:
 
 ```text
 outputs/
+```
+
+## Chaotic-bursting control
+
+```bash
+# Linear feedback
+python main.py --dataset hr --hr-mode chaotic_bursting --no-opt \
+  --control --controller linear_feedback --auto-control-k
+
+# Finite-time feedback
+python main.py --dataset hr --hr-mode chaotic_bursting --no-opt \
+  --control --controller finite_time --finite-s 0.8 --auto-control-k
+
+# Pyragas delayed feedback
+python main.py --dataset hr --hr-mode chaotic_bursting --no-opt \
+  --control --controller pyragas --pyragas-delay 320 \
+  --pyragas-sign -1 --auto-control-k
+```
+
+Existing outputs are preserved unless `--clean-output` is explicitly supplied.
+
+## Regression tests
+
+```bash
+python -m unittest discover -s tests -v
 ```
