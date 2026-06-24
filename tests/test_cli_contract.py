@@ -46,6 +46,20 @@ class CliContractTests(unittest.TestCase):
                 if option in text:
                     self.assertIn(option, options, f"{option} used by {path.name}")
 
+    def test_final_validation_scripts_lock_selected_parameters(self):
+        pyragas = (ROOT / "run_pyragas_final_validation.slurm").read_text()
+        self.assertIn("--optimizer dummy", pyragas)
+        self.assertIn("--control-k 0.8", pyragas)
+        self.assertIn("--pyragas-delay 2400", pyragas)
+        self.assertIn("--pyragas-sign -1", pyragas)
+
+        fixed = (ROOT / "run_final_linear_finite_validation.slurm").read_text()
+        self.assertIn("--controller linear_feedback", fixed)
+        self.assertIn("--control-k 1.0", fixed)
+        self.assertIn("--controller finite_time", fixed)
+        self.assertIn("--control-k 0.4582142857142857", fixed)
+        self.assertIn("--finite-s 0.8", fixed)
+
 
 if __name__ == "__main__":
     unittest.main()

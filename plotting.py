@@ -180,6 +180,7 @@ def _format_count(value):
 def _metric_box_text(metrics):
     metrics = metrics or {}
     lines = []
+    controller = str(metrics.get("controller", "")).strip().lower()
 
     if metrics.get("K") is not None:
         lines.append(f"K = {_safe_float(metrics.get('K')):.4g}")
@@ -231,7 +232,7 @@ def _metric_box_text(metrics):
 
         return "\n".join(lines) if lines else "No Pyragas metrics available"
 
-    if metrics.get("finite_s") is not None:
+    if controller == "finite_time" and metrics.get("finite_s") is not None:
         lines.append(f"finite_s = {_safe_float(metrics.get('finite_s')):.3f}")
     if metrics.get("delay_steps") is not None:
         lines.append(f"delay = {int(_safe_float(metrics.get('delay_steps'), 0))} steps")
@@ -239,7 +240,7 @@ def _metric_box_text(metrics):
     for item in (
         _format_optional_metric("Target RMSE", metrics.get("target_rmse_state"), ".4f"),
         _format_optional_metric("Spike reduction", metrics.get("spike_reduction_percent"), ".2f", "%"),
-        _format_optional_metric("Energy", metrics.get("control_energy"), ".4f"),
+        _format_optional_metric("Energy", metrics.get("control_energy"), ".4g"),
         _format_optional_metric("Settling time", metrics.get("settling_time"), ".4f"),
     ):
         if item is not None:
