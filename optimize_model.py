@@ -12,11 +12,25 @@ from model import EchoStateNetwork
 
 try:
     from skopt import Optimizer
-    from skopt.space import Integer, Real
+    from skopt.space import Integer, Real, Space
 except ImportError as e:
     raise ImportError(
         "scikit-optimize is missing. Install it with: pip install scikit-optimize"
     ) from e
+
+
+class _RandomSearchOptimizer:
+    """Seeded uniform random search with the Optimizer ask/tell interface."""
+
+    def __init__(self, dimensions, random_state):
+        self.space = Space(dimensions)
+        self.rng = np.random.RandomState(random_state)
+
+    def ask(self):
+        return self.space.rvs(n_samples=1, random_state=self.rng)[0]
+
+    def tell(self, _x, _score):
+        return None
 
 
 # ============================================================
@@ -579,13 +593,20 @@ def optimize_hyperparameters(loader, neuron_id: int = 0, optimizer: str = "gp") 
         "gbrt": 300,
     }.get(optimizer, 0)
 
-    skopt_opt = Optimizer(
-        dimensions=dimensions,
-        base_estimator=base_estimator,
-        n_initial_points=random_starts,
-        random_state=random_seed + seed_offset,
-        acq_func="EI",
-    )
+    optimizer_seed = random_seed + seed_offset
+    if optimizer == "dummy":
+        # scikit-optimize's DUMMY estimator resolves to None. Newer
+        # scikit-learn releases attempt to inspect estimator tags before their
+        # None check, so use the equivalent seeded Space.rvs random search.
+        skopt_opt = _RandomSearchOptimizer(dimensions, optimizer_seed)
+    else:
+        skopt_opt = Optimizer(
+            dimensions=dimensions,
+            base_estimator=base_estimator,
+            n_initial_points=random_starts,
+            random_state=optimizer_seed,
+            acq_func="EI",
+        )
 
     print("\n" + "=" * 70)
     print("HYPERPARAMETER OPTIMIZATION")
