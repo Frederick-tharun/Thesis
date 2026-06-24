@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import numpy as np
-from scipy import sparse
 from scipy import linalg
+
+from neuron_controllers import compute_control_signal
 
 
 class EchoStateNetwork:
@@ -53,22 +54,17 @@ class EchoStateNetwork:
     def _initialize_weights(self) -> None:
         rng = np.random.default_rng(self.seed)
 
-        # Input matrix includes one bias column.
-        # Shape: N_res x (1 + input_size)
         self.Win = rng.uniform(
             low=-self.input_scaling,
             high=self.input_scaling,
             size=(self.N_res, self.input_size + 1),
         )
 
-        # Sparse reservoir matrix
         mask = rng.random((self.N_res, self.N_res)) < self.p
         W_dense = rng.uniform(-1.0, 1.0, size=(self.N_res, self.N_res)) * mask
 
-        # Remove self-connections for cleaner dynamics
         np.fill_diagonal(W_dense, 0.0)
 
-        # Scale spectral radius
         eigvals = np.linalg.eigvals(W_dense)
         radius = np.max(np.abs(eigvals))
 
@@ -163,13 +159,6 @@ class EchoStateNetwork:
 
         Learns:
             u(t) -> u(t+1)
-
-        Parameters
-        ----------
-        u:
-            Time series with shape (T, input_size)
-        washout:
-            Initial reservoir states ignored during readout training.
         """
         u = self._as_2d(u)
         u = self._normalize_fit(u)
@@ -210,8 +199,6 @@ class EchoStateNetwork:
 
         ridge = max(float(self.regularization), 1e-12)
 
-        # Solve ridge regression:
-        # Wout = Y^T X (X^T X + ridge I)^-1
         XtX = X.T @ X
         XtY = X.T @ Y
 
@@ -224,7 +211,6 @@ class EchoStateNetwork:
             solution = np.linalg.pinv(A) @ XtY
 
         self.Wout = solution.T
-
         self.is_fitted = True
 
     def _warmup_until_index(self, u: np.ndarray, n_warmup: int) -> tuple[np.ndarray, np.ndarray]:
@@ -233,10 +219,6 @@ class EchoStateNetwork:
 
         After warmup:
             current_input = u[n_warmup]
-
-        This matches your main.py usage:
-            warmup_steps = len(train_norm) - 1
-            first prediction is for first test sample
         """
         u = self._as_2d(u)
 
@@ -254,20 +236,6 @@ class EchoStateNetwork:
     def predict(self, u: np.ndarray, n_warmup: int = 0):
         """
         Recursive autonomous prediction.
-
-        Parameters
-        ----------
-        u:
-            Full normalized sequence containing training + test.
-        n_warmup:
-            Index of last ground-truth input before recursive prediction.
-
-        Returns
-        -------
-        predictions:
-            Recursive predictions.
-        states:
-            Reservoir states during prediction.
         """
         if not self.is_fitted:
             raise RuntimeError("ESN is not trained yet. Call train() first.")
@@ -306,19 +274,30 @@ class EchoStateNetwork:
         K: float,
         control_start_idx: int = 0,
         max_abs_value: float = 1e6,
+        controller: str = "linear_feedback",
+        finite_s: float = 0.8,
+        pyragas_delay: int = 20,
+        pyragas_sign: int = -1,
     ) -> dict:
         """
-        Recursive prediction with linear feedback control.
+        Recursive prediction with controller.
 
-        Control law:
-            error = y_pred - target
-            control_signal = K * error
-            controlled_input = y_pred - control_signal
+        Supported controllers:
+            linear_feedback
+            finite_time
+            pyragas
 
         Important:
         - The ESN rollout logic is exactly the same as predict().
         - Before control starts, controlled output = normal ESN output.
         - After control starts, controlled output = controlled input fed back to ESN.
+        - Controller formulas are stored in neuron_controllers.py.
+
+        Pyragas note:
+        - model.py applies control as: next_input = y_pred - u_control
+        - Therefore, pyragas_sign=-1 makes the Pyragas signal move the next input
+          toward the delayed state when neuron_controllers.py computes
+          u_control = K * (y_pred - delayed_state).
         """
         if not self.is_fitted:
             raise RuntimeError("ESN is not trained yet. Call train() first.")
@@ -334,10 +313,20 @@ class EchoStateNetwork:
             )
 
         horizon_steps = int(horizon_steps)
+
+        if horizon_steps <= 0:
+            return {
+                "stable": True,
+                "raw_prediction_norm": np.empty((0, self.input_size)),
+                "controlled_output_norm": np.empty((0, self.input_size)),
+                "feedback_input_norm": np.empty((0, self.input_size)),
+                "control_signal_norm": np.empty((0, self.input_size)),
+                "error_signal_norm": np.empty((0, self.input_size)),
+                "states": np.empty((0, self.N_res)),
+            }
+
         control_start_idx = int(max(0, min(control_start_idx, horizon_steps - 1)))
 
-        # Same warmup logic as normal prediction:
-        # warm up to last training input
         x, current_input = self._warmup_until_index(
             train_sequence,
             n_warmup=len(train_sequence) - 1,
@@ -351,18 +340,28 @@ class EchoStateNetwork:
         states = np.full((horizon_steps, self.N_res), np.nan)
 
         stable = True
+        history = []
 
         for k in range(horizon_steps):
             x = self._update_state(x, current_input)
             y_pred = self._readout(current_input, x)
 
+            error = y_pred - target
+
             if k >= control_start_idx:
-                error = y_pred - target
-                u_control = float(K) * error
+                u_control = compute_control_signal(
+                    controller=controller,
+                    y_pred=y_pred,
+                    target=target,
+                    K=K,
+                    history=history,
+                    finite_s=finite_s,
+                    pyragas_delay=pyragas_delay,
+                    pyragas_sign=pyragas_sign,
+                )
                 next_input = y_pred - u_control
                 y_controlled = next_input
             else:
-                error = y_pred - target
                 u_control = np.zeros_like(y_pred)
                 next_input = y_pred
                 y_controlled = y_pred
@@ -373,6 +372,8 @@ class EchoStateNetwork:
             control_signal[k] = u_control
             error_signal[k] = error
             states[k] = x
+
+            history.append(y_controlled.copy())
 
             if (
                 not np.all(np.isfinite(next_input))
@@ -387,6 +388,11 @@ class EchoStateNetwork:
 
         return {
             "stable": stable,
+            "controller": controller,
+            "K": float(K),
+            "finite_s": float(finite_s),
+            "pyragas_delay": int(pyragas_delay),
+            "pyragas_sign": int(pyragas_sign),
             "raw_prediction_norm": raw_prediction,
             "controlled_output_norm": controlled_output,
             "feedback_input_norm": feedback_input,

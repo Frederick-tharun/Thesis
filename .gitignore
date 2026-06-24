@@ -1,11 +1,15 @@
-<<<<<<< HEAD
-=======
 .conda_env/
 .venv/
 __pycache__/
+*.py[cod]
 logs/
+logs_old/
 archive_old_files/
-*.pyc
+controller_debug_backup/
 *.zip
 .DS_Store
->>>>>>> e4c16f8a (Update final ESN control outputs and clean repository tracking)
+/outputs_final_all_controls/
+/outputs_finite_s_sweep/
+/outputs_pyragas_periodic_sweep/
+/selected_pyragas_results/
+/outputs/*/control/

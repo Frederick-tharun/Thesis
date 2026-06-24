@@ -34,10 +34,11 @@ except Exception:
     setup_run_output_folder = None
     save_experiment_summary = None
 
+
 try:
-    from control_experiment import run_linear_feedback_control_experiment
+    from control_experiment import run_control_experiment
 except Exception as e:
-    run_linear_feedback_control_experiment = None
+    run_control_experiment = None
     CONTROL_IMPORT_ERROR = e
 
 
@@ -93,48 +94,56 @@ def parse_args():
     p.add_argument(
         "--control",
         action="store_true",
-        help="Run linear-feedback control experiment after ESN prediction",
+        help="Run ESN control experiment after prediction",
+    )
+
+    p.add_argument(
+        "--controller",
+        type=str,
+        default="linear_feedback",
+        choices=["linear_feedback", "finite_time", "pyragas"],
+        help="Controller to use for ESN control experiment",
     )
 
     p.add_argument(
         "--control-k",
         type=float,
         default=None,
-        help="Single K value for linear feedback. If omitted, config.CONTROL_LINEAR_K_SWEEP is used.",
+        help="Single K value for control. If omitted, K sweep/auto-K is used.",
     )
 
     p.add_argument(
-    "--auto-control-k",
-    action="store_true",
-    help="Automatically search K values and select the best K. ESN is trained once, then many K values are tested quickly.",
+        "--auto-control-k",
+        action="store_true",
+        help="Automatically search K values and select the best K.",
     )
 
     p.add_argument(
-    "--k-min",
-    type=float,
-    default=None,
-    help="Minimum K for automatic K search. If omitted, config.CONTROL_AUTO_K_MIN is used.",
+        "--k-min",
+        type=float,
+        default=None,
+        help="Minimum K for automatic K search.",
     )
 
     p.add_argument(
-    "--k-max",
-    type=float,
-    default=None,
-    help="Maximum K for automatic K search. If omitted, config.CONTROL_AUTO_K_MAX is used.",
+        "--k-max",
+        type=float,
+        default=None,
+        help="Maximum K for automatic K search.",
     )
 
     p.add_argument(
-    "--k-num",
-    type=int,
-    default=None,
-    help="Number of coarse K values for automatic K search. If omitted, config.CONTROL_AUTO_K_NUM is used.",
+        "--k-num",
+        type=int,
+        default=None,
+        help="Number of coarse K values for automatic K search.",
     )
 
     p.add_argument(
-    "--k-refine-num",
-    type=int,
-    default=None,
-    help="Number of refined K values around the best coarse K. If omitted, config.CONTROL_AUTO_K_REFINE_NUM is used.",
+        "--k-refine-num",
+        type=int,
+        default=None,
+        help="Number of refined K values around the best coarse K.",
     )
 
     p.add_argument(
@@ -150,6 +159,32 @@ def parse_args():
         default=getattr(config, "CONTROL_TARGET_MODE", "rest_state"),
         choices=["rest_state", "zero", "mean"],
         help="How to choose the control target state",
+    )
+
+    p.add_argument(
+        "--finite-s",
+        type=float,
+        default=0.8,
+        help="Exponent s for finite-time controller. Must be between 0 and 1.",
+    )
+
+    p.add_argument(
+        "--pyragas-delay",
+        type=int,
+        default=20,
+        help="Delay steps for Pyragas time-delay feedback controller.",
+    )
+
+    p.add_argument(
+        "--pyragas-sign",
+        type=int,
+        default=getattr(config, "PYRAGAS_SIGN", -1),
+        choices=[-1, 1],
+        help=(
+            "Pyragas feedback sign. Use -1 for u = K * (y_pred - y_delayed), "
+            "which works with next_input = y_pred - u_control to pull toward the delayed state. "
+            "Use 1 to test the opposite sign."
+        ),
     )
 
     return p.parse_args()
@@ -198,16 +233,6 @@ def save_csv(rows, filename):
     print(f"[Save] -> {path}")
 
 
-def _safe_float_for_table(value, default=""):
-    try:
-        value = float(value)
-        if not np.isfinite(value):
-            return default
-        return value
-    except Exception:
-        return default
-
-
 def _format_table_value(value):
     if value == "" or value is None:
         return ""
@@ -227,14 +252,18 @@ def _format_table_value(value):
 
 
 def _make_final_comparison_row(result):
-    """
-    Builds one thesis/professor-facing row that combines:
-    - ESN prediction result
-    - selected BO hyperparameters
-    - control result
-    """
     control = result.get("control_result") or {}
     params = result.get("selected_params") or {}
+
+    controller_name = control.get("controller", "")
+    if controller_name == "linear_feedback":
+        control_method = "Linear feedback"
+    elif controller_name == "finite_time":
+        control_method = "Finite-time"
+    elif controller_name == "pyragas":
+        control_method = "Pyragas time-delay"
+    else:
+        control_method = ""
 
     return {
         "Regime": result.get("mode", ""),
@@ -250,7 +279,7 @@ def _make_final_comparison_row(result):
         "Pred_NRMSE_x": result.get("nrmse_x", ""),
         "Pred_RMSE_all": result.get("rmse_all", ""),
         "Pred_NRMSE_all": result.get("nrmse_all", ""),
-        "Control_method": "Linear feedback" if control else "",
+        "Control_method": control_method,
         "Best_K": control.get("best_K", ""),
         "Control_target_RMSE_state": control.get("best_target_rmse_state", ""),
         "Control_target_RMSE_x": control.get("best_target_rmse_x", ""),
@@ -302,16 +331,7 @@ def _write_rows_table_png(path, rows):
         print(f"[Report] Final comparison PNG skipped: {e}")
 
 
-
 def save_final_comparison_table(results):
-    """
-    Saves the final table your professor can look at.
-
-    Files created in outputs/:
-      - final_prediction_control_comparison.csv
-      - final_prediction_control_comparison.md
-      - final_prediction_control_comparison.png
-    """
     if not results:
         return
 
@@ -331,15 +351,18 @@ def save_final_comparison_table(results):
     print("\n" + "=" * 72)
     print("FINAL PREDICTION + CONTROL COMPARISON TABLE")
     print("=" * 72)
+
     for row in rows:
         print(
             f"{row.get('Regime', ''):>20} | "
             f"opt={row.get('Optimizer', ''):>8} | "
+            f"control={row.get('Control_method', ''):>18} | "
             f"pred NRMSE x={_format_table_value(row.get('Pred_NRMSE_x')):>10} | "
             f"K={_format_table_value(row.get('Best_K')):>10} | "
             f"control RMSE={_format_table_value(row.get('Control_target_RMSE_state')):>10} | "
             f"stable={row.get('Control_stable', '')}"
         )
+
     print("=" * 72)
 
 
@@ -475,15 +498,12 @@ def run_all_optimizers(loader, neuron_id):
 
     plot_optimizer_convergence(all_history)
 
-    # Paper-style BO objective/partial-dependence plot for the best optimizer.
-    # This is the thesis-friendly replacement for the simple optimizer heatmap.
     plot_bo_objective_landscape(
         all_history,
         optimizer=str(best.get("optimizer", "forest")),
         params=("input_scaling", "spectral_radius", "leaky_coefficient"),
         filename="bo_objective_landscape_best_optimizer.png",
     )
-
 
     print("\n" + "=" * 72)
     print("OPTIMIZER RANKING")
@@ -601,10 +621,10 @@ def run_control_if_requested(
         return None
 
     print("\n" + "=" * 72)
-    print("LINEAR FEEDBACK CONTROL EXPERIMENT")
+    print(f"{args.controller.upper()} CONTROL EXPERIMENT")
     print("=" * 72)
 
-    if run_linear_feedback_control_experiment is None:
+    if run_control_experiment is None:
         print("[Control] Skipped: control_experiment.py is missing or could not be imported.")
         try:
             print(f"[Control] Import error: {CONTROL_IMPORT_ERROR}")
@@ -621,30 +641,34 @@ def run_control_if_requested(
         return None
 
     try:
-        control_result = run_linear_feedback_control_experiment(
-    esn=esn,
-    loader=loader,
-    config=config,
-    train=train,
-    test=test,
-    train_norm=train_norm,
-    test_norm=test_norm,
-    mean=mean,
-    std=std,
-    times=times,
-    base_output_dir=base_output_dir,
-    hr_mode=active_hr_mode,
-    best_params=best_params,
-    optimizer_name=best_name,
-    control_k=args.control_k,
-    control_start_frac=args.control_start_frac,
-    control_target_mode=args.control_target_mode,
-    auto_control_k=args.auto_control_k,
-    k_min=args.k_min,
-    k_max=args.k_max,
-    k_num=args.k_num,
-    k_refine_num=args.k_refine_num,
-)
+        control_result = run_control_experiment(
+            esn=esn,
+            loader=loader,
+            config=config,
+            train=train,
+            test=test,
+            train_norm=train_norm,
+            test_norm=test_norm,
+            mean=mean,
+            std=std,
+            times=times,
+            base_output_dir=base_output_dir,
+            hr_mode=active_hr_mode,
+            best_params=best_params,
+            optimizer_name=best_name,
+            control_k=args.control_k,
+            control_start_frac=args.control_start_frac,
+            control_target_mode=args.control_target_mode,
+            auto_control_k=args.auto_control_k,
+            k_min=args.k_min,
+            k_max=args.k_max,
+            k_num=args.k_num,
+            k_refine_num=args.k_refine_num,
+            controller=args.controller,
+            finite_s=args.finite_s,
+            pyragas_delay=args.pyragas_delay,
+            pyragas_sign=args.pyragas_sign,
+        )
         return control_result
 
     except Exception as e:
@@ -861,8 +885,9 @@ def run_single_experiment(args, hr_mode: str | None = None):
         print("Full-state prediction: x, y, z")
 
     if control_result is not None:
+        print(f"Controller                : {control_result.get('controller')}")
         print(f"Control best K            : {control_result.get('best_K')}")
-        print(f"Control best target RMSE  : {control_result.get('best_target_rmse_state'):.6f}")
+        print(f"Control best target RMSE  : {control_result.get('best_target_rmse_state')}")
         print(f"Control outputs saved in  : {control_result.get('output_dir')}")
 
     print(f"[Done] Files saved inside: {config.OUTPUT_DIR}")

@@ -67,7 +67,7 @@ def setup_run_output_folder(config):
 
     run_output_dir = os.path.join(root_output, run_name)
 
-    clear_each_run = getattr(config, "CLEAR_OUTPUT_FOLDER_EACH_RUN", True)
+    clear_each_run = getattr(config, "CLEAR_OUTPUT_FOLDER_EACH_RUN", False)
 
     if clear_each_run:
         _clear_folder(run_output_dir)
