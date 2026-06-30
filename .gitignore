@@ -19,3 +19,5 @@ controller_debug_backup/
 /selected_pyragas_results/
 /selected_controller_results/
 /thesis_results_summary/
+selected_controller_results
+selected_pyragas_results
