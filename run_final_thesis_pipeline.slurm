@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=final_thesis_pipeline
 #SBATCH --partition=a100
+#SBATCH --gres=gpu:a100:1
 #SBATCH --time=04:00:00
 #SBATCH --output=logs/final_thesis_pipeline_%j.out
 #SBATCH --error=logs/final_thesis_pipeline_%j.err
