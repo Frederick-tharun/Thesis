@@ -10,6 +10,13 @@ set -euo pipefail
 
 mkdir -p logs
 
+module load python/3.12-conda
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate "$HOME/.conda/envs/thesis_final"
+
+export PYTHONNOUSERSITE=1
+export CONDA_PKGS_DIRS="$HOME/.conda/pkgs"
+
 JOB_ID="${SLURM_JOB_ID:-manual_$(date +%Y%m%d_%H%M%S)}"
 STAMP="$(date +%Y%m%d_%H%M%S)"
 PROJECT_DIR="$PWD"
@@ -31,8 +38,8 @@ echo "========================================================================"
 git rev-parse HEAD > "$FINAL_ROOT/00_manifest/GIT_COMMIT.txt"
 git branch --show-current > "$FINAL_ROOT/00_manifest/GIT_BRANCH.txt"
 date > "$FINAL_ROOT/00_manifest/RUN_DATE.txt"
-.venv/bin/python --version > "$FINAL_ROOT/00_manifest/PYTHON_VERSION.txt"
-.venv/bin/pip freeze > "$FINAL_ROOT/00_manifest/requirements_freeze.txt"
+python --version > "$FINAL_ROOT/00_manifest/PYTHON_VERSION.txt"
+python -m pip freeze > "$FINAL_ROOT/00_manifest/requirements_freeze.txt"
 
 echo "========================================================================"
 echo "STEP 1: ESN DIGITAL TWIN PREDICTION FOR ALL HR REGIMES"
@@ -40,7 +47,7 @@ echo "========================================================================"
 
 rm -rf outputs
 
-.venv/bin/python main.py \
+python main.py \
   --dataset hr \
   --run-all-regimes \
   --optimizer auto \
@@ -68,7 +75,7 @@ echo "========================================================================"
 
 rm -rf outputs/chaotic_bursting
 
-.venv/bin/python main.py \
+python main.py \
   --dataset hr \
   --hr-mode chaotic_bursting \
   --optimizer dummy \
@@ -98,7 +105,7 @@ for S in 0.3 0.5 0.7 0.8 0.9; do
 
   rm -rf outputs/chaotic_bursting
 
-  .venv/bin/python main.py \
+  python main.py \
     --dataset hr \
     --hr-mode chaotic_bursting \
     --optimizer dummy \
@@ -123,7 +130,7 @@ echo "========================================================================"
 
 rm -rf outputs/chaotic_bursting
 
-.venv/bin/python main.py \
+python main.py \
   --dataset hr \
   --hr-mode chaotic_bursting \
   --optimizer dummy \
@@ -153,7 +160,7 @@ for SIGN in -1 1; do
 
     rm -rf outputs/chaotic_bursting
 
-    .venv/bin/python main.py \
+    python main.py \
       --dataset hr \
       --hr-mode chaotic_bursting \
       --optimizer dummy \
@@ -180,7 +187,7 @@ echo "========================================================================"
 
 rm -rf outputs/chaotic_bursting
 
-.venv/bin/python main.py \
+python main.py \
   --dataset hr \
   --hr-mode chaotic_bursting \
   --optimizer dummy \
@@ -199,7 +206,7 @@ echo "========================================================================"
 echo "STEP 7: BUILD FINAL SUMMARY TABLES"
 echo "========================================================================"
 
-FINAL_ROOT="$FINAL_ROOT" .venv/bin/python - <<'PY'
+FINAL_ROOT="$FINAL_ROOT" python - <<'PY'
 import csv
 import json
 import os
