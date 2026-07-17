@@ -59,7 +59,7 @@ class ControlledRolloutTests(unittest.TestCase):
             controller="finite_time",
             finite_s=0.5,
         )
-        self.assertAlmostEqual(result["controlled_output_norm"][0, 0], 3.0)
+        self.assertAlmostEqual(result["controlled_output_norm"][0, 0], 2.0)
 
     def test_pyragas_uses_controlled_history(self):
         esn = deterministic_esn(

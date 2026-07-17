@@ -24,11 +24,39 @@ class ControllerLawTests(unittest.TestCase):
         )
         np.testing.assert_allclose(actual, [0.5, -1.0])
 
-    def test_finite_time_law_and_exponent_validation(self):
+    def test_finite_time_uses_linear_branch_outside_unit_sphere(self):
         actual = finite_time_control(
             y_pred=[4.0, -4.0], target=[0.0, 0.0], K=0.5, finite_s=0.5
         )
-        np.testing.assert_allclose(actual, [1.0, -1.0], rtol=0, atol=1e-8)
+        np.testing.assert_allclose(actual, [2.0, -2.0])
+
+        # The branch is selected by the vector norm, even though each
+        # individual component is smaller than one.
+        vector_norm_outside = finite_time_control(
+            y_pred=[0.8, 0.8], target=[0.0, 0.0], K=0.5, finite_s=0.5
+        )
+        np.testing.assert_allclose(vector_norm_outside, [0.4, 0.4])
+
+    def test_finite_time_uses_fractional_branch_inside_and_on_unit_sphere(self):
+        inside = finite_time_control(
+            y_pred=[0.25, -0.25], target=[0.0, 0.0], K=0.5, finite_s=0.5
+        )
+        np.testing.assert_allclose(inside, [0.25, -0.25])
+
+        boundary = finite_time_control(
+            y_pred=[0.6, 0.8], target=[0.0, 0.0], K=0.5, finite_s=0.5
+        )
+        np.testing.assert_allclose(
+            boundary,
+            0.5 * np.sqrt([0.6, 0.8]),
+        )
+
+        zero = finite_time_control(
+            y_pred=[0.0, 0.0], target=[0.0, 0.0], K=0.5, finite_s=0.5
+        )
+        np.testing.assert_array_equal(zero, [0.0, 0.0])
+
+    def test_finite_time_exponent_validation(self):
 
         with self.assertRaises(ValueError):
             finite_time_control(

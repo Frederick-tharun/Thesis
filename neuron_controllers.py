@@ -80,7 +80,8 @@ def finite_time_control(*, y_pred, target, K, finite_s=0.8, eps=1e-8, **kwargs) 
     finite_s : float, optional
         Nonlinear exponent for the finite‑time controller (``0 < finite_s < 1``).
     eps : float, optional
-        Small constant to avoid zero division when the error is exactly zero.
+        Retained for API compatibility. The global finite-time law does not
+        require an epsilon offset.
 
     Returns
     -------
@@ -89,9 +90,11 @@ def finite_time_control(*, y_pred, target, K, finite_s=0.8, eps=1e-8, **kwargs) 
 
     Notes
     -----
-    The control law is ``u = K * sign(error) * |error|^s`` where ``error = y_pred – target``
-    and ``0 < s < 1``.  Smaller values of ``s`` produce stronger nonlinear
-    corrections near the target.
+    This implements the global finite-time law from Eq. (10) of the reference
+    paper. For ``||error|| > 1`` the controller uses linear feedback,
+    ``u = K * error``. Inside and on the unit error sphere it switches to
+    ``u = K * sign(error) * |error|^s``, where ``0 < s < 1``. The unit-sphere
+    test is applied to the complete error vector.
     """
     y_pred = _as_1d(y_pred)
     target = _as_1d(target)
@@ -99,7 +102,12 @@ def finite_time_control(*, y_pred, target, K, finite_s=0.8, eps=1e-8, **kwargs) 
     if not (0.0 < finite_s < 1.0):
         raise ValueError(f"finite_s must be between 0 and 1.  Got finite_s={finite_s}")
     error = y_pred - target
-    return float(K) * np.sign(error) * (np.abs(error) + float(eps)) ** finite_s
+    gain = float(K)
+
+    if np.linalg.norm(error) > 1.0:
+        return gain * error
+
+    return gain * np.sign(error) * np.abs(error) ** finite_s
 
 
 def pyragas_control(
