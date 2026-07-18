@@ -2,7 +2,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "DRG3_MdFoF.csv")
-OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
+OUTPUT_ROOT = os.path.join(BASE_DIR, "outputs")
+OUTPUT_DIR = OUTPUT_ROOT
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # -------------------------------------------------------------------
@@ -50,10 +51,37 @@ OPTIMIZERS_TO_COMPARE = ["gp", "dummy", "forest", "gbrt"]
 
 BO_N_CALLS = 30
 BO_N_RANDOM_STARTS = 8
+BO_RESERVOIR_SEED = 42
+BO_EVALUATION_SEEDS = [42]
 
-# For final thesis run later:
-# BO_N_CALLS = 80
-# BO_N_RANDOM_STARTS = 15
+# Validation-only recursive model selection. The three non-overlapping windows
+# are drawn from the 70% training portion and are never allowed to touch the
+# final held-out 45,000-step test trajectory.
+PREDICTION_VALIDATION_NUM_WINDOWS = 3
+PREDICTION_VALIDATION_WINDOW_LENGTH = 8000
+PREDICTION_VALIDATION_WINDOW_STARTS = None
+PREDICTION_VALIDATION_AGGREGATION = "mean_plus_max"
+PREDICTION_VALIDATION_MAX_WEIGHT = 0.25
+PREDICTION_STATE_X_WEIGHT = 0.55
+PREDICTION_MULTISTATE_WEIGHT = 0.25
+PREDICTION_SPIKE_FREQUENCY_WEIGHT = 1.0
+PREDICTION_SPIKE_INTERVAL_WEIGHT = 0.50
+PREDICTION_DIVERGENCE_PENALTY = 1_000_000.0
+
+# Locked final-test quality gates. These are broad scientific acceptability
+# limits, not optimizer targets, and are evaluated only after selected_model.json
+# has been written.
+PERIODIC_SPIKING_MAX_TEST_NRMSE_X = 0.20
+PERIODIC_SPIKING_MAX_SPIKE_FREQUENCY_REL_ERROR = 0.10
+
+# Final Chapter 1 model/control provenance.
+CONTROL_MODEL_SOURCE = "validation_selected"
+PYRAGAS_SIGNS = [-1]
+FINAL_HR_REGIMES = [
+    "periodic_spiking",
+    "periodic_bursting",
+    "chaotic_bursting",
+]
 
 BO_SEARCH_SPACE = {
     "reservoir_size":  (250, 800, "int", False),
@@ -64,6 +92,9 @@ BO_SEARCH_SPACE = {
     "sparsity":        (0.02, 0.20, "float", False),
     "washout":         (50, 500, "int", False),
 }
+# Spectral radii above one are intentional empirical candidates. Autonomous
+# stability is checked explicitly by the BO objective; rho < 1 is sufficient
+# but not necessary for every leaky ESN.
 
 TS_FOLDS = 3
 TS_VAL_LEN = 80
@@ -135,9 +166,6 @@ HR_I = _hr["I"]
 # Clean output organization
 # ============================================================
 
-OUTPUT_ROOT = "outputs"
-OUTPUT_DIR = "outputs"
-
 # True = each regime folder is cleaned before a new run.
 # This prevents old confusing files from mixing with new files.
 CLEAR_OUTPUT_FOLDER_EACH_RUN = False
@@ -170,11 +198,14 @@ CONTROL_LINEAR_K_SWEEP = [0.05, 0.10, 0.20, 0.35, 0.50, 0.75, 1.00, 1.25, 1.50]
 # then control is switched on.
 CONTROL_START_FRAC = 0.20
 
-# How to choose the control target.
-# "rest_state" = median of non-spike training states
-# "zero"       = exact zero vector
-# "mean"       = mean of the full training state
-CONTROL_TARGET_MODE = "rest_state"
+# Final Chapter 1 control target: the median data-derived
+# empirical quiet-state reference from training. "zero" and "mean" remain
+# compatibility-only exploratory modes and are not used by the final pipeline.
+CONTROL_TARGET_MODE = "rest_state_from_quiet_training_data"
+
+# Split the post-control horizon: tune on validation, report once on test.
+CONTROL_VALIDATION_FRAC = 0.50
+CONTROL_TEST_FRAC = 0.50
 
 # Settling-time rule:
 # error norm must stay below CONTROL_SETTLING_TOL for
@@ -189,6 +220,7 @@ CONTROL_SETTLING_CONSECUTIVE = CONTROL_SETTLING_HOLD_STEPS
 CONTROL_FINITE_S = 0.8
 PYRAGAS_DELAY = 20
 PYRAGAS_SIGN = -1
+PYRAGAS_HISTORY_SIGNAL = "raw_readout"
 
 # Optional clamp on corrected ESN input after control is applied.
 # Set to None to disable.
@@ -217,9 +249,9 @@ CONTROL_AUTO_K_REFINE_WIDTH_FRAC = 0.15
 # K-selection score:
 # lower score = better K
 #
-# score = target_rmse_state
-#       + CONTROL_SCORE_ENERGY_WEIGHT * control_energy
-#       + CONTROL_SCORE_SETTLING_WEIGHT * settling_time
+# score = corrected_feedback_input_target_rmse_state
+#       + CONTROL_SCORE_ENERGY_WEIGHT * control_effort_mean_sq
+#       + CONTROL_SCORE_SETTLING_WEIGHT * evaluation_time_to_tolerance
 #       - CONTROL_SCORE_SPIKE_WEIGHT * spike_reduction_percent / 100
 
 CONTROL_SCORE_ENERGY_WEIGHT = 0.01
@@ -231,7 +263,8 @@ CONTROL_SCORE_SPIKE_WEIGHT = 0.0
 # ============================================================
 
 
-# Metrics are calculated only after the Pyragas transient.
+# Validation metrics use the explicit post-control validation window. Held-out
+# test metrics use the controller-test window without an extra discarded transient.
 PYRAGAS_MIN_EVALUATION_PEAKS = 6
 
 # Reject flat or strongly amplified trajectories.
@@ -273,33 +306,37 @@ PYRAGAS_TARGET_CONTROL_DECAY = 0.50
 
 PYRAGAS_MISSING_INTERVAL_CV_PENALTY = 2.0
 
-# Selection-score weights.
+# Selection-score weights consumed by control_experiment._selection_score.
 PYRAGAS_SCORE_FEW_SPIKES_WEIGHT = 30.0
+PYRAGAS_SCORE_FEW_CYCLES_WEIGHT = 30.0
 PYRAGAS_SCORE_FLAT_AMPLITUDE_WEIGHT = 25.0
 PYRAGAS_SCORE_FLAT_STD_WEIGHT = 10.0
 PYRAGAS_SCORE_AMPLITUDE_RANGE_WEIGHT = 8.0
 PYRAGAS_SCORE_STD_RANGE_WEIGHT = 3.0
 
-PYRAGAS_SCORE_INTERVAL_CV_WEIGHT = 2.0
-PYRAGAS_SCORE_INTERVAL_CV_EXCESS_WEIGHT = 2.0
-PYRAGAS_SCORE_PERIODICITY_WEIGHT = 1.0
-PYRAGAS_SCORE_PERIODICITY_EXCESS_WEIGHT = 2.0
-PYRAGAS_SCORE_DELAY_MISMATCH_WEIGHT = 1.0
-
-PYRAGAS_SCORE_NONINVASIVENESS_WEIGHT = 1.0
-PYRAGAS_SCORE_CONTROL_DECAY_WEIGHT = 0.5
-PYRAGAS_SCORE_PEAK_COVERAGE_WEIGHT = 20.0
-PYRAGAS_SCORE_PEAK_AMPLITUDE_WEIGHT = 8.0
-PYRAGAS_SCORE_WINDOW_AMPLITUDE_WEIGHT = 12.0
+PYRAGAS_SCORE_INTERVAL_CV_WEIGHT = 8.0
+PYRAGAS_SCORE_INTERVAL_CV_EXCESS_WEIGHT = 15.0
+PYRAGAS_SCORE_PERIODICITY_WEIGHT = 10.0
+PYRAGAS_SCORE_PERIODICITY_EXCESS_WEIGHT = 20.0
+PYRAGAS_SCORE_EMPIRICAL_CORRELATION_WEIGHT = 10.0
+PYRAGAS_SCORE_PEAK_COVERAGE_WEIGHT = 15.0
+PYRAGAS_SCORE_CYCLE_COVERAGE_WEIGHT = 15.0
+PYRAGAS_SCORE_PEAK_AMPLITUDE_WEIGHT = 6.0
+PYRAGAS_SCORE_WINDOW_AMPLITUDE_WEIGHT = 4.0
 PYRAGAS_SCORE_DRIFT_WEIGHT = 20.0
 PYRAGAS_SCORE_TAIL_ACTIVITY_WEIGHT = 20.0
 PYRAGAS_SCORE_TAIL_CLOSURE_WEIGHT = 15.0
 PYRAGAS_SCORE_QUALITY_ISSUE_WEIGHT = 25.0
-
 PYRAGAS_SCORE_TOO_MANY_SPIKES_WEIGHT = 2.0
 PYRAGAS_SCORE_ENERGY_WEIGHT = 0.05
 PYRAGAS_SCORE_MAX_CONTROL_WEIGHT = 0.01
 PYRAGAS_SCORE_K_WEIGHT = 0.02
+
+# Legacy diagnostic weights retained for old notebooks. Delay mismatch,
+# noninvasiveness, and control decay are reported diagnostics, not selection terms.
+PYRAGAS_SCORE_DELAY_MISMATCH_WEIGHT = 1.0
+PYRAGAS_SCORE_NONINVASIVENESS_WEIGHT = 1.0
+PYRAGAS_SCORE_CONTROL_DECAY_WEIGHT = 0.5
 
 # Suggested coarse search only; CLI arguments can override these.
 PYRAGAS_RECOMMENDED_K_MIN = 0.01

@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import hashlib
+import json
+from pathlib import Path
+
 import numpy as np
 
 try:
@@ -285,6 +289,9 @@ class EchoStateNetwork:
         finite_s: float = 0.8,
         pyragas_delay: int = 20,
         pyragas_sign: int = -1,
+        pyragas_history_signal: str = "raw_readout",
+        control_input_clip=None,
+        divergence_abs_limit: float | None = None,
     ) -> dict:
         """
         Recursive prediction with controller.
@@ -294,116 +301,393 @@ class EchoStateNetwork:
             finite_time
             pyragas
 
-        Important:
-        - The ESN rollout logic is exactly the same as predict().
-        - Before control starts, controlled output = normal ESN output.
-        - After control starts, controlled output = controlled input fed back to ESN.
-        - Controller formulas are stored in neuron_controllers.py.
+        Canonical signals:
+        - raw_readout_norm is the ESN readout before control is applied.
+        - corrected_feedback_input_norm is the corrected signal fed back to the
+          ESN at the next recursive step.
+        - control_signal_norm is the correction actually applied, so
+          corrected feedback input = raw readout - applied control signal.
+        - Legacy output names are retained as aliases for existing callers.
 
         Pyragas note:
-        - model.py applies control as: next_input = y_pred - u_control
-        - Therefore, pyragas_sign=-1 makes the Pyragas signal move the next input
-          toward the delayed state when neuron_controllers.py computes
-          u_control = K * (y_pred - delayed_state).
+        - model.py applies control as: next_input = y_pred - u_control.
+        - Therefore, pyragas_sign=-1 moves the next input toward the delayed
+          state when the controller computes K * (y_pred - delayed_state).
+        - pyragas_history_signal chooses whether delay history contains raw ESN
+          readouts (the paper-aligned default) or corrected feedback inputs
+          (the legacy behaviour).
+
+        Safety note:
+        - control_input_clip clips the corrected feedback input, not the raw
+          controller request. If clipping changes the request, the returned
+          applied control is recomputed to preserve the signal identity.
+        - divergence_abs_limit supersedes max_abs_value when supplied. Limits
+          and clipping operate in the coordinates passed to this method
+          (normally externally normalized ESN coordinates).
         """
         if not self.is_fitted:
             raise RuntimeError("ESN is not trained yet. Call train() first.")
+
+        history_signal = str(pyragas_history_signal).strip().lower()
+        valid_history_signals = {"raw_readout", "corrected_feedback_input"}
+        if history_signal not in valid_history_signals:
+            raise ValueError(
+                "pyragas_history_signal must be 'raw_readout' or "
+                f"'corrected_feedback_input'. Got {pyragas_history_signal!r}."
+            )
+
+        if divergence_abs_limit is None:
+            resolved_divergence_limit = float(max_abs_value)
+        else:
+            resolved_divergence_limit = float(divergence_abs_limit)
+        if np.isnan(resolved_divergence_limit) or resolved_divergence_limit <= 0.0:
+            raise ValueError(
+                "divergence_abs_limit/max_abs_value must be positive. "
+                f"Got {resolved_divergence_limit}."
+            )
+
+        clip_bounds = None
+        if control_input_clip is not None:
+            if np.isscalar(control_input_clip):
+                clip_magnitude = float(control_input_clip)
+                if not np.isfinite(clip_magnitude) or clip_magnitude < 0.0:
+                    raise ValueError(
+                        "Scalar control_input_clip must be finite and non-negative. "
+                        f"Got {control_input_clip!r}."
+                    )
+                clip_bounds = (-clip_magnitude, clip_magnitude)
+            else:
+                clip_values = np.asarray(control_input_clip, dtype=float).reshape(-1)
+                if clip_values.size != 2:
+                    raise ValueError(
+                        "control_input_clip must be None, a non-negative scalar, "
+                        "or a (lower, upper) pair."
+                    )
+                lower, upper = float(clip_values[0]), float(clip_values[1])
+                if not np.isfinite(lower) or not np.isfinite(upper) or lower > upper:
+                    raise ValueError(
+                        "control_input_clip bounds must be finite with lower <= upper. "
+                        f"Got ({lower}, {upper})."
+                    )
+                clip_bounds = (lower, upper)
 
         train_sequence = self._as_2d(train_sequence)
         train_sequence = self._normalize_apply(train_sequence)
 
         target = self._as_1d(target)
-
         if target.size != self.input_size:
             raise ValueError(
                 f"Target size must be {self.input_size}, got {target.size}"
             )
 
         horizon_steps = int(horizon_steps)
-
         if horizon_steps <= 0:
+            empty_signal = np.empty((0, self.input_size))
             return {
                 "stable": True,
-                "raw_prediction_norm": np.empty((0, self.input_size)),
-                "controlled_output_norm": np.empty((0, self.input_size)),
-                "feedback_input_norm": np.empty((0, self.input_size)),
-                "control_signal_norm": np.empty((0, self.input_size)),
-                "error_signal_norm": np.empty((0, self.input_size)),
+                "divergence_detected": False,
+                "divergence_reason": None,
+                "divergence_index": None,
+                "steps_completed": 0,
+                "pyragas_history_signal": history_signal,
+                "control_input_clip": clip_bounds,
+                "divergence_abs_limit": resolved_divergence_limit,
+                "raw_readout_norm": empty_signal,
+                "corrected_feedback_input_norm": empty_signal,
+                "requested_control_signal_norm": empty_signal,
+                "control_signal_norm": empty_signal,
+                "raw_readout_error_norm": empty_signal,
+                "corrected_feedback_error_norm": empty_signal,
+                "raw_prediction_norm": empty_signal,
+                "controlled_output_norm": empty_signal,
+                "feedback_input_norm": empty_signal,
+                "error_signal_norm": empty_signal,
                 "states": np.empty((0, self.N_res)),
             }
 
         control_start_idx = int(max(0, min(control_start_idx, horizon_steps - 1)))
-
         x, current_input = self._warmup_until_index(
             train_sequence,
             n_warmup=len(train_sequence) - 1,
         )
 
-        raw_prediction = np.full((horizon_steps, self.input_size), np.nan)
-        controlled_output = np.full((horizon_steps, self.input_size), np.nan)
-        feedback_input = np.full((horizon_steps, self.input_size), np.nan)
-        control_signal = np.full((horizon_steps, self.input_size), np.nan)
-        error_signal = np.full((horizon_steps, self.input_size), np.nan)
+        raw_readout = np.full((horizon_steps, self.input_size), np.nan)
+        corrected_feedback_input = np.full(
+            (horizon_steps, self.input_size), np.nan
+        )
+        requested_control_signal = np.full(
+            (horizon_steps, self.input_size), np.nan
+        )
+        applied_control_signal = np.full(
+            (horizon_steps, self.input_size), np.nan
+        )
+        raw_readout_error = np.full((horizon_steps, self.input_size), np.nan)
+        corrected_feedback_error = np.full(
+            (horizon_steps, self.input_size), np.nan
+        )
         states = np.full((horizon_steps, self.N_res), np.nan)
 
         stable = True
+        divergence_reason = None
+        divergence_index = None
+        steps_completed = 0
         history = []
 
         for k in range(horizon_steps):
             x = self._update_state(x, current_input)
             y_pred = self._readout(current_input, x)
-
             error = y_pred - target
 
-            if k >= control_start_idx:
-                u_control = compute_control_signal(
-                    controller=controller,
-                    y_pred=y_pred,
-                    target=target,
-                    K=K,
-                    history=history,
-                    finite_s=finite_s,
-                    pyragas_delay=pyragas_delay,
-                    pyragas_sign=pyragas_sign,
-                )
-                next_input = y_pred - u_control
-                y_controlled = next_input
-            else:
-                u_control = np.zeros_like(y_pred)
-                next_input = y_pred
-                y_controlled = y_pred
-
-            raw_prediction[k] = y_pred
-            controlled_output[k] = y_controlled
-            feedback_input[k] = next_input
-            control_signal[k] = u_control
-            error_signal[k] = error
+            raw_readout[k] = y_pred
+            raw_readout_error[k] = error
             states[k] = x
+            steps_completed = k + 1
 
-            history.append(y_controlled.copy())
-
-            if (
-                not np.all(np.isfinite(next_input))
-                or not np.all(np.isfinite(x))
-                or np.max(np.abs(next_input)) > max_abs_value
-                or np.max(np.abs(x)) > max_abs_value
-            ):
+            if not np.all(np.isfinite(y_pred)):
                 stable = False
+                divergence_reason = "nonfinite_raw_readout"
+                divergence_index = k
                 break
+            if not np.all(np.isfinite(x)):
+                stable = False
+                divergence_reason = "nonfinite_reservoir_state"
+                divergence_index = k
+                break
+            if np.max(np.abs(y_pred)) > resolved_divergence_limit:
+                stable = False
+                divergence_reason = "raw_readout_abs_limit_exceeded"
+                divergence_index = k
+                break
+            if np.max(np.abs(x)) > resolved_divergence_limit:
+                stable = False
+                divergence_reason = "reservoir_state_abs_limit_exceeded"
+                divergence_index = k
+                break
+
+            if k >= control_start_idx:
+                try:
+                    requested_control = compute_control_signal(
+                        controller=controller,
+                        y_pred=y_pred,
+                        target=target,
+                        K=K,
+                        history=history,
+                        finite_s=finite_s,
+                        pyragas_delay=pyragas_delay,
+                        pyragas_sign=pyragas_sign,
+                    )
+                except FloatingPointError:
+                    stable = False
+                    divergence_reason = "nonfinite_requested_control_signal"
+                    divergence_index = k
+                    break
+                next_input = y_pred - requested_control
+                if clip_bounds is not None:
+                    next_input = np.clip(
+                        next_input, clip_bounds[0], clip_bounds[1]
+                    )
+                applied_control = y_pred - next_input
+            else:
+                requested_control = np.zeros_like(y_pred)
+                applied_control = np.zeros_like(y_pred)
+                next_input = y_pred
+
+            corrected_feedback_input[k] = next_input
+            requested_control_signal[k] = requested_control
+            applied_control_signal[k] = applied_control
+            corrected_feedback_error[k] = next_input - target
+
+            if not np.all(np.isfinite(requested_control)):
+                stable = False
+                divergence_reason = "nonfinite_requested_control_signal"
+                divergence_index = k
+                break
+            if np.max(np.abs(requested_control)) > resolved_divergence_limit:
+                stable = False
+                divergence_reason = "requested_control_signal_abs_limit_exceeded"
+                divergence_index = k
+                break
+            if not np.all(np.isfinite(applied_control)):
+                stable = False
+                divergence_reason = "nonfinite_applied_control_signal"
+                divergence_index = k
+                break
+            if np.max(np.abs(applied_control)) > resolved_divergence_limit:
+                stable = False
+                divergence_reason = "applied_control_signal_abs_limit_exceeded"
+                divergence_index = k
+                break
+            if not np.all(np.isfinite(next_input)):
+                stable = False
+                divergence_reason = "nonfinite_corrected_feedback_input"
+                divergence_index = k
+                break
+            if np.max(np.abs(next_input)) > resolved_divergence_limit:
+                stable = False
+                divergence_reason = "corrected_feedback_input_abs_limit_exceeded"
+                divergence_index = k
+                break
+
+            history_value = (
+                y_pred if history_signal == "raw_readout" else next_input
+            )
+            history.append(history_value.copy())
 
             current_input = next_input
 
         return {
             "stable": stable,
+            "divergence_detected": not stable,
+            "divergence_reason": divergence_reason,
+            "divergence_index": divergence_index,
+            "steps_completed": int(steps_completed),
             "controller": controller,
             "K": float(K),
             "finite_s": float(finite_s),
             "pyragas_delay": int(pyragas_delay),
             "pyragas_sign": int(pyragas_sign),
-            "raw_prediction_norm": raw_prediction,
-            "controlled_output_norm": controlled_output,
-            "feedback_input_norm": feedback_input,
-            "control_signal_norm": control_signal,
-            "error_signal_norm": error_signal,
+            "pyragas_history_signal": history_signal,
+            "control_input_clip": clip_bounds,
+            "divergence_abs_limit": resolved_divergence_limit,
+            "raw_readout_norm": raw_readout,
+            "corrected_feedback_input_norm": corrected_feedback_input,
+            "requested_control_signal_norm": requested_control_signal,
+            "control_signal_norm": applied_control_signal,
+            "raw_readout_error_norm": raw_readout_error,
+            "corrected_feedback_error_norm": corrected_feedback_error,
+            # Backward-compatible aliases. controlled_output_norm and
+            # feedback_input_norm both mean corrected feedback input.
+            "raw_prediction_norm": raw_readout,
+            "controlled_output_norm": corrected_feedback_input,
+            "feedback_input_norm": corrected_feedback_input,
+            "error_signal_norm": raw_readout_error,
             "states": states,
         }
+
+    def model_identity_hash(self) -> str:
+        """Return a deterministic identity for architecture and trained weights."""
+        if not self.is_fitted or self.Wout is None:
+            raise RuntimeError("Cannot identify an unfitted ESN.")
+        scalars = {
+            "N_res": self.N_res,
+            "p": self.p,
+            "spectral_radius": self.spectral_radius,
+            "leaky_coefficient": self.leaky_coefficient,
+            "regularization": self.regularization,
+            "input_size": self.input_size,
+            "normalize_input": self.normalize_input,
+            "input_scaling": self.input_scaling,
+            "seed": self.seed,
+        }
+        digest = hashlib.sha256(
+            json.dumps(
+                scalars, sort_keys=True, separators=(",", ":")
+            ).encode("utf-8")
+        )
+        for name, value in (
+            ("Win", self.Win),
+            ("W", self.W),
+            ("Wout", self.Wout),
+            ("input_mean", self.input_mean),
+            ("input_std", self.input_std),
+        ):
+            array = np.ascontiguousarray(np.asarray(value, dtype=np.float64))
+            digest.update(name.encode("utf-8"))
+            digest.update(str(array.shape).encode("ascii"))
+            digest.update(array.tobytes(order="C"))
+        return digest.hexdigest()
+
+    def save_bundle(
+        self,
+        path,
+        *,
+        metadata: dict | None = None,
+        external_mean: np.ndarray | None = None,
+        external_std: np.ndarray | None = None,
+    ) -> dict:
+        """Save every deterministic component needed to reuse this fitted ESN."""
+        if not self.is_fitted or self.Wout is None:
+            raise RuntimeError("Cannot save an unfitted ESN.")
+        destination = Path(path)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        identity = self.model_identity_hash()
+        bundle_metadata = dict(metadata or {})
+        bundle_metadata.update(
+            {
+                "schema_version": "chapter1_esn_bundle_v1",
+                "model_identity_hash": identity,
+                "model_seed": int(self.seed),
+            }
+        )
+        np.savez_compressed(
+            destination,
+            Win=np.asarray(self.Win, dtype=float),
+            W=np.asarray(self.W, dtype=float),
+            Wout=np.asarray(self.Wout, dtype=float),
+            input_mean=np.asarray(self.input_mean, dtype=float),
+            input_std=np.asarray(self.input_std, dtype=float),
+            external_mean=np.asarray(
+                np.empty((0, self.input_size))
+                if external_mean is None
+                else external_mean,
+                dtype=float,
+            ),
+            external_std=np.asarray(
+                np.empty((0, self.input_size))
+                if external_std is None
+                else external_std,
+                dtype=float,
+            ),
+            metadata_json=np.asarray(
+                json.dumps(bundle_metadata, sort_keys=True)
+            ),
+            N_res=np.asarray(self.N_res),
+            p=np.asarray(self.p),
+            spectral_radius=np.asarray(self.spectral_radius),
+            leaky_coefficient=np.asarray(self.leaky_coefficient),
+            regularization=np.asarray(self.regularization),
+            input_size=np.asarray(self.input_size),
+            normalize_input=np.asarray(self.normalize_input),
+            input_scaling=np.asarray(self.input_scaling),
+            seed=np.asarray(self.seed),
+        )
+        return bundle_metadata
+
+    @classmethod
+    def load_bundle(cls, path):
+        """Load a saved bundle without training and verify its identity hash."""
+        source = Path(path)
+        with np.load(source, allow_pickle=False) as bundle:
+            model = cls(
+                N_res=int(bundle["N_res"]),
+                p=float(bundle["p"]),
+                spectral_radius=float(bundle["spectral_radius"]),
+                leaky_coefficient=float(bundle["leaky_coefficient"]),
+                regularization=float(bundle["regularization"]),
+                input_size=int(bundle["input_size"]),
+                normalize_input=bool(bundle["normalize_input"]),
+                input_scaling=float(bundle["input_scaling"]),
+                seed=int(bundle["seed"]),
+            )
+            model.Win = np.asarray(bundle["Win"], dtype=float)
+            model.W = np.asarray(bundle["W"], dtype=float)
+            model.Wres = model.W
+            model.Wout = np.asarray(bundle["Wout"], dtype=float)
+            model.input_mean = np.asarray(bundle["input_mean"], dtype=float)
+            model.input_std = np.asarray(bundle["input_std"], dtype=float)
+            model.is_fitted = True
+            metadata = json.loads(str(bundle["metadata_json"]))
+            external_mean = np.asarray(bundle["external_mean"], dtype=float)
+            external_std = np.asarray(bundle["external_std"], dtype=float)
+
+        expected = str(metadata.get("model_identity_hash", ""))
+        actual = model.model_identity_hash()
+        if expected and expected != actual:
+            raise ValueError(
+                "Saved ESN identity hash does not match its serialized weights."
+            )
+        metadata["model_identity_hash"] = actual
+        metadata["loaded_from_cache"] = True
+        metadata["external_mean"] = external_mean
+        metadata["external_std"] = external_std
+        return model, metadata

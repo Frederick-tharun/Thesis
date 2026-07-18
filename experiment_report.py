@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import math
 import os
 import shutil
 from datetime import datetime
@@ -321,6 +322,22 @@ def _control_fieldnames(rows):
         "timestamp",
         "regime",
         "controller",
+        "best_k",
+        "stable",
+        "target_mode",
+        "selection_metric_name",
+        "selection_metric_value",
+        "final_test_metric_name",
+        "final_test_metric_value",
+        "raw_readout_target_rmse_state",
+        "raw_readout_target_rmse_x",
+        "corrected_feedback_input_target_rmse_state",
+        "corrected_feedback_input_target_rmse_x",
+        "control_effort_mean_sq",
+        "control_energy_dt_sum",
+        "divergence_detected",
+        "divergence_reason",
+        "pyragas_history_signal",
         "best_K",
         "best_target_rmse_state",
         "best_target_rmse_x",
@@ -328,7 +345,6 @@ def _control_fieldnames(rows):
         "best_spike_reduction_percent",
         "best_control_energy_mean",
         "best_diverged",
-        "target_mode",
     ]
 
     all_keys = set()
@@ -408,6 +424,10 @@ def _control_try_docx(path, rows, title):
 
 def save_control_summary(regime_output_dir, controller_name, sweep_rows):
     """
+    Backward-compatible CSV/DOCX adapter.
+
+    Active JSON summaries are written by control_experiment.py. This helper
+    selects candidates only by their validation selection metric.
     Save:
       1. per-regime control summary inside outputs/<regime>/control/<controller_name>/
       2. global control comparison inside outputs/control_comparison.csv and .docx
@@ -422,34 +442,57 @@ def save_control_summary(regime_output_dir, controller_name, sweep_rows):
 
     os.makedirs(controller_dir, exist_ok=True)
 
-    valid = [r for r in sweep_rows if not bool(r.get("diverged", False))]
-    candidates = valid if valid else sweep_rows
+    validation_rows = [
+        row
+        for row in sweep_rows
+        if row.get("metric_segment", "controller_validation")
+        == "controller_validation"
+    ]
+    if not validation_rows:
+        raise ValueError(
+            "Control summary selection requires controller-validation rows."
+        )
+
+    valid = [
+        row
+        for row in validation_rows
+        if bool(row.get("stable", False))
+        and not bool(row.get("divergence_detected", False))
+        and not bool(row.get("diverged", False))
+    ]
+    if not valid:
+        raise RuntimeError(
+            "No stable controller-validation row is available for reporting."
+        )
 
     def _score(row):
         try:
-            return (
-                float(row.get("target_rmse_state", 1e18)),
-                float(row.get("control_energy_mean", 1e18)),
-                -float(row.get("spike_reduction_percent", -1e18)),
+            value = float(
+                row.get("selection_metric_value", row.get("selection_score"))
             )
-        except Exception:
-            return (1e18, 1e18, 1e18)
+        except (TypeError, ValueError):
+            return float("inf")
+        return value if math.isfinite(value) else float("inf")
 
+    candidates = [row for row in valid if math.isfinite(_score(row))]
+    if not candidates:
+        raise ValueError(
+            "Control summary selection requires a finite validation selection score."
+        )
     best = min(candidates, key=_score)
 
     best_row = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "regime": regime_name,
         "controller": controller_name,
-        "best_K": best.get("K", ""),
-        "best_target_rmse_state": best.get("target_rmse_state", ""),
-        "best_target_rmse_x": best.get("target_rmse_x", ""),
-        "best_settling_time_s": best.get("settling_time_s", ""),
-        "best_spike_reduction_percent": best.get("spike_reduction_percent", ""),
-        "best_control_energy_mean": best.get("control_energy_mean", ""),
-        "best_diverged": best.get("diverged", ""),
-        "target_mode": best.get("target_mode", ""),
+        **best,
     }
+    best_row.setdefault("best_k", best.get("K", best.get("best_K", "")))
+    best_row.setdefault("stable", not bool(best.get("diverged", False)))
+    best_row.setdefault("selection_metric_name", "legacy_selection_score")
+    best_row.setdefault("selection_metric_value", _score(best))
+
+    # Deprecated aliases remain readable by historical notebooks and CSVs.
 
     # Per-regime summary
     single_csv = os.path.join(controller_dir, "control_experiment_summary.csv")

@@ -9,14 +9,19 @@ plotting_stub = types.ModuleType("plotting")
 for function_name in (
     "plot_controlled_vs_uncontrolled_x",
     "plot_controlled_all_states",
+    "plot_raw_readout_vs_corrected_feedback_input_x",
     "plot_control_signal",
     "plot_control_error",
     "plot_k_sweep_summary",
 ):
     setattr(plotting_stub, function_name, lambda *args, **kwargs: None)
-sys.modules.setdefault("plotting", plotting_stub)
-
+previous_plotting_module = sys.modules.get("plotting")
+sys.modules["plotting"] = plotting_stub
 from control_experiment import _pyragas_dynamics_metrics, _settling_time
+if previous_plotting_module is None:
+    sys.modules.pop("plotting", None)
+else:
+    sys.modules["plotting"] = previous_plotting_module
 
 
 class PyragasMetricTests(unittest.TestCase):

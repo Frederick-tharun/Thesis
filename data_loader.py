@@ -174,21 +174,36 @@ class DataLoader:
         )
 
     def summary(self) -> None:
+        dataset_mode = getattr(config, "DATASET_MODE", "real").lower()
+        is_hr = dataset_mode == "hr"
         total_s = self.time[-1] - self.time[0] if len(self.time) > 1 else 0.0
 
         print("\n" + "=" * 56)
         print("DATASET SUMMARY")
         print("=" * 56)
-        print(f"File              : {self.csv_path}")
+        if is_hr:
+            print("Source            : Synthetic Hindmarsh-Rose generated trajectory (RK4)")
+        else:
+            print(f"File              : {self.csv_path}")
         print(f"Total samples     : {self.n_samples}")
         print(f"Total neurons     : {self.n_neurons}")
-        print(f"Duration          : {total_s/60:.2f} min ({total_s:.0f} s)")
+        if is_hr:
+            print(f"Duration          : {total_s:.2f} simulation time units")
+        else:
+            print(f"Duration          : {total_s/60:.2f} min ({total_s:.0f} s)")
         print(f"First neuron      : {self.neuron_names[0]}")
         print(f"Last neuron       : {self.neuron_names[-1]}")
-        print(
-            f"Split ratios      : train={config.TRAIN_RATIO:.2f}, "
-            f"val={config.VAL_RATIO:.2f}, test={config.TEST_RATIO:.2f}"
-        )
+        if is_hr:
+            print(
+                f"Prediction split  : train={config.TRAIN_RATIO:.2f}, "
+                f"held-out test={1.0 - config.TRAIN_RATIO:.2f}"
+            )
+            print("BO validation     : selected only from the training portion")
+        else:
+            print(
+                f"Split ratios      : train={config.TRAIN_RATIO:.2f}, "
+                f"val={config.VAL_RATIO:.2f}, test={config.TEST_RATIO:.2f}"
+            )
 
         if self.spike_indices:
             counts = [len(v) for v in self.spike_indices.values()]

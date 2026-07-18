@@ -31,6 +31,7 @@ class CliContractTests(unittest.TestCase):
         options = main_cli_options()
         required = {
             "--control",
+            "--params-file",
             "--controller",
             "--finite-s",
             "--pyragas-delay",
@@ -45,6 +46,28 @@ class CliContractTests(unittest.TestCase):
             for option in ("--controller", "--pyragas-delay", "--pyragas-sign"):
                 if option in text:
                     self.assertIn(option, options, f"{option} used by {path.name}")
+
+    def test_official_slurm_is_one_pass_clean_and_strict(self):
+        slurm = (ROOT / "run_final_thesis_pipeline.slurm").read_text()
+        pipeline = (ROOT / "final_pipeline.py").read_text()
+        for marker in (
+            "git diff --quiet",
+            "git diff --cached --quiet",
+            "git ls-files --others --exclude-standard",
+            "final_pipeline.py",
+            "final_package_validation.json",
+            "--clean-repository-at-start",
+        ):
+            self.assertIn(marker, slurm)
+        self.assertNotIn("09_working_outputs", slurm)
+        self.assertNotIn("best_params_dummy.json", slurm)
+        self.assertNotIn("|| true", slurm)
+        self.assertIn("for regime in HR_REGIMES", pipeline)
+        self.assertIn("run_all_optimizers(", pipeline)
+        self.assertIn("EchoStateNetwork.load_bundle(", pipeline)
+        self.assertIn("if list(config.PYRAGAS_SIGNS) != [-1]", pipeline)
+        self.assertIn("locked_validation_selection", pipeline)
+        self.assertNotIn("subprocess.run([\"sbatch\"", pipeline)
 
     def test_final_validation_scripts_lock_selected_parameters(self):
         pyragas = (ROOT / "run_pyragas_final_validation.slurm").read_text()

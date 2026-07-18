@@ -141,6 +141,67 @@ def _format_optional_metric(name, value, fmt=".4f", suffix=""):
     return f"{name} = {value:{fmt}}{suffix}"
 
 
+def _control_effort_value(metrics):
+    """Prefer the canonical mean-squared effort key with legacy fallback."""
+    metrics = metrics or {}
+    value = metrics.get("control_effort_mean_sq")
+    return metrics.get("control_energy") if value is None else value
+
+
+def _controller_test_boundary_idx(metrics, control_start_idx, n):
+    """Return the held-out controller-test boundary in rollout coordinates."""
+    metrics = metrics or {}
+    value = metrics.get("controller_test_start")
+    if value is None:
+        value = metrics.get("controller_test_start_idx")
+    if value is None:
+        value = metrics.get("pyragas_evaluation_start_idx")
+    boundary = _safe_float(value, control_start_idx)
+    if not np.isfinite(boundary):
+        boundary = control_start_idx
+    return int(max(control_start_idx, min(boundary, n - 1)))
+
+
+def _add_controller_segment_guides(ax, times, control_start_idx, metrics=None):
+    """Shade controller validation separately from the held-out test segment."""
+    boundary = _controller_test_boundary_idx(
+        metrics, control_start_idx, len(times)
+    )
+    if boundary > control_start_idx:
+        ax.axvspan(
+            times[control_start_idx],
+            times[boundary],
+            color=_COLOR_EVENT,
+            alpha=0.055,
+            zorder=0,
+            label="Controller validation (not used for held-out metrics)",
+        )
+        ax.axvline(
+            times[boundary],
+            color=_COLOR_TARGET,
+            linestyle="-.",
+            linewidth=1.25,
+            label="Held-out controller-test start",
+            zorder=1,
+        )
+        ax.axvspan(
+            times[boundary],
+            times[-1],
+            color=_COLOR_TARGET,
+            alpha=0.035,
+            zorder=0,
+        )
+    else:
+        ax.axvspan(
+            times[control_start_idx],
+            times[-1],
+            color=_COLOR_EVENT,
+            alpha=0.045,
+            zorder=0,
+        )
+    return boundary
+
+
 def _is_pyragas_context(metrics=None, output_dir=None, controller_name=None, rows=None):
     """Return True when the active plot belongs to Pyragas delayed feedback."""
     candidates = []
@@ -185,12 +246,36 @@ def _metric_box_text(metrics):
     if metrics.get("K") is not None:
         lines.append(f"K = {_safe_float(metrics.get('K')):.4g}")
 
+    corrected_metrics = metrics.get("corrected_feedback_input_metrics", {})
+    if not isinstance(corrected_metrics, dict):
+        corrected_metrics = {}
+    raw_metrics = metrics.get("raw_readout_metrics", {})
+    if not isinstance(raw_metrics, dict):
+        raw_metrics = {}
+
+    corrected_rmse = metrics.get("corrected_feedback_input_target_rmse_state")
+    if corrected_rmse is None:
+        corrected_rmse = corrected_metrics.get("target_rmse_state")
+    if corrected_rmse is None:
+        corrected_rmse = metrics.get("target_rmse_state")
+
+    raw_rmse = metrics.get("raw_readout_target_rmse_state")
+    if raw_rmse is None:
+        raw_rmse = raw_metrics.get("target_rmse_state")
+
+    effort = _control_effort_value(metrics)
+
     if _is_pyragas_context(metrics=metrics):
         delay = metrics.get("pyragas_delay", metrics.get("delay_steps"))
         if delay is not None:
             lines.append(f"delay = {int(_safe_float(delay, 0))} steps")
         if metrics.get("pyragas_sign") is not None:
-            lines.append(f"sign = {int(_safe_float(metrics.get('pyragas_sign'), 0)):+d}")
+            lines.append(
+                f"sign = {int(_safe_float(metrics.get('pyragas_sign'), 0)):+d}"
+            )
+        history_signal = metrics.get("pyragas_history_signal")
+        if history_signal:
+            lines.append(f"delay history = {history_signal}")
 
         quality_pass = metrics.get("pyragas_quality_pass")
         if quality_pass is not None:
@@ -207,25 +292,58 @@ def _metric_box_text(metrics):
         if cycle_count is not None:
             lines.append(f"evaluated cycles = {_format_count(cycle_count)}")
 
-        empirical_steps = _safe_float(metrics.get("pyragas_empirical_period_steps"))
-        empirical_time = _safe_float(metrics.get("pyragas_empirical_period_time"))
+        empirical_steps = _safe_float(
+            metrics.get("pyragas_empirical_period_steps")
+        )
+        empirical_time = _safe_float(
+            metrics.get("pyragas_empirical_period_time")
+        )
         if np.isfinite(empirical_steps) and empirical_steps > 0:
             if np.isfinite(empirical_time):
                 lines.append(
-                    f"measured period = {int(round(empirical_steps))} steps ({empirical_time:.3g} time units)"
+                    f"measured period = {int(round(empirical_steps))} steps "
+                    f"({empirical_time:.3g} time units)"
                 )
             else:
-                lines.append(f"measured period = {int(round(empirical_steps))} steps")
+                lines.append(
+                    f"measured period = {int(round(empirical_steps))} steps"
+                )
 
         for item in (
-            _format_optional_metric("rhythm CV", metrics.get("pyragas_rhythm_interval_cv"), ".4f"),
-            _format_optional_metric("amplitude ratio", metrics.get("pyragas_x_amplitude_ratio"), ".3f"),
-            _format_optional_metric("cycle recurrence error", metrics.get("pyragas_empirical_recurrence_error_norm"), ".4f"),
-            _format_optional_metric("cycle correlation", metrics.get("pyragas_empirical_recurrence_correlation"), ".3f"),
-            _format_optional_metric("cycle-window coverage", metrics.get("pyragas_cycle_window_coverage"), ".2f"),
-            _format_optional_metric("drift ratio", metrics.get("pyragas_drift_ratio"), ".3f"),
-            _format_optional_metric("empirical closure", metrics.get("pyragas_empirical_tail_closure_error_norm"), ".3f"),
-            _format_optional_metric("energy", metrics.get("control_energy"), ".4g"),
+            _format_optional_metric(
+                "rhythm CV",
+                metrics.get("pyragas_rhythm_interval_cv"),
+                ".4f",
+            ),
+            _format_optional_metric(
+                "amplitude ratio",
+                metrics.get("pyragas_x_amplitude_ratio"),
+                ".3f",
+            ),
+            _format_optional_metric(
+                "cycle recurrence error",
+                metrics.get("pyragas_empirical_recurrence_error_norm"),
+                ".4f",
+            ),
+            _format_optional_metric(
+                "cycle correlation",
+                metrics.get("pyragas_empirical_recurrence_correlation"),
+                ".3f",
+            ),
+            _format_optional_metric(
+                "cycle-window coverage",
+                metrics.get("pyragas_cycle_window_coverage"),
+                ".2f",
+            ),
+            _format_optional_metric(
+                "drift ratio", metrics.get("pyragas_drift_ratio"), ".3f"
+            ),
+            _format_optional_metric(
+                "empirical closure",
+                metrics.get("pyragas_empirical_tail_closure_error_norm"),
+                ".3f",
+            ),
+            _format_optional_metric("mean-squared effort", effort, ".4g"),
         ):
             if item is not None:
                 lines.append(item)
@@ -235,13 +353,34 @@ def _metric_box_text(metrics):
     if controller == "finite_time" and metrics.get("finite_s") is not None:
         lines.append(f"finite_s = {_safe_float(metrics.get('finite_s')):.3f}")
     if metrics.get("delay_steps") is not None:
-        lines.append(f"delay = {int(_safe_float(metrics.get('delay_steps'), 0))} steps")
+        lines.append(
+            f"delay = {int(_safe_float(metrics.get('delay_steps'), 0))} steps"
+        )
 
     for item in (
-        _format_optional_metric("Target RMSE", metrics.get("target_rmse_state"), ".4f"),
-        _format_optional_metric("Spike reduction", metrics.get("spike_reduction_percent"), ".2f", "%"),
-        _format_optional_metric("Energy", metrics.get("control_energy"), ".4g"),
-        _format_optional_metric("Settling time", metrics.get("settling_time"), ".4f"),
+        _format_optional_metric(
+            "Corrected-feedback target RMSE", corrected_rmse, ".4f"
+        ),
+        _format_optional_metric(
+            "Raw-readout target RMSE", raw_rmse, ".4f"
+        ),
+        _format_optional_metric(
+            "Spike reduction (corrected feedback)",
+            metrics.get("spike_reduction_percent"),
+            ".2f",
+            "%",
+        ),
+        _format_optional_metric("Mean-squared control effort", effort, ".4g"),
+        _format_optional_metric(
+            "Controller-test time to tolerance",
+            metrics.get(
+                "controller_test_time_to_tolerance",
+                metrics.get(
+                    "evaluation_time_to_tolerance", metrics.get("settling_time")
+                ),
+            ),
+            ".4f",
+        ),
     ):
         if item is not None:
             lines.append(item)
@@ -565,7 +704,7 @@ def plot_results(split, y_pred, tag="ESN"):
     )
 
     ax.set_title("2) Recursive prediction on held-out test segment", fontsize=12, fontweight="bold")
-    ax.set_xlabel("Time (s)")
+    ax.set_xlabel("Time")
     ax.set_ylabel("x state")
     ax.grid(True, alpha=0.25)
     ax.legend(loc="best", fontsize=8)
@@ -603,7 +742,7 @@ def plot_zoom_comparison(t, y_true, y_pred, tag="ESN"):
     plt.axhline(_spike_threshold(), linestyle=":", linewidth=1.0, alpha=0.75, label="Spike threshold")
 
     plt.title(f"{tag} recursive prediction zoom", fontsize=14, fontweight="bold")
-    plt.xlabel("Time (s)")
+    plt.xlabel("Time")
     plt.ylabel("x state")
     plt.grid(True, alpha=0.25)
     plt.legend(loc="best")
@@ -667,7 +806,7 @@ def plot_spike_event_comparison(t, y_true, y_pred, tag="ESN"):
         )
 
     plt.yticks([0.9, 1.9, 2.9], ["FN", "FP", "TP"])
-    plt.xlabel("Time (s)")
+    plt.xlabel("Time")
     plt.ylabel("Event type")
     plt.title(
         f"Spike event comparison | Precision={precision:.4f}  Recall={recall:.4f}  F1={f1:.4f}",
@@ -717,7 +856,7 @@ def plot_all_states(t, truth, pred, tag="ESN"):
         ax.grid(True, alpha=0.25)
         ax.legend(loc="best", fontsize=8)
 
-    axes[-1].set_xlabel("Time (s)")
+    axes[-1].set_xlabel("Time")
     fig.suptitle(f"{tag} - full-state recursive forecast", fontsize=15, fontweight="bold")
     plt.tight_layout(rect=[0, 0, 1, 0.96])
     _savefig("results_all_states.png")
@@ -1301,7 +1440,7 @@ def plot_controlled_vs_uncontrolled_x(
     output_dir,
     controller_name=None,
 ):
-    """Plot true, uncontrolled, and controlled x-state with the correct controller label."""
+    """Plot true, uncontrolled, and corrected-feedback x trajectories."""
     times = _as_1d(times)
     truth = _as_2d(truth)
     uncontrolled = _as_2d(uncontrolled)
@@ -1336,7 +1475,7 @@ def plot_controlled_vs_uncontrolled_x(
         color=_COLOR_CONTROLLED,
         linestyle="--",
         linewidth=1.65,
-        label="Controlled ESN x",
+        label="Corrected feedback input x (controlled trajectory)",
         zorder=5,
     )
     is_pyragas = _is_pyragas_context(
@@ -1350,7 +1489,7 @@ def plot_controlled_vs_uncontrolled_x(
             color=_COLOR_TARGET,
             linestyle=":",
             linewidth=1.7,
-            label="Target x",
+            label="Empirical quiet-state reference x",
             zorder=1,
         )
     ax.axvline(
@@ -1361,41 +1500,9 @@ def plot_controlled_vs_uncontrolled_x(
         label="Control start",
         zorder=1,
     )
-    evaluation_start_idx = int(
-        max(
-            control_start_idx,
-            min(
-                int(_safe_float(metrics.get("pyragas_evaluation_start_idx"), control_start_idx)),
-                n - 1,
-            ),
-        )
+    _add_controller_segment_guides(
+        ax, times, control_start_idx, metrics=metrics
     )
-    if is_pyragas and evaluation_start_idx > control_start_idx:
-        ax.axvspan(
-            times[control_start_idx],
-            times[evaluation_start_idx],
-            color=_COLOR_EVENT,
-            alpha=0.055,
-            zorder=0,
-            label="Ignored transient",
-        )
-        ax.axvline(
-            times[evaluation_start_idx],
-            color=_COLOR_TARGET,
-            linestyle="-.",
-            linewidth=1.35,
-            label="Evaluation start",
-            zorder=1,
-        )
-        ax.axvspan(
-            times[evaluation_start_idx],
-            times[-1],
-            color=_COLOR_TARGET,
-            alpha=0.035,
-            zorder=0,
-        )
-    else:
-        ax.axvspan(times[control_start_idx], times[-1], color=_COLOR_EVENT, alpha=0.045, zorder=0)
 
     txt = _metric_box_text(metrics)
     ax.text(
@@ -1410,8 +1517,18 @@ def plot_controlled_vs_uncontrolled_x(
         bbox=dict(boxstyle="round,pad=0.45", facecolor="white", edgecolor="#d1d5db", alpha=0.94),
     )
 
-    ax.set_title(f"{label}: x-state comparison", fontsize=15, fontweight="bold", pad=12)
-    ax.set_xlabel("Time (s)")
+    comparison_title = (
+        f"{label}: x-state comparison"
+        if is_pyragas
+        else (
+            f"{label}: regulation toward an empirical quiet-state "
+            "reference"
+        )
+    )
+    ax.set_title(
+        comparison_title, fontsize=15, fontweight="bold", pad=12
+    )
+    ax.set_xlabel("Time")
     ax.set_ylabel("Hindmarsh-Rose x state")
     _style_axis(ax)
     _clean_legend(ax, fontsize=9, loc="upper right", ncol=2)
@@ -1424,6 +1541,84 @@ def plot_controlled_vs_uncontrolled_x(
         # use explicit pyragas_* filenames.
         pass
 
+
+
+def plot_raw_readout_vs_corrected_feedback_input_x(
+    times,
+    raw_readout,
+    corrected_feedback_input,
+    control_start_idx,
+    output_dir,
+    controller_name=None,
+    metrics=None,
+):
+    """Plot the closed-loop raw ESN readout against its corrected feedback input."""
+    times = _as_1d(times)
+    raw_readout = _as_2d(raw_readout)
+    corrected_feedback_input = _as_2d(corrected_feedback_input)
+
+    n = min(len(times), len(raw_readout), len(corrected_feedback_input))
+    if n == 0:
+        return
+
+    times = times[:n]
+    raw_readout = raw_readout[:n]
+    corrected_feedback_input = corrected_feedback_input[:n]
+    control_start_idx = int(max(0, min(control_start_idx, n - 1)))
+    label = _controller_label(
+        controller_name,
+        metrics=metrics,
+        output_dir=output_dir,
+    )
+
+    fig, ax = plt.subplots(figsize=(16, 5.8))
+    ax.plot(
+        times,
+        raw_readout[:, 0],
+        color=_COLOR_TRUE,
+        linewidth=1.45,
+        label="Raw ESN readout x (closed loop)",
+        zorder=4,
+    )
+    ax.plot(
+        times,
+        corrected_feedback_input[:, 0],
+        color=_COLOR_CONTROLLED,
+        linestyle="--",
+        linewidth=1.55,
+        label="Corrected feedback input x",
+        zorder=5,
+    )
+    ax.axvline(
+        times[control_start_idx],
+        color=_COLOR_EVENT,
+        linestyle="--",
+        linewidth=1.3,
+        label="Control start",
+        zorder=2,
+    )
+    _add_controller_segment_guides(
+        ax, times, control_start_idx, metrics=metrics
+    )
+
+    ax.set_title(
+        f"{label}: raw ESN readout vs corrected feedback input",
+        fontsize=15,
+        fontweight="bold",
+        pad=12,
+    )
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Hindmarsh-Rose x state")
+    _style_axis(ax)
+    _clean_legend(ax, fontsize=9, loc="upper right")
+    fig.tight_layout()
+    _savefig_to_path(
+        os.path.join(
+            output_dir,
+            "raw_readout_vs_corrected_feedback_input_x.png",
+        ),
+        fig=fig,
+    )
 
 
 def _limit_trajectory_points(arrays, max_points=3500):
@@ -1526,10 +1721,10 @@ def plot_pyragas_phase_trajectory_3d(
     # Left: reference chaotic/test trajectory and uncontrolled ESN.
     ax1.plot(truth_post[:, 0], truth_post[:, 1], truth_post[:, 2], color=_COLOR_TRUE, linewidth=1.0, alpha=0.75, label="True trajectory")
     ax1.plot(unctrl_post[:, 0], unctrl_post[:, 1], unctrl_post[:, 2], color=_COLOR_UNCONTROLLED, linewidth=1.2, alpha=0.85, label="Uncontrolled ESN")
-    ax1.set_title("Before Pyragas control / uncontrolled evolution", fontsize=11, fontweight="bold", pad=10)
+    ax1.set_title("Held-out controller-test reference and uncontrolled ESN", fontsize=11, fontweight="bold", pad=10)
 
-    # Right: distinguish the ignored switching transient from the trajectory
-    # that was actually used for periodic-orbit validation.
+    # Right: distinguish controller validation from the held-out trajectory
+    # that is used only for final periodic-orbit reporting.
     if len(ctrl_transient):
         ax2.plot(
             ctrl_transient[:, 0],
@@ -1538,7 +1733,7 @@ def plot_pyragas_phase_trajectory_3d(
             color=_COLOR_EVENT,
             linewidth=0.9,
             alpha=0.30,
-            label="Ignored transient",
+            label="Controller validation (not used for held-out metrics)",
         )
     if previous_cycle is not None and final_cycle is not None:
         ax2.plot(
@@ -1548,7 +1743,7 @@ def plot_pyragas_phase_trajectory_3d(
             color=_COLOR_CONTROLLED,
             linewidth=0.8,
             alpha=0.18,
-            label="Evaluated trajectory",
+            label="Held-out corrected-feedback trajectory",
         )
         ax2.plot(
             previous_cycle[:, 0],
@@ -1587,14 +1782,14 @@ def plot_pyragas_phase_trajectory_3d(
             depthshade=True,
         )
     else:
-        ax2.plot(ctrl_post[:, 0], ctrl_post[:, 1], ctrl_post[:, 2], color=_COLOR_CONTROLLED, linewidth=1.35, alpha=0.95, label="Evaluated controlled trajectory")
-        ax2.scatter(ctrl_post[0, 0], ctrl_post[0, 1], ctrl_post[0, 2], color=_COLOR_EVENT, s=28, label="Evaluation start", depthshade=True)
+        ax2.plot(ctrl_post[:, 0], ctrl_post[:, 1], ctrl_post[:, 2], color=_COLOR_CONTROLLED, linewidth=1.35, alpha=0.95, label="Held-out corrected-feedback trajectory")
+        ax2.scatter(ctrl_post[0, 0], ctrl_post[0, 1], ctrl_post[0, 2], color=_COLOR_EVENT, s=28, label="Held-out controller-test start", depthshade=True)
         ax2.scatter(ctrl_post[-1, 0], ctrl_post[-1, 1], ctrl_post[-1, 2], color=_COLOR_TARGET, s=28, label="End", depthshade=True)
     quality_pass = (metrics or {}).get("pyragas_quality_pass")
     status = "PASS" if quality_pass is True else "FAIL" if quality_pass is False else "not assessed"
     rhythm_type = str((metrics or {}).get("pyragas_rhythm_type", "undetermined"))
     ax2.set_title(
-        f"Post-transient {rhythm_type} trajectory: {status}",
+        f"Held-out controller-test {rhythm_type} trajectory: {status}",
         fontsize=11,
         fontweight="bold",
         pad=10,
@@ -1630,7 +1825,7 @@ def plot_pyragas_periodic_zoom(
     metrics=None,
 ):
     """
-    Zoomed post-control x-state plot for Pyragas periodic rhythm.
+    Zoomed held-out controller-test plot for Pyragas periodic rhythm.
 
     Saved as:
         pyragas_periodic_zoom.png
@@ -1687,8 +1882,8 @@ def plot_pyragas_periodic_zoom(
     fig, ax = plt.subplots(figsize=(16, 5.5))
     ax.plot(times[start:end], truth[start:end, 0], color=_COLOR_TRUE, linewidth=1.35, label="True x")
     ax.plot(times[start:end], uncontrolled[start:end, 0], color=_COLOR_UNCONTROLLED, linewidth=1.15, alpha=0.85, label="Uncontrolled ESN x")
-    ax.plot(times[start:end], controlled[start:end, 0], color=_COLOR_CONTROLLED, linestyle="--", linewidth=1.55, label="Pyragas controlled x")
-    ax.axvline(times[start], color=_COLOR_TARGET, linestyle="-.", linewidth=1.25, label="Evaluation start")
+    ax.plot(times[start:end], controlled[start:end, 0], color=_COLOR_CONTROLLED, linestyle="--", linewidth=1.55, label="Corrected feedback input x (Pyragas)")
+    ax.axvline(times[start], color=_COLOR_TARGET, linestyle="-.", linewidth=1.25, label="Held-out controller-test start")
     quality_pass = (metrics or {}).get("pyragas_quality_pass")
     status = "PASS" if quality_pass is True else "FAIL" if quality_pass is False else "not assessed"
     rhythm_type = str((metrics or {}).get("pyragas_rhythm_type", "undetermined"))
@@ -1698,12 +1893,12 @@ def plot_pyragas_periodic_zoom(
         else ""
     )
     ax.set_title(
-        f"Pyragas post-transient {rhythm_type} rhythm: {status}{period_text}",
+        f"Held-out controller-test Pyragas {rhythm_type} rhythm: {status}{period_text}",
         fontsize=15,
         fontweight="bold",
         pad=12,
     )
-    ax.set_xlabel("Time (s)")
+    ax.set_xlabel("Time")
     ax.set_ylabel("Hindmarsh-Rose x state")
     _style_axis(ax)
     _clean_legend(ax, fontsize=9, loc="upper right", ncol=2)
@@ -1743,15 +1938,6 @@ def plot_controlled_all_states(
         output_dir=output_dir,
         controller_name=controller_name,
     )
-    evaluation_start_idx = int(
-        max(
-            control_start_idx,
-            min(
-                int(_safe_float((metrics or {}).get("pyragas_evaluation_start_idx"), control_start_idx)),
-                n - 1,
-            ),
-        )
-    )
 
     labels_short = ["x", "y", "z"]
     names = [
@@ -1782,7 +1968,7 @@ def plot_controlled_all_states(
             color=_COLOR_CONTROLLED,
             linestyle="--",
             linewidth=1.45,
-            label=f"Controlled {labels_short[i]}",
+            label=f"Corrected feedback input {labels_short[i]}",
             zorder=5,
         )
         if not is_pyragas:
@@ -1791,7 +1977,10 @@ def plot_controlled_all_states(
                 color=_COLOR_TARGET,
                 linestyle=":",
                 linewidth=1.35,
-                label=f"Target {labels_short[i]}",
+                label=(
+                    "Empirical quiet-state reference "
+                    f"{labels_short[i]}"
+                ),
                 zorder=1,
             )
         ax.axvline(
@@ -1802,31 +1991,26 @@ def plot_controlled_all_states(
             label="Control start",
             zorder=1,
         )
-        if is_pyragas and evaluation_start_idx > control_start_idx:
-            ax.axvspan(
-                times[control_start_idx],
-                times[evaluation_start_idx],
-                color=_COLOR_EVENT,
-                alpha=0.05,
-                zorder=0,
-            )
-            ax.axvline(
-                times[evaluation_start_idx],
-                color=_COLOR_TARGET,
-                linestyle="-.",
-                linewidth=1.1,
-                label="Evaluation start",
-                zorder=1,
-            )
-        else:
-            ax.axvspan(times[control_start_idx], times[-1], color=_COLOR_EVENT, alpha=0.04, zorder=0)
+        _add_controller_segment_guides(
+            ax, times, control_start_idx, metrics=metrics
+        )
         ax.set_ylabel(labels_short[i])
         ax.set_title(names[i], fontsize=11, fontweight="bold", pad=7)
         _style_axis(ax)
         _clean_legend(ax, fontsize=8, loc="upper right", ncol=3)
 
-    axes[-1].set_xlabel("Time (s)")
-    fig.suptitle(f"{label}: all HR states", fontsize=16, fontweight="bold", y=0.995)
+    axes[-1].set_xlabel("Time")
+    states_title = (
+        f"{label}: all HR states"
+        if is_pyragas
+        else (
+            f"{label}: regulation toward an empirical quiet-state "
+            "reference"
+        )
+    )
+    fig.suptitle(
+        states_title, fontsize=16, fontweight="bold", y=0.995
+    )
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     _savefig_to_path(os.path.join(output_dir, "controlled_all_states.png"), fig=fig)
 
@@ -1854,7 +2038,14 @@ def plot_controlled_all_states(
         )
 
 
-def plot_control_signal(times, control_signal, control_start_idx, output_dir, controller_name=None):
+def plot_control_signal(
+    times,
+    control_signal,
+    control_start_idx,
+    output_dir,
+    controller_name=None,
+    metrics=None,
+):
     """Plot the control signal with the correct controller label."""
     times = _as_1d(times)
     control_signal = _as_2d(control_signal)
@@ -1866,15 +2057,17 @@ def plot_control_signal(times, control_signal, control_start_idx, output_dir, co
     control_signal = control_signal[:n]
     control_start_idx = int(max(0, min(control_start_idx, n - 1)))
     control_norm = np.linalg.norm(control_signal, axis=1)
-    label = _controller_label(controller_name, output_dir=output_dir)
+    label = _controller_label(
+        controller_name, metrics=metrics, output_dir=output_dir
+    )
 
     fig, ax = plt.subplots(figsize=(16, 5.4))
     ax.plot(times, control_norm, color=_COLOR_CONTROLLED, linewidth=1.55, label=r"$||u(t)||$", zorder=4)
     ax.plot(times, control_signal[:, 0], color=_COLOR_UNCONTROLLED, linestyle="--", linewidth=1.25, label=r"$u_x(t)$", zorder=3)
     ax.axvline(times[control_start_idx], color=_COLOR_EVENT, linestyle="--", linewidth=1.3, label="Control start", zorder=2)
-    ax.axvspan(times[control_start_idx], times[-1], color=_COLOR_EVENT, alpha=0.045, zorder=0)
+    _add_controller_segment_guides(ax, times, control_start_idx, metrics=metrics)
     ax.set_title(f"{label}: control signal", fontsize=15, fontweight="bold", pad=12)
-    ax.set_xlabel("Time (s)")
+    ax.set_xlabel("Time")
     ax.set_ylabel("Control magnitude")
     _style_axis(ax)
     _clean_legend(ax, fontsize=9, loc="upper right")
@@ -1890,6 +2083,7 @@ def plot_control_error(
     settling_tolerance,
     output_dir,
     controller_name=None,
+    metrics=None,
 ):
     """Plot target-tracking error with readable styling and correct controller label."""
     times = _as_1d(times)
@@ -1903,26 +2097,29 @@ def plot_control_error(
     uncontrolled_error_norm = uncontrolled_error_norm[:n]
     controlled_error_norm = controlled_error_norm[:n]
     control_start_idx = int(max(0, min(control_start_idx, n - 1)))
-    label = _controller_label(controller_name, output_dir=output_dir)
+    label = _controller_label(
+        controller_name, metrics=metrics, output_dir=output_dir
+    )
     is_pyragas = _is_pyragas_context(
+        metrics=metrics,
         output_dir=output_dir,
         controller_name=controller_name,
     )
 
     fig, ax = plt.subplots(figsize=(16, 5.4))
     ax.plot(times, uncontrolled_error_norm, color=_COLOR_UNCONTROLLED, linewidth=1.25, label="Uncontrolled error")
-    ax.plot(times, controlled_error_norm, color=_COLOR_CONTROLLED, linestyle="--", linewidth=1.55, label="Controlled error")
+    ax.plot(times, controlled_error_norm, color=_COLOR_CONTROLLED, linestyle="--", linewidth=1.55, label="Corrected feedback-input error")
     ax.axhline(settling_tolerance, color=_COLOR_TARGET, linestyle=":", linewidth=1.35, label="Settling tolerance")
     ax.axvline(times[control_start_idx], color=_COLOR_EVENT, linestyle="--", linewidth=1.3, label="Control start")
-    ax.axvspan(times[control_start_idx], times[-1], color=_COLOR_EVENT, alpha=0.045, zorder=0)
+    _add_controller_segment_guides(ax, times, control_start_idx, metrics=metrics)
     error_title = (
         "reference-state distance (diagnostic only)"
         if is_pyragas
-        else "target-tracking error"
+        else "empirical quiet-reference tracking error"
     )
     ax.set_title(f"{label}: {error_title}", fontsize=15, fontweight="bold", pad=12)
-    ax.set_xlabel("Time (s)")
-    ax.set_ylabel(r"$||state - target||$")
+    ax.set_xlabel("Time")
+    ax.set_ylabel(r"$||state - empirical\ quiet\ reference||$")
     _style_axis(ax)
     _clean_legend(ax, fontsize=9, loc="upper right")
     fig.tight_layout()
@@ -1930,7 +2127,7 @@ def plot_control_error(
 
 
 def plot_k_sweep_summary(rows, output_dir, controller_name=None):
-    """Plot K-sweep summary with the correct controller label."""
+    """Plot controller-validation metrics used to select the feedback gain."""
     if not rows:
         return
 
@@ -1938,98 +2135,199 @@ def plot_k_sweep_summary(rows, output_dir, controller_name=None):
     if not stable_rows:
         stable_rows = rows
 
-    label = _controller_label(controller_name, output_dir=output_dir, rows=stable_rows)
+    label = _controller_label(
+        controller_name,
+        output_dir=output_dir,
+        rows=stable_rows,
+    )
 
-    # Pyragas has a different scientific goal: periodic-orbit regularization,
-    # not rest-state tracking. Therefore its K sweep should visualize periodic
-    # quality, non-flat amplitude, and control effort instead of spike reduction.
-    if _is_pyragas_context(output_dir=output_dir, controller_name=controller_name, rows=stable_rows):
-        k = np.array([_safe_float(r.get("K", np.nan)) for r in stable_rows], dtype=float)
-        cv = np.array([_safe_float(r.get("pyragas_rhythm_interval_cv", np.nan)) for r in stable_rows], dtype=float)
-        amp = np.array([_safe_float(r.get("pyragas_x_amplitude_ratio", np.nan)) for r in stable_rows], dtype=float)
-        periodicity = np.array([_safe_float(r.get("pyragas_empirical_recurrence_error_norm", np.nan)) for r in stable_rows], dtype=float)
-        energy = np.array([_safe_float(r.get("control_energy", np.nan)) for r in stable_rows], dtype=float)
-        selection = np.array([_safe_float(r.get("selection_score", np.nan)) for r in stable_rows], dtype=float)
-        quality = np.array([bool(r.get("pyragas_quality_pass", False)) for r in stable_rows], dtype=bool)
+    # Pyragas selects periodic-orbit regularity rather than fixed-target error.
+    if _is_pyragas_context(
+        output_dir=output_dir,
+        controller_name=controller_name,
+        rows=stable_rows,
+    ):
+        k = np.array(
+            [_safe_float(r.get("K", np.nan)) for r in stable_rows],
+            dtype=float,
+        )
+        cv = np.array(
+            [
+                _safe_float(r.get("pyragas_rhythm_interval_cv", np.nan))
+                for r in stable_rows
+            ],
+            dtype=float,
+        )
+        amp = np.array(
+            [
+                _safe_float(r.get("pyragas_x_amplitude_ratio", np.nan))
+                for r in stable_rows
+            ],
+            dtype=float,
+        )
+        periodicity = np.array(
+            [
+                _safe_float(
+                    r.get("pyragas_empirical_recurrence_error_norm", np.nan)
+                )
+                for r in stable_rows
+            ],
+            dtype=float,
+        )
+        effort = np.array(
+            [_safe_float(_control_effort_value(r)) for r in stable_rows],
+            dtype=float,
+        )
+        selection = np.array(
+            [
+                _safe_float(
+                    r.get(
+                        "selection_metric_value",
+                        r.get("selection_score", np.nan),
+                    )
+                )
+                for r in stable_rows
+            ],
+            dtype=float,
+        )
+        quality = np.array(
+            [
+                bool(r.get("pyragas_quality_pass", False))
+                for r in stable_rows
+            ],
+            dtype=bool,
+        )
 
         valid = np.isfinite(k)
         if not np.any(valid):
             return
 
-        k, cv, amp, periodicity, energy, selection, quality = (
+        k, cv, amp, periodicity, effort, selection, quality = (
             k[valid],
             cv[valid],
             amp[valid],
             periodicity[valid],
-            energy[valid],
+            effort[valid],
             selection[valid],
             quality[valid],
         )
         order = np.argsort(k)
-        k, cv, amp, periodicity, energy, selection, quality = (
+        k, cv, amp, periodicity, effort, selection, quality = (
             k[order],
             cv[order],
             amp[order],
             periodicity[order],
-            energy[order],
+            effort[order],
             selection[order],
             quality[order],
         )
 
         fig, axes = plt.subplots(4, 1, figsize=(12.5, 13.0), sharex=True)
         series = [
-            (cv, "Empirical rhythm CV", "lower = more regular repeated cycles", "min"),
-            (amp, "x amplitude ratio", "closer to 1 = similar amplitude", "closest1"),
-            (periodicity, "Empirical cycle recurrence error", "lower = stronger full-state cycle repetition", "min"),
-            (energy, "Control energy", "lower = less control effort", "min"),
+            (
+                cv,
+                "Validation rhythm CV",
+                "lower = more regular validation cycles",
+                "min",
+            ),
+            (
+                amp,
+                "Validation x amplitude ratio",
+                "closer to 1 on validation segment",
+                "closest1",
+            ),
+            (
+                periodicity,
+                "Validation cycle recurrence error",
+                "lower = stronger validation recurrence",
+                "min",
+            ),
+            (
+                effort,
+                "Validation mean-squared control effort",
+                "lower = less validation control effort",
+                "min",
+            ),
         ]
 
         best_idx = None
-        selected_label = "Best available (no quality pass)"
+        selected_label = "Best validation candidate (no quality pass)"
         finite_selection = np.isfinite(selection)
         valid_selection = finite_selection & quality
         if np.any(valid_selection):
             candidates = np.flatnonzero(valid_selection)
             best_idx = int(candidates[np.argmin(selection[candidates])])
-            selected_label = "Selected quality-passing K"
+            selected_label = "Validation-selected quality-passing K"
         elif np.any(finite_selection):
             best_idx = int(np.nanargmin(selection))
 
         for ax, (vals, ylabel, legend_label, mode) in zip(axes, series):
-            ax.plot(k, vals, color=_COLOR_CONTROLLED, marker="o", markersize=4.5, linewidth=1.55, label=legend_label)
+            ax.plot(
+                k,
+                vals,
+                color=_COLOR_CONTROLLED,
+                marker="o",
+                markersize=4.5,
+                linewidth=1.55,
+                label=legend_label,
+            )
             finite_mask = np.isfinite(vals)
             if np.any(finite_mask):
-                if best_idx is not None and best_idx < len(k) and np.isfinite(vals[best_idx]):
+                if (
+                    best_idx is not None
+                    and best_idx < len(k)
+                    and np.isfinite(vals[best_idx])
+                ):
                     idx = best_idx
                     star_label = selected_label
                 elif mode == "closest1":
                     idx = int(np.nanargmin(np.abs(vals - 1.0)))
-                    star_label = "Best visible point"
+                    star_label = "Best visible validation point"
                 else:
                     idx = int(np.nanargmin(vals))
-                    star_label = "Best visible point"
-                ax.scatter([k[idx]], [vals[idx]], color=_COLOR_EVENT, s=70, marker="*", zorder=5, label=star_label)
-            if ylabel == "x amplitude ratio":
-                ax.axhline(1.0, color=_COLOR_TARGET, linestyle=":", linewidth=1.1, label="ratio = 1")
+                    star_label = "Best visible validation point"
+                ax.scatter(
+                    [k[idx]],
+                    [vals[idx]],
+                    color=_COLOR_EVENT,
+                    s=70,
+                    marker="*",
+                    zorder=5,
+                    label=star_label,
+                )
+            if mode == "closest1":
+                ax.axhline(
+                    1.0,
+                    color=_COLOR_TARGET,
+                    linestyle=":",
+                    linewidth=1.1,
+                    label="ratio = 1",
+                )
             ax.set_ylabel(ylabel)
             _style_axis(ax)
             _clean_legend(ax, fontsize=8, loc="best")
 
-        axes[-1].set_xlabel("Feedback gain K")
+        axes[-1].set_xlabel(
+            "Feedback gain K (selected on controller-validation segment)"
+        )
         quality_summary = (
-            f"{int(np.sum(quality))} quality-passing candidate(s)"
+            f"{int(np.sum(quality))} validation quality-passing candidate(s)"
             if np.any(quality)
-            else "NO QUALITY-PASSING CANDIDATE"
+            else "NO VALIDATION QUALITY-PASSING CANDIDATE"
         )
         fig.suptitle(
-            f"{label}: Pyragas periodic-orbit K sweep\n{quality_summary}",
+            f"{label}: controller-validation Pyragas K sweep\n"
+            f"{quality_summary}; controller-test segment not used",
             fontsize=16,
             fontweight="bold",
             y=0.995,
         )
         fig.tight_layout(rect=[0, 0, 1, 0.97])
 
-        pyragas_path = os.path.join(output_dir, "pyragas_periodic_k_sweep_summary.png")
+        pyragas_path = os.path.join(
+            output_dir,
+            "pyragas_periodic_k_sweep_summary.png",
+        )
         legacy_path = os.path.join(output_dir, "control_sweep_summary.png")
         os.makedirs(output_dir, exist_ok=True)
         fig.savefig(pyragas_path, dpi=_PLOT_DPI, bbox_inches="tight")
@@ -2039,46 +2337,118 @@ def plot_k_sweep_summary(rows, output_dir, controller_name=None):
         print(f"[Plot] Saved -> {legacy_path}")
         return
 
-    k = np.array([_safe_float(r.get("K", np.nan)) for r in stable_rows], dtype=float)
-    rmse_vals = np.array([_safe_float(r.get("target_rmse_state", np.nan)) for r in stable_rows], dtype=float)
-    spike = np.array([_safe_float(r.get("spike_reduction_percent", np.nan)) for r in stable_rows], dtype=float)
-    energy = np.array([_safe_float(r.get("control_energy", np.nan)) for r in stable_rows], dtype=float)
+    k = np.array(
+        [_safe_float(r.get("K", np.nan)) for r in stable_rows],
+        dtype=float,
+    )
+    rmse_vals = np.array(
+        [
+            _safe_float(
+                r.get(
+                    "corrected_feedback_input_target_rmse_state",
+                    r.get("target_rmse_state", np.nan),
+                )
+            )
+            for r in stable_rows
+        ],
+        dtype=float,
+    )
+    spike = np.array(
+        [
+            _safe_float(r.get("spike_reduction_percent", np.nan))
+            for r in stable_rows
+        ],
+        dtype=float,
+    )
+    effort = np.array(
+        [_safe_float(_control_effort_value(r)) for r in stable_rows],
+        dtype=float,
+    )
 
     valid = np.isfinite(k)
     if not np.any(valid):
         return
 
-    k, rmse_vals, spike, energy = k[valid], rmse_vals[valid], spike[valid], energy[valid]
+    k, rmse_vals, spike, effort = (
+        k[valid],
+        rmse_vals[valid],
+        spike[valid],
+        effort[valid],
+    )
     order = np.argsort(k)
-    k, rmse_vals, spike, energy = k[order], rmse_vals[order], spike[order], energy[order]
+    k, rmse_vals, spike, effort = (
+        k[order],
+        rmse_vals[order],
+        spike[order],
+        effort[order],
+    )
 
     fig, axes = plt.subplots(3, 1, figsize=(12, 10.5), sharex=True)
     series = [
-        (rmse_vals, "Target RMSE", "Target RMSE"),
-        (spike, "Spike reduction (%)", "Spike reduction"),
-        (energy, "Control energy", "Control energy"),
+        (
+            rmse_vals,
+            "Validation corrected-feedback target RMSE",
+            "Validation corrected-feedback target RMSE",
+            "min",
+        ),
+        (
+            spike,
+            "Validation spike reduction (%)",
+            "Validation spike reduction",
+            "max",
+        ),
+        (
+            effort,
+            "Validation mean-squared control effort",
+            "Validation mean-squared control effort",
+            "min",
+        ),
     ]
 
-    for ax, (vals, ylabel, legend_label) in zip(axes, series):
-        ax.plot(k, vals, color=_COLOR_CONTROLLED, marker="o", markersize=4.5, linewidth=1.55, label=legend_label)
+    for ax, (vals, ylabel, legend_label, mode) in zip(axes, series):
+        ax.plot(
+            k,
+            vals,
+            color=_COLOR_CONTROLLED,
+            marker="o",
+            markersize=4.5,
+            linewidth=1.55,
+            label=legend_label,
+        )
         finite_mask = np.isfinite(vals)
         if np.any(finite_mask):
-            if ylabel == "Control energy":
-                best_idx = int(np.nanargmin(vals))
-            elif ylabel == "Target RMSE":
-                best_idx = int(np.nanargmin(vals))
-            else:
+            if mode == "max":
                 best_idx = int(np.nanargmax(vals))
-            ax.scatter([k[best_idx]], [vals[best_idx]], color=_COLOR_EVENT, s=70, marker="*", zorder=5, label="Best visible point")
+            else:
+                best_idx = int(np.nanargmin(vals))
+            ax.scatter(
+                [k[best_idx]],
+                [vals[best_idx]],
+                color=_COLOR_EVENT,
+                s=70,
+                marker="*",
+                zorder=5,
+                label="Best visible validation point",
+            )
         ax.set_ylabel(ylabel)
         _style_axis(ax)
         _clean_legend(ax, fontsize=8, loc="best")
 
-    axes[-1].set_xlabel("Feedback gain K")
-    fig.suptitle(f"{label}: K sweep summary", fontsize=16, fontweight="bold", y=0.995)
+    axes[-1].set_xlabel(
+        "Feedback gain K (selected on controller-validation segment)"
+    )
+    fig.suptitle(
+        f"{label}: controller-validation K sweep "
+        "(controller-test segment not used)",
+        fontsize=16,
+        fontweight="bold",
+        y=0.995,
+    )
     fig.tight_layout(rect=[0, 0, 1, 0.97])
-    _savefig_to_path(os.path.join(output_dir, "control_sweep_summary.png"), fig=fig)
-
+    _savefig_to_path(
+        os.path.join(output_dir, "control_sweep_summary.png"),
+        fig=fig,
+    )
 
 def _default_table_format(value):
     if value == "" or value is None:
@@ -2103,16 +2473,30 @@ def plot_final_comparison_table(path, rows, formatter=None):
         return
     formatter = formatter or _default_table_format
 
+    effort_column = next(
+        (
+            name
+            for name in (
+                "Control_effort_mean_sq",
+                "control_effort_mean_sq",
+                "Control_energy_legacy_alias",
+            )
+            if any(name in row for row in rows)
+        ),
+        "Control_effort_mean_sq",
+    )
     columns = [
         "Regime",
         "Optimizer",
         "Pred_NRMSE_x",
         "Pred_NRMSE_all",
         "Best_K",
+        "Final_test_metric_name",
+        "Final_test_metric_value",
         "Control_target_RMSE_state",
         "Spike_reduction_percent",
-        "Control_energy",
-        "Settling_time",
+        effort_column,
+        "Controller_test_time_to_tolerance",
         "Control_stable",
     ]
     columns = [c for c in columns if c in rows[0]]

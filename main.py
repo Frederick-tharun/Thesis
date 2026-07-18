@@ -58,6 +58,16 @@ def parse_args():
     p.add_argument("--neuron", type=int, default=0)
 
     p.add_argument(
+        "--output-root",
+        type=str,
+        default=None,
+        help=(
+            "Override the configured output root. This is primarily used by "
+            "the reproducibility Slurm job so repository outputs are preserved."
+        ),
+    )
+
+    p.add_argument(
         "--optimizer",
         type=str,
         default="auto",
@@ -69,6 +79,14 @@ def parse_args():
         "--no-opt",
         action="store_true",
         help="Skip optimizer search and use default ESN parameters",
+    )
+    p.add_argument(
+        "--params-file",
+        type=str,
+        default=None,
+        help=(
+            "Reuse selected ESN parameters from a JSON file and skip optimization."
+        ),
     )
 
     p.add_argument(
@@ -156,22 +174,22 @@ def parse_args():
     p.add_argument(
         "--control-target-mode",
         type=str,
-        default=getattr(config, "CONTROL_TARGET_MODE", "rest_state"),
-        choices=["rest_state", "zero", "mean"],
-        help="How to choose the control target state",
+        default=getattr(config, "CONTROL_TARGET_MODE", "rest_state_from_quiet_training_data"),
+        choices=["rest_state_from_quiet_training_data", "rest_state", "zero", "mean"],
+        help="Target definition; 'rest_state' is a deprecated alias for the quiet-training-data target.",
     )
 
     p.add_argument(
         "--finite-s",
         type=float,
-        default=0.8,
+        default=getattr(config, "CONTROL_FINITE_S", 0.8),
         help="Exponent s for finite-time controller. Must be between 0 and 1.",
     )
 
     p.add_argument(
         "--pyragas-delay",
         type=int,
-        default=20,
+        default=getattr(config, "PYRAGAS_DELAY", 20),
         help="Delay steps for Pyragas time-delay feedback controller.",
     )
 
@@ -184,6 +202,26 @@ def parse_args():
             "Pyragas feedback sign. Use -1 for u = K * (y_pred - y_delayed), "
             "which works with next_input = y_pred - u_control to pull toward the delayed state. "
             "Use 1 to test the opposite sign."
+        ),
+    )
+
+    p.add_argument(
+        "--pyragas-history-signal",
+        type=str,
+        default=getattr(config, "PYRAGAS_HISTORY_SIGNAL", "raw_readout"),
+        choices=["raw_readout", "corrected_feedback_input"],
+        help=(
+            "Signal stored in the Pyragas delay history; raw_readout is the "
+            "paper-consistent default."
+        ),
+    )
+
+    p.add_argument(
+        "--control-validation-only",
+        action="store_true",
+        help=(
+            "Select controller parameters on controller validation and stop "
+            "without evaluating controller test. Used by outer Slurm sweeps."
         ),
     )
 
@@ -253,10 +291,15 @@ def _format_table_value(value):
 
 def _make_final_comparison_row(result):
     control = result.get("control_result") or {}
+    legacy_best = control.get("best", {})
+    if isinstance(legacy_best, dict):
+        control = {**legacy_best, **control}
     params = result.get("selected_params") or {}
 
+    raw_metrics = control.get("raw_readout_metrics", {})
+    corrected_metrics = control.get("corrected_feedback_input_metrics", {})
+
     controller_name = control.get("controller", "")
-    is_pyragas = controller_name == "pyragas"
     if controller_name == "linear_feedback":
         control_method = "Linear feedback"
     elif controller_name == "finite_time":
@@ -281,17 +324,55 @@ def _make_final_comparison_row(result):
         "Pred_RMSE_all": result.get("rmse_all", ""),
         "Pred_NRMSE_all": result.get("nrmse_all", ""),
         "Control_method": control_method,
-        "Best_K": control.get("best_K", ""),
-        "Control_target_RMSE_state": (
-            "" if is_pyragas else control.get("best_target_rmse_state", "")
+        "Best_K": control.get("best_k", control.get("best_K", "")),
+        "Final_test_metric_name": control.get("final_test_metric_name", ""),
+        "Final_test_metric_value": control.get("final_test_metric_value", ""),
+        "Selection_metric_name": control.get("selection_metric_name", ""),
+        "Selection_metric_value": control.get("selection_metric_value", ""),
+        "Raw_readout_target_RMSE_state": raw_metrics.get(
+            "target_rmse_state", control.get("raw_readout_target_rmse_state", "")
         ),
-        "Control_target_RMSE_x": (
-            "" if is_pyragas else control.get("best_target_rmse_x", "")
+        "Raw_readout_target_RMSE_x": raw_metrics.get(
+            "target_rmse_x", control.get("raw_readout_target_rmse_x", "")
+        ),
+        "Raw_readout_target_NRMSE_x": raw_metrics.get(
+            "target_nrmse_x", control.get("raw_readout_target_nrmse_x", "")
+        ),
+        "Control_target_RMSE_state": corrected_metrics.get(
+            "target_rmse_state",
+            control.get(
+                "corrected_feedback_input_target_rmse_state",
+                control.get("best_target_rmse_state", ""),
+            ),
+        ),
+        "Control_target_RMSE_x": corrected_metrics.get(
+            "target_rmse_x",
+            control.get(
+                "corrected_feedback_input_target_rmse_x",
+                control.get("best_target_rmse_x", ""),
+            ),
+        ),
+        "Corrected_feedback_target_NRMSE_x": corrected_metrics.get(
+            "target_nrmse_x",
+            control.get("corrected_feedback_input_target_nrmse_x", ""),
         ),
         "Spike_reduction_percent": control.get("best_spike_reduction_percent", ""),
-        "Control_energy": control.get("best_control_energy", ""),
-        "Settling_time": control.get("best_settling_time", ""),
-        "Control_stable": control.get("best_stable", ""),
+        "Control_effort_mean_sq": control.get("control_effort_mean_sq", ""),
+        "Control_energy_dt_sum": control.get("control_energy_dt_sum", ""),
+        "Control_energy_legacy_alias": control.get("best_control_energy", ""),
+        "Controller_test_time_to_tolerance": control.get(
+            "controller_test_time_to_tolerance", control.get("best_settling_time", "")
+        ),
+        "Settling_time_legacy_alias": control.get("best_settling_time", ""),
+        "Control_stable": control.get("stable", control.get("best_stable", "")),
+        "Divergence_detected": control.get("divergence_detected", ""),
+        "Divergence_reason": control.get("divergence_reason", ""),
+        "Target_mode": control.get("target_mode", ""),
+        "Controller_validation_start": control.get("controller_validation_start", ""),
+        "Controller_validation_end": control.get("controller_validation_end", ""),
+        "Controller_test_start": control.get("controller_test_start", ""),
+        "Controller_test_end": control.get("controller_test_end", ""),
+        "Pyragas_history_signal": control.get("pyragas_history_signal", ""),
         "Pyragas_quality_pass": control.get("best_pyragas_quality_pass", ""),
         "Pyragas_rhythm_CV": control.get("best_pyragas_rhythm_interval_cv", ""),
         "Pyragas_recurrence_error": control.get(
@@ -458,6 +539,49 @@ def default_params(input_size):
         "regularization": 1e-6,
         "washout": 200,
     }
+_REQUIRED_ESN_PARAMS = (
+    "N_res",
+    "p",
+    "spectral_radius",
+    "leaky_coefficient",
+    "input_scaling",
+    "regularization",
+)
+
+
+def load_selected_params(path):
+    source_path = os.path.abspath(os.path.expanduser(path))
+    with open(source_path, "r", encoding="utf-8") as handle:
+        params = json.load(handle)
+
+    if not isinstance(params, dict):
+        raise ValueError("Selected parameter file must contain a JSON object.")
+
+    missing = [key for key in _REQUIRED_ESN_PARAMS if key not in params]
+    if missing:
+        raise ValueError(
+            "Selected parameter file is missing: " + ", ".join(missing)
+        )
+
+    params = dict(params)
+    params["parameter_source_file"] = source_path
+    params["optimization_reused"] = True
+    return params
+
+
+def _selected_reservoir_seed(params):
+    seed = params.get("reservoir_seed")
+    if seed is None:
+        seeds = params.get("evaluation_seeds", params.get("bo_evaluation_seeds", []))
+        if isinstance(seeds, (list, tuple)) and seeds:
+            seed = seeds[0]
+    if seed is None:
+        seed = getattr(
+            config,
+            "BO_RESERVOIR_SEED",
+            getattr(config, "RANDOM_SEED", 42),
+        )
+    return int(seed)
 
 
 def make_model(params, input_size):
@@ -470,11 +594,17 @@ def make_model(params, input_size):
         input_scaling=float(params.get("input_scaling", 0.5)),
         input_size=int(input_size),
         normalize_input=False,
-        seed=config.RANDOM_SEED,
+        seed=_selected_reservoir_seed(params),
     )
 
 
-def run_all_optimizers(loader, neuron_id):
+def run_all_optimizers(
+    loader,
+    neuron_id,
+    *,
+    selection_series=None,
+    heldout_length=0,
+):
     optimizers = getattr(config, "OPTIMIZERS_TO_COMPARE", ["gp", "dummy", "forest", "gbrt"])
 
     all_history = []
@@ -485,7 +615,13 @@ def run_all_optimizers(loader, neuron_id):
     print("=" * 72)
 
     for opt in optimizers:
-        result = optimize_hyperparameters(loader, neuron_id, optimizer=opt)
+        result = optimize_hyperparameters(
+            loader,
+            neuron_id,
+            optimizer=opt,
+            selection_series=selection_series,
+            heldout_length=heldout_length,
+        )
 
         all_history.extend(result.history)
 
@@ -567,6 +703,23 @@ def run_all_optimizers(loader, neuron_id):
         "validation_mean_gap": float(best.get("validation_mean_gap", 0.0)),
     }
 
+    # Preserve optimizer/reservoir seed and aggregation provenance when auto
+    # chooses a method.
+    provenance_keys = {
+        "score_aggregation",
+        "test_data_used_for_selection",
+        "final_training_end",
+        "heldout_test_start",
+        "heldout_test_end",
+    }
+    for key, value in best.items():
+        if (
+            "seed" in str(key).lower()
+            or str(key).startswith("validation_")
+            or key in provenance_keys
+        ) and key not in best_params:
+            best_params[key] = value
+
     save_json(best_params, "best_params_auto.json")
 
     return best["optimizer"], best_params, summary, all_history
@@ -635,20 +788,19 @@ def run_control_if_requested(
     print("=" * 72)
 
     if run_control_experiment is None:
-        print("[Control] Skipped: control_experiment.py is missing or could not be imported.")
-        try:
-            print(f"[Control] Import error: {CONTROL_IMPORT_ERROR}")
-        except Exception:
-            pass
-        return None
+        message = "control_experiment.py is missing or could not be imported"
+        import_error = globals().get("CONTROL_IMPORT_ERROR")
+        raise RuntimeError(message) from import_error
 
     if config.DATASET_MODE != "hr":
-        print("[Control] Skipped: control experiment currently expects HR data.")
-        return None
+        raise ValueError("Control was requested, but control currently requires HR data")
 
     if input_size != 3:
-        print("[Control] Skipped: control experiment expects full-state HR input size = 3.")
-        return None
+        raise ValueError("Control was requested, but full-state HR input_size=3 is required")
+
+    target_mode = args.control_target_mode
+    if target_mode == "rest_state":
+        print("[Control] Deprecated target 'rest_state'; using quiet-training-data target.")
 
     try:
         control_result = run_control_experiment(
@@ -668,7 +820,7 @@ def run_control_if_requested(
             optimizer_name=best_name,
             control_k=args.control_k,
             control_start_frac=args.control_start_frac,
-            control_target_mode=args.control_target_mode,
+            control_target_mode=target_mode,
             auto_control_k=args.auto_control_k,
             k_min=args.k_min,
             k_max=args.k_max,
@@ -678,16 +830,24 @@ def run_control_if_requested(
             finite_s=args.finite_s,
             pyragas_delay=args.pyragas_delay,
             pyragas_sign=args.pyragas_sign,
+            pyragas_history_signal=args.pyragas_history_signal,
+            validation_only=args.control_validation_only,
         )
         return control_result
 
     except Exception as e:
         print(f"[Control] Failed: {e}")
-        return None
+        raise
 
 
 def run_single_experiment(args, hr_mode: str | None = None):
     config.DATASET_MODE = args.dataset.lower()
+    reused_params = None
+    if args.params_file:
+        if args.no_opt:
+            raise ValueError("--params-file and --no-opt cannot be used together.")
+        reused_params = load_selected_params(args.params_file)
+
 
     if config.DATASET_MODE == "hr":
         active_hr_mode = set_hr_mode(hr_mode or args.hr_mode)
@@ -736,7 +896,14 @@ def run_single_experiment(args, hr_mode: str | None = None):
     optimizer_summary = []
     optimizer_history = []
 
-    if args.no_opt:
+    if reused_params is not None:
+        best_name = (
+            args.optimizer if args.optimizer != "auto" else "reused_parameters"
+        )
+        best_params = reused_params
+        print(f"Reusing parameters: {best_params['parameter_source_file']}")
+
+    elif args.no_opt:
         best_name = "defaults"
         best_params = default_params(input_size)
 
@@ -766,6 +933,9 @@ def run_single_experiment(args, hr_mode: str | None = None):
             params=("input_scaling", "spectral_radius", "leaky_coefficient"),
             filename="bo_objective_landscape_best_optimizer.png",
         )
+
+    best_params = dict(best_params)
+    best_params.setdefault("reservoir_seed", _selected_reservoir_seed(best_params))
 
     save_json(best_params, "best_params.json")
 
@@ -895,8 +1065,18 @@ def run_single_experiment(args, hr_mode: str | None = None):
         print("Full-state prediction: x, y, z")
 
     if control_result is not None:
+        legacy_best = control_result.get("best", {})
+        if isinstance(legacy_best, dict):
+            control_result = {**legacy_best, **control_result}
         print(f"Controller                : {control_result.get('controller')}")
-        print(f"Control best K            : {control_result.get('best_K')}")
+        print(
+            "Control best K            : "
+            f"{control_result.get('best_k', control_result.get('best_K'))}"
+        )
+        print(
+            "Final test metric         : "
+            f"{control_result.get('final_test_metric_name')} = {control_result.get('final_test_metric_value')}"
+        )
         if control_result.get("controller") == "pyragas":
             print(
                 "Pyragas quality pass      : "
@@ -909,8 +1089,12 @@ def run_single_experiment(args, hr_mode: str | None = None):
         else:
             print(
                 "Control best target RMSE  : "
-                f"{control_result.get('best_target_rmse_state')}"
+                f"{control_result.get('corrected_feedback_input_target_rmse_state', control_result.get('best_target_rmse_state'))}"
             )
+        print(
+            "Raw-readout target RMSE   : "
+            f"{control_result.get('raw_readout_target_rmse_state')}"
+        )
         print(f"Control outputs saved in  : {control_result.get('output_dir')}")
 
     print(f"[Done] Files saved inside: {config.OUTPUT_DIR}")
@@ -931,7 +1115,13 @@ def run_single_experiment(args, hr_mode: str | None = None):
 
 
 def main():
+    global ROOT_OUTPUT_DIR
     args = parse_args()
+
+    if args.output_root:
+        ROOT_OUTPUT_DIR = os.path.abspath(os.path.expanduser(args.output_root))
+        config.OUTPUT_ROOT = ROOT_OUTPUT_DIR
+        config.OUTPUT_DIR = ROOT_OUTPUT_DIR
 
     if args.run_all_regimes:
         print("\n" + "#" * 80)
@@ -955,13 +1145,24 @@ def main():
                 f"folder={r['output_dir']}"
             )
 
-        save_final_comparison_table(results)
-
-        print("[Done] Global comparison files are inside the outputs folder.")
+        if args.control_validation_only:
+            print(
+                "[Control] Validation-only run: final comparison tables were not "
+                "written because no held-out controller test was evaluated."
+            )
+        else:
+            save_final_comparison_table(results)
+            print("[Done] Global comparison files are inside the outputs folder.")
 
     else:
         result = run_single_experiment(args)
-        save_final_comparison_table([result])
+        if args.control_validation_only:
+            print(
+                "[Control] Validation-only run: final comparison tables were not "
+                "written because no held-out controller test was evaluated."
+            )
+        else:
+            save_final_comparison_table([result])
 
 
 if __name__ == "__main__":

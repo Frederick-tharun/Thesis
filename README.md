@@ -1,114 +1,129 @@
-# Hindmarsh-Rose ESN Prediction and Control
+# Chapter 1: ESN digital twin and control of Hindmarsh–Rose dynamics
 
-This project trains a full-state echo state network (ESN) for the
-Hindmarsh-Rose system:
+This repository contains the final Chapter 1 pipeline for the
+periodic_spiking, periodic_bursting and chaotic_bursting synthetic
+Hindmarsh–Rose regimes.
 
-```text
-[x, y, z] -> [x_next, y_next, z_next]
-```
+The code compares GP, random (dummy), random-forest and GBRT optimization
+backends, selects one ESN per regime using validation data only, locks and
+saves that model, and evaluates it once on the untouched held-out trajectory.
+Linear feedback, finite-time feedback and Pyragas delayed feedback all reuse
+the same saved validation-selected chaotic-bursting ESN.
 
-The primary thesis workflow uses the chaotic-bursting regime and evaluates
-three controllers on the ESN digital twin. See [FINAL_RESULTS.md](FINAL_RESULTS.md)
-for the validated parameters, evidence hashes, and claim boundaries.
+## Definitive run
 
-## Environment
+The source tree must be committed and clean. Submit exactly one job:
 
-```bash
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-```
+~~~bash
+sbatch run_final_thesis_pipeline.slurm
+~~~
 
-The final HPC validation used Python 3.12, scikit-optimize 0.10.2, and
-scikit-learn 1.9.0.
+The Slurm preflight refuses tracked, staged, or relevant untracked source
+changes. It invokes final_pipeline.py once; it does not rerun main.py for each
+controller. Completed evidence is written outside the repository:
 
-## Tests
+~~~text
+~/Thesis_evidence_20260624/FINAL_THESIS_RUN_<JOBID>/
+~~~
 
-```bash
-.venv/bin/python -m unittest discover -s tests -v
-```
+A run is definitive only if
+00_manifest/final_package_validation.json contains valid=true. Submitting a
+job alone does not make its results final.
 
-## Prediction Baseline
+## Prediction selection protocol
 
-Run the chaotic-bursting ESN with the configured default parameters:
+The final prediction split is 70% training and 30% untouched held-out test.
+Model selection receives the 70% training array only. By default its final
+24,000 samples form three identical, non-overlapping 8,000-step recursive
+validation windows for every optimizer and candidate. The preceding training
+samples fit each candidate.
 
-```bash
-.venv/bin/python main.py \
-  --dataset hr \
-  --hr-mode chaotic_bursting \
-  --no-opt
-```
+Every window records recursive x NRMSE, multistate NRMSE, spike count, spike
+frequency, relative frequency error, mean inter-spike interval,
+inter-spike-interval error and divergence status. The configurable score
+combines state error, spike-frequency/timing error and stability penalties.
+Window scores use the configured mean-plus-maximum aggregation.
 
-Run one optimizer explicitly:
+selected_model.json is written before the held-out array is normalized or
+predicted. The selected model is never replaced using held-out performance.
+For periodic spiking, the locked model must pass both predefined gates:
+held-out x NRMSE at most 0.20 and relative spike-frequency error at most 0.10.
+A failure stops the pipeline as a scientific failure.
 
-```bash
-.venv/bin/python main.py \
-  --dataset hr \
-  --hr-mode chaotic_bursting \
-  --optimizer dummy
-```
+## Model reuse and controllers
 
-## Validated Chaotic Controllers
+One final trained ESN bundle per regime stores the reservoir seed, input
+weights, recurrent weights, readout weights, scaling statistics, configuration
+hash and deterministic model-identity hash. All controller candidates and all
+three final controllers load and reuse one chaotic-bursting bundle. Controller
+code cannot invoke optimization.
 
-These commands reproduce the fixed controller candidates validated at source
-commit `ae50ce2a434114902c72d0f76895fba9d73da0c1`.
+Controller parameters are selected only on controller_validation. Divergent
+candidates are recorded as stable=false and rejected=true, with their reason
+and evaluated steps; they do not access controller_test. The selected
+controller is evaluated once on controller_test, and divergence there is fatal.
 
-Linear feedback:
+The finite-time law is global and piecewise: linear feedback when the
+normalized error norm is at least one and fractional-power feedback inside the
+unit error sphere. Pyragas uses only sign -1, the convention
+next_input = raw_readout - control_signal, and raw_readout as its delayed
+observable.
 
-```bash
-.venv/bin/python main.py \
-  --dataset hr \
-  --hr-mode chaotic_bursting \
-  --optimizer dummy \
-  --control \
-  --controller linear_feedback \
-  --control-k 1.0
-```
+The Chapter 1 objective is regulation toward an empirical quiet-state
+reference. It is the median of quiet training samples. It is data-derived, and
+its Hindmarsh–Rose right-hand-side residual norm is reported as a diagnostic.
+The final pipeline does not run a separate equilibrium-target experiment.
 
-Finite-time feedback:
+## Curated output
 
-```bash
-.venv/bin/python main.py \
-  --dataset hr \
-  --hr-mode chaotic_bursting \
-  --optimizer dummy \
-  --control \
-  --controller finite_time \
-  --control-k 0.4582142857142857 \
-  --finite-s 0.8
-```
+~~~text
+FINAL_THESIS_RUN_<JOBID>/
+├── 00_manifest/
+├── 01_prediction_all_regimes/
+├── 02_bo_optimization/
+├── 03_linear_feedback/
+├── 04_finite_time/
+├── 05_pyragas/
+├── 06_comparison_tables/
+├── 07_report_figures/
+└── 08_logs/
+~~~
 
-Pyragas delayed feedback:
+Canonical uncontrolled prediction figures occur only under
+01_prediction_all_regimes/<regime>/. Candidate folders contain compact
+JSON/CSV evidence; only final controllers receive full controller plots.
+07_report_figures uses relative symlinks to canonical figures, avoiding
+physical duplicate PNGs. Internal package references are relative. The
+validator checks structure, JSON, CSV, readable PNG files, absolute paths,
+duplicate hashes, controller summaries, shared model identity, commit
+identity, clean-start evidence and final quality gates.
 
-```bash
-.venv/bin/python main.py \
-  --dataset hr \
-  --hr-mode chaotic_bursting \
-  --optimizer dummy \
-  --control \
-  --controller pyragas \
-  --control-k 0.8 \
-  --pyragas-delay 2400 \
-  --pyragas-sign -1
-```
+The diagnostic run FINAL_THESIS_RUN_1751888 is preserved unchanged. It is
+near-final evidence but is not the definitive package.
 
-The corresponding HPC jobs are:
+## Verification
 
-```bash
-sbatch run_final_linear_finite_validation.slurm
-sbatch run_pyragas_final_validation.slurm
-```
+Use the thesis Conda environment:
 
-## Exploratory Gain Search
+~~~bash
+python -m py_compile \
+  config.py data_loader.py main.py model.py optimize_model.py \
+  control_experiment.py neuron_controllers.py plotting.py \
+  experiment_report.py final_pipeline.py final_package.py \
+  finalization_smoke.py
 
-Automatic K selection already exists. Omit `--control-k` and pass
-`--auto-control-k` to run the configured coarse and refined gain search. This
-is exploratory and is not required to reproduce the locked final candidates.
+python -m unittest discover -s tests -p "test_*.py"
+bash -n run_final_thesis_pipeline.slurm
+python finalization_smoke.py --output-dir /tmp/chapter1_finalization_smoke
+~~~
 
-## Outputs
+## Documented limitations
 
-Generated files are written below `outputs/`. Final validation scripts copy
-selected evidence to `selected_controller_results/` or
-`selected_pyragas_results/`. These generated directories are ignored by Git;
-archive them separately with checksums.
-
-Existing outputs are preserved unless `--clean-output` is explicitly supplied.
+The deterministic Chapter 1 case study uses reservoir seed 42. This supports
+reproducibility but not broad claims across random initializations. The ridge
+solve can emit a numerical conditioning warning for some candidates;
+regularization, finite-result checks and a pseudoinverse fallback are present,
+but the warning remains a numerical limitation. The empirical quiet-state
+reference has a nonzero HR right-hand-side residual because it is data-derived.
+These limitations are documented rather than used to reopen the frozen
+Chapter 1 methodology.

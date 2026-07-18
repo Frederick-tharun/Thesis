@@ -8,7 +8,8 @@ parameter to support both sign conventions commonly used in the literature.
 Changes from the original implementation:
   • Added ``pyragas_sign`` parameter to ``pyragas_control``.  This parameter can
     be set to ``1`` to apply ``u = K * (delayed_state – y_pred)`` or ``-1`` to
-    apply ``u = K * (y_pred – delayed_state)``.  The default is ``1``.
+    apply ``u = K * (y_pred – delayed_state)``.  The default is ``-1``, so the
+    model's subtractive injection moves the feedback input toward the delayed state.
   • Updated ``compute_control_signal`` to pass through ``pyragas_sign`` when
     invoking the Pyragas controller.
   • Added validation for ``pyragas_sign`` and improved docstrings.
@@ -117,7 +118,7 @@ def pyragas_control(
     K: float,
     history: list | np.ndarray | None = None,
     pyragas_delay: int = 20,
-    pyragas_sign: int = 1,
+    pyragas_sign: int = -1,
     **kwargs,
 ) -> np.ndarray:
     """
@@ -138,17 +139,18 @@ def pyragas_control(
     K : float
         Feedback gain; controls the strength of the delayed feedback.
     history : list or ndarray, optional
-        Sequence of previous controlled states.  The length of ``history``
-        determines whether a delayed state can be extracted.  If ``history``
-        is ``None`` or shorter than ``pyragas_delay``, the control signal is
-        zero.
+        Sequence of previous states selected by the rollout caller. The model
+        can supply raw ESN readouts (the paper-aligned default) or corrected
+        feedback inputs (legacy behaviour). The length of ``history``
+        determines whether a delayed state can be extracted. If ``history`` is
+        ``None`` or shorter than ``pyragas_delay``, the control signal is zero.
     pyragas_delay : int, optional
         Number of timesteps to look back for the delayed feedback.  Must be
         a positive integer.
     pyragas_sign : int, optional
         Sign convention for the feedback.  Use ``+1`` for
         ``u = K * (y_delayed − y_pred)`` and ``−1`` for
-        ``u = K * (y_pred − y_delayed)``.  Defaults to ``+1``.
+        ``u = K * (y_pred − y_delayed)``.  Defaults to ``−1``.
 
     Returns
     -------
@@ -164,10 +166,12 @@ def pyragas_control(
     Notes
     -----
     Pyragas control is often used to stabilise unstable periodic or chaotic
-    trajectories without specifying an explicit target.  The sign convention
-    controls whether the feedback pushes the state toward the delayed state
-    (``pyragas_sign`` = +1) or away from it (``pyragas_sign`` = −1).  If the
-    history is shorter than the delay, no feedback is applied.
+    trajectories without specifying an explicit target. The sign convention
+    must be interpreted together with the rollout update
+    ``next_input = y_pred - u``. Under that subtractive injection,
+    ``pyragas_sign = -1`` moves the next input toward the delayed state
+    (for ``0 < K <= 1``), whereas ``pyragas_sign = +1`` applies the
+    opposite direction. If history is shorter than the delay, control is zero.
     """
     # Convert to 1‑D array.
     y_pred = _as_1d(y_pred)
@@ -227,7 +231,7 @@ def compute_control_signal(
     history=None,
     finite_s=0.8,
     pyragas_delay=20,
-    pyragas_sign=1,
+    pyragas_sign=-1,
     eps=1e-8,
 ) -> np.ndarray:
     """

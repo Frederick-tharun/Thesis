@@ -1,6 +1,7 @@
 .conda_env/
 .venv/
 __pycache__/
+.pytest_cache/
 *.py[cod]
 logs/
 logs_old/
@@ -9,6 +10,7 @@ controller_debug_backup/
 *.zip
 *.zip.sha256
 *.patch
+FINAL_THESIS_RUN_*
 .DS_Store
 /outputs/
 /report_results/
