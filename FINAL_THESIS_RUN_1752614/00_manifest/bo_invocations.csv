@@ -1,0 +1,4 @@
+regime,overall_bo_stage_invocations,optimizers_compared,heldout_array_passed_to_selection,training_selection_samples,heldout_samples
+periodic_spiking,1,"[""gp"", ""dummy"", ""forest"", ""gbrt""]",False,105000,45000
+periodic_bursting,1,"[""gp"", ""dummy"", ""forest"", ""gbrt""]",False,105000,45000
+chaotic_bursting,1,"[""gp"", ""dummy"", ""forest"", ""gbrt""]",False,105000,45000

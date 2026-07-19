@@ -1,0 +1,39 @@
+{
+  "divergence_detected": false,
+  "heldout_steps": 45000,
+  "heldout_test_end": 150000,
+  "heldout_test_start": 105000,
+  "inter_spike_interval_rel_error": 0.0,
+  "inter_spike_interval_units": "time_unit",
+  "mean_inter_spike_interval_pred": 41.37111111111111,
+  "mean_inter_spike_interval_true": 41.37111111111111,
+  "metric_segment": "untouched_heldout_test",
+  "model_identity_hash": "13f66dd0b76ad3a8cb637f3f1e21529e4f2b09e0d3681091e863833afa21e70d",
+  "nrmse_recursive_all_states": 4.4453436022473806e-05,
+  "nrmse_recursive_x": 7.261918656668348e-05,
+  "quality_gate": {
+    "checks": {
+      "nondivergent": true,
+      "spike_frequency_rel_error": true,
+      "test_nrmse_x": true
+    },
+    "limits": {
+      "max_spike_frequency_rel_error": 0.1,
+      "max_test_nrmse_x": 0.2
+    },
+    "passed": true,
+    "required": true
+  },
+  "rmse_recursive_all_states": 5.286501865043553e-05,
+  "rmse_recursive_x": 3.7698327604061985e-05,
+  "selected_optimizer": "forest",
+  "selection_locked_before_evaluation": true,
+  "source_regime": "periodic_spiking",
+  "spike_count_pred": 10,
+  "spike_count_true": 10,
+  "spike_frequency_pred": 0.022222222222222223,
+  "spike_frequency_rel_error": 0.0,
+  "spike_frequency_true": 0.022222222222222223,
+  "spike_frequency_units": "inverse_time_unit",
+  "test_data_used_for_selection": false
+}

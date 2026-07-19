@@ -11,6 +11,8 @@ controller_debug_backup/
 *.zip.sha256
 *.patch
 FINAL_THESIS_RUN_*
+!FINAL_THESIS_RUN_1752614/
+!FINAL_THESIS_RUN_1752614/**
 .DS_Store
 /outputs/
 /report_results/

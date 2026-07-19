@@ -1,0 +1,91 @@
+{
+  "controller_metrics": [
+    {
+      "control_model_source": "validation_selected",
+      "controller": "linear_feedback",
+      "controller_test_end": 45000,
+      "controller_test_start": 27000,
+      "controller_validation_end": 27000,
+      "controller_validation_start": 9000,
+      "final_test_metric_name": "corrected_feedback_input_target_rmse_state",
+      "final_test_metric_value": 2.360513934557384e-06,
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "regulation_objective": "regulation toward an empirical quiet-state reference",
+      "stable": true
+    },
+    {
+      "control_model_source": "validation_selected",
+      "controller": "finite_time",
+      "controller_test_end": 45000,
+      "controller_test_start": 27000,
+      "controller_validation_end": 27000,
+      "controller_validation_start": 9000,
+      "final_test_metric_name": "corrected_feedback_input_target_rmse_state",
+      "final_test_metric_value": 0.0002502693870573333,
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "regulation_objective": "regulation toward an empirical quiet-state reference",
+      "stable": true
+    },
+    {
+      "control_model_source": "validation_selected",
+      "controller": "pyragas",
+      "controller_test_end": 45000,
+      "controller_test_start": 27000,
+      "controller_validation_end": 27000,
+      "controller_validation_start": 9000,
+      "final_test_metric_name": "pyragas_empirical_recurrence_error_norm",
+      "final_test_metric_value": 0.013430689505203718,
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "regulation_objective": "regulation toward an empirical quiet-state reference",
+      "stable": true
+    }
+  ],
+  "prediction_metrics": [
+    {
+      "heldout_nrmse_all_states": 4.4453436022473806e-05,
+      "heldout_nrmse_x": 7.261918656668348e-05,
+      "heldout_spike_frequency_rel_error": 0.0,
+      "heldout_test_end": 150000,
+      "heldout_test_start": 105000,
+      "model_identity_hash": "13f66dd0b76ad3a8cb637f3f1e21529e4f2b09e0d3681091e863833afa21e70d",
+      "quality_gate_passed": true,
+      "regime": "periodic_spiking",
+      "selected_optimizer": "forest",
+      "training_end": 105000,
+      "training_start": 0,
+      "validation_score": 2.985965712936149e-05
+    },
+    {
+      "heldout_nrmse_all_states": 0.027536363124814035,
+      "heldout_nrmse_x": 0.0403663628435495,
+      "heldout_spike_frequency_rel_error": 0.0,
+      "heldout_test_end": 150000,
+      "heldout_test_start": 105000,
+      "model_identity_hash": "a168645086d152f71d0b1d07c2dc745dc3f6e068a7f3ef7ea42e542c2e648650",
+      "quality_gate_passed": true,
+      "regime": "periodic_bursting",
+      "selected_optimizer": "forest",
+      "training_end": 105000,
+      "training_start": 0,
+      "validation_score": 0.0001625389549609331
+    },
+    {
+      "heldout_nrmse_all_states": 0.0015276248844465783,
+      "heldout_nrmse_x": 0.002275220876640819,
+      "heldout_spike_frequency_rel_error": 0.0,
+      "heldout_test_end": 150000,
+      "heldout_test_start": 105000,
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "quality_gate_passed": true,
+      "regime": "chaotic_bursting",
+      "selected_optimizer": "gbrt",
+      "training_end": 105000,
+      "training_start": 0,
+      "validation_score": 0.0006411884706532306
+    }
+  ],
+  "target_statement": "regulation toward an empirical quiet-state reference"
+}

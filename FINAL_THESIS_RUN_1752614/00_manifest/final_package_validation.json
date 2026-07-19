@@ -1,0 +1,798 @@
+{
+  "absolute_path_findings": [],
+  "clean_repository_at_run_start": true,
+  "controller_summaries": [
+    {
+      "control_model_source": "validation_selected",
+      "controller": "linear_feedback",
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "section": "03_linear_feedback",
+      "stable": true
+    },
+    {
+      "control_model_source": "validation_selected",
+      "controller": "finite_time",
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "section": "04_finite_time",
+      "stable": true
+    },
+    {
+      "control_model_source": "validation_selected",
+      "controller": "pyragas",
+      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "reference_type": "empirical_quiet_state_reference",
+      "section": "05_pyragas",
+      "stable": true
+    }
+  ],
+  "csv_errors": [],
+  "csv_valid": true,
+  "duplicate_hash_groups": [
+    {
+      "extension": ".csv",
+      "files": [
+        "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+        "02_bo_optimization/periodic_bursting/optimizer_results.csv"
+      ],
+      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+    },
+    {
+      "extension": ".csv",
+      "files": [
+        "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+        "02_bo_optimization/chaotic_bursting/optimizer_results.csv"
+      ],
+      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+    },
+    {
+      "extension": ".csv",
+      "files": [
+        "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+        "02_bo_optimization/periodic_spiking/optimizer_results.csv"
+      ],
+      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+        "01_prediction_all_regimes/chaotic_bursting/metrics.json"
+      ],
+      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+        "01_prediction_all_regimes/periodic_bursting/metrics.json"
+      ],
+      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+        "01_prediction_all_regimes/periodic_spiking/metrics.json"
+      ],
+      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "02_bo_optimization/chaotic_bursting/validation_windows.json",
+        "02_bo_optimization/periodic_bursting/validation_windows.json",
+        "02_bo_optimization/periodic_spiking/validation_windows.json"
+      ],
+      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+    },
+    {
+      "extension": ".png",
+      "files": [
+        "05_pyragas/control_sweep_summary.png",
+        "05_pyragas/pyragas_periodic_k_sweep_summary.png"
+      ],
+      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+    }
+  ],
+  "duplicate_prediction_violations": [],
+  "errors": [],
+  "expected_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "expected_controller_summaries_present": true,
+  "file_hashes": [
+    {
+      "extension": ".csv",
+      "file": "00_manifest/bo_invocations.csv",
+      "sha256": "184e1900c5e8be7c5a6a925706c45bef3a197809bcb2f8cf92b6880ea8a1d95a"
+    },
+    {
+      "extension": ".json",
+      "file": "00_manifest/run_manifest.json",
+      "sha256": "802c1978f38cfa64653d367c1b8975a953f91a669915b8e16512b248a275eba5"
+    },
+    {
+      "extension": ".json",
+      "file": "00_manifest/source_hashes.json",
+      "sha256": "482b97736241bb37b080efb67604fcb49beaa038e122576f68bdcd138a513204"
+    },
+    {
+      "extension": ".csv",
+      "file": "00_manifest/stage_timings.csv",
+      "sha256": "a6d2d64e705cafb2b86d8d4ef646d6860c16885aceaec71a89a11f5214d9cd66"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/chaotic_bursting/metrics.json",
+      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/chaotic_bursting/results_all_states.png",
+      "sha256": "21d4f8969d65b02524d83002e7d48541e7e4b04b54f7e66353a13539cf816efd"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png",
+      "sha256": "0b71677c4cc39f74f2425073e101d36067c38d11d04306356086d46d96cef0b4"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png",
+      "sha256": "cda8e19f1b2bec00bc254a080f768cf6133c8805dba0db14e53847e6daa703c7"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/chaotic_bursting/selected_model.json",
+      "sha256": "d2eb222f13b65f1fc250d53bc288e0b5675ddfc6869a1771b29554e13cabba20"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png",
+      "sha256": "9ffd660bb7d0338f8c2a23932907e0fb2bd84d9ead6be85345ef458fa0863e13"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_bursting/metrics.json",
+      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_bursting/results_all_states.png",
+      "sha256": "b90e3a0e895695a9e696a480785a7eafc597083cf95266f09fc1ed221248dadf"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_bursting/results_full_zoom.png",
+      "sha256": "e68047ce1ce4203cb2688e2b0fcfc136267bc2050eb84c5d73636698b69ec102"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png",
+      "sha256": "ef0a73834e59fa0605013ff0d97dd3fb5b5c5f4ce2b8ea644f12a239952f49a3"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_bursting/selected_model.json",
+      "sha256": "b67ab6029121e2e479e169d5dcbd84f04be95176ec65fd59d29226ef5cb5ecef"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png",
+      "sha256": "440489f1260733f4adf9ca0fafcda068539c78b05398cc650cb117ab868268cd"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_spiking/metrics.json",
+      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_spiking/results_all_states.png",
+      "sha256": "d81f58019972b292f11a817f78357e5e43737c0b23eb6af6b1cd99a1ecf47cad"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_spiking/results_full_zoom.png",
+      "sha256": "219e72fe120eef1d417d85e3ef76e387452efcd394c0a5397c2ba30336d7afea"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png",
+      "sha256": "a4d886d08ad3ff929727ee7ad685d03c0582302985cc1f7eab48e36dd9e89b99"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_spiking/selected_model.json",
+      "sha256": "c35b160db397a8c457b1e9ff6777349277b17ecfc1a15376db783ab717ccbec5"
+    },
+    {
+      "extension": ".png",
+      "file": "01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png",
+      "sha256": "d25ceda3b8996c78fb13b6388362a31e4c053c1c418ae8b769398dc4a29d6cc2"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params.json",
+      "sha256": "495bae24fd55970a29ce23198e5af23133a44473459718ae1d7c082786ad6cf1"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params_auto.json",
+      "sha256": "a6023fa42cb9b15a0cbd74d2ab18a2df3b6bdd74c853874b479aa3034e3e3222"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params_dummy.json",
+      "sha256": "c13bd5e7c7e9c8371e954f327d3d6126cb1f38228aa4771220a759063e1877f4"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params_forest.json",
+      "sha256": "34419843933a2e2d70d4f393d9a7dc1fc1abb6e51657e2eee8ba8de17c4c4cf2"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params_gbrt.json",
+      "sha256": "38b775b192ada280b0a2339beac8fe4ea446d1b23d1d3b4b503899d6fdaad94c"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/best_params_gp.json",
+      "sha256": "dea1be2e7fdeaa50fdb9ebd4f57e39daaaf2596d21d4883affd9029c2cabce28"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png",
+      "sha256": "7fa41344f68bdf31da43fcc86608be4ff728ea9923a1d2b6e94ae291129bfa67"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_convergence.png",
+      "sha256": "35c243f6ed115b73f0dab16d287ad2a9a1c1107e2426a5c15d7ed2ea54b65c39"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv",
+      "sha256": "764b69b5c224a8e5f30952776505cc9a363d0953accb3ede97eac4bda34f706d"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_results.csv",
+      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_summary.json",
+      "sha256": "81cb685500696b24ba7819c298e3bc21f468fb93d27f851c6b7a8fb1eb37894e"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/chaotic_bursting/optimizer_validation_summary.csv",
+      "sha256": "63acb0154bd51499d0371f4d296c50cff2b354031cd859bb9505bde013e47894"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/chaotic_bursting/validation_windows.json",
+      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params.json",
+      "sha256": "8b227e83b0560ec8380ba7fc52e36c441eb2c5a4d7391fa4b87bed1b8d8bae4e"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params_auto.json",
+      "sha256": "6bd1e32c3c1bc788c028db0505abc3f7beaef0dc8428a91af66027d7c768fcf5"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params_dummy.json",
+      "sha256": "39b6f50706f8393463b60b346d879106e1f92572b66449f04e8aebb913d188db"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params_forest.json",
+      "sha256": "64d92f0357fea1a3fc5e14c10e28bf7d434eb01577766ff116887fb1ca659c24"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params_gbrt.json",
+      "sha256": "ab1985739cac9818354b05ea19cdc532d9174267106ec26d582591d7f239ea8c"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/best_params_gp.json",
+      "sha256": "530a3348f3f76564848bfb5af2e1896e1b2f1bc4a8d539763cb5d168d18685d8"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png",
+      "sha256": "40a0dc73e941e8812b573cb639fe6254a2dc5120eedbda1ae4a56f0da4536c13"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_convergence.png",
+      "sha256": "18b7dc3411a0fe70c68e82166fa47048e11ac2d9255e21db6708950f628c1a14"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv",
+      "sha256": "7502a7b343e246253305edc45bfa4ab8e4528da36e4e0f408a2e05d167d8834f"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_results.csv",
+      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_summary.json",
+      "sha256": "88c5165fcaf89405595bb394c57503dae021c151c288012fe7ecf2d88ae25bf1"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_bursting/optimizer_validation_summary.csv",
+      "sha256": "e0f8ad81bc310a00c15b8dec5d8f1e1b7915d311afc643c97babc79058d74d34"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_bursting/validation_windows.json",
+      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params.json",
+      "sha256": "be51c7f7ad0d0e9a207687c120cf772048739a10638acba35e77a074f56c147d"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params_auto.json",
+      "sha256": "9405c7e86a107b2fa0cb392c082c658a2457653de81293c3ca041aa7fd0c1a8f"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params_dummy.json",
+      "sha256": "f4b7e414b281873ccd3b5a58b763fa771810ec1af4c7130d21fbf7d3e60bd0b9"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params_forest.json",
+      "sha256": "d73fab60a6e2679c4d36fe18a58fb76cb9f1c491764e853c0ac881773ee73dbf"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params_gbrt.json",
+      "sha256": "ae1c08a434b4f865455c4b682f22314442ca03f132a587682b492483fd9abfaa"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/best_params_gp.json",
+      "sha256": "73d6559bcf29aa1f997d6a92346956c376fae874e223aa7ae938c89069824c9a"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png",
+      "sha256": "75f84b913c70d054afa148ca01620a8402574783548995d8e4c1f9c77ad086e6"
+    },
+    {
+      "extension": ".png",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_convergence.png",
+      "sha256": "9ced75f129c4b143dd513296a179d87c7e578e3aa2464d55e7a5f3bb1d3188cf"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv",
+      "sha256": "174208dfdc64352ce3189edcaf3274510a3e0b45cab5b30a0278dccc0276beea"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_results.csv",
+      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_summary.json",
+      "sha256": "0e43b59a1ebaf2ce70906233a8d6b247f545089041f5b07a32b2ae76b6848e7d"
+    },
+    {
+      "extension": ".csv",
+      "file": "02_bo_optimization/periodic_spiking/optimizer_validation_summary.csv",
+      "sha256": "c858065e645d15ce6eb1c3f6807b814909fcd51f905afa88eaa2b957baf1a4bd"
+    },
+    {
+      "extension": ".json",
+      "file": "02_bo_optimization/periodic_spiking/validation_windows.json",
+      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+    },
+    {
+      "extension": ".json",
+      "file": "03_linear_feedback/best_rollout/metrics.json",
+      "sha256": "46189e09a7e59dc2d064957428b2dde072134f418e1458e4ec866a24cd84d057"
+    },
+    {
+      "extension": ".csv",
+      "file": "03_linear_feedback/best_rollout/rollout.csv",
+      "sha256": "116b5c96f92e1d1aaf9daf1f80a93174cf9872683597812b05fbd9c9a451477a"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/control_error.png",
+      "sha256": "bf23452846177a0c1fe6554681b0400816b22b64bab2398139d1bf9f79f6a8e6"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/control_signal.png",
+      "sha256": "a21d1b4528d7fbfe161c4abb4f901d175f187e8006520b2806d61c93ec373bfe"
+    },
+    {
+      "extension": ".json",
+      "file": "03_linear_feedback/control_summary.json",
+      "sha256": "41e0722d023efb51beb7c74e107283f99adf0d14b1d2250a0ea68bb9fcc314eb"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/control_sweep_summary.png",
+      "sha256": "bb249a6c134f2680ea3369fa3a57bad589593805a4cb8eac87ad693c62690fe5"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/controlled_all_states.png",
+      "sha256": "e29788e0a54e211ba23c05dc295d081187b9ecedd786e5281a2837693eb6c7b7"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/controlled_vs_uncontrolled_x.png",
+      "sha256": "b239814a12ce2ce5dbb428bb32311fc7839c3547a21fb249195879f28c425c55"
+    },
+    {
+      "extension": ".csv",
+      "file": "03_linear_feedback/k_sweep.csv",
+      "sha256": "f753748f407d0ff8588a08a91ffcfac78b4fac73263997fc4242bbb898ca70ec"
+    },
+    {
+      "extension": ".png",
+      "file": "03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png",
+      "sha256": "8e2ffd097262bfc6ad793a72ca8560797bd3bb3649eaa4d8afda4c0766f7c8cc"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/best_rollout/metrics.json",
+      "sha256": "e91dcfaf254cbb956e273c14b1e7b3d17feb6b90ad67d3fb9fecd9fcd2d08ebb"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/best_rollout/rollout.csv",
+      "sha256": "b84603aa45f5b9d658297dee4b7926a35db474c70aa32f0773f56dafa24f0548"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/candidates/s_0p3/control_summary.json",
+      "sha256": "331bbaff2f28b3248e5699f1cf490b4cd1b3553e9bdb56fd2cd73e8ca7594524"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/candidates/s_0p3/k_sweep.csv",
+      "sha256": "24657f690c5f1e228059c34cac689ab851a3a198bba6663717688686c4bbe2b8"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/candidates/s_0p5/control_summary.json",
+      "sha256": "285d47c873e6a11e237c51f57d9d74da35952b11ed093a6b362751d916f28173"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/candidates/s_0p5/k_sweep.csv",
+      "sha256": "111fa65b36dc8e965998fd16b86ca23a103af606adc3a873f3cf57c0bbe00247"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/candidates/s_0p7/control_summary.json",
+      "sha256": "5d605207114da51c96ca84197830840d1b5c11fdfe1ef18edde8e927ebe0374e"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/candidates/s_0p7/k_sweep.csv",
+      "sha256": "c92b10132fab8355397689eae9f56c6e96750532a276588d3c02241a59ffc501"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/candidates/s_0p8/control_summary.json",
+      "sha256": "b8dfe3281b35bbbbc695a0512adfbccbe0777efc0a78600533f010289e84a835"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/candidates/s_0p8/k_sweep.csv",
+      "sha256": "d2cac56a0a3eec39656d9ca92f9c4dcdd756a4314c0a4c4527f52a673856f42f"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/candidates/s_0p9/control_summary.json",
+      "sha256": "e796782e930f1ba95d88ab4cfbbd879bc9c194a5cecde15ce38fa8e1e8ac33e8"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/candidates/s_0p9/k_sweep.csv",
+      "sha256": "f4f29cb28386bcf34a99819f642a3b7c68648588b8eb0618964a663fcf72d16c"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/control_error.png",
+      "sha256": "ad18cc67c588f5becd116f22184e4b9d42946c1c88b89aa7e44b4be8df8ea115"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/control_signal.png",
+      "sha256": "4707873383a99e8e41f3f0cd3991dcbc61e7d073584dfa62fd8e3925f11a48f2"
+    },
+    {
+      "extension": ".json",
+      "file": "04_finite_time/control_summary.json",
+      "sha256": "d430dd17952e1b6429ad2127758439f5fa69c307569928dd57c234dfe1124d67"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/control_sweep_summary.png",
+      "sha256": "9b85ad83ad5f5a031c089863f36c9a71f6b18e3bff3212cc5e18de116ee3e6aa"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/controlled_all_states.png",
+      "sha256": "30d70a275e5160fa33c567710670f38cba681c9a1a8d2017facc74ca4f9b0736"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/controlled_vs_uncontrolled_x.png",
+      "sha256": "b3286b7d0fdbea38dc6c895f2fed9938f04878627b151135ef0a0c8eaa7da894"
+    },
+    {
+      "extension": ".csv",
+      "file": "04_finite_time/k_sweep.csv",
+      "sha256": "c434d324e0d884b1913f98608bcd89b36e1ad9272f8f0791330d01dd8cdc6235"
+    },
+    {
+      "extension": ".png",
+      "file": "04_finite_time/raw_readout_vs_corrected_feedback_input_x.png",
+      "sha256": "985a41d571e43d50f8078a3462a820f4c1bc2d5de15ebb7281f40a5d061a2aff"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/best_rollout/metrics.json",
+      "sha256": "004671e7e9044676e2e0510246a736b2084b7cb670182892ec443ea53b19da04"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/best_rollout/rollout.csv",
+      "sha256": "ec5dd037299c1d8fdb307ad991c1a53f831c5ba6ebc2aba6a6a1f25460f18e95"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json",
+      "sha256": "5872f3e4f332fc8f8ff686b6a5baf22f39327dde96ddaba49fc8e072d25d8255"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv",
+      "sha256": "ba5c68692ec8b6b887e9ef469742183d61f05107abf695dbf0e29f60ce42373b"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json",
+      "sha256": "a295f83ed097d2c3347a438ac2bd5a62de6ed5e51b8262c65f7b552883e25c57"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv",
+      "sha256": "79187da69743ab5a41aae3f68d0d959a4a32de521d1b84676df42c5eefb661fd"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_20_sign_minus1/control_summary.json",
+      "sha256": "309ab72939c588b48d94306eff2aa0ce82a821e927fdc35dc535c8b00af00d79"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv",
+      "sha256": "7ff5de8f4e29880153a42427fa37e647ddfd7e0486431d8da08576944fda72f3"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json",
+      "sha256": "210745babae8893ccc662aacd30c5525868638a8ca1058e239ec4bf13e0e1c99"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv",
+      "sha256": "2df09349e8d50907ac83a9c9d24cf99c0a4f9ccce2eef2c86e11f73e5b4b2c99"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json",
+      "sha256": "57cb295e4be022f1c89970fad3e8033d98884aba6f4139bf5cb3ec147563d1dc"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv",
+      "sha256": "546b224b4e538bd6641261862d153a3d8dbaf060a1fdba747305267c65dfd401"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_320_sign_minus1/control_summary.json",
+      "sha256": "3df65c26932c8c54ac64e05903828f4cf6ca96fb91594ed0ebe0107fdc5914d9"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv",
+      "sha256": "b338b014a30c728e4cb794f7fe356ff5dcb981f9688a3522e240600a0642928f"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_640_sign_minus1/control_summary.json",
+      "sha256": "cafae7121a949a4b1279609aab2d6a2f0dd91b74eeadfeeaf990b74b40fa866d"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv",
+      "sha256": "6fc03b800382e997a566e6d8a01312a796f4d14e2b3b301bee61c126d524c34b"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/candidates/delay_80_sign_minus1/control_summary.json",
+      "sha256": "627196a6657b48b71f983f8c856d855bfe814c245092846e6b012cdc1fa698f8"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv",
+      "sha256": "67d3efb7d3cac7df0715dceef71620a16efc164e8dc7e2d2d6b4626bf37304a5"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/control_error.png",
+      "sha256": "ed772f6a099e80e7f4d1413d7cd774738542ed4979afac92295ced13a2b16b3a"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/control_signal.png",
+      "sha256": "251178226516728647a9c598ec30966d667cacb4f8c95e6db388d1c17238f954"
+    },
+    {
+      "extension": ".json",
+      "file": "05_pyragas/control_summary.json",
+      "sha256": "34bdf9123659145c03185a81bdff416dcd4fc5dda2d042ca04aa393034985fb8"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/control_sweep_summary.png",
+      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/controlled_all_states.png",
+      "sha256": "45a613fafd2e7ffe7e0dd13ca9f8ce8409b6a2480ecf892324df997e61e7cfe6"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/controlled_vs_uncontrolled_x.png",
+      "sha256": "11ef7d278c1c51db55d24fdafbe03b447694626356d14208e0d7bfa4326cb60c"
+    },
+    {
+      "extension": ".csv",
+      "file": "05_pyragas/k_sweep.csv",
+      "sha256": "d952b1a569403ca5089569d7fedee331f20e22dbe5827b2c8355682ef300773e"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/pyragas_periodic_k_sweep_summary.png",
+      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/pyragas_periodic_zoom.png",
+      "sha256": "e19c26ab8fdb3f84013a13d1b907230ad961b80846f429a18f6df378570bed89"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/pyragas_phase_trajectory_3d.png",
+      "sha256": "1bbf6d75c3acb084b0d0922c461974f8ba2016695c3936b8c552ddcc8bacfe6d"
+    },
+    {
+      "extension": ".png",
+      "file": "05_pyragas/raw_readout_vs_corrected_feedback_input_x.png",
+      "sha256": "f884174878a8eceb0fc35ee726fce051346a411127e00b9ab4326f2d612f196a"
+    },
+    {
+      "extension": ".json",
+      "file": "06_comparison_tables/chapter1_final_comparison.json",
+      "sha256": "0fb70ce46f2bcd97a3270b903722ce95a4e0e0600fe2a28882ec3d9fa9e44d9a"
+    },
+    {
+      "extension": ".csv",
+      "file": "06_comparison_tables/controller_final_test_metrics.csv",
+      "sha256": "76b2f4626e7382289d6a8b69bfa61d3ef8641d5ea908bdbceb4df54d0c84b312"
+    },
+    {
+      "extension": ".csv",
+      "file": "06_comparison_tables/prediction_metrics_all_regimes.csv",
+      "sha256": "b1f96209c7b0a4d6dd74702bedaf698e7376ccd31ac0fcc720e0fe7ddc0aeec1"
+    },
+    {
+      "extension": ".json",
+      "file": "07_report_figures/figure_index.json",
+      "sha256": "e9301d1c51a014458f54b0d3587581d738fd052ea123e3ce9a1d01ef8156011e"
+    }
+  ],
+  "final_quality_gates_passed": true,
+  "json_errors": [],
+  "json_valid": true,
+  "manifest_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "manifest_commit_matches_current_commit": true,
+  "misplaced_prediction_figures": [],
+  "missing_directories": [],
+  "missing_required_files": [],
+  "no_unexpected_absolute_paths": true,
+  "no_unnecessary_duplicate_prediction_figures": true,
+  "periodic_spiking_quality_gate_passed": true,
+  "png_errors": [],
+  "png_readable": true,
+  "required_directories": [
+    "00_manifest",
+    "01_prediction_all_regimes",
+    "02_bo_optimization",
+    "03_linear_feedback",
+    "04_finite_time",
+    "05_pyragas",
+    "06_comparison_tables",
+    "07_report_figures",
+    "08_logs"
+  ],
+  "required_files_present": true,
+  "same_control_model_identity": true,
+  "schema_version": "chapter1_package_validation_v1",
+  "top_level_directories": [
+    "00_manifest",
+    "01_prediction_all_regimes",
+    "02_bo_optimization",
+    "03_linear_feedback",
+    "04_finite_time",
+    "05_pyragas",
+    "06_comparison_tables",
+    "07_report_figures",
+    "08_logs"
+  ],
+  "unexpected_directories": [],
+  "valid": true,
+  "warnings": [
+    "identical PNG/CSV/JSON files are listed for review; only cross-section prediction duplicates are fatal"
+  ]
+}

@@ -1,0 +1,2148 @@
+### Starting TaskPrologue of job 1752614 on tg095 at Sat Jul 18 21:55:47 CEST 2026
+Running on cores 96-127 with governor ondemand
+Sat Jul 18 21:55:47 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:C1:00.0 Off |                    0 |
+| N/A   33C    P0             50W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+========================================================================
+CHAPTER 1 DEFINITIVE ONE-PASS PIPELINE
+========================================================================
+Project dir : /home/hpc/rlvl/rlvl177v/Thesis
+Final root  : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614
+Job ID      : 1752614
+Git commit  : 2e953b065b3208c1556cf3d56ce690a1f7cd48c5
+Git branch  : chapter1-methodology-final-fixes-20260717_115956
+Started UTC : 2026-07-18T19:55:50+00:00
+========================================================================
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_spiking
+[DataLoader] HR input current I: 2.5
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 40 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=6.364007 best=6.364007 x_nrmse=2.178524 all_nrmse=2.450756 penalty=2.187 N=688 p=0.053 rho=1.046 leak=0.518 scale=0.474 ridge=5.0e-10 washout=257
+[GP] iter   2/30 score=24.528772 best=6.364007 x_nrmse=6.214938 all_nrmse=2.899650 penalty=5.684 N=434 p=0.046 rho=0.956 leak=0.139 scale=0.736 ridge=3.7e-04 washout=50
+[GP] iter   3/30 score=1000000.000000 best=6.364007 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.131 rho=0.928 leak=0.105 scale=0.072 ridge=4.7e-07 washout=230
+[GP] iter   4/30 score=0.004063 best=0.004063 x_nrmse=0.004025 all_nrmse=0.002717 penalty=0.000 N=276 p=0.195 rho=0.663 leak=0.163 scale=0.637 ridge=4.8e-08 washout=492
+[GP] iter   5/30 score=0.433810 best=0.004063 x_nrmse=0.399229 all_nrmse=0.267284 penalty=0.000 N=507 p=0.175 rho=0.976 leak=0.415 scale=0.063 ridge=3.9e-04 washout=303
+[GP] iter   6/30 score=0.045737 best=0.004063 x_nrmse=0.043900 all_nrmse=0.029512 penalty=0.000 N=462 p=0.023 rho=0.662 leak=0.269 scale=0.699 ridge=1.9e-06 washout=425
+[GP] iter   7/30 score=0.001056 best=0.001056 x_nrmse=0.000920 all_nrmse=0.000618 penalty=0.000 N=345 p=0.090 rho=0.628 leak=0.629 scale=0.454 ridge=2.9e-09 washout=305
+[GP] iter   8/30 score=4.666955 best=0.001056 x_nrmse=1.730238 all_nrmse=1.808020 penalty=1.142 N=267 p=0.172 rho=0.815 leak=0.377 scale=0.930 ridge=1.2e-05 washout=197
+[GP] iter   9/30 score=32.288220 best=0.001056 x_nrmse=13.331582 all_nrmse=5.206224 penalty=13.260 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-10 washout=500
+[GP] iter  10/30 score=1000000.000000 best=0.001056 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.200 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=1000000.000000 best=0.001056 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=250 p=0.200 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=284
+[GP] iter  12/30 score=2.912352 best=0.001056 x_nrmse=1.020072 all_nrmse=1.038835 penalty=0.333 N=388 p=0.035 rho=0.640 leak=0.605 scale=0.690 ridge=6.2e-10 washout=371
+[GP] iter  13/30 score=2.958489 best=0.001056 x_nrmse=1.016502 all_nrmse=1.233053 penalty=0.333 N=563 p=0.136 rho=0.765 leak=0.383 scale=0.371 ridge=8.3e-07 washout=245
+[GP] iter  14/30 score=7.377958 best=0.001056 x_nrmse=2.905774 all_nrmse=2.266303 penalty=1.637 N=732 p=0.041 rho=0.500 leak=0.733 scale=0.642 ridge=1.0e-10 washout=141
+[GP] iter  15/30 score=0.000628 best=0.000628 x_nrmse=0.000574 all_nrmse=0.000385 penalty=0.000 N=300 p=0.029 rho=0.609 leak=0.450 scale=0.683 ridge=5.9e-10 washout=338
+[GP] iter  16/30 score=0.019894 best=0.000628 x_nrmse=0.019784 all_nrmse=0.013391 penalty=0.000 N=555 p=0.108 rho=0.766 leak=0.158 scale=0.594 ridge=1.1e-06 washout=303
+[GP] iter  17/30 score=3.837532 best=0.000628 x_nrmse=1.166554 all_nrmse=1.454545 penalty=0.714 N=610 p=0.085 rho=0.857 leak=0.772 scale=0.452 ridge=1.6e-09 washout=318
+[GP] iter  18/30 score=0.033472 best=0.000628 x_nrmse=0.030403 all_nrmse=0.020396 penalty=0.000 N=800 p=0.020 rho=1.200 leak=0.361 scale=0.095 ridge=1.0e-03 washout=79
+[GP] iter  19/30 score=0.113069 best=0.000628 x_nrmse=0.106647 all_nrmse=0.071768 penalty=0.000 N=356 p=0.151 rho=0.738 leak=0.685 scale=0.530 ridge=3.1e-06 washout=359
+[GP] iter  20/30 score=18.524280 best=0.000628 x_nrmse=7.771607 all_nrmse=3.329347 penalty=7.514 N=537 p=0.170 rho=0.850 leak=0.189 scale=0.958 ridge=5.3e-04 washout=179
+[GP] iter  21/30 score=26.923916 best=0.000628 x_nrmse=11.384826 all_nrmse=4.805662 penalty=11.064 N=643 p=0.132 rho=0.625 leak=0.429 scale=0.534 ridge=3.8e-10 washout=131
+[GP] iter  22/30 score=16.832366 best=0.000628 x_nrmse=6.925085 all_nrmse=2.854783 penalty=6.849 N=800 p=0.020 rho=1.200 leak=0.100 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  23/30 score=0.288298 best=0.000628 x_nrmse=0.284295 all_nrmse=0.191568 penalty=0.000 N=694 p=0.190 rho=0.898 leak=0.218 scale=0.128 ridge=1.0e-03 washout=420
+[GP] iter  24/30 score=14.475566 best=0.000628 x_nrmse=4.490047 all_nrmse=2.370215 penalty=3.541 N=663 p=0.029 rho=0.885 leak=0.607 scale=0.296 ridge=1.0e-10 washout=400
+[GP] iter  25/30 score=0.000140 best=0.000140 x_nrmse=0.000141 all_nrmse=0.000096 penalty=0.000 N=274 p=0.154 rho=0.785 leak=0.672 scale=0.136 ridge=2.0e-10 washout=181
+[GP] iter  26/30 score=19.630201 best=0.000140 x_nrmse=7.756379 all_nrmse=3.047015 penalty=7.588 N=718 p=0.070 rho=0.779 leak=0.800 scale=0.845 ridge=1.0e-10 washout=474
+[GP] iter  27/30 score=21.291269 best=0.000140 x_nrmse=9.094755 all_nrmse=3.758590 penalty=8.664 N=521 p=0.046 rho=0.701 leak=0.551 scale=0.896 ridge=7.2e-08 washout=132
+[GP] iter  28/30 score=0.000550 best=0.000140 x_nrmse=0.000508 all_nrmse=0.000348 penalty=0.000 N=295 p=0.020 rho=1.179 leak=0.800 scale=1.000 ridge=1.0e-10 washout=500
+[GP] iter  29/30 score=7.749438 best=0.000140 x_nrmse=3.604470 all_nrmse=2.627361 penalty=1.190 N=250 p=0.117 rho=0.691 leak=0.800 scale=0.050 ridge=1.0e-10 washout=50
+[GP] iter  30/30 score=1000000.000000 best=0.000140 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=800 p=0.200 rho=0.500 leak=0.100 scale=0.050 ridge=1.0e-10 washout=50
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=3.549486 best=3.549486 x_nrmse=1.050417 all_nrmse=1.108331 penalty=0.651 N=527 p=0.088 rho=0.580 leak=0.643 scale=0.665 ridge=2.3e-07 washout=446
+[DUMMY] iter   2/30 score=2.951312 best=2.951312 x_nrmse=1.106355 all_nrmse=1.097819 penalty=0.333 N=389 p=0.069 rho=0.719 leak=0.568 scale=0.707 ridge=1.2e-07 washout=455
+[DUMMY] iter   3/30 score=14.313130 best=2.951312 x_nrmse=6.567850 all_nrmse=2.968778 penalty=5.786 N=561 p=0.175 rho=1.070 leak=0.530 scale=0.203 ridge=4.2e-06 washout=165
+[DUMMY] iter   4/30 score=1.319949 best=1.319949 x_nrmse=0.825550 all_nrmse=0.600178 penalty=0.000 N=721 p=0.140 rho=0.963 leak=0.123 scale=0.645 ridge=5.6e-07 washout=410
+[DUMMY] iter   5/30 score=2.816353 best=1.319949 x_nrmse=1.434298 all_nrmse=1.411411 penalty=0.000 N=414 p=0.120 rho=1.099 leak=0.768 scale=0.501 ridge=6.9e-07 washout=191
+[DUMMY] iter   6/30 score=0.006136 best=0.006136 x_nrmse=0.005429 all_nrmse=0.003833 penalty=0.000 N=685 p=0.117 rho=1.022 leak=0.505 scale=0.217 ridge=2.0e-05 washout=478
+[DUMMY] iter   7/30 score=0.000596 best=0.000596 x_nrmse=0.000481 all_nrmse=0.000343 penalty=0.000 N=774 p=0.063 rho=0.761 leak=0.732 scale=0.429 ridge=9.6e-09 washout=196
+[DUMMY] iter   8/30 score=0.006414 best=0.000596 x_nrmse=0.005669 all_nrmse=0.003928 penalty=0.000 N=555 p=0.093 rho=0.836 leak=0.754 scale=0.194 ridge=1.5e-04 washout=202
+[DUMMY] iter   9/30 score=0.364170 best=0.000596 x_nrmse=0.305514 all_nrmse=0.203569 penalty=0.000 N=614 p=0.103 rho=0.733 leak=0.399 scale=0.102 ridge=9.1e-04 washout=105
+[DUMMY] iter  10/30 score=3.039945 best=0.000596 x_nrmse=1.095687 all_nrmse=1.441745 penalty=0.333 N=792 p=0.063 rho=0.876 leak=0.723 scale=0.594 ridge=5.6e-09 washout=474
+[DUMMY] iter  11/30 score=7.217743 best=0.000596 x_nrmse=2.602351 all_nrmse=1.998845 penalty=2.619 N=695 p=0.159 rho=0.745 leak=0.411 scale=0.443 ridge=5.9e-07 washout=422
+[DUMMY] iter  12/30 score=0.000531 best=0.000531 x_nrmse=0.000524 all_nrmse=0.000437 penalty=0.000 N=389 p=0.067 rho=1.045 leak=0.520 scale=0.276 ridge=5.9e-07 washout=164
+[DUMMY] iter  13/30 score=6.326632 best=0.000531 x_nrmse=2.289413 all_nrmse=1.868875 penalty=2.068 N=685 p=0.094 rho=0.854 leak=0.125 scale=0.339 ridge=1.3e-04 washout=394
+[DUMMY] iter  14/30 score=0.103266 best=0.000531 x_nrmse=0.098766 all_nrmse=0.066548 penalty=0.000 N=687 p=0.099 rho=1.070 leak=0.296 scale=0.117 ridge=3.1e-04 washout=330
+[DUMMY] iter  15/30 score=3.053879 best=0.000531 x_nrmse=1.022597 all_nrmse=1.486616 penalty=0.333 N=473 p=0.142 rho=0.994 leak=0.196 scale=0.898 ridge=4.3e-04 washout=84
+[DUMMY] iter  16/30 score=0.016157 best=0.000531 x_nrmse=0.013908 all_nrmse=0.009712 penalty=0.000 N=741 p=0.101 rho=0.847 leak=0.763 scale=0.603 ridge=4.2e-09 washout=109
+[DUMMY] iter  17/30 score=2.953654 best=0.000531 x_nrmse=1.008140 all_nrmse=1.097938 penalty=0.332 N=396 p=0.040 rho=0.803 leak=0.127 scale=0.778 ridge=2.7e-05 washout=200
+[DUMMY] iter  18/30 score=0.000394 best=0.000394 x_nrmse=0.000378 all_nrmse=0.000259 penalty=0.000 N=412 p=0.149 rho=0.900 leak=0.368 scale=0.559 ridge=4.9e-09 washout=260
+[DUMMY] iter  19/30 score=0.653894 best=0.000394 x_nrmse=0.659821 all_nrmse=0.447896 penalty=0.000 N=422 p=0.155 rho=1.132 leak=0.227 scale=0.234 ridge=7.7e-05 washout=481
+[DUMMY] iter  20/30 score=2.221596 best=0.000394 x_nrmse=1.000732 all_nrmse=0.968689 penalty=0.164 N=342 p=0.089 rho=1.131 leak=0.666 scale=0.271 ridge=3.7e-06 washout=72
+[DUMMY] iter  21/30 score=7.331970 best=0.000394 x_nrmse=2.621552 all_nrmse=1.954447 penalty=2.606 N=523 p=0.062 rho=0.753 leak=0.343 scale=0.469 ridge=1.9e-04 washout=413
+[DUMMY] iter  22/30 score=13.155310 best=0.000394 x_nrmse=1.869669 all_nrmse=1.495532 penalty=1.470 N=702 p=0.125 rho=0.985 leak=0.309 scale=0.332 ridge=8.2e-05 washout=355
+[DUMMY] iter  23/30 score=0.002490 best=0.000394 x_nrmse=0.002456 all_nrmse=0.001658 penalty=0.000 N=698 p=0.041 rho=1.081 leak=0.572 scale=0.495 ridge=8.8e-10 washout=340
+[DUMMY] iter  24/30 score=5.266356 best=0.000394 x_nrmse=1.993899 all_nrmse=1.513095 penalty=0.870 N=519 p=0.082 rho=0.958 leak=0.499 scale=0.431 ridge=7.4e-10 washout=275
+[DUMMY] iter  25/30 score=0.002142 best=0.000394 x_nrmse=0.001857 all_nrmse=0.001276 penalty=0.000 N=665 p=0.025 rho=0.590 leak=0.633 scale=0.458 ridge=2.7e-08 washout=478
+[DUMMY] iter  26/30 score=15.989625 best=0.000394 x_nrmse=6.655603 all_nrmse=2.980928 penalty=6.133 N=475 p=0.168 rho=0.640 leak=0.156 scale=0.850 ridge=4.6e-04 washout=83
+[DUMMY] iter  27/30 score=5.335473 best=0.000394 x_nrmse=2.041998 all_nrmse=1.587533 penalty=1.448 N=252 p=0.087 rho=0.885 leak=0.295 scale=0.775 ridge=4.5e-06 washout=55
+[DUMMY] iter  28/30 score=5.244172 best=0.000394 x_nrmse=1.791733 all_nrmse=1.566043 penalty=1.072 N=546 p=0.022 rho=0.650 leak=0.165 scale=0.724 ridge=2.8e-04 washout=318
+[DUMMY] iter  29/30 score=0.004933 best=0.000394 x_nrmse=0.004551 all_nrmse=0.003121 penalty=0.000 N=409 p=0.136 rho=0.846 leak=0.322 scale=0.210 ridge=2.0e-06 washout=245
+[DUMMY] iter  30/30 score=4.662145 best=0.000394 x_nrmse=1.960961 all_nrmse=1.431762 penalty=0.626 N=614 p=0.104 rho=0.714 leak=0.585 scale=0.355 ridge=6.5e-04 washout=265
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=0.014235 best=0.014235 x_nrmse=0.012999 all_nrmse=0.008703 penalty=0.000 N=353 p=0.030 rho=0.953 leak=0.506 scale=0.370 ridge=5.7e-10 washout=389
+[FOREST] iter   2/30 score=1.234254 best=0.014235 x_nrmse=0.929905 all_nrmse=0.689493 penalty=0.000 N=544 p=0.045 rho=0.898 leak=0.207 scale=0.503 ridge=6.2e-05 washout=172
+[FOREST] iter   3/30 score=11.135863 best=0.014235 x_nrmse=4.259822 all_nrmse=2.686082 penalty=3.793 N=679 p=0.115 rho=0.544 leak=0.489 scale=0.553 ridge=1.6e-10 washout=153
+[FOREST] iter   4/30 score=13.334962 best=0.014235 x_nrmse=5.883504 all_nrmse=2.697788 penalty=5.367 N=502 p=0.023 rho=1.103 leak=0.138 scale=0.864 ridge=1.4e-07 washout=271
+[FOREST] iter   5/30 score=12.652378 best=0.014235 x_nrmse=5.586752 all_nrmse=2.667377 penalty=5.071 N=622 p=0.189 rho=0.869 leak=0.458 scale=0.973 ridge=2.4e-04 washout=91
+[FOREST] iter   6/30 score=16.211373 best=0.014235 x_nrmse=6.744643 all_nrmse=2.977310 penalty=6.551 N=733 p=0.165 rho=0.947 leak=0.609 scale=0.784 ridge=1.0e-04 washout=495
+[FOREST] iter   7/30 score=0.766674 best=0.014235 x_nrmse=0.676551 all_nrmse=0.472805 penalty=0.000 N=658 p=0.044 rho=0.814 leak=0.574 scale=0.331 ridge=4.8e-05 washout=156
+[FOREST] iter   8/30 score=0.017256 best=0.014235 x_nrmse=0.015473 all_nrmse=0.010593 penalty=0.000 N=531 p=0.156 rho=0.896 leak=0.762 scale=0.784 ridge=9.7e-08 washout=422
+[FOREST] iter   9/30 score=0.009366 best=0.009366 x_nrmse=0.008152 all_nrmse=0.005430 penalty=0.000 N=423 p=0.039 rho=0.588 leak=0.526 scale=0.089 ridge=1.0e-08 washout=452
+[FOREST] iter  10/30 score=1000000.000000 best=0.009366 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=463 p=0.071 rho=1.010 leak=0.529 scale=0.055 ridge=1.0e-10 washout=448
+[FOREST] iter  11/30 score=0.002745 best=0.002745 x_nrmse=0.002210 all_nrmse=0.001482 penalty=0.000 N=515 p=0.029 rho=1.178 leak=0.765 scale=0.264 ridge=3.5e-07 washout=287
+[FOREST] iter  12/30 score=0.002349 best=0.002349 x_nrmse=0.001952 all_nrmse=0.001308 penalty=0.000 N=263 p=0.026 rho=0.938 leak=0.663 scale=0.308 ridge=1.1e-08 washout=498
+[FOREST] iter  13/30 score=0.014734 best=0.002349 x_nrmse=0.014714 all_nrmse=0.009973 penalty=0.000 N=492 p=0.079 rho=0.961 leak=0.672 scale=0.177 ridge=2.4e-07 washout=340
+[FOREST] iter  14/30 score=0.001093 best=0.001093 x_nrmse=0.000930 all_nrmse=0.000624 penalty=0.000 N=471 p=0.045 rho=0.949 leak=0.661 scale=0.282 ridge=9.2e-10 washout=461
+[FOREST] iter  15/30 score=0.001032 best=0.001032 x_nrmse=0.000791 all_nrmse=0.000547 penalty=0.000 N=406 p=0.094 rho=0.998 leak=0.519 scale=0.443 ridge=6.0e-09 washout=465
+[FOREST] iter  16/30 score=0.000037 best=0.000037 x_nrmse=0.000033 all_nrmse=0.000022 penalty=0.000 N=303 p=0.044 rho=0.658 leak=0.582 scale=0.112 ridge=2.6e-10 washout=324
+[FOREST] iter  17/30 score=1000000.000000 best=0.000037 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=424 p=0.050 rho=0.947 leak=0.451 scale=0.051 ridge=2.0e-10 washout=313
+[FOREST] iter  18/30 score=0.000093 best=0.000037 x_nrmse=0.000087 all_nrmse=0.000059 penalty=0.000 N=730 p=0.044 rho=1.116 leak=0.785 scale=0.184 ridge=3.9e-10 washout=418
+[FOREST] iter  19/30 score=0.005801 best=0.000037 x_nrmse=0.005356 all_nrmse=0.003566 penalty=0.000 N=307 p=0.066 rho=1.197 leak=0.554 scale=0.052 ridge=1.7e-07 washout=426
+[FOREST] iter  20/30 score=0.000308 best=0.000037 x_nrmse=0.000312 all_nrmse=0.000211 penalty=0.000 N=306 p=0.080 rho=0.845 leak=0.757 scale=0.283 ridge=2.6e-10 washout=73
+[FOREST] iter  21/30 score=0.004780 best=0.000037 x_nrmse=0.004407 all_nrmse=0.003025 penalty=0.000 N=638 p=0.094 rho=1.064 leak=0.476 scale=0.082 ridge=4.1e-07 washout=269
+[FOREST] iter  22/30 score=0.000142 best=0.000037 x_nrmse=0.000136 all_nrmse=0.000093 penalty=0.000 N=294 p=0.100 rho=0.978 leak=0.441 scale=0.146 ridge=3.2e-10 washout=54
+[FOREST] iter  23/30 score=0.000030 best=0.000030 x_nrmse=0.000026 all_nrmse=0.000018 penalty=0.000 N=540 p=0.104 rho=0.936 leak=0.255 scale=0.174 ridge=2.4e-10 washout=352
+[FOREST] iter  24/30 score=1000000.000000 best=0.000030 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=761 p=0.038 rho=0.975 leak=0.348 scale=0.078 ridge=3.0e-10 washout=488
+[FOREST] iter  25/30 score=2.992393 best=0.000030 x_nrmse=1.170122 all_nrmse=1.170773 penalty=0.333 N=789 p=0.053 rho=1.048 leak=0.273 scale=0.282 ridge=1.2e-10 washout=474
+[FOREST] iter  26/30 score=0.000203 best=0.000030 x_nrmse=0.000197 all_nrmse=0.000133 penalty=0.000 N=671 p=0.022 rho=0.869 leak=0.360 scale=0.100 ridge=1.9e-10 washout=304
+[FOREST] iter  27/30 score=0.000788 best=0.000030 x_nrmse=0.000707 all_nrmse=0.000476 penalty=0.000 N=591 p=0.194 rho=1.048 leak=0.405 scale=0.084 ridge=2.7e-10 washout=497
+[FOREST] iter  28/30 score=1000000.000000 best=0.000030 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=262 p=0.185 rho=0.538 leak=0.300 scale=0.082 ridge=6.6e-10 washout=322
+[FOREST] iter  29/30 score=0.011104 best=0.000030 x_nrmse=0.010553 all_nrmse=0.007125 penalty=0.000 N=399 p=0.115 rho=1.128 leak=0.797 scale=0.084 ridge=2.0e-04 washout=317
+[FOREST] iter  30/30 score=0.012583 best=0.000030 x_nrmse=0.011191 all_nrmse=0.007494 penalty=0.000 N=470 p=0.084 rho=0.672 leak=0.447 scale=0.083 ridge=2.0e-08 washout=102
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=5.934829 best=5.934829 x_nrmse=2.305066 all_nrmse=1.551580 penalty=1.044 N=437 p=0.168 rho=0.529 leak=0.504 scale=0.938 ridge=1.8e-08 washout=184
+[GBRT] iter   2/30 score=0.042412 best=0.042412 x_nrmse=0.039711 all_nrmse=0.027166 penalty=0.000 N=790 p=0.105 rho=1.126 leak=0.207 scale=0.249 ridge=7.3e-08 washout=111
+[GBRT] iter   3/30 score=8.011406 best=0.042412 x_nrmse=2.884935 all_nrmse=1.921273 penalty=2.755 N=594 p=0.054 rho=0.864 leak=0.367 scale=0.939 ridge=4.4e-05 washout=217
+[GBRT] iter   4/30 score=0.003546 best=0.003546 x_nrmse=0.002973 all_nrmse=0.001996 penalty=0.000 N=530 p=0.158 rho=0.825 leak=0.104 scale=0.381 ridge=1.1e-06 washout=358
+[GBRT] iter   5/30 score=2.977783 best=0.003546 x_nrmse=0.994486 all_nrmse=1.233178 penalty=0.333 N=773 p=0.025 rho=1.180 leak=0.756 scale=0.432 ridge=4.0e-06 washout=256
+[GBRT] iter   6/30 score=22.681657 best=0.003546 x_nrmse=9.510756 all_nrmse=3.841699 penalty=9.248 N=655 p=0.044 rho=0.924 leak=0.562 scale=0.753 ridge=4.6e-08 washout=218
+[GBRT] iter   7/30 score=0.000895 best=0.000895 x_nrmse=0.000903 all_nrmse=0.000620 penalty=0.000 N=525 p=0.160 rho=0.822 leak=0.170 scale=0.352 ridge=7.0e-08 washout=105
+[GBRT] iter   8/30 score=5.353919 best=0.000895 x_nrmse=2.494550 all_nrmse=1.558622 penalty=0.989 N=294 p=0.150 rho=1.145 leak=0.550 scale=0.188 ridge=4.7e-05 washout=363
+[GBRT] iter   9/30 score=0.000388 best=0.000388 x_nrmse=0.000367 all_nrmse=0.000248 penalty=0.000 N=761 p=0.102 rho=0.601 leak=0.102 scale=0.370 ridge=3.4e-08 washout=258
+[GBRT] iter  10/30 score=0.004699 best=0.000388 x_nrmse=0.004072 all_nrmse=0.002715 penalty=0.000 N=712 p=0.047 rho=0.766 leak=0.129 scale=0.658 ridge=1.2e-07 washout=226
+[GBRT] iter  11/30 score=12.776175 best=0.000388 x_nrmse=4.180020 all_nrmse=2.348881 penalty=3.248 N=712 p=0.037 rho=0.954 leak=0.161 scale=0.926 ridge=2.4e-10 washout=218
+[GBRT] iter  12/30 score=0.888228 best=0.000388 x_nrmse=0.894446 all_nrmse=0.626261 penalty=0.000 N=526 p=0.023 rho=0.705 leak=0.588 scale=0.672 ridge=1.8e-09 washout=123
+[GBRT] iter  13/30 score=0.008224 best=0.000388 x_nrmse=0.007326 all_nrmse=0.004914 penalty=0.000 N=787 p=0.038 rho=0.528 leak=0.563 scale=0.268 ridge=1.1e-06 washout=63
+[GBRT] iter  14/30 score=2.942757 best=0.000388 x_nrmse=0.986152 all_nrmse=1.132916 penalty=0.333 N=536 p=0.113 rho=0.843 leak=0.543 scale=0.536 ridge=3.3e-10 washout=51
+[GBRT] iter  15/30 score=5.701559 best=0.000388 x_nrmse=1.940607 all_nrmse=2.314344 penalty=1.506 N=781 p=0.098 rho=0.797 leak=0.558 scale=0.342 ridge=1.4e-10 washout=122
+[GBRT] iter  16/30 score=20.888438 best=0.000388 x_nrmse=8.727777 all_nrmse=3.577104 penalty=8.503 N=733 p=0.049 rho=0.764 leak=0.581 scale=0.781 ridge=2.8e-05 washout=269
+[GBRT] iter  17/30 score=0.000612 best=0.000388 x_nrmse=0.000550 all_nrmse=0.000377 penalty=0.000 N=297 p=0.045 rho=0.685 leak=0.577 scale=0.851 ridge=9.0e-09 washout=142
+[GBRT] iter  18/30 score=0.000759 best=0.000388 x_nrmse=0.000763 all_nrmse=0.000518 penalty=0.000 N=282 p=0.187 rho=0.777 leak=0.170 scale=0.733 ridge=2.7e-08 washout=77
+[GBRT] iter  19/30 score=0.181970 best=0.000388 x_nrmse=0.169678 all_nrmse=0.113944 penalty=0.000 N=358 p=0.168 rho=0.702 leak=0.264 scale=0.769 ridge=5.7e-07 washout=84
+[GBRT] iter  20/30 score=25.895267 best=0.000388 x_nrmse=10.496692 all_nrmse=4.106149 penalty=10.601 N=782 p=0.153 rho=0.891 leak=0.211 scale=0.803 ridge=7.1e-09 washout=63
+[GBRT] iter  21/30 score=0.002323 best=0.000388 x_nrmse=0.002198 all_nrmse=0.001490 penalty=0.000 N=259 p=0.102 rho=0.604 leak=0.203 scale=0.788 ridge=1.3e-08 washout=139
+[GBRT] iter  22/30 score=18.350837 best=0.000388 x_nrmse=5.274377 all_nrmse=2.608399 penalty=4.462 N=735 p=0.080 rho=0.815 leak=0.148 scale=0.777 ridge=7.8e-07 washout=458
+[GBRT] iter  23/30 score=21.784594 best=0.000388 x_nrmse=9.549806 all_nrmse=3.981640 penalty=8.864 N=762 p=0.054 rho=0.592 leak=0.653 scale=0.772 ridge=1.2e-07 washout=179
+[GBRT] iter  24/30 score=0.048533 best=0.000388 x_nrmse=0.045755 all_nrmse=0.030871 penalty=0.000 N=298 p=0.168 rho=0.605 leak=0.377 scale=0.883 ridge=2.4e-06 washout=111
+[GBRT] iter  25/30 score=0.006218 best=0.000388 x_nrmse=0.005953 all_nrmse=0.004013 penalty=0.000 N=294 p=0.174 rho=0.805 leak=0.102 scale=0.758 ridge=4.4e-07 washout=139
+[GBRT] iter  26/30 score=0.000844 best=0.000388 x_nrmse=0.000782 all_nrmse=0.000524 penalty=0.000 N=790 p=0.049 rho=0.922 leak=0.544 scale=0.072 ridge=3.8e-09 washout=92
+[GBRT] iter  27/30 score=1.954201 best=0.000388 x_nrmse=0.740160 all_nrmse=0.737722 penalty=0.000 N=334 p=0.183 rho=0.885 leak=0.373 scale=0.782 ridge=5.5e-06 washout=64
+[GBRT] iter  28/30 score=4.584773 best=0.000388 x_nrmse=2.217236 all_nrmse=1.507473 penalty=0.547 N=739 p=0.030 rho=0.623 leak=0.439 scale=0.715 ridge=8.2e-08 washout=145
+[GBRT] iter  29/30 score=0.001160 best=0.000388 x_nrmse=0.001074 all_nrmse=0.000724 penalty=0.000 N=311 p=0.162 rho=0.888 leak=0.323 scale=0.403 ridge=3.4e-09 washout=50
+[GBRT] iter  30/30 score=0.001265 best=0.000388 x_nrmse=0.001023 all_nrmse=0.000711 penalty=0.000 N=445 p=0.170 rho=0.912 leak=0.126 scale=0.707 ridge=2.4e-07 washout=59
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/best_params_gbrt.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/optimizer_summary.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/optimizer_history.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/optimizer_results.csv
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+  forest | score=0.000030 | x_nrmse=0.000026 | N=540 | rho=0.936 | leak=0.255 | scale=0.174 | washout=352
+      gp | score=0.000140 | x_nrmse=0.000141 | N=274 | rho=0.785 | leak=0.672 | scale=0.136 | washout=181
+    gbrt | score=0.000388 | x_nrmse=0.000367 | N=761 | rho=0.601 | leak=0.102 | scale=0.370 | washout=258
+   dummy | score=0.000394 | x_nrmse=0.000378 | N=412 | rho=0.900 | leak=0.368 | scale=0.559 | washout=260
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_spiking/best_params_auto.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_spiking/results_full_zoom.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_spiking/results_all_states.png
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_bursting
+[DataLoader] HR input current I: 3.0
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 73 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=0.002899 best=0.002899 x_nrmse=0.002371 all_nrmse=0.002023 penalty=0.000 N=688 p=0.053 rho=1.046 leak=0.518 scale=0.474 ridge=5.0e-10 washout=257
+[GP] iter   2/30 score=0.082151 best=0.002899 x_nrmse=0.066275 all_nrmse=0.056467 penalty=0.000 N=434 p=0.046 rho=0.956 leak=0.139 scale=0.736 ridge=3.7e-04 washout=50
+[GP] iter   3/30 score=1000000.000000 best=0.002899 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.131 rho=0.928 leak=0.105 scale=0.072 ridge=4.7e-07 washout=230
+[GP] iter   4/30 score=0.004964 best=0.002899 x_nrmse=0.003777 all_nrmse=0.003334 penalty=0.000 N=276 p=0.195 rho=0.663 leak=0.163 scale=0.637 ridge=4.8e-08 washout=492
+[GP] iter   5/30 score=5.307489 best=0.002899 x_nrmse=2.262258 all_nrmse=1.291311 penalty=1.195 N=507 p=0.175 rho=0.976 leak=0.415 scale=0.063 ridge=3.9e-04 washout=303
+[GP] iter   6/30 score=0.791588 best=0.002899 x_nrmse=0.756391 all_nrmse=0.588025 penalty=0.000 N=462 p=0.023 rho=0.662 leak=0.269 scale=0.699 ridge=1.9e-06 washout=425
+[GP] iter   7/30 score=0.000641 best=0.000641 x_nrmse=0.000467 all_nrmse=0.000411 penalty=0.000 N=345 p=0.090 rho=0.628 leak=0.629 scale=0.454 ridge=2.9e-09 washout=305
+[GP] iter   8/30 score=2.993739 best=0.000641 x_nrmse=1.100400 all_nrmse=0.534417 penalty=0.669 N=267 p=0.172 rho=0.815 leak=0.377 scale=0.930 ridge=1.2e-05 washout=197
+[GP] iter   9/30 score=3.898264 best=0.000641 x_nrmse=1.319171 all_nrmse=2.161031 penalty=0.752 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-10 washout=500
+[GP] iter  10/30 score=1000000.000000 best=0.000641 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.200 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=1000000.000000 best=0.000641 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=250 p=0.200 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=283
+[GP] iter  12/30 score=0.001020 best=0.000641 x_nrmse=0.000782 all_nrmse=0.000676 penalty=0.000 N=387 p=0.035 rho=0.640 leak=0.605 scale=0.690 ridge=6.2e-10 washout=371
+[GP] iter  13/30 score=9.850597 best=0.000641 x_nrmse=3.703530 all_nrmse=2.474387 penalty=3.872 N=563 p=0.136 rho=0.766 leak=0.383 scale=0.371 ridge=8.3e-07 washout=245
+[GP] iter  14/30 score=5.880324 best=0.000641 x_nrmse=1.796428 all_nrmse=2.065867 penalty=1.947 N=733 p=0.041 rho=0.500 leak=0.733 scale=0.642 ridge=1.0e-10 washout=143
+[GP] iter  15/30 score=0.000591 best=0.000591 x_nrmse=0.000425 all_nrmse=0.000377 penalty=0.000 N=300 p=0.029 rho=0.609 leak=0.450 scale=0.683 ridge=5.9e-10 washout=338
+[GP] iter  16/30 score=17.389478 best=0.000591 x_nrmse=6.837541 all_nrmse=3.667772 penalty=7.071 N=595 p=0.144 rho=1.112 leak=0.694 scale=0.619 ridge=1.1e-06 washout=220
+[GP] iter  17/30 score=0.003127 best=0.000591 x_nrmse=0.002910 all_nrmse=0.002309 penalty=0.000 N=609 p=0.085 rho=0.853 leak=0.783 scale=0.455 ridge=1.6e-09 washout=322
+[GP] iter  18/30 score=17.477829 best=0.000591 x_nrmse=6.371091 all_nrmse=3.101468 penalty=6.541 N=698 p=0.053 rho=0.796 leak=0.768 scale=0.699 ridge=1.9e-10 washout=388
+[GP] iter  19/30 score=3.860451 best=0.000591 x_nrmse=1.704780 all_nrmse=1.266646 penalty=0.719 N=335 p=0.200 rho=0.517 leak=0.364 scale=0.094 ridge=3.1e-04 washout=51
+[GP] iter  20/30 score=1.095914 best=0.000591 x_nrmse=1.045436 all_nrmse=0.850276 penalty=0.000 N=476 p=0.021 rho=0.724 leak=0.229 scale=0.751 ridge=3.8e-06 washout=414
+[GP] iter  21/30 score=21.103214 best=0.000591 x_nrmse=8.434138 all_nrmse=3.945112 penalty=8.688 N=800 p=0.020 rho=1.144 leak=0.800 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  22/30 score=1.612407 best=0.000591 x_nrmse=0.953858 all_nrmse=0.491200 penalty=0.000 N=737 p=0.200 rho=0.500 leak=0.530 scale=1.000 ridge=4.7e-10 washout=480
+[GP] iter  23/30 score=4.397659 best=0.000591 x_nrmse=2.147663 all_nrmse=1.238090 penalty=0.747 N=250 p=0.200 rho=0.500 leak=0.100 scale=1.000 ridge=1.0e-10 washout=500
+[GP] iter  24/30 score=3.698118 best=0.000591 x_nrmse=1.782675 all_nrmse=1.092726 penalty=0.620 N=250 p=0.020 rho=0.500 leak=0.675 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  25/30 score=1.136921 best=0.000591 x_nrmse=0.554770 all_nrmse=0.230863 penalty=0.000 N=358 p=0.177 rho=0.500 leak=0.558 scale=0.164 ridge=2.6e-05 washout=185
+[GP] iter  26/30 score=0.136250 best=0.000591 x_nrmse=0.105946 all_nrmse=0.091694 penalty=0.000 N=423 p=0.190 rho=0.506 leak=0.413 scale=0.110 ridge=7.5e-07 washout=125
+[GP] iter  27/30 score=0.256474 best=0.000591 x_nrmse=0.237033 all_nrmse=0.186165 penalty=0.000 N=439 p=0.142 rho=0.597 leak=0.532 scale=0.521 ridge=8.6e-06 washout=248
+[GP] iter  28/30 score=0.001368 best=0.000591 x_nrmse=0.001062 all_nrmse=0.000918 penalty=0.000 N=673 p=0.020 rho=1.007 leak=0.672 scale=1.000 ridge=1.0e-10 washout=50
+[GP] iter  29/30 score=0.008736 best=0.000591 x_nrmse=0.007112 all_nrmse=0.006073 penalty=0.000 N=350 p=0.152 rho=0.705 leak=0.657 scale=0.794 ridge=5.6e-08 washout=234
+[GP] iter  30/30 score=1.013154 best=0.000591 x_nrmse=0.441028 all_nrmse=0.204783 penalty=0.000 N=659 p=0.174 rho=0.989 leak=0.551 scale=0.085 ridge=2.5e-05 washout=283
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=0.006569 best=0.006569 x_nrmse=0.005085 all_nrmse=0.004435 penalty=0.000 N=527 p=0.088 rho=0.580 leak=0.643 scale=0.665 ridge=2.3e-07 washout=446
+[DUMMY] iter   2/30 score=3.736393 best=0.006569 x_nrmse=2.020598 all_nrmse=1.143486 penalty=0.509 N=389 p=0.069 rho=0.719 leak=0.568 scale=0.707 ridge=1.2e-07 washout=455
+[DUMMY] iter   3/30 score=0.035511 best=0.006569 x_nrmse=0.028671 all_nrmse=0.024407 penalty=0.000 N=561 p=0.175 rho=1.070 leak=0.530 scale=0.203 ridge=4.2e-06 washout=165
+[DUMMY] iter   4/30 score=5.309332 best=0.006569 x_nrmse=2.133885 all_nrmse=0.819501 penalty=1.722 N=721 p=0.140 rho=0.963 leak=0.123 scale=0.645 ridge=5.6e-07 washout=410
+[DUMMY] iter   5/30 score=3.866697 best=0.006569 x_nrmse=1.658968 all_nrmse=1.301763 penalty=0.671 N=414 p=0.120 rho=1.099 leak=0.768 scale=0.501 ridge=6.9e-07 washout=191
+[DUMMY] iter   6/30 score=0.103611 best=0.006569 x_nrmse=0.081406 all_nrmse=0.069958 penalty=0.000 N=685 p=0.117 rho=1.022 leak=0.505 scale=0.217 ridge=2.0e-05 washout=478
+[DUMMY] iter   7/30 score=0.001412 best=0.001412 x_nrmse=0.001079 all_nrmse=0.000945 penalty=0.000 N=774 p=0.063 rho=0.761 leak=0.732 scale=0.429 ridge=9.6e-09 washout=196
+[DUMMY] iter   8/30 score=0.138654 best=0.001412 x_nrmse=0.119512 all_nrmse=0.099078 penalty=0.000 N=555 p=0.093 rho=0.836 leak=0.754 scale=0.194 ridge=1.5e-04 washout=202
+[DUMMY] iter   9/30 score=0.808012 best=0.001412 x_nrmse=0.705787 all_nrmse=0.565070 penalty=0.000 N=614 p=0.103 rho=0.733 leak=0.399 scale=0.102 ridge=9.1e-04 washout=105
+[DUMMY] iter  10/30 score=0.334120 best=0.001412 x_nrmse=0.244225 all_nrmse=0.231476 penalty=0.000 N=792 p=0.063 rho=0.876 leak=0.723 scale=0.594 ridge=5.6e-09 washout=474
+[DUMMY] iter  11/30 score=19.293256 best=0.001412 x_nrmse=7.673093 all_nrmse=3.422597 penalty=7.512 N=695 p=0.159 rho=0.745 leak=0.411 scale=0.443 ridge=5.9e-07 washout=422
+[DUMMY] iter  12/30 score=0.019986 best=0.001412 x_nrmse=0.015771 all_nrmse=0.013633 penalty=0.000 N=389 p=0.067 rho=1.045 leak=0.520 scale=0.276 ridge=5.9e-07 washout=164
+[DUMMY] iter  13/30 score=5.294335 best=0.001412 x_nrmse=2.026048 all_nrmse=1.366216 penalty=0.929 N=685 p=0.094 rho=0.854 leak=0.125 scale=0.339 ridge=1.3e-04 washout=394
+[DUMMY] iter  14/30 score=0.227324 best=0.001412 x_nrmse=0.205918 all_nrmse=0.152862 penalty=0.000 N=687 p=0.099 rho=1.070 leak=0.296 scale=0.117 ridge=3.1e-04 washout=330
+[DUMMY] iter  15/30 score=10.483800 best=0.001412 x_nrmse=4.133027 all_nrmse=2.223954 penalty=4.102 N=473 p=0.142 rho=0.994 leak=0.196 scale=0.898 ridge=4.3e-04 washout=84
+[DUMMY] iter  16/30 score=0.002151 best=0.001412 x_nrmse=0.001682 all_nrmse=0.001449 penalty=0.000 N=741 p=0.101 rho=0.847 leak=0.763 scale=0.603 ridge=4.2e-09 washout=109
+[DUMMY] iter  17/30 score=0.026603 best=0.001412 x_nrmse=0.022092 all_nrmse=0.018563 penalty=0.000 N=396 p=0.040 rho=0.803 leak=0.127 scale=0.778 ridge=2.7e-05 washout=200
+[DUMMY] iter  18/30 score=0.003779 best=0.001412 x_nrmse=0.003094 all_nrmse=0.002643 penalty=0.000 N=412 p=0.149 rho=0.900 leak=0.368 scale=0.559 ridge=4.9e-09 washout=260
+[DUMMY] iter  19/30 score=3.630955 best=0.001412 x_nrmse=1.465427 all_nrmse=0.656566 penalty=0.677 N=422 p=0.155 rho=1.132 leak=0.227 scale=0.234 ridge=7.7e-05 washout=481
+[DUMMY] iter  20/30 score=0.655656 best=0.001412 x_nrmse=0.473769 all_nrmse=0.483836 penalty=0.000 N=342 p=0.089 rho=1.131 leak=0.666 scale=0.271 ridge=3.7e-06 washout=72
+[DUMMY] iter  21/30 score=8.705798 best=0.001412 x_nrmse=3.327005 all_nrmse=2.051921 penalty=1.903 N=523 p=0.062 rho=0.753 leak=0.343 scale=0.469 ridge=1.9e-04 washout=413
+[DUMMY] iter  22/30 score=0.071694 best=0.001412 x_nrmse=0.055737 all_nrmse=0.048295 penalty=0.000 N=702 p=0.125 rho=0.985 leak=0.309 scale=0.332 ridge=8.2e-05 washout=355
+[DUMMY] iter  23/30 score=0.099202 best=0.001412 x_nrmse=0.080679 all_nrmse=0.067897 penalty=0.000 N=698 p=0.041 rho=1.081 leak=0.572 scale=0.495 ridge=8.8e-10 washout=340
+[DUMMY] iter  24/30 score=0.001016 best=0.001016 x_nrmse=0.000834 all_nrmse=0.000691 penalty=0.000 N=519 p=0.082 rho=0.958 leak=0.499 scale=0.431 ridge=7.4e-10 washout=275
+[DUMMY] iter  25/30 score=0.004245 best=0.001016 x_nrmse=0.003323 all_nrmse=0.002898 penalty=0.000 N=665 p=0.025 rho=0.590 leak=0.633 scale=0.458 ridge=2.7e-08 washout=478
+[DUMMY] iter  26/30 score=3.718954 best=0.001016 x_nrmse=1.315418 all_nrmse=1.678623 penalty=0.737 N=475 p=0.168 rho=0.640 leak=0.156 scale=0.850 ridge=4.6e-04 washout=83
+[DUMMY] iter  27/30 score=3.851385 best=0.001016 x_nrmse=1.375509 all_nrmse=0.526918 penalty=0.823 N=252 p=0.087 rho=0.885 leak=0.295 scale=0.775 ridge=4.5e-06 washout=55
+[DUMMY] iter  28/30 score=20.581011 best=0.001016 x_nrmse=8.364522 all_nrmse=3.974564 penalty=8.113 N=546 p=0.022 rho=0.650 leak=0.165 scale=0.724 ridge=2.8e-04 washout=318
+[DUMMY] iter  29/30 score=0.015078 best=0.001016 x_nrmse=0.012289 all_nrmse=0.010390 penalty=0.000 N=409 p=0.136 rho=0.846 leak=0.322 scale=0.210 ridge=2.0e-06 washout=245
+[DUMMY] iter  30/30 score=6.837912 best=0.001016 x_nrmse=2.860183 all_nrmse=1.477706 penalty=1.477 N=614 p=0.104 rho=0.714 leak=0.585 scale=0.355 ridge=6.5e-04 washout=265
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=0.000234 best=0.000234 x_nrmse=0.000228 all_nrmse=0.000167 penalty=0.000 N=353 p=0.030 rho=0.953 leak=0.506 scale=0.370 ridge=5.7e-10 washout=389
+[FOREST] iter   2/30 score=3.542712 best=0.000234 x_nrmse=1.345171 all_nrmse=0.623127 penalty=0.645 N=544 p=0.045 rho=0.898 leak=0.207 scale=0.503 ridge=6.2e-05 washout=172
+[FOREST] iter   3/30 score=4.024757 best=0.000234 x_nrmse=1.400871 all_nrmse=1.778512 penalty=0.892 N=679 p=0.115 rho=0.544 leak=0.489 scale=0.553 ridge=1.6e-10 washout=153
+[FOREST] iter   4/30 score=0.019254 best=0.000234 x_nrmse=0.016379 all_nrmse=0.013408 penalty=0.000 N=502 p=0.023 rho=1.103 leak=0.138 scale=0.864 ridge=1.4e-07 washout=271
+[FOREST] iter   5/30 score=16.679449 best=0.000234 x_nrmse=5.113268 all_nrmse=2.202808 penalty=4.163 N=622 p=0.189 rho=0.869 leak=0.458 scale=0.973 ridge=2.4e-04 washout=91
+[FOREST] iter   6/30 score=8.277821 best=0.000234 x_nrmse=3.383589 all_nrmse=1.948085 penalty=1.756 N=733 p=0.165 rho=0.947 leak=0.609 scale=0.784 ridge=1.0e-04 washout=495
+[FOREST] iter   7/30 score=1.415356 best=0.000234 x_nrmse=0.727907 all_nrmse=0.306480 penalty=0.000 N=658 p=0.044 rho=0.814 leak=0.574 scale=0.331 ridge=4.8e-05 washout=156
+[FOREST] iter   8/30 score=0.039292 best=0.000234 x_nrmse=0.033635 all_nrmse=0.028353 penalty=0.000 N=531 p=0.156 rho=0.896 leak=0.762 scale=0.784 ridge=9.7e-08 washout=422
+[FOREST] iter   9/30 score=0.000163 best=0.000163 x_nrmse=0.000140 all_nrmse=0.000116 penalty=0.000 N=473 p=0.032 rho=1.033 leak=0.794 scale=0.077 ridge=1.5e-10 washout=375
+[FOREST] iter  10/30 score=4.759134 best=0.000163 x_nrmse=1.603630 all_nrmse=1.834237 penalty=1.188 N=454 p=0.033 rho=1.088 leak=0.448 scale=0.979 ridge=3.0e-05 washout=388
+[FOREST] iter  11/30 score=0.011900 best=0.000163 x_nrmse=0.010457 all_nrmse=0.008990 penalty=0.000 N=477 p=0.020 rho=0.907 leak=0.640 scale=0.857 ridge=1.7e-07 washout=73
+[FOREST] iter  12/30 score=0.436735 best=0.000163 x_nrmse=0.386416 all_nrmse=0.338352 penalty=0.000 N=697 p=0.021 rho=1.028 leak=0.766 scale=0.957 ridge=9.6e-08 washout=435
+[FOREST] iter  13/30 score=0.003788 best=0.000163 x_nrmse=0.003157 all_nrmse=0.002644 penalty=0.000 N=294 p=0.148 rho=1.086 leak=0.684 scale=0.979 ridge=9.6e-10 washout=482
+[FOREST] iter  14/30 score=0.002412 best=0.000163 x_nrmse=0.001818 all_nrmse=0.001609 penalty=0.000 N=439 p=0.168 rho=0.795 leak=0.690 scale=0.985 ridge=7.0e-10 washout=269
+[FOREST] iter  15/30 score=0.010251 best=0.000163 x_nrmse=0.007970 all_nrmse=0.006971 penalty=0.000 N=594 p=0.161 rho=1.056 leak=0.730 scale=0.969 ridge=4.8e-09 washout=84
+[FOREST] iter  16/30 score=3.997899 best=0.000163 x_nrmse=1.388596 all_nrmse=1.780274 penalty=0.883 N=610 p=0.170 rho=0.674 leak=0.722 scale=0.962 ridge=1.9e-10 washout=461
+[FOREST] iter  17/30 score=0.000903 best=0.000163 x_nrmse=0.000687 all_nrmse=0.000593 penalty=0.000 N=348 p=0.171 rho=1.037 leak=0.746 scale=0.767 ridge=5.3e-10 washout=300
+[FOREST] iter  18/30 score=0.026076 best=0.000163 x_nrmse=0.020062 all_nrmse=0.017749 penalty=0.000 N=344 p=0.185 rho=0.974 leak=0.709 scale=0.537 ridge=2.2e-06 washout=362
+[FOREST] iter  19/30 score=0.042893 best=0.000163 x_nrmse=0.035795 all_nrmse=0.030160 penalty=0.000 N=439 p=0.189 rho=1.089 leak=0.650 scale=0.317 ridge=4.4e-06 washout=287
+[FOREST] iter  20/30 score=14.104352 best=0.000163 x_nrmse=5.600361 all_nrmse=2.617811 penalty=5.356 N=641 p=0.185 rho=1.191 leak=0.697 scale=0.811 ridge=6.9e-06 washout=104
+[FOREST] iter  21/30 score=0.000283 best=0.000163 x_nrmse=0.000228 all_nrmse=0.000195 penalty=0.000 N=426 p=0.196 rho=1.076 leak=0.656 scale=0.177 ridge=3.3e-10 washout=50
+[FOREST] iter  22/30 score=0.003148 best=0.000163 x_nrmse=0.002944 all_nrmse=0.002325 penalty=0.000 N=263 p=0.184 rho=1.117 leak=0.120 scale=0.853 ridge=2.7e-09 washout=89
+[FOREST] iter  23/30 score=0.021470 best=0.000163 x_nrmse=0.016451 all_nrmse=0.014529 penalty=0.000 N=311 p=0.188 rho=1.044 leak=0.644 scale=0.377 ridge=4.6e-06 washout=75
+[FOREST] iter  24/30 score=0.021019 best=0.000163 x_nrmse=0.017886 all_nrmse=0.014907 penalty=0.000 N=321 p=0.180 rho=1.118 leak=0.676 scale=0.213 ridge=4.4e-06 washout=75
+[FOREST] iter  25/30 score=4.269450 best=0.000163 x_nrmse=1.570887 all_nrmse=0.831685 penalty=0.908 N=357 p=0.137 rho=1.066 leak=0.671 scale=0.590 ridge=5.5e-06 washout=68
+[FOREST] iter  26/30 score=21.692447 best=0.000163 x_nrmse=8.701872 all_nrmse=4.053568 penalty=8.832 N=454 p=0.189 rho=1.070 leak=0.418 scale=0.242 ridge=1.5e-06 washout=54
+[FOREST] iter  27/30 score=0.002711 best=0.000163 x_nrmse=0.002314 all_nrmse=0.001908 penalty=0.000 N=258 p=0.186 rho=1.180 leak=0.701 scale=0.455 ridge=1.3e-09 washout=329
+[FOREST] iter  28/30 score=0.000457 best=0.000163 x_nrmse=0.000369 all_nrmse=0.000301 penalty=0.000 N=313 p=0.195 rho=1.009 leak=0.747 scale=0.101 ridge=8.5e-10 washout=207
+[FOREST] iter  29/30 score=0.002153 best=0.000163 x_nrmse=0.001735 all_nrmse=0.001476 penalty=0.000 N=370 p=0.196 rho=1.040 leak=0.748 scale=0.637 ridge=2.5e-09 washout=144
+[FOREST] iter  30/30 score=0.002590 best=0.000163 x_nrmse=0.002112 all_nrmse=0.001794 penalty=0.000 N=391 p=0.198 rho=0.955 leak=0.792 scale=0.147 ridge=8.3e-09 washout=63
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=3.528242 best=3.528242 x_nrmse=1.262694 all_nrmse=1.327948 penalty=0.475 N=437 p=0.168 rho=0.529 leak=0.504 scale=0.938 ridge=1.8e-08 washout=184
+[GBRT] iter   2/30 score=0.018828 best=0.018828 x_nrmse=0.014115 all_nrmse=0.012588 penalty=0.000 N=790 p=0.105 rho=1.126 leak=0.207 scale=0.249 ridge=7.3e-08 washout=111
+[GBRT] iter   3/30 score=5.230878 best=0.018828 x_nrmse=1.964410 all_nrmse=1.113847 penalty=1.232 N=594 p=0.054 rho=0.864 leak=0.367 scale=0.939 ridge=4.4e-05 washout=217
+[GBRT] iter   4/30 score=0.263160 best=0.018828 x_nrmse=0.254540 all_nrmse=0.153219 penalty=0.000 N=530 p=0.158 rho=0.825 leak=0.104 scale=0.381 ridge=1.1e-06 washout=358
+[GBRT] iter   5/30 score=3.301414 best=0.018828 x_nrmse=1.282657 all_nrmse=1.652131 penalty=0.343 N=773 p=0.025 rho=1.180 leak=0.756 scale=0.432 ridge=4.0e-06 washout=256
+[GBRT] iter   6/30 score=17.846214 best=0.018828 x_nrmse=7.032894 all_nrmse=3.139554 penalty=6.835 N=655 p=0.044 rho=0.924 leak=0.562 scale=0.753 ridge=4.6e-08 washout=218
+[GBRT] iter   7/30 score=0.002389 best=0.002389 x_nrmse=0.001841 all_nrmse=0.001600 penalty=0.000 N=525 p=0.160 rho=0.822 leak=0.170 scale=0.352 ridge=7.0e-08 washout=105
+[GBRT] iter   8/30 score=0.031658 best=0.002389 x_nrmse=0.027786 all_nrmse=0.023062 penalty=0.000 N=294 p=0.150 rho=1.145 leak=0.550 scale=0.188 ridge=4.7e-05 washout=363
+[GBRT] iter   9/30 score=102.902777 best=0.002389 x_nrmse=4.568561 all_nrmse=3.446876 penalty=1.789 N=706 p=0.043 rho=0.722 leak=0.653 scale=0.068 ridge=2.3e-10 washout=217
+[GBRT] iter  10/30 score=1000000.000000 best=0.002389 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=752 p=0.157 rho=1.067 leak=0.431 scale=0.065 ridge=1.1e-09 washout=88
+[GBRT] iter  11/30 score=1000000.000000 best=0.002389 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=451 p=0.033 rho=0.739 leak=0.551 scale=0.053 ridge=3.4e-07 washout=73
+[GBRT] iter  12/30 score=0.000334 best=0.000334 x_nrmse=0.000270 all_nrmse=0.000232 penalty=0.000 N=336 p=0.033 rho=0.615 leak=0.769 scale=0.809 ridge=8.8e-10 washout=72
+[GBRT] iter  13/30 score=0.000213 best=0.000213 x_nrmse=0.000178 all_nrmse=0.000149 penalty=0.000 N=335 p=0.041 rho=0.514 leak=0.767 scale=0.318 ridge=3.8e-10 washout=272
+[GBRT] iter  14/30 score=0.000379 best=0.000213 x_nrmse=0.000268 all_nrmse=0.000232 penalty=0.000 N=690 p=0.144 rho=0.506 leak=0.732 scale=0.257 ridge=2.5e-10 washout=416
+[GBRT] iter  15/30 score=67.355248 best=0.000213 x_nrmse=20.650612 all_nrmse=7.125331 penalty=25.155 N=377 p=0.192 rho=0.690 leak=0.716 scale=0.065 ridge=3.4e-07 washout=366
+[GBRT] iter  16/30 score=1.723995 best=0.000213 x_nrmse=0.837358 all_nrmse=0.288315 penalty=0.456 N=324 p=0.188 rho=1.043 leak=0.794 scale=0.060 ridge=6.6e-09 washout=155
+[GBRT] iter  17/30 score=213.136131 best=0.000213 x_nrmse=58.346307 all_nrmse=14.289750 penalty=86.385 N=601 p=0.200 rho=0.849 leak=0.610 scale=0.062 ridge=1.0e-04 washout=295
+[GBRT] iter  18/30 score=1000000.000000 best=0.000213 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=350 p=0.078 rho=0.610 leak=0.104 scale=0.056 ridge=1.4e-07 washout=495
+[GBRT] iter  19/30 score=10.413433 best=0.000213 x_nrmse=3.977853 all_nrmse=2.276528 penalty=3.436 N=558 p=0.197 rho=1.177 leak=0.102 scale=0.231 ridge=1.0e-06 washout=93
+[GBRT] iter  20/30 score=8.202637 best=0.000213 x_nrmse=3.149882 all_nrmse=1.638747 penalty=1.895 N=594 p=0.188 rho=0.951 leak=0.205 scale=0.189 ridge=7.2e-05 washout=84
+[GBRT] iter  21/30 score=0.012585 best=0.000213 x_nrmse=0.010295 all_nrmse=0.008729 penalty=0.000 N=537 p=0.048 rho=0.914 leak=0.713 scale=0.064 ridge=3.0e-09 washout=87
+[GBRT] iter  22/30 score=26.146058 best=0.000213 x_nrmse=10.485115 all_nrmse=5.206288 penalty=10.715 N=761 p=0.141 rho=0.548 leak=0.418 scale=0.651 ridge=6.7e-10 washout=73
+[GBRT] iter  23/30 score=1000000.000000 best=0.000213 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=747 p=0.168 rho=0.615 leak=0.393 scale=0.064 ridge=6.9e-05 washout=110
+[GBRT] iter  24/30 score=0.764749 best=0.000213 x_nrmse=0.649849 all_nrmse=0.533207 penalty=0.000 N=511 p=0.192 rho=0.801 leak=0.486 scale=0.059 ridge=5.7e-06 washout=246
+[GBRT] iter  25/30 score=0.000431 best=0.000213 x_nrmse=0.000309 all_nrmse=0.000268 penalty=0.000 N=750 p=0.106 rho=0.899 leak=0.656 scale=0.107 ridge=3.2e-10 washout=333
+[GBRT] iter  26/30 score=0.127667 best=0.000213 x_nrmse=0.102299 all_nrmse=0.085822 penalty=0.000 N=731 p=0.187 rho=0.935 leak=0.656 scale=0.067 ridge=4.7e-06 washout=294
+[GBRT] iter  27/30 score=0.289654 best=0.000213 x_nrmse=0.278911 all_nrmse=0.176467 penalty=0.000 N=777 p=0.179 rho=1.018 leak=0.648 scale=0.055 ridge=5.4e-05 washout=296
+[GBRT] iter  28/30 score=1000000.000000 best=0.000213 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=726 p=0.124 rho=0.816 leak=0.593 scale=0.059 ridge=6.1e-08 washout=385
+[GBRT] iter  29/30 score=1.464397 best=0.000213 x_nrmse=0.770569 all_nrmse=0.368566 penalty=0.000 N=629 p=0.133 rho=1.095 leak=0.648 scale=0.053 ridge=6.5e-05 washout=132
+[GBRT] iter  30/30 score=6.087621 best=0.000213 x_nrmse=2.387577 all_nrmse=1.220864 penalty=1.409 N=389 p=0.197 rho=1.119 leak=0.611 scale=0.727 ridge=1.5e-05 washout=306
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/best_params_gbrt.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/optimizer_summary.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/optimizer_history.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/optimizer_results.csv
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+  forest | score=0.000163 | x_nrmse=0.000140 | N=473 | rho=1.033 | leak=0.794 | scale=0.077 | washout=375
+    gbrt | score=0.000213 | x_nrmse=0.000178 | N=335 | rho=0.514 | leak=0.767 | scale=0.318 | washout=272
+      gp | score=0.000591 | x_nrmse=0.000425 | N=300 | rho=0.609 | leak=0.450 | scale=0.683 | washout=338
+   dummy | score=0.001016 | x_nrmse=0.000834 | N=519 | rho=0.958 | leak=0.499 | scale=0.431 | washout=275
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/periodic_bursting/best_params_auto.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_bursting/results_full_zoom.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/periodic_bursting/results_all_states.png
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: chaotic_bursting
+[DataLoader] HR input current I: 3.25
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 45 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=0.328686 best=0.328686 x_nrmse=0.298193 all_nrmse=0.212719 penalty=0.000 N=688 p=0.053 rho=1.046 leak=0.518 scale=0.474 ridge=5.0e-10 washout=257
+[GP] iter   2/30 score=7.666430 best=0.328686 x_nrmse=2.703332 all_nrmse=2.425189 penalty=2.407 N=434 p=0.046 rho=0.956 leak=0.139 scale=0.736 ridge=3.7e-04 washout=50
+[GP] iter   3/30 score=1000000.000000 best=0.328686 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.131 rho=0.928 leak=0.105 scale=0.072 ridge=4.7e-07 washout=230
+[GP] iter   4/30 score=0.008835 best=0.008835 x_nrmse=0.008235 all_nrmse=0.005806 penalty=0.000 N=276 p=0.195 rho=0.663 leak=0.163 scale=0.637 ridge=4.8e-08 washout=492
+[GP] iter   5/30 score=0.703409 best=0.008835 x_nrmse=0.647457 all_nrmse=0.488098 penalty=0.000 N=507 p=0.175 rho=0.976 leak=0.415 scale=0.063 ridge=3.9e-04 washout=303
+[GP] iter   6/30 score=12.953689 best=0.008835 x_nrmse=5.140235 all_nrmse=3.548256 penalty=5.310 N=462 p=0.023 rho=0.662 leak=0.269 scale=0.699 ridge=1.9e-06 washout=425
+[GP] iter   7/30 score=0.010492 best=0.008835 x_nrmse=0.009120 all_nrmse=0.006784 penalty=0.000 N=345 p=0.090 rho=0.628 leak=0.629 scale=0.454 ridge=2.9e-09 washout=305
+[GP] iter   8/30 score=0.986862 best=0.008835 x_nrmse=0.131415 all_nrmse=0.093397 penalty=0.000 N=267 p=0.172 rho=0.815 leak=0.377 scale=0.930 ridge=1.2e-05 washout=197
+[GP] iter   9/30 score=0.064743 best=0.008835 x_nrmse=0.053787 all_nrmse=0.039098 penalty=0.000 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-10 washout=500
+[GP] iter  10/30 score=1000000.000000 best=0.008835 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.200 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=1000000.000000 best=0.008835 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=250 p=0.200 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=284
+[GP] iter  12/30 score=0.017705 best=0.008835 x_nrmse=0.014889 all_nrmse=0.010916 penalty=0.000 N=388 p=0.035 rho=0.640 leak=0.605 scale=0.690 ridge=6.2e-10 washout=371
+[GP] iter  13/30 score=3.364801 best=0.008835 x_nrmse=1.017408 all_nrmse=1.472841 penalty=0.369 N=563 p=0.136 rho=0.765 leak=0.383 scale=0.371 ridge=8.3e-07 washout=245
+[GP] iter  14/30 score=4.920427 best=0.008835 x_nrmse=1.469246 all_nrmse=2.109905 penalty=1.117 N=731 p=0.041 rho=0.500 leak=0.733 scale=0.642 ridge=1.0e-10 washout=141
+[GP] iter  15/30 score=0.003074 best=0.003074 x_nrmse=0.002563 all_nrmse=0.001923 penalty=0.000 N=300 p=0.029 rho=0.609 leak=0.450 scale=0.683 ridge=5.9e-10 washout=338
+[GP] iter  16/30 score=9.675847 best=0.003074 x_nrmse=3.684083 all_nrmse=2.598901 penalty=3.449 N=555 p=0.108 rho=0.766 leak=0.158 scale=0.594 ridge=1.1e-06 washout=303
+[GP] iter  17/30 score=0.079856 best=0.003074 x_nrmse=0.070900 all_nrmse=0.052459 penalty=0.000 N=610 p=0.085 rho=0.857 leak=0.772 scale=0.452 ridge=1.6e-09 washout=318
+[GP] iter  18/30 score=1.872801 best=0.003074 x_nrmse=1.006628 all_nrmse=0.793140 penalty=0.000 N=791 p=0.020 rho=1.186 leak=0.361 scale=0.095 ridge=1.3e-04 washout=110
+[GP] iter  19/30 score=0.061392 best=0.003074 x_nrmse=0.062742 all_nrmse=0.045568 penalty=0.000 N=669 p=0.046 rho=0.810 leak=0.795 scale=0.856 ridge=1.9e-10 washout=475
+[GP] iter  20/30 score=36.058659 best=0.003074 x_nrmse=3.131164 all_nrmse=2.539819 penalty=2.306 N=583 p=0.047 rho=0.766 leak=0.798 scale=0.945 ridge=3.4e-06 washout=258
+[GP] iter  21/30 score=1000000.000000 best=0.003074 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=800 p=0.020 rho=1.178 leak=0.107 scale=0.054 ridge=9.4e-04 washout=79
+[GP] iter  22/30 score=12.160695 best=0.003074 x_nrmse=4.783092 all_nrmse=2.976223 penalty=4.995 N=800 p=0.020 rho=1.200 leak=0.246 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  23/30 score=4.018741 best=0.003074 x_nrmse=1.448448 all_nrmse=1.929653 penalty=0.443 N=800 p=0.020 rho=1.200 leak=0.100 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  24/30 score=11.428689 best=0.003074 x_nrmse=2.076852 all_nrmse=2.534814 penalty=0.527 N=791 p=0.020 rho=0.500 leak=0.624 scale=0.556 ridge=1.0e-10 washout=500
+[GP] iter  25/30 score=2.138996 best=0.003074 x_nrmse=1.235705 all_nrmse=0.935515 penalty=0.000 N=250 p=0.200 rho=1.200 leak=0.566 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  26/30 score=0.191996 best=0.003074 x_nrmse=0.175318 all_nrmse=0.128104 penalty=0.000 N=250 p=0.200 rho=1.200 leak=0.686 scale=1.000 ridge=1.8e-10 washout=50
+[GP] iter  27/30 score=1.417349 best=0.003074 x_nrmse=0.640667 all_nrmse=0.484696 penalty=0.000 N=250 p=0.200 rho=0.534 leak=0.397 scale=0.178 ridge=1.0e-03 washout=58
+[GP] iter  28/30 score=13.322593 best=0.003074 x_nrmse=5.342763 all_nrmse=3.200123 penalty=5.546 N=800 p=0.020 rho=1.200 leak=0.356 scale=0.600 ridge=8.5e-05 washout=50
+[GP] iter  29/30 score=3.577008 best=0.003074 x_nrmse=1.272489 all_nrmse=1.616587 penalty=0.333 N=250 p=0.200 rho=1.200 leak=0.800 scale=0.590 ridge=1.0e-03 washout=50
+[GP] iter  30/30 score=2.668693 best=0.003074 x_nrmse=1.404761 all_nrmse=1.279274 penalty=0.000 N=800 p=0.200 rho=1.200 leak=0.387 scale=0.050 ridge=1.0e-03 washout=500
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=0.097366 best=0.097366 x_nrmse=0.098079 all_nrmse=0.071230 penalty=0.000 N=527 p=0.088 rho=0.580 leak=0.643 scale=0.665 ridge=2.3e-07 washout=446
+[DUMMY] iter   2/30 score=0.076571 best=0.076571 x_nrmse=0.078428 all_nrmse=0.056863 penalty=0.000 N=389 p=0.069 rho=0.719 leak=0.568 scale=0.707 ridge=1.2e-07 washout=455
+[DUMMY] iter   3/30 score=3.366432 best=0.076571 x_nrmse=0.972964 all_nrmse=0.893387 penalty=0.448 N=561 p=0.175 rho=1.070 leak=0.530 scale=0.203 ridge=4.2e-06 washout=165
+[DUMMY] iter   4/30 score=3.064218 best=0.076571 x_nrmse=1.104268 all_nrmse=1.832607 penalty=0.000 N=721 p=0.140 rho=0.963 leak=0.123 scale=0.645 ridge=5.6e-07 washout=410
+[DUMMY] iter   5/30 score=2.001691 best=0.076571 x_nrmse=1.033377 all_nrmse=1.141375 penalty=0.000 N=414 p=0.120 rho=1.099 leak=0.768 scale=0.501 ridge=6.9e-07 washout=191
+[DUMMY] iter   6/30 score=3.262678 best=0.076571 x_nrmse=1.010588 all_nrmse=1.259058 penalty=0.333 N=685 p=0.117 rho=1.022 leak=0.505 scale=0.217 ridge=2.0e-05 washout=478
+[DUMMY] iter   7/30 score=0.028041 best=0.028041 x_nrmse=0.027403 all_nrmse=0.020010 penalty=0.000 N=774 p=0.063 rho=0.761 leak=0.732 scale=0.429 ridge=9.6e-09 washout=196
+[DUMMY] iter   8/30 score=0.744521 best=0.028041 x_nrmse=0.668280 all_nrmse=0.500901 penalty=0.000 N=555 p=0.093 rho=0.836 leak=0.754 scale=0.194 ridge=1.5e-04 washout=202
+[DUMMY] iter   9/30 score=1.213092 best=0.028041 x_nrmse=0.425429 all_nrmse=0.317723 penalty=0.000 N=614 p=0.103 rho=0.733 leak=0.399 scale=0.102 ridge=9.1e-04 washout=105
+[DUMMY] iter  10/30 score=1.862420 best=0.028041 x_nrmse=0.873663 all_nrmse=0.802060 penalty=0.000 N=792 p=0.063 rho=0.876 leak=0.723 scale=0.594 ridge=5.6e-09 washout=474
+[DUMMY] iter  11/30 score=10.860406 best=0.028041 x_nrmse=4.074862 all_nrmse=3.426584 penalty=4.232 N=695 p=0.159 rho=0.745 leak=0.411 scale=0.443 ridge=5.9e-07 washout=422
+[DUMMY] iter  12/30 score=0.154359 best=0.028041 x_nrmse=0.142522 all_nrmse=0.101939 penalty=0.000 N=389 p=0.067 rho=1.045 leak=0.520 scale=0.276 ridge=5.9e-07 washout=164
+[DUMMY] iter  13/30 score=7.239732 best=0.028041 x_nrmse=2.374500 all_nrmse=2.854007 penalty=2.353 N=685 p=0.094 rho=0.854 leak=0.125 scale=0.339 ridge=1.3e-04 washout=394
+[DUMMY] iter  14/30 score=0.297739 best=0.028041 x_nrmse=0.277539 all_nrmse=0.206457 penalty=0.000 N=687 p=0.099 rho=1.070 leak=0.296 scale=0.117 ridge=3.1e-04 washout=330
+[DUMMY] iter  15/30 score=10.227572 best=0.028041 x_nrmse=3.803257 all_nrmse=3.010428 penalty=3.987 N=473 p=0.142 rho=0.994 leak=0.196 scale=0.898 ridge=4.3e-04 washout=84
+[DUMMY] iter  16/30 score=1.790283 best=0.028041 x_nrmse=0.924772 all_nrmse=0.778515 penalty=0.000 N=741 p=0.101 rho=0.847 leak=0.763 scale=0.603 ridge=4.2e-09 washout=109
+[DUMMY] iter  17/30 score=5.258812 best=0.028041 x_nrmse=1.621195 all_nrmse=2.626484 penalty=1.249 N=396 p=0.040 rho=0.803 leak=0.127 scale=0.778 ridge=2.7e-05 washout=200
+[DUMMY] iter  18/30 score=0.011459 best=0.011459 x_nrmse=0.009939 all_nrmse=0.007334 penalty=0.000 N=412 p=0.149 rho=0.900 leak=0.368 scale=0.559 ridge=4.9e-09 washout=260
+[DUMMY] iter  19/30 score=10.568221 best=0.011459 x_nrmse=2.184225 all_nrmse=2.271453 penalty=1.358 N=422 p=0.155 rho=1.132 leak=0.227 scale=0.234 ridge=7.7e-05 washout=481
+[DUMMY] iter  20/30 score=0.058465 best=0.011459 x_nrmse=0.056706 all_nrmse=0.040299 penalty=0.000 N=342 p=0.089 rho=1.131 leak=0.666 scale=0.271 ridge=3.7e-06 washout=72
+[DUMMY] iter  21/30 score=23.148035 best=0.011459 x_nrmse=3.124544 all_nrmse=2.930295 penalty=2.551 N=523 p=0.062 rho=0.753 leak=0.343 scale=0.469 ridge=1.9e-04 washout=413
+[DUMMY] iter  22/30 score=6.747422 best=0.011459 x_nrmse=1.833010 all_nrmse=1.925222 penalty=0.746 N=702 p=0.125 rho=0.985 leak=0.309 scale=0.332 ridge=8.2e-05 washout=355
+[DUMMY] iter  23/30 score=0.085839 best=0.011459 x_nrmse=0.079267 all_nrmse=0.057083 penalty=0.000 N=698 p=0.041 rho=1.081 leak=0.572 scale=0.495 ridge=8.8e-10 washout=340
+[DUMMY] iter  24/30 score=0.078254 best=0.011459 x_nrmse=0.067709 all_nrmse=0.048946 penalty=0.000 N=519 p=0.082 rho=0.958 leak=0.499 scale=0.431 ridge=7.4e-10 washout=275
+[DUMMY] iter  25/30 score=0.028509 best=0.011459 x_nrmse=0.025801 all_nrmse=0.019095 penalty=0.000 N=665 p=0.025 rho=0.590 leak=0.633 scale=0.458 ridge=2.7e-08 washout=478
+[DUMMY] iter  26/30 score=11.549341 best=0.011459 x_nrmse=4.475092 all_nrmse=3.069154 penalty=4.671 N=475 p=0.168 rho=0.640 leak=0.156 scale=0.850 ridge=4.6e-04 washout=83
+[DUMMY] iter  27/30 score=0.157825 best=0.011459 x_nrmse=0.130630 all_nrmse=0.096965 penalty=0.000 N=252 p=0.087 rho=0.885 leak=0.295 scale=0.775 ridge=4.5e-06 washout=55
+[DUMMY] iter  28/30 score=10.974735 best=0.011459 x_nrmse=4.441821 all_nrmse=3.012608 penalty=4.429 N=546 p=0.022 rho=0.650 leak=0.165 scale=0.724 ridge=2.8e-04 washout=318
+[DUMMY] iter  29/30 score=0.154846 best=0.011459 x_nrmse=0.133217 all_nrmse=0.097690 penalty=0.000 N=409 p=0.136 rho=0.846 leak=0.322 scale=0.210 ridge=2.0e-06 washout=245
+[DUMMY] iter  30/30 score=7.498750 best=0.011459 x_nrmse=2.593934 all_nrmse=1.950899 penalty=2.684 N=614 p=0.104 rho=0.714 leak=0.585 scale=0.355 ridge=6.5e-04 washout=265
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=0.006167 best=0.006167 x_nrmse=0.005307 all_nrmse=0.003893 penalty=0.000 N=353 p=0.030 rho=0.953 leak=0.506 scale=0.370 ridge=5.7e-10 washout=389
+[FOREST] iter   2/30 score=10.336839 best=0.006167 x_nrmse=3.923233 all_nrmse=2.666625 penalty=4.091 N=544 p=0.045 rho=0.898 leak=0.207 scale=0.503 ridge=6.2e-05 washout=172
+[FOREST] iter   3/30 score=16.949620 best=0.006167 x_nrmse=7.018305 all_nrmse=5.530811 penalty=6.788 N=679 p=0.115 rho=0.544 leak=0.489 scale=0.553 ridge=1.6e-10 washout=153
+[FOREST] iter   4/30 score=0.086115 best=0.006167 x_nrmse=0.069067 all_nrmse=0.051190 penalty=0.000 N=502 p=0.023 rho=1.103 leak=0.138 scale=0.864 ridge=1.4e-07 washout=271
+[FOREST] iter   5/30 score=42.870695 best=0.006167 x_nrmse=2.966816 all_nrmse=2.329535 penalty=2.277 N=622 p=0.189 rho=0.869 leak=0.458 scale=0.973 ridge=2.4e-04 washout=91
+[FOREST] iter   6/30 score=3.483204 best=0.006167 x_nrmse=1.034266 all_nrmse=1.690802 penalty=0.413 N=733 p=0.165 rho=0.947 leak=0.609 scale=0.784 ridge=1.0e-04 washout=495
+[FOREST] iter   7/30 score=1.602968 best=0.006167 x_nrmse=1.245883 all_nrmse=1.042009 penalty=0.000 N=658 p=0.044 rho=0.814 leak=0.574 scale=0.331 ridge=4.8e-05 washout=156
+[FOREST] iter   8/30 score=0.540358 best=0.006167 x_nrmse=0.476643 all_nrmse=0.346056 penalty=0.000 N=531 p=0.156 rho=0.896 leak=0.762 scale=0.784 ridge=9.7e-08 washout=422
+[FOREST] iter   9/30 score=0.689024 best=0.006167 x_nrmse=0.674713 all_nrmse=0.469992 penalty=0.000 N=473 p=0.029 rho=1.049 leak=0.527 scale=0.944 ridge=1.7e-06 washout=328
+[FOREST] iter  10/30 score=7.938358 best=0.006167 x_nrmse=2.841947 all_nrmse=2.204065 penalty=2.753 N=507 p=0.029 rho=0.913 leak=0.372 scale=0.892 ridge=8.8e-06 washout=342
+[FOREST] iter  11/30 score=5.059024 best=0.006167 x_nrmse=1.952555 all_nrmse=1.803756 penalty=1.113 N=266 p=0.194 rho=1.143 leak=0.536 scale=0.856 ridge=5.3e-04 washout=479
+[FOREST] iter  12/30 score=1.357764 best=0.006167 x_nrmse=0.628653 all_nrmse=0.474419 penalty=0.000 N=662 p=0.179 rho=1.056 leak=0.578 scale=0.933 ridge=3.9e-08 washout=387
+[FOREST] iter  13/30 score=0.560480 best=0.006167 x_nrmse=0.500409 all_nrmse=0.354147 penalty=0.000 N=596 p=0.150 rho=1.079 leak=0.513 scale=0.890 ridge=6.8e-08 washout=156
+[FOREST] iter  14/30 score=0.224933 best=0.006167 x_nrmse=0.189535 all_nrmse=0.136637 penalty=0.000 N=761 p=0.147 rho=1.039 leak=0.628 scale=0.955 ridge=1.1e-09 washout=154
+[FOREST] iter  15/30 score=0.280476 best=0.006167 x_nrmse=0.223300 all_nrmse=0.162057 penalty=0.000 N=440 p=0.134 rho=1.119 leak=0.147 scale=0.953 ridge=4.3e-08 washout=81
+[FOREST] iter  16/30 score=1.879694 best=0.006167 x_nrmse=0.821195 all_nrmse=0.841401 penalty=0.000 N=702 p=0.196 rho=1.022 leak=0.115 scale=0.995 ridge=6.2e-09 washout=106
+[FOREST] iter  17/30 score=0.302837 best=0.006167 x_nrmse=0.247355 all_nrmse=0.179830 penalty=0.000 N=622 p=0.133 rho=0.978 leak=0.456 scale=0.972 ridge=2.4e-08 washout=142
+[FOREST] iter  18/30 score=0.007119 best=0.006167 x_nrmse=0.005817 all_nrmse=0.004274 penalty=0.000 N=433 p=0.024 rho=0.884 leak=0.708 scale=0.916 ridge=1.4e-10 washout=122
+[FOREST] iter  19/30 score=0.016479 best=0.006167 x_nrmse=0.013637 all_nrmse=0.009894 penalty=0.000 N=534 p=0.058 rho=0.745 leak=0.692 scale=0.938 ridge=2.3e-10 washout=82
+[FOREST] iter  20/30 score=0.022332 best=0.006167 x_nrmse=0.018388 all_nrmse=0.013434 penalty=0.000 N=388 p=0.089 rho=0.627 leak=0.760 scale=0.967 ridge=6.9e-10 washout=121
+[FOREST] iter  21/30 score=0.031408 best=0.006167 x_nrmse=0.025303 all_nrmse=0.018709 penalty=0.000 N=453 p=0.095 rho=0.818 leak=0.742 scale=0.993 ridge=2.8e-10 washout=81
+[FOREST] iter  22/30 score=0.090743 best=0.006167 x_nrmse=0.088073 all_nrmse=0.064577 penalty=0.000 N=607 p=0.185 rho=0.754 leak=0.696 scale=0.981 ridge=4.3e-09 washout=106
+[FOREST] iter  23/30 score=0.037098 best=0.006167 x_nrmse=0.032768 all_nrmse=0.023476 penalty=0.000 N=455 p=0.191 rho=0.824 leak=0.792 scale=0.992 ridge=3.1e-10 washout=80
+[FOREST] iter  24/30 score=0.014456 best=0.006167 x_nrmse=0.012338 all_nrmse=0.008936 penalty=0.000 N=405 p=0.196 rho=0.859 leak=0.456 scale=0.961 ridge=5.6e-10 washout=247
+[FOREST] iter  25/30 score=0.030810 best=0.006167 x_nrmse=0.024718 all_nrmse=0.018151 penalty=0.000 N=491 p=0.104 rho=0.818 leak=0.441 scale=0.999 ridge=3.1e-09 washout=93
+[FOREST] iter  26/30 score=2.408738 best=0.006167 x_nrmse=1.101200 all_nrmse=1.046916 penalty=0.000 N=260 p=0.198 rho=0.512 leak=0.109 scale=0.911 ridge=1.8e-09 washout=61
+[FOREST] iter  27/30 score=7.166568 best=0.006167 x_nrmse=2.543981 all_nrmse=2.299292 penalty=2.113 N=456 p=0.093 rho=0.953 leak=0.490 scale=0.907 ridge=3.8e-05 washout=65
+[FOREST] iter  28/30 score=6.716562 best=0.006167 x_nrmse=2.202369 all_nrmse=2.134103 penalty=2.166 N=402 p=0.154 rho=0.851 leak=0.712 scale=0.967 ridge=3.8e-04 washout=101
+[FOREST] iter  29/30 score=2.306013 best=0.006167 x_nrmse=1.219635 all_nrmse=0.918536 penalty=0.000 N=440 p=0.141 rho=0.788 leak=0.780 scale=0.985 ridge=1.7e-04 washout=218
+[FOREST] iter  30/30 score=0.076784 best=0.006167 x_nrmse=0.059506 all_nrmse=0.043989 penalty=0.000 N=629 p=0.103 rho=0.976 leak=0.468 scale=0.978 ridge=2.5e-10 washout=65
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=0.026875 best=0.026875 x_nrmse=0.026038 all_nrmse=0.018921 penalty=0.000 N=437 p=0.168 rho=0.529 leak=0.504 scale=0.938 ridge=1.8e-08 washout=184
+[GBRT] iter   2/30 score=4.823200 best=0.026875 x_nrmse=1.820313 all_nrmse=1.682991 penalty=0.000 N=790 p=0.105 rho=1.126 leak=0.207 scale=0.249 ridge=7.3e-08 washout=111
+[GBRT] iter   3/30 score=10.966758 best=0.026875 x_nrmse=4.322683 all_nrmse=2.806525 penalty=4.211 N=594 p=0.054 rho=0.864 leak=0.367 scale=0.939 ridge=4.4e-05 washout=217
+[GBRT] iter   4/30 score=2.593592 best=0.026875 x_nrmse=1.358954 all_nrmse=1.518847 penalty=0.000 N=530 p=0.158 rho=0.825 leak=0.104 scale=0.381 ridge=1.1e-06 washout=358
+[GBRT] iter   5/30 score=10.588557 best=0.026875 x_nrmse=4.028563 all_nrmse=2.981970 penalty=4.112 N=773 p=0.025 rho=1.180 leak=0.756 scale=0.432 ridge=4.0e-06 washout=256
+[GBRT] iter   6/30 score=10.305834 best=0.026875 x_nrmse=3.556180 all_nrmse=2.616387 penalty=3.430 N=655 p=0.044 rho=0.924 leak=0.562 scale=0.753 ridge=4.6e-08 washout=218
+[GBRT] iter   7/30 score=4.849951 best=0.026875 x_nrmse=1.292836 all_nrmse=1.703773 penalty=0.105 N=525 p=0.160 rho=0.822 leak=0.170 scale=0.352 ridge=7.0e-08 washout=105
+[GBRT] iter   8/30 score=0.123905 best=0.026875 x_nrmse=0.105496 all_nrmse=0.078191 penalty=0.000 N=294 p=0.150 rho=1.145 leak=0.550 scale=0.188 ridge=4.7e-05 washout=363
+[GBRT] iter   9/30 score=0.069730 best=0.026875 x_nrmse=0.057416 all_nrmse=0.041802 penalty=0.000 N=417 p=0.182 rho=0.747 leak=0.577 scale=0.969 ridge=1.6e-08 washout=439
+[GBRT] iter  10/30 score=0.000641 best=0.000641 x_nrmse=0.000596 all_nrmse=0.000444 penalty=0.000 N=413 p=0.199 rho=0.605 leak=0.256 scale=0.164 ridge=2.6e-10 washout=499
+[GBRT] iter  11/30 score=0.000718 best=0.000641 x_nrmse=0.000645 all_nrmse=0.000481 penalty=0.000 N=470 p=0.170 rho=0.527 leak=0.358 scale=0.214 ridge=1.6e-10 washout=410
+[GBRT] iter  12/30 score=3.602097 best=0.000641 x_nrmse=1.191112 all_nrmse=1.930892 penalty=0.333 N=397 p=0.084 rho=0.562 leak=0.115 scale=0.715 ridge=2.4e-05 washout=237
+[GBRT] iter  13/30 score=0.004453 best=0.000641 x_nrmse=0.003937 all_nrmse=0.002941 penalty=0.000 N=312 p=0.191 rho=0.525 leak=0.639 scale=0.162 ridge=4.9e-09 washout=241
+[GBRT] iter  14/30 score=0.000662 best=0.000641 x_nrmse=0.000626 all_nrmse=0.000460 penalty=0.000 N=258 p=0.199 rho=0.650 leak=0.487 scale=0.166 ridge=4.6e-10 washout=151
+[GBRT] iter  15/30 score=0.001369 best=0.000641 x_nrmse=0.001197 all_nrmse=0.000890 penalty=0.000 N=401 p=0.178 rho=0.521 leak=0.515 scale=0.149 ridge=3.8e-10 washout=439
+[GBRT] iter  16/30 score=0.019802 best=0.000641 x_nrmse=0.015656 all_nrmse=0.011573 penalty=0.000 N=258 p=0.174 rho=0.538 leak=0.179 scale=0.864 ridge=5.5e-09 washout=303
+[GBRT] iter  17/30 score=0.001056 best=0.000641 x_nrmse=0.000955 all_nrmse=0.000710 penalty=0.000 N=532 p=0.166 rho=0.562 leak=0.103 scale=0.164 ridge=2.7e-10 washout=355
+[GBRT] iter  18/30 score=0.074260 best=0.000641 x_nrmse=0.069232 all_nrmse=0.051181 penalty=0.000 N=332 p=0.176 rho=1.120 leak=0.351 scale=0.905 ridge=6.8e-09 washout=488
+[GBRT] iter  19/30 score=0.011585 best=0.000641 x_nrmse=0.009354 all_nrmse=0.006997 penalty=0.000 N=296 p=0.043 rho=0.583 leak=0.523 scale=0.084 ridge=2.3e-10 washout=121
+[GBRT] iter  20/30 score=2.027663 best=0.000641 x_nrmse=1.006837 all_nrmse=1.114836 penalty=0.000 N=647 p=0.051 rho=0.865 leak=0.108 scale=0.763 ridge=9.3e-10 washout=479
+[GBRT] iter  21/30 score=0.053465 best=0.000641 x_nrmse=0.047809 all_nrmse=0.035211 penalty=0.000 N=605 p=0.055 rho=0.649 leak=0.449 scale=0.122 ridge=4.5e-07 washout=469
+[GBRT] iter  22/30 score=1000000.000000 best=0.000641 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=257 p=0.033 rho=0.508 leak=0.123 scale=0.087 ridge=9.3e-07 washout=337
+[GBRT] iter  23/30 score=0.029151 best=0.000641 x_nrmse=0.025330 all_nrmse=0.018500 penalty=0.000 N=253 p=0.057 rho=0.511 leak=0.211 scale=0.944 ridge=1.2e-10 washout=166
+[GBRT] iter  24/30 score=0.010616 best=0.000641 x_nrmse=0.010346 all_nrmse=0.007397 penalty=0.000 N=268 p=0.051 rho=0.508 leak=0.485 scale=0.977 ridge=3.6e-08 washout=468
+[GBRT] iter  25/30 score=0.168149 best=0.000641 x_nrmse=0.148295 all_nrmse=0.111038 penalty=0.000 N=752 p=0.040 rho=0.502 leak=0.638 scale=0.639 ridge=4.0e-07 washout=295
+[GBRT] iter  26/30 score=1.105714 best=0.000641 x_nrmse=0.294619 all_nrmse=0.218030 penalty=0.000 N=255 p=0.041 rho=0.844 leak=0.563 scale=0.065 ridge=5.6e-06 washout=156
+[GBRT] iter  27/30 score=2.345902 best=0.000641 x_nrmse=1.367320 all_nrmse=1.040354 penalty=0.000 N=520 p=0.031 rho=1.115 leak=0.102 scale=0.407 ridge=4.0e-07 washout=298
+[GBRT] iter  28/30 score=0.201463 best=0.000641 x_nrmse=0.165665 all_nrmse=0.124260 penalty=0.000 N=694 p=0.027 rho=0.511 leak=0.130 scale=0.141 ridge=2.7e-07 washout=459
+[GBRT] iter  29/30 score=0.090852 best=0.000641 x_nrmse=0.082540 all_nrmse=0.061737 penalty=0.000 N=575 p=0.046 rho=0.507 leak=0.166 scale=0.162 ridge=4.3e-06 washout=334
+[GBRT] iter  30/30 score=1000000.000000 best=0.000641 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=252 p=0.030 rho=1.050 leak=0.128 scale=0.109 ridge=2.2e-09 washout=376
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/best_params_gbrt.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/optimizer_summary.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/optimizer_history.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/optimizer_results.csv
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+    gbrt | score=0.000641 | x_nrmse=0.000596 | N=413 | rho=0.605 | leak=0.256 | scale=0.164 | washout=499
+      gp | score=0.003074 | x_nrmse=0.002563 | N=300 | rho=0.609 | leak=0.450 | scale=0.683 | washout=338
+  forest | score=0.006167 | x_nrmse=0.005307 | N=353 | rho=0.953 | leak=0.506 | scale=0.370 | washout=389
+   dummy | score=0.011459 | x_nrmse=0.009939 | N=412 | rho=0.900 | leak=0.368 | scale=0.559 | washout=260
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/02_bo_optimization/chaotic_bursting/best_params_auto.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/01_prediction_all_regimes/chaotic_bursting/results_all_states.png
+[Control] Controller: linear_feedback
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.092917
+[Control] Validation coarse K=0.175833
+[Control] Validation coarse K=0.258750
+[Control] Validation coarse K=0.341667
+[Control] Validation coarse K=0.424583
+[Control] Validation coarse K=0.507500
+[Control] Validation coarse K=0.590417
+[Control] Validation coarse K=0.673333
+[Control] Validation coarse K=0.756250
+[Control] Validation coarse K=0.839167
+[Control] Validation coarse K=0.922083
+[Control] Validation coarse K=1.005000
+[Control] Validation coarse K=1.087917
+[Control] Validation coarse K=1.170833
+[Control] Validation coarse K=1.253750
+[Control] Validation coarse K=1.336667
+[Control] Validation coarse K=1.419583
+[Control] Validation coarse K=1.502500
+[Control] Validation coarse K=1.585417
+[Control] Validation coarse K=1.668333
+[Control] Validation coarse K=1.751250
+[Control] Validation coarse K=1.834167
+[Control] Validation coarse K=1.917083
+[Control] Validation coarse K=2.000000
+[Control] Validation refined K=0.706500
+[Control] Validation refined K=0.737921
+[Control] Validation refined K=0.769342
+[Control] Validation refined K=0.800763
+[Control] Validation refined K=0.832184
+[Control] Validation refined K=0.863605
+[Control] Validation refined K=0.895026
+[Control] Validation refined K=0.926447
+[Control] Validation refined K=0.957868
+[Control] Validation refined K=0.989289
+[Control] Validation refined K=1.020711
+[Control] Validation refined K=1.052132
+[Control] Validation refined K=1.083553
+[Control] Validation refined K=1.114974
+[Control] Validation refined K=1.146395
+[Control] Validation refined K=1.177816
+[Control] Validation refined K=1.209237
+[Control] Validation refined K=1.240658
+[Control] Validation refined K=1.272079
+[Control] Validation refined K=1.303500
+[Control] Selected K=1.005000 on controller validation (score=8.38193e-06)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/best_rollout/rollout.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/control_summary.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/controlled_all_states.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/control_signal.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/control_error.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/03_linear_feedback/control_sweep_summary.png
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p3
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.025031
+[Control] Validation refined K=0.040061
+[Control] Validation refined K=0.055092
+[Control] Validation refined K=0.070123
+[Control] Validation refined K=0.085154
+[Control] Validation refined K=0.100184
+[Control] Validation refined K=0.115215
+[Control] Validation refined K=0.130246
+[Control] Validation refined K=0.145276
+[Control] Validation refined K=0.160307
+[Control] Validation refined K=0.175338
+[Control] Validation refined K=0.190368
+[Control] Validation refined K=0.205399
+[Control] Validation refined K=0.220430
+[Control] Validation refined K=0.235461
+[Control] Validation refined K=0.250491
+[Control] Validation refined K=0.265522
+[Control] Validation refined K=0.280553
+[Control] Validation refined K=0.295583
+[Control] Selected K=0.040061 on controller validation (score=0.00579154)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p3/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p3/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p5
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.025031
+[Control] Validation refined K=0.040061
+[Control] Validation refined K=0.055092
+[Control] Validation refined K=0.070123
+[Control] Validation refined K=0.085154
+[Control] Validation refined K=0.100184
+[Control] Validation refined K=0.115215
+[Control] Validation refined K=0.130246
+[Control] Validation refined K=0.145276
+[Control] Validation refined K=0.160307
+[Control] Validation refined K=0.175338
+[Control] Validation refined K=0.190368
+[Control] Validation refined K=0.205399
+[Control] Validation refined K=0.220430
+[Control] Validation refined K=0.235461
+[Control] Validation refined K=0.250491
+[Control] Validation refined K=0.265522
+[Control] Validation refined K=0.280553
+[Control] Validation refined K=0.295583
+[Control] Selected K=0.085154 on controller validation (score=0.00346168)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p5/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p5/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p7
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.034833
+[Control] Validation refined K=0.058360
+[Control] Validation refined K=0.081886
+[Control] Validation refined K=0.105412
+[Control] Validation refined K=0.128939
+[Control] Validation refined K=0.152465
+[Control] Validation refined K=0.175991
+[Control] Validation refined K=0.199518
+[Control] Validation refined K=0.223044
+[Control] Validation refined K=0.246570
+[Control] Validation refined K=0.270096
+[Control] Validation refined K=0.293623
+[Control] Validation refined K=0.317149
+[Control] Validation refined K=0.340675
+[Control] Validation refined K=0.364202
+[Control] Validation refined K=0.387728
+[Control] Validation refined K=0.411254
+[Control] Validation refined K=0.434781
+[Control] Validation refined K=0.458307
+[Control] Validation refined K=0.481833
+[Control] Selected K=0.246570 on controller validation (score=0.0017032)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p7/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p7/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p8
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.221083
+[Control] Validation refined K=0.244610
+[Control] Validation refined K=0.268136
+[Control] Validation refined K=0.291662
+[Control] Validation refined K=0.315189
+[Control] Validation refined K=0.338715
+[Control] Validation refined K=0.362241
+[Control] Validation refined K=0.385768
+[Control] Validation refined K=0.409294
+[Control] Validation refined K=0.432820
+[Control] Validation refined K=0.456346
+[Control] Validation refined K=0.479873
+[Control] Validation refined K=0.503399
+[Control] Validation refined K=0.526925
+[Control] Validation refined K=0.550452
+[Control] Validation refined K=0.573978
+[Control] Validation refined K=0.597504
+[Control] Validation refined K=0.621031
+[Control] Validation refined K=0.644557
+[Control] Validation refined K=0.668083
+[Control] Selected K=0.409294 on controller validation (score=0.00107673)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p8/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p8/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p9
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.655667
+[Control] Validation refined K=0.679193
+[Control] Validation refined K=0.702719
+[Control] Validation refined K=0.726246
+[Control] Validation refined K=0.749772
+[Control] Validation refined K=0.773298
+[Control] Validation refined K=0.796825
+[Control] Validation refined K=0.820351
+[Control] Validation refined K=0.843877
+[Control] Validation refined K=0.867404
+[Control] Validation refined K=0.890930
+[Control] Validation refined K=0.914456
+[Control] Validation refined K=0.937982
+[Control] Validation refined K=0.961509
+[Control] Validation refined K=0.985035
+[Control] Validation refined K=1.008561
+[Control] Validation refined K=1.032088
+[Control] Validation refined K=1.055614
+[Control] Validation refined K=1.079140
+[Control] Validation refined K=1.102667
+[Control] Selected K=0.914456 on controller validation (score=0.000302281)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p9/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p9/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Selected K=0.914456 on controller validation (score=0.000302281)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/best_rollout/rollout.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/control_summary.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/controlled_all_states.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/control_signal.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/control_error.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/04_finite_time/control_sweep_summary.png
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_20_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 20
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.030636
+[Control] Validation refined K=0.041273
+[Control] Validation refined K=0.051909
+[Control] Validation refined K=0.062545
+[Control] Validation refined K=0.073182
+[Control] Validation refined K=0.083818
+[Control] Validation refined K=0.094455
+[Control] Validation refined K=0.105091
+[Control] Validation refined K=0.115727
+[Control] Validation refined K=0.126364
+[Control] Validation refined K=0.137000
+[Control] Selected K=0.020000 on controller validation (score=41.755)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_20_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_80_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 80
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.030636
+[Control] Validation refined K=0.041273
+[Control] Validation refined K=0.051909
+[Control] Validation refined K=0.062545
+[Control] Validation refined K=0.073182
+[Control] Validation refined K=0.083818
+[Control] Validation refined K=0.094455
+[Control] Validation refined K=0.105091
+[Control] Validation refined K=0.115727
+[Control] Validation refined K=0.126364
+[Control] Validation refined K=0.137000
+[Control] Selected K=0.020000 on controller validation (score=3287.77)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_80_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_320_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 320
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.030636
+[Control] Validation refined K=0.041273
+[Control] Validation refined K=0.051909
+[Control] Validation refined K=0.062545
+[Control] Validation refined K=0.073182
+[Control] Validation refined K=0.083818
+[Control] Validation refined K=0.094455
+[Control] Validation refined K=0.105091
+[Control] Validation refined K=0.115727
+[Control] Validation refined K=0.126364
+[Control] Validation refined K=0.137000
+[Control] Selected K=0.020000 on controller validation (score=211.256)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_320_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_640_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 640
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.618000
+[Control] Validation refined K=0.634545
+[Control] Validation refined K=0.651091
+[Control] Validation refined K=0.667636
+[Control] Validation refined K=0.684182
+[Control] Validation refined K=0.700727
+[Control] Validation refined K=0.717273
+[Control] Validation refined K=0.733818
+[Control] Validation refined K=0.750364
+[Control] Validation refined K=0.766909
+[Control] Validation refined K=0.783455
+[Control] Selected K=0.733818 on controller validation (score=5.03771)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_640_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1280_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 1280
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.683000
+[Control] Validation refined K=0.693636
+[Control] Validation refined K=0.704273
+[Control] Validation refined K=0.714909
+[Control] Validation refined K=0.725545
+[Control] Validation refined K=0.736182
+[Control] Validation refined K=0.746818
+[Control] Validation refined K=0.757455
+[Control] Validation refined K=0.768091
+[Control] Validation refined K=0.778727
+[Control] Validation refined K=0.789364
+[Control] Selected K=0.789364 on controller validation (score=0.462815)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1600_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 1600
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.683000
+[Control] Validation refined K=0.693636
+[Control] Validation refined K=0.704273
+[Control] Validation refined K=0.714909
+[Control] Validation refined K=0.725545
+[Control] Validation refined K=0.736182
+[Control] Validation refined K=0.746818
+[Control] Validation refined K=0.757455
+[Control] Validation refined K=0.768091
+[Control] Validation refined K=0.778727
+[Control] Validation refined K=0.789364
+[Control] Selected K=0.768091 on controller validation (score=0.142981)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_2400_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 2400
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.618000
+[Control] Validation refined K=0.634545
+[Control] Validation refined K=0.651091
+[Control] Validation refined K=0.667636
+[Control] Validation refined K=0.684182
+[Control] Validation refined K=0.700727
+[Control] Validation refined K=0.717273
+[Control] Validation refined K=0.733818
+[Control] Validation refined K=0.750364
+[Control] Validation refined K=0.766909
+[Control] Validation refined K=0.783455
+[Control] Selected K=0.717273 on controller validation (score=30.218)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_3200_sign_minus1
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 3200
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.618000
+[Control] Validation refined K=0.634545
+[Control] Validation refined K=0.651091
+[Control] Validation refined K=0.667636
+[Control] Validation refined K=0.684182
+[Control] Validation refined K=0.700727
+[Control] Validation refined K=0.717273
+[Control] Validation refined K=0.733818
+[Control] Validation refined K=0.750364
+[Control] Validation refined K=0.766909
+[Control] Validation refined K=0.783455
+[Control] Selected K=0.733818 on controller validation (score=40.6517)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas
+[Control] Target raw : [-0.93522541 -3.43758855  3.23076749]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 1600
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Selected K=0.768091 on controller validation (score=0.142981)
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/best_rollout/rollout.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/k_sweep.csv
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/best_rollout/metrics.json
+[Save] -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/control_summary.json
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/controlled_all_states.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/pyragas_phase_trajectory_3d.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/pyragas_periodic_zoom.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/control_signal.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/control_error.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/pyragas_periodic_k_sweep_summary.png
+[Plot] Saved -> /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/05_pyragas/control_sweep_summary.png
+{
+  "bo_invocations": [
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "periodic_spiking",
+      "training_selection_samples": 105000
+    },
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "periodic_bursting",
+      "training_selection_samples": 105000
+    },
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "chaotic_bursting",
+      "training_selection_samples": 105000
+    }
+  ],
+  "controller_model_identity": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+  "final_root": "/home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614",
+  "git_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "package_validation": {
+    "absolute_path_findings": [],
+    "clean_repository_at_run_start": true,
+    "controller_summaries": [
+      {
+        "control_model_source": "validation_selected",
+        "controller": "linear_feedback",
+        "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "03_linear_feedback",
+        "stable": true
+      },
+      {
+        "control_model_source": "validation_selected",
+        "controller": "finite_time",
+        "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "04_finite_time",
+        "stable": true
+      },
+      {
+        "control_model_source": "validation_selected",
+        "controller": "pyragas",
+        "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "05_pyragas",
+        "stable": true
+      }
+    ],
+    "csv_errors": [],
+    "csv_valid": true,
+    "duplicate_hash_groups": [
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+          "02_bo_optimization/periodic_bursting/optimizer_results.csv"
+        ],
+        "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+      },
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+          "02_bo_optimization/chaotic_bursting/optimizer_results.csv"
+        ],
+        "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      },
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+          "02_bo_optimization/periodic_spiking/optimizer_results.csv"
+        ],
+        "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+          "01_prediction_all_regimes/chaotic_bursting/metrics.json"
+        ],
+        "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+          "01_prediction_all_regimes/periodic_bursting/metrics.json"
+        ],
+        "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+          "01_prediction_all_regimes/periodic_spiking/metrics.json"
+        ],
+        "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "02_bo_optimization/chaotic_bursting/validation_windows.json",
+          "02_bo_optimization/periodic_bursting/validation_windows.json",
+          "02_bo_optimization/periodic_spiking/validation_windows.json"
+        ],
+        "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      },
+      {
+        "extension": ".png",
+        "files": [
+          "05_pyragas/control_sweep_summary.png",
+          "05_pyragas/pyragas_periodic_k_sweep_summary.png"
+        ],
+        "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      }
+    ],
+    "duplicate_prediction_violations": [],
+    "errors": [],
+    "expected_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+    "expected_controller_summaries_present": true,
+    "file_hashes": [
+      {
+        "extension": ".csv",
+        "file": "00_manifest/bo_invocations.csv",
+        "sha256": "184e1900c5e8be7c5a6a925706c45bef3a197809bcb2f8cf92b6880ea8a1d95a"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/run_manifest.json",
+        "sha256": "802c1978f38cfa64653d367c1b8975a953f91a669915b8e16512b248a275eba5"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/source_hashes.json",
+        "sha256": "482b97736241bb37b080efb67604fcb49beaa038e122576f68bdcd138a513204"
+      },
+      {
+        "extension": ".csv",
+        "file": "00_manifest/stage_timings.csv",
+        "sha256": "a6d2d64e705cafb2b86d8d4ef646d6860c16885aceaec71a89a11f5214d9cd66"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+        "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/metrics.json",
+        "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_all_states.png",
+        "sha256": "21d4f8969d65b02524d83002e7d48541e7e4b04b54f7e66353a13539cf816efd"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png",
+        "sha256": "0b71677c4cc39f74f2425073e101d36067c38d11d04306356086d46d96cef0b4"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png",
+        "sha256": "cda8e19f1b2bec00bc254a080f768cf6133c8805dba0db14e53847e6daa703c7"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/selected_model.json",
+        "sha256": "d2eb222f13b65f1fc250d53bc288e0b5675ddfc6869a1771b29554e13cabba20"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png",
+        "sha256": "9ffd660bb7d0338f8c2a23932907e0fb2bd84d9ead6be85345ef458fa0863e13"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+        "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/metrics.json",
+        "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_all_states.png",
+        "sha256": "b90e3a0e895695a9e696a480785a7eafc597083cf95266f09fc1ed221248dadf"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_full_zoom.png",
+        "sha256": "e68047ce1ce4203cb2688e2b0fcfc136267bc2050eb84c5d73636698b69ec102"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png",
+        "sha256": "ef0a73834e59fa0605013ff0d97dd3fb5b5c5f4ce2b8ea644f12a239952f49a3"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/selected_model.json",
+        "sha256": "b67ab6029121e2e479e169d5dcbd84f04be95176ec65fd59d29226ef5cb5ecef"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png",
+        "sha256": "440489f1260733f4adf9ca0fafcda068539c78b05398cc650cb117ab868268cd"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+        "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/metrics.json",
+        "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_all_states.png",
+        "sha256": "d81f58019972b292f11a817f78357e5e43737c0b23eb6af6b1cd99a1ecf47cad"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_full_zoom.png",
+        "sha256": "219e72fe120eef1d417d85e3ef76e387452efcd394c0a5397c2ba30336d7afea"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png",
+        "sha256": "a4d886d08ad3ff929727ee7ad685d03c0582302985cc1f7eab48e36dd9e89b99"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/selected_model.json",
+        "sha256": "c35b160db397a8c457b1e9ff6777349277b17ecfc1a15376db783ab717ccbec5"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png",
+        "sha256": "d25ceda3b8996c78fb13b6388362a31e4c053c1c418ae8b769398dc4a29d6cc2"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params.json",
+        "sha256": "495bae24fd55970a29ce23198e5af23133a44473459718ae1d7c082786ad6cf1"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_auto.json",
+        "sha256": "a6023fa42cb9b15a0cbd74d2ab18a2df3b6bdd74c853874b479aa3034e3e3222"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_dummy.json",
+        "sha256": "c13bd5e7c7e9c8371e954f327d3d6126cb1f38228aa4771220a759063e1877f4"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_forest.json",
+        "sha256": "34419843933a2e2d70d4f393d9a7dc1fc1abb6e51657e2eee8ba8de17c4c4cf2"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_gbrt.json",
+        "sha256": "38b775b192ada280b0a2339beac8fe4ea446d1b23d1d3b4b503899d6fdaad94c"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_gp.json",
+        "sha256": "dea1be2e7fdeaa50fdb9ebd4f57e39daaaf2596d21d4883affd9029c2cabce28"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png",
+        "sha256": "7fa41344f68bdf31da43fcc86608be4ff728ea9923a1d2b6e94ae291129bfa67"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_convergence.png",
+        "sha256": "35c243f6ed115b73f0dab16d287ad2a9a1c1107e2426a5c15d7ed2ea54b65c39"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+        "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv",
+        "sha256": "764b69b5c224a8e5f30952776505cc9a363d0953accb3ede97eac4bda34f706d"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_results.csv",
+        "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_summary.json",
+        "sha256": "81cb685500696b24ba7819c298e3bc21f468fb93d27f851c6b7a8fb1eb37894e"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_validation_summary.csv",
+        "sha256": "63acb0154bd51499d0371f4d296c50cff2b354031cd859bb9505bde013e47894"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/validation_windows.json",
+        "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params.json",
+        "sha256": "8b227e83b0560ec8380ba7fc52e36c441eb2c5a4d7391fa4b87bed1b8d8bae4e"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_auto.json",
+        "sha256": "6bd1e32c3c1bc788c028db0505abc3f7beaef0dc8428a91af66027d7c768fcf5"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_dummy.json",
+        "sha256": "39b6f50706f8393463b60b346d879106e1f92572b66449f04e8aebb913d188db"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_forest.json",
+        "sha256": "64d92f0357fea1a3fc5e14c10e28bf7d434eb01577766ff116887fb1ca659c24"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_gbrt.json",
+        "sha256": "ab1985739cac9818354b05ea19cdc532d9174267106ec26d582591d7f239ea8c"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_gp.json",
+        "sha256": "530a3348f3f76564848bfb5af2e1896e1b2f1bc4a8d539763cb5d168d18685d8"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png",
+        "sha256": "40a0dc73e941e8812b573cb639fe6254a2dc5120eedbda1ae4a56f0da4536c13"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_convergence.png",
+        "sha256": "18b7dc3411a0fe70c68e82166fa47048e11ac2d9255e21db6708950f628c1a14"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+        "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv",
+        "sha256": "7502a7b343e246253305edc45bfa4ab8e4528da36e4e0f408a2e05d167d8834f"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_results.csv",
+        "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_summary.json",
+        "sha256": "88c5165fcaf89405595bb394c57503dae021c151c288012fe7ecf2d88ae25bf1"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_validation_summary.csv",
+        "sha256": "e0f8ad81bc310a00c15b8dec5d8f1e1b7915d311afc643c97babc79058d74d34"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/validation_windows.json",
+        "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params.json",
+        "sha256": "be51c7f7ad0d0e9a207687c120cf772048739a10638acba35e77a074f56c147d"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_auto.json",
+        "sha256": "9405c7e86a107b2fa0cb392c082c658a2457653de81293c3ca041aa7fd0c1a8f"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_dummy.json",
+        "sha256": "f4b7e414b281873ccd3b5a58b763fa771810ec1af4c7130d21fbf7d3e60bd0b9"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_forest.json",
+        "sha256": "d73fab60a6e2679c4d36fe18a58fb76cb9f1c491764e853c0ac881773ee73dbf"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_gbrt.json",
+        "sha256": "ae1c08a434b4f865455c4b682f22314442ca03f132a587682b492483fd9abfaa"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_gp.json",
+        "sha256": "73d6559bcf29aa1f997d6a92346956c376fae874e223aa7ae938c89069824c9a"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png",
+        "sha256": "75f84b913c70d054afa148ca01620a8402574783548995d8e4c1f9c77ad086e6"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_convergence.png",
+        "sha256": "9ced75f129c4b143dd513296a179d87c7e578e3aa2464d55e7a5f3bb1d3188cf"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+        "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv",
+        "sha256": "174208dfdc64352ce3189edcaf3274510a3e0b45cab5b30a0278dccc0276beea"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_results.csv",
+        "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_summary.json",
+        "sha256": "0e43b59a1ebaf2ce70906233a8d6b247f545089041f5b07a32b2ae76b6848e7d"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_validation_summary.csv",
+        "sha256": "c858065e645d15ce6eb1c3f6807b814909fcd51f905afa88eaa2b957baf1a4bd"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/validation_windows.json",
+        "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      },
+      {
+        "extension": ".json",
+        "file": "03_linear_feedback/best_rollout/metrics.json",
+        "sha256": "46189e09a7e59dc2d064957428b2dde072134f418e1458e4ec866a24cd84d057"
+      },
+      {
+        "extension": ".csv",
+        "file": "03_linear_feedback/best_rollout/rollout.csv",
+        "sha256": "116b5c96f92e1d1aaf9daf1f80a93174cf9872683597812b05fbd9c9a451477a"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_error.png",
+        "sha256": "bf23452846177a0c1fe6554681b0400816b22b64bab2398139d1bf9f79f6a8e6"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_signal.png",
+        "sha256": "a21d1b4528d7fbfe161c4abb4f901d175f187e8006520b2806d61c93ec373bfe"
+      },
+      {
+        "extension": ".json",
+        "file": "03_linear_feedback/control_summary.json",
+        "sha256": "41e0722d023efb51beb7c74e107283f99adf0d14b1d2250a0ea68bb9fcc314eb"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_sweep_summary.png",
+        "sha256": "bb249a6c134f2680ea3369fa3a57bad589593805a4cb8eac87ad693c62690fe5"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/controlled_all_states.png",
+        "sha256": "e29788e0a54e211ba23c05dc295d081187b9ecedd786e5281a2837693eb6c7b7"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/controlled_vs_uncontrolled_x.png",
+        "sha256": "b239814a12ce2ce5dbb428bb32311fc7839c3547a21fb249195879f28c425c55"
+      },
+      {
+        "extension": ".csv",
+        "file": "03_linear_feedback/k_sweep.csv",
+        "sha256": "f753748f407d0ff8588a08a91ffcfac78b4fac73263997fc4242bbb898ca70ec"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "8e2ffd097262bfc6ad793a72ca8560797bd3bb3649eaa4d8afda4c0766f7c8cc"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/best_rollout/metrics.json",
+        "sha256": "e91dcfaf254cbb956e273c14b1e7b3d17feb6b90ad67d3fb9fecd9fcd2d08ebb"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/best_rollout/rollout.csv",
+        "sha256": "b84603aa45f5b9d658297dee4b7926a35db474c70aa32f0773f56dafa24f0548"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p3/control_summary.json",
+        "sha256": "331bbaff2f28b3248e5699f1cf490b4cd1b3553e9bdb56fd2cd73e8ca7594524"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p3/k_sweep.csv",
+        "sha256": "24657f690c5f1e228059c34cac689ab851a3a198bba6663717688686c4bbe2b8"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p5/control_summary.json",
+        "sha256": "285d47c873e6a11e237c51f57d9d74da35952b11ed093a6b362751d916f28173"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p5/k_sweep.csv",
+        "sha256": "111fa65b36dc8e965998fd16b86ca23a103af606adc3a873f3cf57c0bbe00247"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p7/control_summary.json",
+        "sha256": "5d605207114da51c96ca84197830840d1b5c11fdfe1ef18edde8e927ebe0374e"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p7/k_sweep.csv",
+        "sha256": "c92b10132fab8355397689eae9f56c6e96750532a276588d3c02241a59ffc501"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p8/control_summary.json",
+        "sha256": "b8dfe3281b35bbbbc695a0512adfbccbe0777efc0a78600533f010289e84a835"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p8/k_sweep.csv",
+        "sha256": "d2cac56a0a3eec39656d9ca92f9c4dcdd756a4314c0a4c4527f52a673856f42f"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p9/control_summary.json",
+        "sha256": "e796782e930f1ba95d88ab4cfbbd879bc9c194a5cecde15ce38fa8e1e8ac33e8"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p9/k_sweep.csv",
+        "sha256": "f4f29cb28386bcf34a99819f642a3b7c68648588b8eb0618964a663fcf72d16c"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_error.png",
+        "sha256": "ad18cc67c588f5becd116f22184e4b9d42946c1c88b89aa7e44b4be8df8ea115"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_signal.png",
+        "sha256": "4707873383a99e8e41f3f0cd3991dcbc61e7d073584dfa62fd8e3925f11a48f2"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/control_summary.json",
+        "sha256": "d430dd17952e1b6429ad2127758439f5fa69c307569928dd57c234dfe1124d67"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_sweep_summary.png",
+        "sha256": "9b85ad83ad5f5a031c089863f36c9a71f6b18e3bff3212cc5e18de116ee3e6aa"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/controlled_all_states.png",
+        "sha256": "30d70a275e5160fa33c567710670f38cba681c9a1a8d2017facc74ca4f9b0736"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/controlled_vs_uncontrolled_x.png",
+        "sha256": "b3286b7d0fdbea38dc6c895f2fed9938f04878627b151135ef0a0c8eaa7da894"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/k_sweep.csv",
+        "sha256": "c434d324e0d884b1913f98608bcd89b36e1ad9272f8f0791330d01dd8cdc6235"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "985a41d571e43d50f8078a3462a820f4c1bc2d5de15ebb7281f40a5d061a2aff"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/best_rollout/metrics.json",
+        "sha256": "004671e7e9044676e2e0510246a736b2084b7cb670182892ec443ea53b19da04"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/best_rollout/rollout.csv",
+        "sha256": "ec5dd037299c1d8fdb307ad991c1a53f831c5ba6ebc2aba6a6a1f25460f18e95"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json",
+        "sha256": "5872f3e4f332fc8f8ff686b6a5baf22f39327dde96ddaba49fc8e072d25d8255"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv",
+        "sha256": "ba5c68692ec8b6b887e9ef469742183d61f05107abf695dbf0e29f60ce42373b"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json",
+        "sha256": "a295f83ed097d2c3347a438ac2bd5a62de6ed5e51b8262c65f7b552883e25c57"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv",
+        "sha256": "79187da69743ab5a41aae3f68d0d959a4a32de521d1b84676df42c5eefb661fd"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_20_sign_minus1/control_summary.json",
+        "sha256": "309ab72939c588b48d94306eff2aa0ce82a821e927fdc35dc535c8b00af00d79"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv",
+        "sha256": "7ff5de8f4e29880153a42427fa37e647ddfd7e0486431d8da08576944fda72f3"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json",
+        "sha256": "210745babae8893ccc662aacd30c5525868638a8ca1058e239ec4bf13e0e1c99"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv",
+        "sha256": "2df09349e8d50907ac83a9c9d24cf99c0a4f9ccce2eef2c86e11f73e5b4b2c99"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json",
+        "sha256": "57cb295e4be022f1c89970fad3e8033d98884aba6f4139bf5cb3ec147563d1dc"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv",
+        "sha256": "546b224b4e538bd6641261862d153a3d8dbaf060a1fdba747305267c65dfd401"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_320_sign_minus1/control_summary.json",
+        "sha256": "3df65c26932c8c54ac64e05903828f4cf6ca96fb91594ed0ebe0107fdc5914d9"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv",
+        "sha256": "b338b014a30c728e4cb794f7fe356ff5dcb981f9688a3522e240600a0642928f"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_640_sign_minus1/control_summary.json",
+        "sha256": "cafae7121a949a4b1279609aab2d6a2f0dd91b74eeadfeeaf990b74b40fa866d"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv",
+        "sha256": "6fc03b800382e997a566e6d8a01312a796f4d14e2b3b301bee61c126d524c34b"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_80_sign_minus1/control_summary.json",
+        "sha256": "627196a6657b48b71f983f8c856d855bfe814c245092846e6b012cdc1fa698f8"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv",
+        "sha256": "67d3efb7d3cac7df0715dceef71620a16efc164e8dc7e2d2d6b4626bf37304a5"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_error.png",
+        "sha256": "ed772f6a099e80e7f4d1413d7cd774738542ed4979afac92295ced13a2b16b3a"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_signal.png",
+        "sha256": "251178226516728647a9c598ec30966d667cacb4f8c95e6db388d1c17238f954"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/control_summary.json",
+        "sha256": "34bdf9123659145c03185a81bdff416dcd4fc5dda2d042ca04aa393034985fb8"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_sweep_summary.png",
+        "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/controlled_all_states.png",
+        "sha256": "45a613fafd2e7ffe7e0dd13ca9f8ce8409b6a2480ecf892324df997e61e7cfe6"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/controlled_vs_uncontrolled_x.png",
+        "sha256": "11ef7d278c1c51db55d24fdafbe03b447694626356d14208e0d7bfa4326cb60c"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/k_sweep.csv",
+        "sha256": "d952b1a569403ca5089569d7fedee331f20e22dbe5827b2c8355682ef300773e"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_periodic_k_sweep_summary.png",
+        "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_periodic_zoom.png",
+        "sha256": "e19c26ab8fdb3f84013a13d1b907230ad961b80846f429a18f6df378570bed89"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_phase_trajectory_3d.png",
+        "sha256": "1bbf6d75c3acb084b0d0922c461974f8ba2016695c3936b8c552ddcc8bacfe6d"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "f884174878a8eceb0fc35ee726fce051346a411127e00b9ab4326f2d612f196a"
+      },
+      {
+        "extension": ".json",
+        "file": "06_comparison_tables/chapter1_final_comparison.json",
+        "sha256": "0fb70ce46f2bcd97a3270b903722ce95a4e0e0600fe2a28882ec3d9fa9e44d9a"
+      },
+      {
+        "extension": ".csv",
+        "file": "06_comparison_tables/controller_final_test_metrics.csv",
+        "sha256": "76b2f4626e7382289d6a8b69bfa61d3ef8641d5ea908bdbceb4df54d0c84b312"
+      },
+      {
+        "extension": ".csv",
+        "file": "06_comparison_tables/prediction_metrics_all_regimes.csv",
+        "sha256": "b1f96209c7b0a4d6dd74702bedaf698e7376ccd31ac0fcc720e0fe7ddc0aeec1"
+      },
+      {
+        "extension": ".json",
+        "file": "07_report_figures/figure_index.json",
+        "sha256": "e9301d1c51a014458f54b0d3587581d738fd052ea123e3ce9a1d01ef8156011e"
+      }
+    ],
+    "final_quality_gates_passed": true,
+    "json_errors": [],
+    "json_valid": true,
+    "manifest_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+    "manifest_commit_matches_current_commit": true,
+    "misplaced_prediction_figures": [],
+    "missing_directories": [],
+    "missing_required_files": [],
+    "no_unexpected_absolute_paths": true,
+    "no_unnecessary_duplicate_prediction_figures": true,
+    "periodic_spiking_quality_gate_passed": true,
+    "png_errors": [],
+    "png_readable": true,
+    "required_directories": [
+      "00_manifest",
+      "01_prediction_all_regimes",
+      "02_bo_optimization",
+      "03_linear_feedback",
+      "04_finite_time",
+      "05_pyragas",
+      "06_comparison_tables",
+      "07_report_figures",
+      "08_logs"
+    ],
+    "required_files_present": true,
+    "same_control_model_identity": true,
+    "schema_version": "chapter1_package_validation_v1",
+    "top_level_directories": [
+      "00_manifest",
+      "01_prediction_all_regimes",
+      "02_bo_optimization",
+      "03_linear_feedback",
+      "04_finite_time",
+      "05_pyragas",
+      "06_comparison_tables",
+      "07_report_figures",
+      "08_logs"
+    ],
+    "unexpected_directories": [],
+    "valid": true,
+    "warnings": [
+      "identical PNG/CSV/JSON files are listed for review; only cross-section prediction duplicates are fatal"
+    ]
+  }
+}
+Final package validation: PASS
+========================================================================
+PIPELINE COMPLETE
+Definitive package: /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614
+Validation report : /home/hpc/rlvl/rlvl177v/Thesis_evidence_20260624/FINAL_THESIS_RUN_1752614/00_manifest/final_package_validation.json
+Completed UTC     : 2026-07-18T21:11:31+00:00
+========================================================================

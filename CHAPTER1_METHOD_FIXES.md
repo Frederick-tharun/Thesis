@@ -78,8 +78,9 @@ portable tiny package.
 - The empirical quiet-state reference is data-derived and generally has a
   nonzero HR right-hand-side residual.
 
-FINAL_THESIS_RUN_1751888 remains unchanged diagnostic evidence. A new job is
-definitive only after its package validator reports success.
+`FINAL_THESIS_RUN_1752614`, produced from commit
+`2e953b065b3208c1556cf3d56ce690a1f7cd48c5`, is the definitive Chapter 1
+evidence package. Its final-package validator reports success.
 
 ## Final command
 

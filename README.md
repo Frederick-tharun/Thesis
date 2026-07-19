@@ -1,129 +1,167 @@
-# Chapter 1: ESN digital twin and control of Hindmarsh–Rose dynamics
+# ESN prediction and control of Hindmarsh–Rose neuron dynamics
 
-This repository contains the final Chapter 1 pipeline for the
-periodic_spiking, periodic_bursting and chaotic_bursting synthetic
-Hindmarsh–Rose regimes.
+This repository contains the code used for Chapter 1 of my master's thesis. It
+examines whether an Echo State Network (ESN) can learn three regimes of the
+Hindmarsh–Rose neuron model—periodic spiking, periodic bursting and chaotic
+bursting—and whether the trained ESN can then be controlled.
 
-The code compares GP, random (dummy), random-forest and GBRT optimization
-backends, selects one ESN per regime using validation data only, locks and
-saves that model, and evaluates it once on the untouched held-out trajectory.
-Linear feedback, finite-time feedback and Pyragas delayed feedback all reuse
-the same saved validation-selected chaotic-bursting ESN.
+The project compares Gaussian-process, random, random-forest and GBRT
+hyperparameter searches. The selected models are evaluated on held-out data
+that are not used during model selection. The chaotic-bursting ESN is then
+reused for linear feedback, global finite-time feedback and Pyragas delayed
+feedback experiments.
 
-## Definitive run
+The controllers act on the trained ESN digital twin. They do not directly
+control a biological neuron or the original Hindmarsh–Rose differential
+equations.
 
-The source tree must be committed and clean. Submit exactly one job:
+## Main files
 
-~~~bash
+| File | Purpose |
+|---|---|
+| `main.py` | General command-line entry point |
+| `final_pipeline.py` | Runs the complete Chapter 1 experiment |
+| `final_package.py` | Validates a completed final result package |
+| `model.py` | Echo State Network implementation |
+| `optimize_model.py` | Hyperparameter search and validation scoring |
+| `neuron_controllers.py` | Linear, finite-time and Pyragas control laws |
+| `control_experiment.py` | Controller selection and evaluation |
+| `data_loader.py` | Hindmarsh–Rose simulation and preprocessing |
+| `plotting.py` | Prediction, optimization and control figures |
+| `finalization_smoke.py` | Reduced end-to-end workflow check |
+| `run_final_thesis_pipeline.slurm` | Slurm job for the definitive run |
+
+
+## Installation
+
+The definitive experiment used Python 3.12. To create a local environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+On the HPC system, the final job used the Conda environment `thesis_final`.
+The exact software versions are stored in the final run manifest.
+
+## Running the code
+
+Use the standard command-line interface for individual experiments:
+
+```bash
+python main.py --help
+```
+
+Submit the complete Chapter 1 workflow with:
+
+```bash
 sbatch run_final_thesis_pipeline.slurm
-~~~
+```
 
-The Slurm preflight refuses tracked, staged, or relevant untracked source
-changes. It invokes final_pipeline.py once; it does not rerun main.py for each
-controller. Completed evidence is written outside the repository:
+The Slurm workflow requires a clean, committed Git tree. This connects every
+result to an exact source revision. It writes the complete evidence package
+outside the repository:
 
-~~~text
-~/Thesis_evidence_20260624/FINAL_THESIS_RUN_<JOBID>/
-~~~
+```text
+~/Thesis_evidence_20260624/FINAL_THESIS_RUN_<JOB_ID>/
+```
 
-A run is definitive only if
-00_manifest/final_package_validation.json contains valid=true. Submitting a
-job alone does not make its results final.
+A run is complete only when
+`00_manifest/final_package_validation.json` contains `"valid": true`.
 
-## Prediction selection protocol
+## Evaluation protocol
 
-The final prediction split is 70% training and 30% untouched held-out test.
-Model selection receives the 70% training array only. By default its final
-24,000 samples form three identical, non-overlapping 8,000-step recursive
-validation windows for every optimizer and candidate. The preceding training
-samples fit each candidate.
+For each dynamical regime, 70% of the trajectory is used for training and
+model selection. The remaining 30% is an untouched held-out test trajectory.
+Bayesian optimization receives only the training portion.
 
-Every window records recursive x NRMSE, multistate NRMSE, spike count, spike
-frequency, relative frequency error, mean inter-spike interval,
-inter-spike-interval error and divergence status. The configurable score
-combines state error, spike-frequency/timing error and stability penalties.
-Window scores use the configured mean-plus-maximum aggregation.
+Candidates are evaluated on three non-overlapping recursive validation
+windows. The validation score considers state error, spike frequency and
+timing, and prediction stability. The selected ESN is trained once and then
+evaluated on the held-out trajectory.
 
-selected_model.json is written before the held-out array is normalized or
-predicted. The selected model is never replaced using held-out performance.
-For periodic spiking, the locked model must pass both predefined gates:
-held-out x NRMSE at most 0.20 and relative spike-frequency error at most 0.10.
-A failure stops the pipeline as a scientific failure.
+Controller parameters are selected on a controller-validation segment. The
+locked controller is evaluated once on a separate controller-test segment.
+All controllers reuse the same saved chaotic-bursting ESN.
 
-## Model reuse and controllers
+## Definitive results
 
-One final trained ESN bundle per regime stores the reservoir seed, input
-weights, recurrent weights, readout weights, scaling statistics, configuration
-hash and deterministic model-identity hash. All controller candidates and all
-three final controllers load and reuse one chaotic-bursting bundle. Controller
-code cannot invoke optimization.
+The definitive experiment is Slurm run **1752614**, produced from Git commit
+`2e953b065b3208c1556cf3d56ce690a1f7cd48c5`. Its package validator passed with
+no missing or corrupted files.
 
-Controller parameters are selected only on controller_validation. Divergent
-candidates are recorded as stable=false and rejected=true, with their reason
-and evaluated steps; they do not access controller_test. The selected
-controller is evaluated once on controller_test, and divergence there is fatal.
+### ESN prediction
 
-The finite-time law is global and piecewise: linear feedback when the
-normalized error norm is at least one and fractional-power feedback inside the
-unit error sphere. Pyragas uses only sign -1, the convention
-next_input = raw_readout - control_signal, and raw_readout as its delayed
-observable.
+| Regime | Optimizer | Held-out x NRMSE | All-state NRMSE |
+|---|---:|---:|---:|
+| Periodic spiking | Random forest | 0.0000726 | 0.0000445 |
+| Periodic bursting | Random forest | 0.04037 | 0.02754 |
+| Chaotic bursting | GBRT | 0.002275 | 0.001528 |
 
-The Chapter 1 objective is regulation toward an empirical quiet-state
-reference. It is the median of quiet training samples. It is data-derived, and
-its Hindmarsh–Rose right-hand-side residual norm is reported as a diagnostic.
-The final pipeline does not run a separate equilibrium-target experiment.
+### Controller evaluation
 
-## Curated output
+| Controller | Selected parameters | Held-out controller-test result |
+|---|---|---|
+| Linear feedback | `K = 1.005` | state RMSE `2.36e-06`; 100% spike reduction |
+| Global finite-time feedback | `s = 0.9`, `K = 0.914456` | state RMSE `2.50e-04`; 100% spike reduction |
+| Pyragas delayed feedback | delay `1600`, sign `-1`, `K = 0.768091` | period `1600`; recurrence error `0.01343`; correlation `0.99991` |
 
-~~~text
-FINAL_THESIS_RUN_<JOBID>/
-├── 00_manifest/
-├── 01_prediction_all_regimes/
-├── 02_bo_optimization/
-├── 03_linear_feedback/
-├── 04_finite_time/
-├── 05_pyragas/
-├── 06_comparison_tables/
-├── 07_report_figures/
-└── 08_logs/
-~~~
+Linear and finite-time feedback regulate the ESN toward an empirical
+quiet-state reference calculated from training data. This reference is not an
+exact equilibrium of the Hindmarsh–Rose equations.
 
-Canonical uncontrolled prediction figures occur only under
-01_prediction_all_regimes/<regime>/. Candidate folders contain compact
-JSON/CSV evidence; only final controllers receive full controller plots.
-07_report_figures uses relative symlinks to canonical figures, avoiding
-physical duplicate PNGs. Internal package references are relative. The
-validator checks structure, JSON, CSV, readable PNG files, absolute paths,
-duplicate hashes, controller summaries, shared model identity, commit
-identity, clean-start evidence and final quality gates.
+Pyragas control has a different objective: it changes irregular bursting into
+a regular periodic-spiking trajectory. An increased spike count is therefore
+not a failure for this controller.
 
-The diagnostic run FINAL_THESIS_RUN_1751888 is preserved unchanged. It is
-near-final evidence but is not the definitive package.
+## Thesis figures
+
+Thesis-ready validation-sweep figures are in
+`THESIS_SWEEP_FIGURES_1752614/`. PDFs are intended for the thesis, while PNGs
+are included for convenient previewing. The combined source data are in
+`controller_sweeps_combined.csv` in the same folder.
+
+These figures document controller selection on validation data. They should
+not be described as held-out controller-test figures.
 
 ## Verification
 
-Use the thesis Conda environment:
-
-~~~bash
+```bash
 python -m py_compile \
   config.py data_loader.py main.py model.py optimize_model.py \
   control_experiment.py neuron_controllers.py plotting.py \
   experiment_report.py final_pipeline.py final_package.py \
   finalization_smoke.py
 
-python -m unittest discover -s tests -p "test_*.py"
-bash -n run_final_thesis_pipeline.slurm
 python finalization_smoke.py --output-dir /tmp/chapter1_finalization_smoke
-~~~
+bash -n run_final_thesis_pipeline.slurm
+```
 
-## Documented limitations
+The final package records source and configuration hashes, the Git revision,
+software versions, random seeds, stage timings and integrity checks under
+`00_manifest/`.
 
-The deterministic Chapter 1 case study uses reservoir seed 42. This supports
-reproducibility but not broad claims across random initializations. The ridge
-solve can emit a numerical conditioning warning for some candidates;
-regularization, finite-result checks and a pseudoinverse fallback are present,
-but the warning remains a numerical limitation. The empirical quiet-state
-reference has a nonzero HR right-hand-side residual because it is data-derived.
-These limitations are documented rather than used to reopen the frozen
-Chapter 1 methodology.
+## Limitations
+
+This is a deterministic computational case study using reservoir seed 42. It
+is reproducible for that realization, but it is not a statistical study over
+many reservoir initializations.
+
+Some ESN candidates can emit a numerical-conditioning warning during the
+regularized readout solve. The implementation checks for finite results and
+has a pseudoinverse fallback, but the warning remains a numerical limitation.
+
+The Pyragas result is empirical and finite-horizon. It demonstrates a
+sustained regular trajectory in the tested ESN rollout, not a mathematical
+proof of asymptotic stability or perfectly non-invasive control.
+
+## Reproducibility note
+
+The complete validated evidence package is included in
+`FINAL_THESIS_RUN_1752614/`. It contains the saved models, full controller
+rollouts, figures, comparison tables, logs and reproducibility manifests used
+for the reported results. The smaller `THESIS_SWEEP_FIGURES_1752614/` folder
+contains additional thesis-ready validation-sweep figures and their source
+CSV data.

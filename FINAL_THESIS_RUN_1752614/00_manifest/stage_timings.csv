@@ -1,0 +1,15 @@
+stage,seconds
+data_generation,13.353513527079485
+bo_periodic_spiking,620.4325577570125
+bo_periodic_bursting,609.7587291019736
+bo_chaotic_bursting,606.8782586989691
+final_model_training,13.376912444946356
+prediction_rollouts,15.00604484800715
+linear_selection,241.46733958797995
+linear_final_test,8.722140080993995
+finite_time_selection,1241.979842280969
+finite_time_final_test,9.310007752035744
+pyragas_selection,1055.4791110443184
+pyragas_final_test,8.899091172032058
+packaging,2.884073020075448
+total_runtime,4475.983403968974

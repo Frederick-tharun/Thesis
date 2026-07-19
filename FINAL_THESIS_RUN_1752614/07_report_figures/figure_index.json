@@ -1,0 +1,32 @@
+[
+  {
+    "canonical_source": "01_prediction_all_regimes/periodic_spiking/results_all_states.png",
+    "report_link": "07_report_figures/prediction_periodic_spiking_results_all_states.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  },
+  {
+    "canonical_source": "01_prediction_all_regimes/periodic_bursting/results_all_states.png",
+    "report_link": "07_report_figures/prediction_periodic_bursting_results_all_states.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  },
+  {
+    "canonical_source": "01_prediction_all_regimes/chaotic_bursting/results_all_states.png",
+    "report_link": "07_report_figures/prediction_chaotic_bursting_results_all_states.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  },
+  {
+    "canonical_source": "03_linear_feedback/controlled_vs_uncontrolled_x.png",
+    "report_link": "07_report_figures/linear_feedback_controlled_vs_uncontrolled_x.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  },
+  {
+    "canonical_source": "04_finite_time/controlled_vs_uncontrolled_x.png",
+    "report_link": "07_report_figures/finite_time_controlled_vs_uncontrolled_x.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  },
+  {
+    "canonical_source": "05_pyragas/controlled_vs_uncontrolled_x.png",
+    "report_link": "07_report_figures/pyragas_controlled_vs_uncontrolled_x.png",
+    "storage": "relative_symlink_no_physical_duplicate"
+  }
+]

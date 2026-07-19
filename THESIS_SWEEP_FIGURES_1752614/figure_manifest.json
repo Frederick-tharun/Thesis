@@ -1,0 +1,47 @@
+{
+  "run_id": "1752614",
+  "git_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "data_role": "controller-validation sweeps used for hyperparameter selection; not held-out controller-test results",
+  "output_directory": "THESIS_SWEEP_FIGURES_1752614",
+  "controllers": [
+    {
+      "controller": "linear_feedback",
+      "label": "Linear feedback",
+      "source_csv": "FINAL_THESIS_RUN_1752614/03_linear_feedback/k_sweep.csv",
+      "source_summary": "FINAL_THESIS_RUN_1752614/03_linear_feedback/control_summary.json",
+      "point_count": 45,
+      "stable_point_count": 45,
+      "quality_pass_count": null,
+      "selected_K": 1.005,
+      "selection_score": 8.381934438276627e-06,
+      "png": "linear_feedback_validation_sweep.png",
+      "pdf": "linear_feedback_validation_sweep.pdf"
+    },
+    {
+      "controller": "finite_time",
+      "label": "Global finite-time feedback",
+      "source_csv": "FINAL_THESIS_RUN_1752614/04_finite_time/candidates/s_0p9/k_sweep.csv",
+      "source_summary": "FINAL_THESIS_RUN_1752614/04_finite_time/control_summary.json",
+      "point_count": 45,
+      "stable_point_count": 45,
+      "quality_pass_count": null,
+      "selected_K": 0.9144561403508772,
+      "selection_score": 0.00030228098361166194,
+      "png": "finite_time_validation_sweep_s_0p9.png",
+      "pdf": "finite_time_validation_sweep_s_0p9.pdf"
+    },
+    {
+      "controller": "pyragas",
+      "label": "Pyragas delayed feedback",
+      "source_csv": "FINAL_THESIS_RUN_1752614/05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv",
+      "source_summary": "FINAL_THESIS_RUN_1752614/05_pyragas/control_summary.json",
+      "point_count": 24,
+      "stable_point_count": 24,
+      "quality_pass_count": 24,
+      "selected_K": 0.7680909090909092,
+      "selection_score": 0.14298124991590613,
+      "png": "pyragas_validation_sweep_delay_1600_sign_minus1.png",
+      "pdf": "pyragas_validation_sweep_delay_1600_sign_minus1.pdf"
+    }
+  ]
+}

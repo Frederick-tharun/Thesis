@@ -1,0 +1,33 @@
+{
+  "aggregation": "mean_plus_max",
+  "final_training_end": 105000,
+  "heldout_test_end": 150000,
+  "heldout_test_start": 105000,
+  "index_semantics": "zero_based_half_open_[start,end)",
+  "test_data_used_for_selection": false,
+  "training_end": 81000,
+  "training_start": 31000,
+  "windows": [
+    {
+      "end": 89000,
+      "length": 8000,
+      "segment": "prediction_validation",
+      "start": 81000,
+      "window_index": 0
+    },
+    {
+      "end": 97000,
+      "length": 8000,
+      "segment": "prediction_validation",
+      "start": 89000,
+      "window_index": 1
+    },
+    {
+      "end": 105000,
+      "length": 8000,
+      "segment": "prediction_validation",
+      "start": 97000,
+      "window_index": 2
+    }
+  ]
+}

@@ -1,8 +1,8 @@
-numpy
+numpy==1.26.4
 pandas
-scipy
-matplotlib
-networkx
-scikit-learn
+scipy==1.13.1
+matplotlib==3.9.2
+scikit-learn==1.5.2
 scikit-optimize==0.10.2
 python-docx
+Pillow

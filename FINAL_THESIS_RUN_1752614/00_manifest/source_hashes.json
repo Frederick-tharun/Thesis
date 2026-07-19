@@ -1,0 +1,22 @@
+{
+  "CHAPTER1_METHOD_FIXES.md": "948fdf4a0ef80b941a35efa7c2048d311715307bcf8b60a01d3d8e05fa7e09c7",
+  "README.md": "8c42124c85448f77e67686eddbfadcc16b0631f850df18eff93a706487d3a631",
+  "compare_optimizers.py": "20499efec50b0e7ce9b6a6b73edf6d7ca568af6d3bc89070e330f3f29ac19b40",
+  "config.py": "9ce7c3f6b837f6278bfa6b024fabeec4f1e6fe764617d71ea0b81cbee337306f",
+  "control_experiment.py": "c23381078b1f4b77a4d13b023913a95dfabe42081661140c2cd7edc22f33bca7",
+  "data_loader.py": "a42fda032f78b20b94d8c96a72f1c80aaf01020f9a35220581f8c7b211f8f78f",
+  "experiment_report.py": "f361a59c31959f3a47fcd47bf7920249b28aa489aa63b746f41e0b1c8ddb84d0",
+  "final_package.py": "e53dc9ea5799edc5b8a749326e322e6b92b231783bf343d4af2444c6c57c0004",
+  "final_pipeline.py": "81d43de6cf74c08c90216e989ca04f13fde37f45e2f894692872c6ab88e319f2",
+  "finalization_smoke.py": "143d08d8acff25e7bc6b570840aeda07ea9ae151068662c8bee4265a8a6b868c",
+  "main.py": "ab51d7cbfd1b1ea9c00551bf7e41348cfcf2f7511e87441083278137aa80c2c2",
+  "model.py": "2db2f7242234e69816a7268a2bcd01029aff7425071e30b22477f0230f8d4f66",
+  "neuron_controllers.py": "b34e81b25ece9ca26f4333f6be524f68025cc85bd95348c56e775b85488cdb9c",
+  "optimize_model.py": "41dc2c827d782e9c5290629ef390982ef6ae74d3e276224b02076d95ac116614",
+  "plotting.py": "f4da5cd3a547fb8f5842f3fdc8fb19a6e553b332b321e82a603b949fccff45d1",
+  "run_final_linear_finite_validation.slurm": "a51df38a92b85aa270eb2410fb6d7fbb578f75e0ef3cb6804421079047093880",
+  "run_final_thesis_pipeline.slurm": "891f3394b6f15df6878e6b8820cfbb9808bb0939e47b6504bff26c88c0db1fff",
+  "run_pyragas_final_joint_search.slurm": "ed2acc1c8b6d955ca634609e30a9c712bf57e52f273cb04cd78421a28e7187ff",
+  "run_pyragas_final_validation.slurm": "30cc9c525b0d8a6639f98acdb5e95b4901b3aa3ff3bc3123f01eff2dc7dd00ca",
+  "run_pyragas_paper_validation.slurm": "118910f9d031ef583de5ddc4df4d6c02ba8074a6015b30d294cf508e715750bc"
+}

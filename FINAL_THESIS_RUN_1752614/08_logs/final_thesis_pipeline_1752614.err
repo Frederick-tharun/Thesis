@@ -1,0 +1,6 @@
+/home/hpc/rlvl/rlvl177v/Thesis/model.py:218: LinAlgWarning: Ill-conditioned matrix (rcond=2.01579e-18): result may not be accurate.
+  solution = scipy_linalg.solve(A, XtY, assume_a="pos")
+/home/hpc/rlvl/rlvl177v/Thesis/model.py:218: LinAlgWarning: Ill-conditioned matrix (rcond=3.24581e-18): result may not be accurate.
+  solution = scipy_linalg.solve(A, XtY, assume_a="pos")
+/home/hpc/rlvl/rlvl177v/Thesis/model.py:218: LinAlgWarning: Ill-conditioned matrix (rcond=7.61627e-18): result may not be accurate.
+  solution = scipy_linalg.solve(A, XtY, assume_a="pos")

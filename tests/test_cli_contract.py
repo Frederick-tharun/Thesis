@@ -69,19 +69,22 @@ class CliContractTests(unittest.TestCase):
         self.assertIn("locked_validation_selection", pipeline)
         self.assertNotIn("subprocess.run([\"sbatch\"", pipeline)
 
-    def test_final_validation_scripts_lock_selected_parameters(self):
-        pyragas = (ROOT / "run_pyragas_final_validation.slurm").read_text()
-        self.assertIn("--optimizer dummy", pyragas)
-        self.assertIn("--control-k 0.8", pyragas)
-        self.assertIn("--pyragas-delay 2400", pyragas)
-        self.assertIn("--pyragas-sign -1", pyragas)
-
-        fixed = (ROOT / "run_final_linear_finite_validation.slurm").read_text()
-        self.assertIn("--controller linear_feedback", fixed)
-        self.assertIn("--control-k 1.0", fixed)
-        self.assertIn("--controller finite_time", fixed)
-        self.assertIn("--control-k 0.4582142857142857", fixed)
-        self.assertIn("--finite-s 0.8", fixed)
+    def test_final_pipeline_selects_controller_parameters_on_validation(self):
+        pipeline = (ROOT / "final_pipeline.py").read_text()
+        for marker in (
+            "FINITE_TIME_EXPONENTS",
+            "PYRAGAS_DELAYS",
+            "_select_candidate(",
+            "validation_only=True",
+            "locked_validation_selection",
+        ):
+            self.assertIn(marker, pipeline)
+        self.assertEqual(config.PYRAGAS_SIGNS, [-1])
+        for obsolete in (
+            "run_pyragas_final_validation.slurm",
+            "run_final_linear_finite_validation.slurm",
+        ):
+            self.assertFalse((ROOT / obsolete).exists())
 
 
 if __name__ == "__main__":

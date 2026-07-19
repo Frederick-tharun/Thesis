@@ -1,0 +1,20 @@
+{
+  "best_parameter_file": "02_bo_optimization/periodic_bursting/best_params.json",
+  "git_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "heldout_test_end": 150000,
+  "heldout_test_start": 105000,
+  "model_bundle": "01_prediction_all_regimes/periodic_bursting/model_bundle.npz",
+  "model_configuration_hash": "9ce7c3f6b837f6278bfa6b024fabeec4f1e6fe764617d71ea0b81cbee337306f",
+  "model_identity_hash": "a168645086d152f71d0b1d07c2dc745dc3f6e068a7f3ef7ea42e542c2e648650",
+  "model_seed": 42,
+  "schema_version": "chapter1_selected_model_v1",
+  "selected_optimizer": "forest",
+  "selection_status": "locked_before_heldout_evaluation",
+  "source_regime": "periodic_bursting",
+  "test_data_used_for_selection": false,
+  "training_end": 105000,
+  "training_start": 0,
+  "validation_only_selection": true,
+  "validation_score": 0.0001625389549609331,
+  "validation_windows_file": "02_bo_optimization/periodic_bursting/validation_windows.json"
+}
