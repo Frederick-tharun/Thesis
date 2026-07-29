@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=chapter1_final
-#SBATCH --partition=a100
-#SBATCH --gres=gpu:a100:1
+#SBATCH --partition=work
 #SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=4
 #SBATCH --output=logs/final_thesis_pipeline_%j.out
 #SBATCH --error=logs/final_thesis_pipeline_%j.err
 
@@ -27,7 +27,6 @@ RELEVANT_PATHS=(
   '*.py'
   '*.slurm'
   'README.md'
-  'CHAPTER1_METHOD_FIXES.md'
   'requirements.txt'
   'requirements*.txt'
 )

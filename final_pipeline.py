@@ -150,7 +150,6 @@ def assert_clean_repository(repo: Path) -> None:
         "*.py",
         "*.slurm",
         "README.md",
-        "CHAPTER1_METHOD_FIXES.md",
         "requirements.txt",
         "requirements*.txt",
     )
@@ -167,7 +166,6 @@ def _source_hashes(repo: Path) -> dict[str, str]:
             *repo.glob("*.py"),
             *repo.glob("*.slurm"),
             repo / "README.md",
-            repo / "CHAPTER1_METHOD_FIXES.md",
         }
     )
     return {
