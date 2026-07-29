@@ -862,7 +862,10 @@ def plot_all_states(t, truth, pred, tag="ESN"):
     _savefig("results_all_states.png")
 
 
-def plot_optimizer_convergence(rows, filename="optimizer_convergence.png"):
+def plot_optimizer_convergence(
+    rows,
+    filename="optimizer_convergence.png",
+):
     if not rows:
         print("[Plot] Optimizer convergence skipped: empty rows")
         return
@@ -870,7 +873,7 @@ def plot_optimizer_convergence(rows, filename="optimizer_convergence.png"):
     grouped = {}
 
     for i, row in enumerate(rows):
-        opt = str(row.get("optimizer", "unknown")).lower()
+        opt = str(row.get("optimizer", "unknown")).strip().lower()
 
         score = _safe_float(
             row.get(
@@ -902,36 +905,75 @@ def plot_optimizer_convergence(rows, filename="optimizer_convergence.png"):
         print("[Plot] Optimizer convergence skipped: no valid rows")
         return
 
+    # Reader-friendly names used in the thesis figures.
+    optimizer_label_map = {
+        "gp": "Gaussian process",
+        "dummy": "Random search",
+        "forest": "Random forest",
+        "gbrt": "GBRT",
+    }
+
     plt.figure(figsize=(14, 5.5))
 
     plotted = False
 
     for opt, values in grouped.items():
-        values = sorted(values, key=lambda x: x[0])
-        calls = np.asarray([v[0] for v in values], dtype=int)
-        scores = np.asarray([v[1] for v in values], dtype=float)
+        values = sorted(values, key=lambda item: item[0])
+
+        calls = np.asarray(
+            [value[0] for value in values],
+            dtype=int,
+        )
+        scores = np.asarray(
+            [value[1] for value in values],
+            dtype=float,
+        )
 
         best_so_far = np.minimum.accumulate(scores)
 
         if len(calls) > 0:
-            plt.plot(calls, best_so_far, marker="o", markersize=3, linewidth=1.5, label=opt)
+            plt.plot(
+                calls,
+                best_so_far,
+                marker="o",
+                markersize=3,
+                linewidth=1.5,
+                label=optimizer_label_map.get(opt, opt),
+            )
             plotted = True
 
-    plt.title("Optimizer comparison", fontsize=14, fontweight="bold")
-    plt.xlabel("Number of optimizer calls")
-    plt.ylabel("Best objective value so far")
+    plt.title(
+        "Hyperparameter optimisation progress",
+        fontsize=14,
+        fontweight="bold",
+    )
+    plt.xlabel("Candidate evaluation")
+    plt.ylabel("Best validation objective so far")
     plt.grid(True, alpha=0.25)
 
     if plotted:
         positive_values = []
+
         for values in grouped.values():
-            positive_values.extend([v[1] for v in values if v[1] > 0 and np.isfinite(v[1])])
+            positive_values.extend(
+                [
+                    value[1]
+                    for value in values
+                    if value[1] > 0 and np.isfinite(value[1])
+                ]
+            )
 
         if positive_values:
-            if max(positive_values) / max(min(positive_values), 1e-12) > 100:
+            largest = max(positive_values)
+            smallest = max(min(positive_values), 1e-12)
+
+            if largest / smallest > 100:
                 plt.yscale("log")
 
-        plt.legend(loc="best")
+        plt.legend(
+            loc="best",
+            fontsize=10,
+        )
 
     plt.tight_layout()
     _savefig(filename)

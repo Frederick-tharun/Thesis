@@ -1,0 +1,15 @@
+{
+  "heldout_steps": 45000,
+  "model_identity_hash": "b4686726ee949e71fcdccd0f456fb2956f41286485013a68c84ba25c36b0dd9b",
+  "nrmse_recursive_all_states": 0.0007555560445119214,
+  "nrmse_recursive_x": 0.0011196753325884126,
+  "reference_seed": 42,
+  "regime": "chaotic_bursting",
+  "rmse_recursive_all_states": 0.000772024011946783,
+  "rmse_recursive_x": 0.0005524468579342364,
+  "runtime_seconds": 4.779281596012879,
+  "seed": 789,
+  "stable": true,
+  "training_steps": 105000,
+  "washout": 499
+}

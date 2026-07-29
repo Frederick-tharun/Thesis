@@ -1,0 +1,7 @@
+{
+  "median_metric_value": 0.002275220876640819,
+  "representative_metric_value": 0.002275220876640819,
+  "rule": "Seed whose held-out prediction NRMSE x is closest to the median across evaluated seeds.",
+  "seed": 42,
+  "selection_metric": "nrmse_recursive_x"
+}

@@ -1,0 +1,10 @@
+{
+  "control_k": 0.9144561403508772,
+  "controller": "finite_time",
+  "evaluation_seed": 789,
+  "finite_s": 0.9,
+  "pyragas_delay": 20,
+  "pyragas_history_signal": "raw_readout",
+  "pyragas_sign": -1,
+  "reference_model_seed": 42
+}

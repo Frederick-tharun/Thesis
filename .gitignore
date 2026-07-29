@@ -1,27 +1,31 @@
+# Python environments and caches
 .conda_env/
 .venv/
 __pycache__/
 .pytest_cache/
 *.py[cod]
-logs/
-logs_old/
-archive_old_files/
-controller_debug_backup/
+
+# Local runtime output
+/logs/
+/outputs/
+.DS_Store
 *.zip
 *.zip.sha256
 *.patch
-FINAL_THESIS_RUN_*
-!FINAL_THESIS_RUN_1752614/
-!FINAL_THESIS_RUN_1752614/**
-.DS_Store
-/outputs/
-/report_results/
-/plan5_smoke_results/
-/outputs_final_all_controls/
-/outputs_finite_s_sweep/
-/outputs_pyragas_periodic_sweep/
-/selected_pyragas_results/
-/selected_controller_results/
-/thesis_results_summary/
-selected_controller_results
-selected_pyragas_results
+
+# Raw job-specific evidence; stable curated folders remain tracked
+/FINAL_THESIS_RUN_*/
+!/FINAL_THESIS_RUN/
+!/FINAL_THESIS_RUN/**
+/MULTISEED_EVAL_*/
+/THESIS_SWEEP_FIGURES_*/
+/MULTISEED_SMOKE/
+
+# Reproducible large multiseed trajectories retained externally
+/MULTISEED_EVAL/**/rollout.csv
+/MULTISEED_EVAL/**/prediction_rollout.npz
+
+# Local references and legacy root-level figure outputs
+/RNN.pdf
+/finite_time_parameter_sensitivity_attractive.png
+/finite_time_parameter_sensitivity_attractive.pdf
