@@ -1,0 +1,94 @@
+{
+  "burst_detection": "largest adjacent gap in sorted log-ISIs; gap >= 0.15; prominence >= 4; at least 2 intervals per timescale; at least 2 spikes per burst",
+  "consistency_relative_tolerance": 0.1,
+  "continuous_current_sequence": [
+    1.67,
+    3.29,
+    3.5,
+    3.34,
+    3.2
+  ],
+  "continuous_samples": 500000,
+  "continuous_switch_indices": [
+    100000,
+    200000,
+    300000,
+    400000
+  ],
+  "description": "Chapter 2 diagnostics; not a locked final test dataset",
+  "dt": 0.01,
+  "equations_and_rk4": "Matched to Chapter 1 data_loader.py",
+  "files": {
+    "data/continuous_switched_currents.npz": "0921cbad321da1830433dc84e58f25ff2b0b6a6d571a31cae769bdfd6dc00a7b",
+    "data/fixed_I_1p67.npz": "cc89af5e9a27d05a9501ea995a2ef361c146d6513ec1b19765238603af9ffb2b",
+    "data/fixed_I_3p20.npz": "c4292a1e0fa5575d08419e7d302f980e2ed085878187f67659aa59decc486ded",
+    "data/fixed_I_3p29.npz": "2ed394f457e5de5f0d14a5dd450611fd9774c02cb13fc68f7b21a2621273b7b4",
+    "data/fixed_I_3p34.npz": "8cad49948c553df9b65a24deacf067dc999325dadb580a4787ded12b6315585d",
+    "data/fixed_I_3p50.npz": "4d042da6adbde026468207c4e9f74443f8587c635dff2d28b69e2b1784d5cbbf",
+    "dynamics_summary.csv": "f660cf1f7260509ff7a61b1e1d24960cd7275b40f883bf55e3acf95340734010",
+    "dynamics_summary.md": "a3a318cd449ffd063cad36e70ad98e01f4e72a153ef0e09bc1b14d103614acff",
+    "figures/continuous_I_and_x.png": "fbbddd2190b526a7b019457311fc30cbf69bf24f284904b87304c7b481335f3c",
+    "figures/continuous_switches_comparison.png": "671616d1f79c81985629858b4958de2826a67cc31e7c579e2a19b547a2526840",
+    "figures/fixed_currents_x_comparison.png": "c318f129ade839135eaaf5b0feac4e78572c9bbaed87b1024091d90bab3b7b70",
+    "figures/transient_settling_check.png": "e4bcbbedfc4beb5e9d4f93fb9af54c2728a09b126d9e15047d884b7cee5fbc6f",
+    "fixed_current_statistics.csv": "f5f95f48c8f3f2bd48e2597d719b6b919de7448a37ffe20011833e0d7ac2e31a",
+    "lyapunov_convergence.csv": "8564ae9013ed555c53e903b72c3cd340d7fecd973cf9620ea09f62142213080c"
+  },
+  "fixed_currents": [
+    1.67,
+    3.2,
+    3.29,
+    3.34,
+    3.5
+  ],
+  "initial_state": [
+    -1.0,
+    -3.0,
+    3.0
+  ],
+  "initial_transient_steps": 100000,
+  "lyapunov": {
+    "checkpoint_steps": [
+      100000,
+      200000,
+      300000,
+      400000,
+      500000
+    ],
+    "convergence_rule": "both final checkpoint changes <= max(absolute tolerance, relative tolerance * abs(final estimate))",
+    "estimation_steps": 500000,
+    "method": "Chapter 1 Benettin tangent-linear RK4 implementation",
+    "renormalization_steps": 10
+  },
+  "lyapunov_checkpoints": [
+    100000,
+    200000,
+    300000,
+    400000,
+    500000
+  ],
+  "lyapunov_evaluation_steps": 500000,
+  "lyapunov_renormalization_interval": 10,
+  "parameters": {
+    "a": 1.0,
+    "b": 3.0,
+    "c": 1.0,
+    "d": 5.0,
+    "r": 0.006,
+    "s": 4.0,
+    "x_r": -1.6
+  },
+  "retained_samples_per_current": 100000,
+  "spike_detection": {
+    "height": 0.0,
+    "minimum_distance_steps": 20,
+    "prominence": 0.5
+  },
+  "switch_indices": [
+    100000,
+    200000,
+    300000,
+    400000
+  ],
+  "transient_steps": 100000
+}
