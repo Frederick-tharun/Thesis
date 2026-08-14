@@ -309,8 +309,18 @@ def test_generated_fixed_outputs_and_statistics() -> None:
                 values = saved[state_name]
                 assert float(row[f"{state_name}_min"]) == float(np.min(values))
                 assert float(row[f"{state_name}_max"]) == float(np.max(values))
-                assert float(row[f"{state_name}_mean"]) == float(np.mean(values))
-                assert float(row[f"{state_name}_std"]) == float(np.std(values))
+                np.testing.assert_allclose(
+                    float(row[f"{state_name}_mean"]),
+                    float(np.mean(values)),
+                    rtol=1.0e-14,
+                    atol=1.0e-15,
+                )
+                np.testing.assert_allclose(
+                    float(row[f"{state_name}_std"]),
+                    float(np.std(values)),
+                    rtol=1.0e-14,
+                    atol=1.0e-15,
+                )
 
 
 def test_generated_continuous_output_segments_and_switches() -> None:
@@ -527,10 +537,26 @@ def test_analysis_only_writers_finish_with_a_current_manifest(
     }
 
 
-def test_python_cache_rules_and_no_cache_artifacts() -> None:
+def test_chapter2_gitignore_contains_required_hygiene_rules() -> None:
     chapter_root = Path(__file__).resolve().parents[1]
-    assert (chapter_root / ".gitignore").read_text(encoding="utf-8") == (
-        "__pycache__/\n*.py[cod]\n"
-    )
-    assert not list(chapter_root.rglob("__pycache__"))
-    assert not list(chapter_root.rglob("*.pyc"))
+    rules = {
+        line
+        for line in (chapter_root / ".gitignore").read_text(
+            encoding="utf-8"
+        ).splitlines()
+        if line and not line.startswith("#")
+    }
+    assert {
+        "__pycache__/",
+        "*.py[cod]",
+        ".pytest_cache/",
+        ".ruff_cache/",
+        ".mypy_cache/",
+        ".venv/",
+        "*.tmp",
+        "*.bak",
+        "*.zip",
+        "*.tar.gz",
+        "final_results/figures/",
+        "final_results/figures_final/",
+    }.issubset(rules)

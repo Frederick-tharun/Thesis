@@ -1,0 +1,8 @@
+# Preserve immutable generated artifacts byte-for-byte and suppress text
+# whitespace diagnostics for their historical CRLF/final-blank-line content.
+final_results/*.csv -diff
+final_results/tables_final/*.csv -diff
+final_results/post_benchmark_event_correction/**/*.csv -diff
+provenance/*.snapshot -diff
+
+# All source, tests, documentation, JSON, figures, and launchers remain normal.

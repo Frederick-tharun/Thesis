@@ -1,0 +1,899 @@
+{
+  "colors": {
+    "boundary": "#8A8A8A",
+    "current": "#009E73",
+    "ordinary_baseline": "#D55E00",
+    "parameter_aware": "#0072B2",
+    "truth": "#222222"
+  },
+  "figure_count": 4,
+  "figures": [
+    {
+      "aggregate_field_used": null,
+      "current_change_indices_in_scored_array": null,
+      "current_values": [
+        1.67,
+        3.2,
+        3.5,
+        3.29,
+        3.34
+      ],
+      "dt": 0.01,
+      "figure": "01_fixed_current_predictions_known_and_unseen",
+      "files": [
+        {
+          "filename": "01_fixed_current_predictions_known_and_unseen.pdf",
+          "sha256": "1e5fb7d6e695dbf5bac3a4b33cebb9defaae9762d3fca7b578bc51e58a95e449",
+          "size_bytes": 38406
+        },
+        {
+          "filename": "01_fixed_current_predictions_known_and_unseen.png",
+          "sha256": "dbaef4798da723d9b0bc458d6a9739708f830e9c7b8e8522fdfdddd5cc39dfbf",
+          "size_bytes": 341757
+        }
+      ],
+      "forecast_length": 8000,
+      "known_unseen_classification": {
+        "unseen": [
+          3.29,
+          3.34
+        ],
+        "used_during_training": [
+          1.67,
+          3.2,
+          3.5
+        ]
+      },
+      "model_names": [
+        "Parameter-aware ESN",
+        "Ordinary ESN"
+      ],
+      "raw_result_hashes": {
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_1": "27e9e50f21fca224a64163c5af6edd622262060a359b6fc524a03456bd038cd1",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_1": "fdcf112d94dd5dd61b95e3a12e9f9daa9ebbd4e62cd59a837d9535f0a58aa499",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_1": "d004744a77177ec26056c519b74707f33e408b89ea8580a31e5de3207242e009",
+        "known_short__parameter_aware__seed_42__I_1p67__window_1": "62ee801d1056cf71ce23b9a651becd6cb10cee28b188822e2d8c438a82c3190b",
+        "known_short__parameter_aware__seed_42__I_3p20__window_1": "19c90a427e5079684de950e48da8379ea99a182a3a3f1c2daae8f1cc621213b5",
+        "known_short__parameter_aware__seed_42__I_3p50__window_1": "41d44dae518cfe12c6cf2561394c6ca6c0fe4a951475d25e4023d6fc1a935ba0",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_1": "4fc4f5af1be0ee26b02e762a5079474cb6591423c414be07adc5dbdf3b54b626",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_1": "77e67a8eb5593f7b4d87463ad8eda21666da890835ebff0b7ba3809ae91057b1",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_1": "cff78db66452c690689c6f35cd59d414ec89ac36fae6affa462af4bfd5f4484e",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_1": "045056c343d6cbb9247bfb397a7119ba0661d79620d5fd57497505334af7f1ea"
+      },
+      "record_identifiers": [
+        "known_short__parameter_aware__seed_42__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_1",
+        "known_short__parameter_aware__seed_42__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_1",
+        "known_short__parameter_aware__seed_42__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_1",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_1"
+      ],
+      "scientific_purpose": "Compare complete held-out autonomous membrane-potential forecasts at currents used during training and at unseen currents.",
+      "seed": 42,
+      "selection_statement": "Record selection was fixed before benchmark access and was not based on performance.",
+      "source_result_families": [
+        "known_short",
+        "unseen_short"
+      ],
+      "window_identifier": 1,
+      "window_start": 70000
+    },
+    {
+      "aggregate_field_used": null,
+      "current_change_indices_in_scored_array": [
+        98000,
+        198000,
+        298000,
+        398000
+      ],
+      "current_values": [
+        1.67,
+        3.29,
+        3.5,
+        3.34,
+        3.2
+      ],
+      "dt": 0.01,
+      "figure": "02_continuous_current_prediction",
+      "files": [
+        {
+          "filename": "02_continuous_current_prediction.pdf",
+          "sha256": "19198f7f0a80d0684d4be6c2357e432661380e0e4edb04ae44bd1c46149b2f18",
+          "size_bytes": 60930
+        },
+        {
+          "filename": "02_continuous_current_prediction.png",
+          "sha256": "2a9ae21eabf04ff78d18ba445fb5753abef2480b3831ca1e3cacc53db1ae6366",
+          "size_bytes": 370870
+        }
+      ],
+      "forecast_length": 497999,
+      "known_unseen_classification": "predefined supporting changing-current benchmark",
+      "model_names": [
+        "Parameter-aware ESN",
+        "Ordinary ESN"
+      ],
+      "raw_result_hashes": {
+        "continuous__ordinary_baseline__seed_42": "85e6c1d65f747001d6147ebe8b27b7f002af5437f32b11bc82f7775795ab7b28",
+        "continuous__parameter_aware__seed_42": "a1113c2fa374e96d8dac88319ed1202b5ca8d59ab8651154c134490bdb6f44c6"
+      },
+      "record_identifiers": [
+        "continuous__parameter_aware__seed_42",
+        "continuous__ordinary_baseline__seed_42"
+      ],
+      "scientific_purpose": "Show full-trajectory response to the supplied changing current without boundary resets.",
+      "seed": 42,
+      "selection_statement": "Record selection was fixed before benchmark access and was not based on performance.",
+      "source_result_families": [
+        "continuous"
+      ],
+      "window_identifier": null,
+      "window_start": null
+    },
+    {
+      "aggregate_field_used": null,
+      "current_change_indices_in_scored_array": [
+        98000,
+        198000,
+        298000,
+        398000
+      ],
+      "current_values": [
+        1.67,
+        3.29,
+        3.5,
+        3.34,
+        3.2
+      ],
+      "dt": 0.01,
+      "figure": "03_current_transition_tracking",
+      "files": [
+        {
+          "filename": "03_current_transition_tracking.pdf",
+          "sha256": "e8802b9459413cf6dd30db749dfbf3dbfb393def561f7071322a39ff26982656",
+          "size_bytes": 18953
+        },
+        {
+          "filename": "03_current_transition_tracking.png",
+          "sha256": "bb9c69ed84b8f95d26cafcaf18d8ba1828f4d6c19bd6e6f81296fea0f98db8b9",
+          "size_bytes": 172556
+        }
+      ],
+      "forecast_length": [
+        2001,
+        2001,
+        2001,
+        2001
+      ],
+      "known_unseen_classification": "predefined supporting changing-current benchmark",
+      "model_names": [
+        "Parameter-aware ESN",
+        "Ordinary ESN"
+      ],
+      "raw_result_hashes": {
+        "continuous__ordinary_baseline__seed_42": "85e6c1d65f747001d6147ebe8b27b7f002af5437f32b11bc82f7775795ab7b28",
+        "continuous__parameter_aware__seed_42": "a1113c2fa374e96d8dac88319ed1202b5ca8d59ab8651154c134490bdb6f44c6"
+      },
+      "record_identifiers": [
+        "continuous__parameter_aware__seed_42",
+        "continuous__ordinary_baseline__seed_42"
+      ],
+      "scientific_purpose": "Compare both ESNs locally across each of the four supplied-current changes.",
+      "seed": 42,
+      "selection_statement": "Record selection was fixed before benchmark access and was not based on performance.",
+      "source_result_families": [
+        "continuous"
+      ],
+      "window_identifier": "four predetermined \u00b110-time-unit boundary views",
+      "window_start": [
+        97000,
+        197000,
+        297000,
+        397000
+      ]
+    },
+    {
+      "aggregate_field_used": "family/model median of aggregate_nrmse_value; family/model median of 100 * metrics.valid_prediction_steps / evaluated prediction steps",
+      "current_change_indices_in_scored_array": [
+        98000,
+        198000,
+        298000,
+        398000
+      ],
+      "current_values": [
+        1.67,
+        3.2,
+        3.5,
+        3.29,
+        3.34
+      ],
+      "dt": 0.01,
+      "figure": "04_overall_predictive_performance",
+      "files": [
+        {
+          "filename": "04_overall_predictive_performance.pdf",
+          "sha256": "360a1825cbc36680151c8c10e64c5870243385a63331ad587f860688d80698ab",
+          "size_bytes": 11227
+        },
+        {
+          "filename": "04_overall_predictive_performance.png",
+          "sha256": "613e28cd60bb29bf6c51a9b53ce11f157329cf5536ece14c864f68f6d1b21473",
+          "size_bytes": 165041
+        }
+      ],
+      "forecast_length": {
+        "continuous": 497999,
+        "known_long": 27999,
+        "known_short": 8000,
+        "unseen_long": 27999,
+        "unseen_short": 8000
+      },
+      "known_unseen_classification": {
+        "changing_current": [
+          1.67,
+          3.29,
+          3.5,
+          3.34,
+          3.2
+        ],
+        "known": [
+          1.67,
+          3.2,
+          3.5
+        ],
+        "unseen": [
+          3.29,
+          3.34
+        ]
+      },
+      "model_names": [
+        "Parameter-aware ESN",
+        "Ordinary ESN"
+      ],
+      "raw_result_hashes": {
+        "continuous__ordinary_baseline__seed_123": "e25bd4861b49208539c1c1120e9618af68fb1a8de3ec1bce3d13bb9621d623f3",
+        "continuous__ordinary_baseline__seed_2026": "fae17a00c10b3dc93d281253afe2cb52014cad7d55da2fdff494644cc4a36e73",
+        "continuous__ordinary_baseline__seed_42": "85e6c1d65f747001d6147ebe8b27b7f002af5437f32b11bc82f7775795ab7b28",
+        "continuous__ordinary_baseline__seed_456": "ed12eb76494fb53e1542f02deb16f163b95a2a272465cf98687f24d3e467f722",
+        "continuous__ordinary_baseline__seed_789": "6de14c90719a4a50dab3eddcb321d03fe762686e54a4a8ccfbb42d4afce08e9f",
+        "continuous__parameter_aware__seed_123": "ec14948a3d53ad7a8fa064b5fe648156fe9a675e7b53b7526517df909c9aace0",
+        "continuous__parameter_aware__seed_2026": "e4adfcfcce6adb3ef382e6b5c7434d6cda88f7be26296b5eea1de218f2b43e56",
+        "continuous__parameter_aware__seed_42": "a1113c2fa374e96d8dac88319ed1202b5ca8d59ab8651154c134490bdb6f44c6",
+        "continuous__parameter_aware__seed_456": "f28e916c17846358e86f7e6fa15be89b5451f51501b483fb8da2b6bbb436a3e8",
+        "continuous__parameter_aware__seed_789": "47e3de118be8be42ad33e04355f0f5d08aeebd503c5b4cce5d9eaca8341faa2b",
+        "known_long__ordinary_baseline__seed_123__I_1p67": "91bf2e5561bf7eae361c7b1d4f004ef2cf1c1106d509c7c11b623b6eca9ea76a",
+        "known_long__ordinary_baseline__seed_123__I_3p20": "f658fbf57539b170f2802580978d42ed16ff4c53565611c7840fe997bc9dad11",
+        "known_long__ordinary_baseline__seed_123__I_3p50": "6cf0e1d2812af7e4a4821cc2da79ca9b341123d13ec48557086988b2e45a1119",
+        "known_long__ordinary_baseline__seed_2026__I_1p67": "a7fe793e1a83a67418136ef17b9ad25823dc00ff0ee08aa025df2ef0c2c6cf0d",
+        "known_long__ordinary_baseline__seed_2026__I_3p20": "8b0f61a6ad773105f82bd294248dd292bf0125f478276d9ee062e748f27711b4",
+        "known_long__ordinary_baseline__seed_2026__I_3p50": "7a71e199f9d077984cf4d0cfdd776ab137a6a0774a30d75b6155b72c2db53ccf",
+        "known_long__ordinary_baseline__seed_42__I_1p67": "1643ff047509c5968292ed0ec22df000bec43e26baf6be56f0332bb668362827",
+        "known_long__ordinary_baseline__seed_42__I_3p20": "31605e17dc82872a1ba3d5eb991d0a662d4bd4b728f3972c5fc36189c66c5282",
+        "known_long__ordinary_baseline__seed_42__I_3p50": "8cae3194f927bfc35ded35a2871fd4af73252e42d1d80f26dc5d8b8d271c8c59",
+        "known_long__ordinary_baseline__seed_456__I_1p67": "2d136a131d9acdc908fa8e43e5e9e180deb5893e73fac6ecb5dda568211c64be",
+        "known_long__ordinary_baseline__seed_456__I_3p20": "0aac4a4135dcd4b2c0e0f96a061de2d73642ff64f6ea1f031d74c672dd3162a7",
+        "known_long__ordinary_baseline__seed_456__I_3p50": "f5d18037a00c1b9476fd0ec3c31f42200788f8fa9a8611ce5d2b6c9b5810a958",
+        "known_long__ordinary_baseline__seed_789__I_1p67": "20bf7bee825308d10690be5bf547ffda7ce854a52cc1db6f05ad91b4da160171",
+        "known_long__ordinary_baseline__seed_789__I_3p20": "b9ac29198a6e4d74aafd825b62cb24705fb4d7c04dc75e5c919704896abdbb01",
+        "known_long__ordinary_baseline__seed_789__I_3p50": "67a180d6c1a1ee6df5f6f7715cc673e24ec55a00163df0d34a17e2ee906ca27b",
+        "known_long__parameter_aware__seed_123__I_1p67": "d05e212092b9fd2d9ba86aff57bb9dcd1907702f3d300c23acdc5dc81c438d4b",
+        "known_long__parameter_aware__seed_123__I_3p20": "e4de429f75b105f1d3c6da004660f025c65506caa96ab2f6d6fda0b7cefb32d2",
+        "known_long__parameter_aware__seed_123__I_3p50": "f30fb922c30287b4d3dccd275b8d67852767dd09cac301bd97868e19810c63ff",
+        "known_long__parameter_aware__seed_2026__I_1p67": "d184ab1236f8da4531adaf0ed28283faeb22c80c8645456134592720fe70f260",
+        "known_long__parameter_aware__seed_2026__I_3p20": "831d672e20d614e1a3fb9c4f6e06aade91352f37b1d25542b30240f3851a85d5",
+        "known_long__parameter_aware__seed_2026__I_3p50": "8f141ebf5625e252ece3f7229337fe1e5ebaed85c1f91ab13695a2f61772360b",
+        "known_long__parameter_aware__seed_42__I_1p67": "cd12835c7afae260fdf1adbb4cdba0369b876ce4c9d60c57149881c3045ab44e",
+        "known_long__parameter_aware__seed_42__I_3p20": "a0ad5e105b2c35e31ae7144765fb48f9581a37dcb7e43c89ac2973f812b91da2",
+        "known_long__parameter_aware__seed_42__I_3p50": "ba0bac2a20b909a3525fe963c929d6a4b258981b854a1509f6e133f9cb31cd2b",
+        "known_long__parameter_aware__seed_456__I_1p67": "856ca8584fea17e81f5f1aa2ce292be005aa6dba2ac062fe1ad9cb450bc2de1c",
+        "known_long__parameter_aware__seed_456__I_3p20": "ad05a5e1dc5b61074d0cba092901875f55f762899bd034fcb0556b897dd1cf4b",
+        "known_long__parameter_aware__seed_456__I_3p50": "2083fc9f153710e7efe728e77805916f61d153a62aa148fc7d859153ebd5dc7f",
+        "known_long__parameter_aware__seed_789__I_1p67": "cae6c39ae2da0b1522a765f488852d758b8fef7b46fe5ed7f34efbf551bf49b5",
+        "known_long__parameter_aware__seed_789__I_3p20": "def78a822faffb78550d9d2549b7ad36a603e541f2f2501b9d59018f177acf8f",
+        "known_long__parameter_aware__seed_789__I_3p50": "0760acc9f7ceb0a6a096eeb85f552954a8b915f5022d4da42ff8752924353f0a",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_1": "a3c540f6d59f608ad84d86ae27bd4642211572f61b9f47382563ab2aa3dab471",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_2": "15d3880b7e41845e71f504c9176499e4a1954c6ba5900c8a52589abadb4c613d",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_3": "4c2377e59c54e2af451c1f8f2c17a02a27d5ceb62580c0625ac375425798b047",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_1": "f53cb70b078bd655bf0baf3a62843e301627d0af1848cad77b62d8eb4bfb5caf",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_2": "a8833957ed65116be4c8eadf9776d6059bb1dc8f384aa4dd8ded5df3f4f05d19",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_3": "2bf7e39f6b0249e147bc4b4872a79ff7f6f3402b49c34d535226c0a91733c946",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_1": "c7d45fa8d3b6959e55a3715b33da8c465607110b79650ac11f84ffcda6fd579b",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_2": "1ffc43f5fc515efcf120398f80bb8322672e0d161f281cf7a4654e4280452945",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_3": "06d9e566a2dcdcf3e4fa69b2cde673f1fc91b72ef37d456829f6331598b7c361",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_1": "e8f5e50517188e594a43f967d2dae1862360ddb0910296b5c10323c7350be872",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_2": "27ff46e0205864ab493726524ae68b595e84827d2fc7fc99dd65920ee8382e40",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_3": "9f98e1588f3f27424c400fc93622adaba8a07d37f52e0e56db15179f3c9a9d9a",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_1": "e0be76d76e8d9484f73d2491f3db0084b2339f9911ce69f9ae73f340ea56ce1a",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_2": "efbe118a95e0def650f5b6a8d6dbf9021e394812224959594ff1b22f6df96f0c",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_3": "ae42a293708ff92b1788b7e8a50dba5499c75ec9ecc15794576d2bbe18950014",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_1": "12050eb43275f412b135e48537fc6cd9331f61097ceb55b3dbb75614c25fe7d6",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_2": "cf098d9a059bcfe3005a10bd53e298c6d6da9c5dc6ca1e61d811a55c760dd258",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_3": "e1a4dda96c904ca6236a481b9220821f9a59ccb912cdca16ab4ff053485a726a",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_1": "27e9e50f21fca224a64163c5af6edd622262060a359b6fc524a03456bd038cd1",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_2": "50f3a71560d3fbaa5b2007047c0efebb846dd2967d59cb0c4f05101a589d7b24",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_3": "0a321c20eb94ecc63a7932dcf3b4ba5801307ec909b5d34f082e0c3f06ef2b3c",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_1": "fdcf112d94dd5dd61b95e3a12e9f9daa9ebbd4e62cd59a837d9535f0a58aa499",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_2": "dbdcb6761af715e95338f25fbd1c2f1c56884ca53c4d3c4774145469313b62dc",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_3": "eb89b8c6e1fb770f727fd8982c0a7f2d18f0f52d497bff2c31166b6c96013fd0",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_1": "d004744a77177ec26056c519b74707f33e408b89ea8580a31e5de3207242e009",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_2": "470466190433a30f41bc3803962d2384d0990c3133329683f7a028f06c3eecd7",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_3": "845d7a409592244db9cc1005167fc40e0d7e6a487a28c3c5ccfc447faed7143e",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_1": "0a1a60dc5222d5bdae2e67d5efb706602391bb7824c1542358f070030fb9bc85",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_2": "6d2e420de6409bffaa1461c542f0121310232774b15d7bd8ba5ba5b6844150f5",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_3": "dfc855bef925447fe1ad5aa4c4ae744e6137b7f28f5028a0c3ef2ae800ec3757",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_1": "f669b137719df1c73a0989322b57faa058afd21b37016e917637612535b9c301",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_2": "6ed24f3983d5d11bade468ec1fbc3984f4bcb2717c61e75d73460956358e75f3",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_3": "084119d4f63fdffbff90fe4388f1fff6ab2754b9f648f0532cacfbd3a1e34c80",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_1": "e0fb8d82e4262e977003fd023bf7930ae5d99a59a4acfc2b4786226251cd7087",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_2": "21dda4b52e16624f7839cf224abd59e814545ff2b9c2995d21ef5664c7060dfd",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_3": "a503fdbf23e77df4eb072c240cc057cf5cb3ae55f15d29491b6ddb4785410ca2",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_1": "d58cccc7a4fc800c88b81617340d858bc5e0b389d88ad9b629bdb2ce5a0d4b9e",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_2": "80301c13e0b369d8ac7d7de833337e10a99d2f6afcc18b0d88fd0bacacbe8172",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_3": "5c6c386caac2ec0521a702c12612b32fdc781d100917629f2c19037fa148eb2f",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_1": "1d9885c8f60996c651701756c56c3f2181f7b7aa3c7d4f599f95b6f09037609f",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_2": "4ed37b2a21fd5caeb5df464684863310cc75b410280bf5f251c88bc89513e82e",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_3": "125380e48c16a237d6d1d3ea721776f62b21c8a972db3bd016a3a635d681117e",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_1": "ef9d9f5c9821411ab315235e49528bb2376af2e73b71bf1c774c20daba386423",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_2": "1515c7331da89a9e36e81d30199499d0007dbef89b3e84e5b521b1f8e2283816",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_3": "5b86f60584ec0fddd589f751deab9f790c451a4baffbe6b70bcc003b5463920e",
+        "known_short__parameter_aware__seed_123__I_1p67__window_1": "7588f000b1074a60d307b5f27a4d6877b1238ec5527ceba269ebeb752e64e182",
+        "known_short__parameter_aware__seed_123__I_1p67__window_2": "665fea64fb539b166eddef6c9d972f06ac71bbc13bfa31d3038c8e148b8be335",
+        "known_short__parameter_aware__seed_123__I_1p67__window_3": "7427c1609342d9b0525924c6d5e8432024ec01eaf63eb849e062b5b91a650ba4",
+        "known_short__parameter_aware__seed_123__I_3p20__window_1": "a33f683ac4dc871225129a8343594bdbc6efaf5382c07b02d5e83c055e4d76c4",
+        "known_short__parameter_aware__seed_123__I_3p20__window_2": "2878b757c67f50e668fed44985869287d96d5a5266dcf3d5c2430e36439ee5fe",
+        "known_short__parameter_aware__seed_123__I_3p20__window_3": "351ca493f3aea98bb031e9be6903b585a75176f30d2e74146c4a5901f0efa857",
+        "known_short__parameter_aware__seed_123__I_3p50__window_1": "6f9ffe581f419d2c37fb5da89460f22575f5b69001cf6c16d2faaa0416434cf5",
+        "known_short__parameter_aware__seed_123__I_3p50__window_2": "02acc7d99f285e4eba781d93e6a13f88edfbeda40ed2839d9714c5e942a37284",
+        "known_short__parameter_aware__seed_123__I_3p50__window_3": "5ee7e18bd6400450ff60094c0b100122019ba738276827a86b353d2bcb79b962",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_1": "920f24876f931300d5d62eb277edc24d9f91005e458d942b76345b91a63ad0cd",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_2": "d6f0109aac5f2735ba56276c4df4393489864743056b1587d469b096a0452244",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_3": "b10127860870271e42ece455832fad6a49e736fb302a2d10cbaa2f465af6eba9",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_1": "395fdccf0a181df207e322a0382075116d8f31d439230bd93e012d53788d6e03",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_2": "574291ecd20890dc09fecfd5c6fb21817f4b33134816a8dbc1a1f5f5e851441c",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_3": "1b2b44dbf9c0febfe98c9ad93581d031eac32eae5747eece599a352669c58d4a",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_1": "065fa7e6e375b157279ac4712319918f432ddfe6641c4d3d6de79a478d515436",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_2": "186593431c8303d6ccffbcae0cb52d94bcaa4d834b547e0e30f6ce81dd19e470",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_3": "4af65aa8393753b5780244c13e8e60315075ed4ec99350db08847b4df66abe33",
+        "known_short__parameter_aware__seed_42__I_1p67__window_1": "62ee801d1056cf71ce23b9a651becd6cb10cee28b188822e2d8c438a82c3190b",
+        "known_short__parameter_aware__seed_42__I_1p67__window_2": "490b163a5ce9003da3ac2979674a73a2634ec84eb54c2dbc5ab048945e2edea3",
+        "known_short__parameter_aware__seed_42__I_1p67__window_3": "001428eb8701859418cb4d98ae070b5d7469b65518e8ffd88b0325412fd5fa9a",
+        "known_short__parameter_aware__seed_42__I_3p20__window_1": "19c90a427e5079684de950e48da8379ea99a182a3a3f1c2daae8f1cc621213b5",
+        "known_short__parameter_aware__seed_42__I_3p20__window_2": "ac6255ed37bfa11fcf59f5289ab22367f3c5797673ff8a3831af39bd091d2d4e",
+        "known_short__parameter_aware__seed_42__I_3p20__window_3": "4b44ab825f4210b7c6b678fbfec5a273f45fa59270bb1e4d7f3a78e85f52af1b",
+        "known_short__parameter_aware__seed_42__I_3p50__window_1": "41d44dae518cfe12c6cf2561394c6ca6c0fe4a951475d25e4023d6fc1a935ba0",
+        "known_short__parameter_aware__seed_42__I_3p50__window_2": "04dd4fc5d356f6fdc0d079204395b45072148a0d4c4055803f87e4871a00b0b8",
+        "known_short__parameter_aware__seed_42__I_3p50__window_3": "de2b03b8120c281664ea71639eaf87648ec861471e96814249337017db01936c",
+        "known_short__parameter_aware__seed_456__I_1p67__window_1": "ca3ebfc18ecf583bd7745235d4fd422b10d0c14b27c6e25fdbb2f21bb51c41c4",
+        "known_short__parameter_aware__seed_456__I_1p67__window_2": "09ed03bd99f1a78fc3bc62d836d4e63eb7e7410cb45a36cf44b615472dff818e",
+        "known_short__parameter_aware__seed_456__I_1p67__window_3": "e5398debf3d58e18a90b85cb6d0b5cdda860cf999355748f210a8b28713cc987",
+        "known_short__parameter_aware__seed_456__I_3p20__window_1": "ab0adc312f9592a4b4dce7fd7de189a94505adc55cbabb51a747c67a0cc4cc98",
+        "known_short__parameter_aware__seed_456__I_3p20__window_2": "d88e36187ea82d0f1e6fea0b78320b3a9f9873596b86b2583e92d055defea41a",
+        "known_short__parameter_aware__seed_456__I_3p20__window_3": "05596c23348fd699fc867306fa6e98c2d36b34ab810021bef9fc963f039b609e",
+        "known_short__parameter_aware__seed_456__I_3p50__window_1": "a00001e1df0da307d5bbfb738080f65697f5fbb699288c8f1f764bd1f0071ee9",
+        "known_short__parameter_aware__seed_456__I_3p50__window_2": "8d90019d5e30d8e2cb6b26bb74e84a6548e7d33a48f06a1a65c74aac8837def4",
+        "known_short__parameter_aware__seed_456__I_3p50__window_3": "e0d458ba54e158e944f4f34790466c86065bde223b141a6412e38d9a120cec30",
+        "known_short__parameter_aware__seed_789__I_1p67__window_1": "2777d12be797910387c041f8c262ff0566dd1ba6fff5ff1be40641f52bbfc7dd",
+        "known_short__parameter_aware__seed_789__I_1p67__window_2": "a84b5d07069b1f85287cafe468dd481fc53c13f8e081bb58b7bc19648b76e67e",
+        "known_short__parameter_aware__seed_789__I_1p67__window_3": "a952d8aa4087c5719d5b794c3ecd4cfc23eb6a9ab170fac66549c886e9384ac6",
+        "known_short__parameter_aware__seed_789__I_3p20__window_1": "57f2891643abb118a44e3c148ef0dd48d73c4533e8f1c6b7162bbba4240d4a2b",
+        "known_short__parameter_aware__seed_789__I_3p20__window_2": "4e5deccffbbcc5da73f595b1d53b2fb4f29e98ccdd77235cb15a6f5a5333cdca",
+        "known_short__parameter_aware__seed_789__I_3p20__window_3": "ecf0954cdc12a151f62f925a90d24b7e094040ae649fe2080e616d7e4713aefb",
+        "known_short__parameter_aware__seed_789__I_3p50__window_1": "4b7680ae5e4eb9af8f475375a7278fc6b1f3c30ed7423a35098335d3b7b2cd53",
+        "known_short__parameter_aware__seed_789__I_3p50__window_2": "07a92b7f0b191f0424bf02149f5cf511fe21c62c5276ca96272103f494a0de4f",
+        "known_short__parameter_aware__seed_789__I_3p50__window_3": "d49e9283487ae2444e718accaa8c9794f3b8e21d408331895465b2235388a737",
+        "unseen_long__ordinary_baseline__seed_123__I_3p29": "d1957f3fc6f9e11db80ce0bfcd2bb61e9999d0f9e6c402211b46a30a2cdc8765",
+        "unseen_long__ordinary_baseline__seed_123__I_3p34": "7fcde95da2109784c0b8132c2cdb123ffd3f2dda37b1c9340f2e0e2cba47395d",
+        "unseen_long__ordinary_baseline__seed_2026__I_3p29": "6a6f037e45fc0d19c926c100e3e61c16c36c66517d8c3f0c8490eaae291c3132",
+        "unseen_long__ordinary_baseline__seed_2026__I_3p34": "69d255bebb419fc3aba3d769efba15a40c6b2a7fa29a7d70ad5e8c42fa6e89ce",
+        "unseen_long__ordinary_baseline__seed_42__I_3p29": "fa4fc1ec035a8322f56d2e5faba154133477388ce279da7c501e4fe9a3f1591c",
+        "unseen_long__ordinary_baseline__seed_42__I_3p34": "187973a0da5048d269625b4a53588c14713e4797d0c255808045042da99f3f73",
+        "unseen_long__ordinary_baseline__seed_456__I_3p29": "f60f32b6cf6b673e086b971de466f0315de44737aa82a678e9a2c314e3c26307",
+        "unseen_long__ordinary_baseline__seed_456__I_3p34": "fbb3e8423de6ad0956806261803bfd799350b07dbe4aa10497b17c7453663280",
+        "unseen_long__ordinary_baseline__seed_789__I_3p29": "a6d2c80f25c0ec1e6ece41c8d1804b28a73da7f8d443112eabf30eef9afeda9b",
+        "unseen_long__ordinary_baseline__seed_789__I_3p34": "ab00e1851fa19728dbad552702b16da7db3606aa2b0a4d04bf6208920fbc94ab",
+        "unseen_long__parameter_aware__seed_123__I_3p29": "d5f08b58ee35ead7aa18fff680e0a97a412697294d8aae4498d4f00a36da2ddd",
+        "unseen_long__parameter_aware__seed_123__I_3p34": "334488834ccb0cbfa7120c4398b702f19c231090223c4ad0e8537adbc3b4cdcf",
+        "unseen_long__parameter_aware__seed_2026__I_3p29": "3ec839bdfa3b930e2841defb01de5b207f38dbc928272d8806c4de3c5dd3a19b",
+        "unseen_long__parameter_aware__seed_2026__I_3p34": "e982e402cb6792c2a2df27923711ffdcc616f6fa1077e632e1069aa68f3eaf68",
+        "unseen_long__parameter_aware__seed_42__I_3p29": "d0550413b5bc19b545cb0ee83c9b55247482acd0fe02a4b2668fd794fea38a18",
+        "unseen_long__parameter_aware__seed_42__I_3p34": "9b52df74aa058d2dfc56c310d32f5546a49756634cb8b22263ace316209fd9c9",
+        "unseen_long__parameter_aware__seed_456__I_3p29": "4821032d8e4ccb9b89e07e45202201332d8d367d620cfe1294649771049f9dd1",
+        "unseen_long__parameter_aware__seed_456__I_3p34": "d45b57030934389eb875e77312439b01d95dcb1eea9378fbb8543e810f26a818",
+        "unseen_long__parameter_aware__seed_789__I_3p29": "620f635c048eff6cdf603baadc9a20803731112edda63675ac99fe7897b7a091",
+        "unseen_long__parameter_aware__seed_789__I_3p34": "59f22a6cc1bd9c384f9c00479d208eff673c4af2fe78de6ddce474d9be24568f",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_1": "78ff0da7c20fbbb6cc46f8b12ba9cfbc36dd3b09b5fc9f825a9a486ab2b7d257",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_2": "3ae033c2d4c42d20c5b87e1cac8d5ea2127453a99b9f747c6275511895a73d06",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_3": "b7783badea2a5c5b43d3723a9191d0fc08e7012b3e6750790f213d2ea8833ffa",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_1": "12974f4d5a306e9ecc3e25a00d9b98d0dc29534e7c5f5073f722254f499803d7",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_2": "5c0755cb4f1cd174d6f1fdf381b13c024dfc69c16c852705b24b925271081b0a",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_3": "bd525fecb35e0308276692e738c1ae7874aafc4acc483693ebc9bc0e3745d3ed",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_1": "65b9f3ca0c5da3b7d7d48309ba01271dc72a588b66dcff65cde1b10e2254285d",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_2": "705f085a030be42a7bb3522ab02144a88f91a12ddc8b40a84f46b18ed6beb424",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_3": "9f0fea721fa9a81981c619c1c877864ec2ef5f67e232b6752f090eae0f2ffeb7",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_1": "c722720939f156a2ac5f17b3e7c9373e8085ffd5079979edadb241c3ce1d649a",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_2": "963431d455ca0cc9b2452c7a5d5e1a9f3e31bf7d47f9049c9e4c654a01e2698c",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_3": "2c95aa02ea7a53b854520eb4a06a475a6bb7d807fd0b7195da3f6403c64934d0",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_1": "4fc4f5af1be0ee26b02e762a5079474cb6591423c414be07adc5dbdf3b54b626",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_2": "b001070d3dd8d796e0a9dc942078501afe17d8d88a1e8f3c54a4d64d41dd4a07",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_3": "054d03099cdb0adbaadbf9406f6a4548cdc68c320e35231613fdafddb30f718a",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_1": "77e67a8eb5593f7b4d87463ad8eda21666da890835ebff0b7ba3809ae91057b1",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_2": "25c95c67a93f49104240421757d11616973f86e37f4260cc4bb464a6867e3c4c",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_3": "6e5b03541fb3c596f7d51238a586d50bd7f62ad99c193b707b3c1570334a48ab",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_1": "03fe5e40cbd963130d5d4bf45d65601b128e948c5db95dec732884d4344be4ed",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_2": "26f588812aac735cc467a472ef9c549b5d262c86c22463e2e8888fdbb4daee70",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_3": "3989269bb9088627d90fe43d3b3a22f7e97bec44049ba7e49ed3ddab76867bb8",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_1": "49994cbdb54cc274d61958dbc3d210aecad0bbcb7caddceec06603b0b1f2f582",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_2": "176c4f4f19bc6d30209c7bdfd7f2eb33fe66af73f0645d9af4ba9527686b2672",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_3": "61c8f484f5c6351ec99a8387bb148aece5b3f31927941dadb25687145b1a4434",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_1": "9eb943cbd1f6183f6953434b5f5ea1e9a851274385e99511eea5c5f07cf92715",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_2": "22f56be49d8cbca40bc80246f34b0b41e446722b002340661ef989857ecaf66d",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_3": "880d071c49adcfc399de3753739398504b8e265cb8108fd2313df2f680701ce0",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_1": "9ace4a78622b9cd49513954e9e3be723b93819ea70d5d4ee57b3407dce7f1816",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_2": "1e90481e28116836ac1e73f0d86b3396eceda24a8254dd8d56e59b9eb0c313aa",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_3": "5dfbfe44e96062519f7c8f6236818dc4e14970f13300cbee1977eb1f5651ed17",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_1": "f082f220f63430eb9e352b4b9d5429bfd6e6ecb491505c1f5a6842ee7b548816",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_2": "4548645b6566dcaf04565e0e1c473b4cd268a34c2298fbdcacb27bd7777c99dd",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_3": "17d7ffe3a182be2d75370ec8605a428cf4d86007e61fc1be443527ae469e8627",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_1": "f760ada33f1b7849460bbba8363231f7bf1f3d445d111a6d70b7be09e5555398",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_2": "dd22cdf94bb54c5480209abaa240b4720a925c91df2e222e2aa4bccfd6f53d22",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_3": "c0d970c9d4eebce5246edc76d385689ab9823e5ed46609385d40c4b72a8a098e",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_1": "b449c2fb724656236e58894274dde7dce49c442a06d5bd879a92b18593d76df7",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_2": "ac199bfff362cdb9e778865dc4ab752b644fb9da4316da86798f7d56c5509f42",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_3": "f802b5406285ba9cf07d1c8cf8716709ef71a2cde9e9f2965e06a67ef8a3b6ba",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_1": "b2360059315a80a6034265b5c2fe92092454d6378aef3df0e3ecef78f5187539",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_2": "1772fa7b61fa8b477cfa2f51acaddff34b966237cc5429622e2ba0104a2da3cc",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_3": "17fbaae3c104a8296388ef0af320a1c30bc8c74df3145c27d7c20dd12df076c2",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_1": "cff78db66452c690689c6f35cd59d414ec89ac36fae6affa462af4bfd5f4484e",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_2": "172262cfc48678041ab0abbbc9bf6db2f5669ae37bcf9e1499fc781ea2f98f95",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_3": "2d0ab5789ec3775c6469a7fad9455f70c34d644304c7e749584fdfeba2586abf",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_1": "045056c343d6cbb9247bfb397a7119ba0661d79620d5fd57497505334af7f1ea",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_2": "c0d59cbeed13feebafc0fe93f9a11a2b66db276db8ba0ff3f67d60b41c81618c",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_3": "281a6b0b7bbf4d86b3d76cd5196186c44a4caa53c115c0f2ba0b2481366c2509",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_1": "c6ded8e7fe7b6bec93a6b8f057aca63689fac5e44c341e1e02ff1e6cdb5d75a2",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_2": "b315e476f1b6562b79ae0e2e049e5713a57fc706b7ed18d23be0a305a90c7270",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_3": "f430908d98872b367aad976005585ceb8625d6cd3c813c545c3c6a35c9f6c6ea",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_1": "8f2c9dc29b506215222962834344ac5249f02a81413dab74dbe820ccd258aeeb",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_2": "ba479e2d291822cb144acea2e8b7659e6e1fab44f3ba498b9a424515799a4a3b",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_3": "043b5241df31ef19f4e965e56a38a0c789602961c340272e6ffe737e0b0a1f70",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_1": "8a529c3ce01779521c87f65a561daf2f82810671646007467561403fb40f1164",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_2": "2932fd35953cf7fc3e409bec6515c20bee9954a1d0762bd71bbc3c39e42aa1dc",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_3": "5c4f79968699d8730cb773bfc5b63a1e2900112f55df0a65858e25dda71a95a8",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_1": "1dbaafd2590a374312e48fb34855483634058738732a82d28f5f1b5a1659d1f2",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_2": "4d3254bd71f7e410b435fb0f9d373b3076ace2df8b843c7ef2170713320a0c13",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_3": "ff46c41448ed1348d0ec813a7f918d7221d1bc4ef4ca1577f42ea97973c99ffb"
+      },
+      "record_identifiers": [
+        "known_short__parameter_aware__seed_42__I_1p67__window_1",
+        "known_short__parameter_aware__seed_42__I_1p67__window_2",
+        "known_short__parameter_aware__seed_42__I_1p67__window_3",
+        "known_short__parameter_aware__seed_42__I_3p20__window_1",
+        "known_short__parameter_aware__seed_42__I_3p20__window_2",
+        "known_short__parameter_aware__seed_42__I_3p20__window_3",
+        "known_short__parameter_aware__seed_42__I_3p50__window_1",
+        "known_short__parameter_aware__seed_42__I_3p50__window_2",
+        "known_short__parameter_aware__seed_42__I_3p50__window_3",
+        "known_short__parameter_aware__seed_123__I_1p67__window_1",
+        "known_short__parameter_aware__seed_123__I_1p67__window_2",
+        "known_short__parameter_aware__seed_123__I_1p67__window_3",
+        "known_short__parameter_aware__seed_123__I_3p20__window_1",
+        "known_short__parameter_aware__seed_123__I_3p20__window_2",
+        "known_short__parameter_aware__seed_123__I_3p20__window_3",
+        "known_short__parameter_aware__seed_123__I_3p50__window_1",
+        "known_short__parameter_aware__seed_123__I_3p50__window_2",
+        "known_short__parameter_aware__seed_123__I_3p50__window_3",
+        "known_short__parameter_aware__seed_456__I_1p67__window_1",
+        "known_short__parameter_aware__seed_456__I_1p67__window_2",
+        "known_short__parameter_aware__seed_456__I_1p67__window_3",
+        "known_short__parameter_aware__seed_456__I_3p20__window_1",
+        "known_short__parameter_aware__seed_456__I_3p20__window_2",
+        "known_short__parameter_aware__seed_456__I_3p20__window_3",
+        "known_short__parameter_aware__seed_456__I_3p50__window_1",
+        "known_short__parameter_aware__seed_456__I_3p50__window_2",
+        "known_short__parameter_aware__seed_456__I_3p50__window_3",
+        "known_short__parameter_aware__seed_789__I_1p67__window_1",
+        "known_short__parameter_aware__seed_789__I_1p67__window_2",
+        "known_short__parameter_aware__seed_789__I_1p67__window_3",
+        "known_short__parameter_aware__seed_789__I_3p20__window_1",
+        "known_short__parameter_aware__seed_789__I_3p20__window_2",
+        "known_short__parameter_aware__seed_789__I_3p20__window_3",
+        "known_short__parameter_aware__seed_789__I_3p50__window_1",
+        "known_short__parameter_aware__seed_789__I_3p50__window_2",
+        "known_short__parameter_aware__seed_789__I_3p50__window_3",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_1",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_2",
+        "known_short__parameter_aware__seed_2026__I_1p67__window_3",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_1",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_2",
+        "known_short__parameter_aware__seed_2026__I_3p20__window_3",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_1",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_2",
+        "known_short__parameter_aware__seed_2026__I_3p50__window_3",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_2",
+        "known_short__ordinary_baseline__seed_42__I_1p67__window_3",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_2",
+        "known_short__ordinary_baseline__seed_42__I_3p20__window_3",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_2",
+        "known_short__ordinary_baseline__seed_42__I_3p50__window_3",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_2",
+        "known_short__ordinary_baseline__seed_123__I_1p67__window_3",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_2",
+        "known_short__ordinary_baseline__seed_123__I_3p20__window_3",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_2",
+        "known_short__ordinary_baseline__seed_123__I_3p50__window_3",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_2",
+        "known_short__ordinary_baseline__seed_456__I_1p67__window_3",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_2",
+        "known_short__ordinary_baseline__seed_456__I_3p20__window_3",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_2",
+        "known_short__ordinary_baseline__seed_456__I_3p50__window_3",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_2",
+        "known_short__ordinary_baseline__seed_789__I_1p67__window_3",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_2",
+        "known_short__ordinary_baseline__seed_789__I_3p20__window_3",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_2",
+        "known_short__ordinary_baseline__seed_789__I_3p50__window_3",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_1",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_2",
+        "known_short__ordinary_baseline__seed_2026__I_1p67__window_3",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_1",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_2",
+        "known_short__ordinary_baseline__seed_2026__I_3p20__window_3",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_1",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_2",
+        "known_short__ordinary_baseline__seed_2026__I_3p50__window_3",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_2",
+        "unseen_short__parameter_aware__seed_42__I_3p29__window_3",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_1",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_2",
+        "unseen_short__parameter_aware__seed_42__I_3p34__window_3",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_2",
+        "unseen_short__parameter_aware__seed_123__I_3p29__window_3",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_1",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_2",
+        "unseen_short__parameter_aware__seed_123__I_3p34__window_3",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_2",
+        "unseen_short__parameter_aware__seed_456__I_3p29__window_3",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_1",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_2",
+        "unseen_short__parameter_aware__seed_456__I_3p34__window_3",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_2",
+        "unseen_short__parameter_aware__seed_789__I_3p29__window_3",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_1",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_2",
+        "unseen_short__parameter_aware__seed_789__I_3p34__window_3",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_1",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_2",
+        "unseen_short__parameter_aware__seed_2026__I_3p29__window_3",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_1",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_2",
+        "unseen_short__parameter_aware__seed_2026__I_3p34__window_3",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_2",
+        "unseen_short__ordinary_baseline__seed_42__I_3p29__window_3",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_2",
+        "unseen_short__ordinary_baseline__seed_42__I_3p34__window_3",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_2",
+        "unseen_short__ordinary_baseline__seed_123__I_3p29__window_3",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_2",
+        "unseen_short__ordinary_baseline__seed_123__I_3p34__window_3",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_2",
+        "unseen_short__ordinary_baseline__seed_456__I_3p29__window_3",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_2",
+        "unseen_short__ordinary_baseline__seed_456__I_3p34__window_3",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_2",
+        "unseen_short__ordinary_baseline__seed_789__I_3p29__window_3",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_2",
+        "unseen_short__ordinary_baseline__seed_789__I_3p34__window_3",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_1",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_2",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_3",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_1",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_2",
+        "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_3",
+        "known_long__parameter_aware__seed_42__I_1p67",
+        "known_long__parameter_aware__seed_42__I_3p20",
+        "known_long__parameter_aware__seed_42__I_3p50",
+        "known_long__parameter_aware__seed_123__I_1p67",
+        "known_long__parameter_aware__seed_123__I_3p20",
+        "known_long__parameter_aware__seed_123__I_3p50",
+        "known_long__parameter_aware__seed_456__I_1p67",
+        "known_long__parameter_aware__seed_456__I_3p20",
+        "known_long__parameter_aware__seed_456__I_3p50",
+        "known_long__parameter_aware__seed_789__I_1p67",
+        "known_long__parameter_aware__seed_789__I_3p20",
+        "known_long__parameter_aware__seed_789__I_3p50",
+        "known_long__parameter_aware__seed_2026__I_1p67",
+        "known_long__parameter_aware__seed_2026__I_3p20",
+        "known_long__parameter_aware__seed_2026__I_3p50",
+        "known_long__ordinary_baseline__seed_42__I_1p67",
+        "known_long__ordinary_baseline__seed_42__I_3p20",
+        "known_long__ordinary_baseline__seed_42__I_3p50",
+        "known_long__ordinary_baseline__seed_123__I_1p67",
+        "known_long__ordinary_baseline__seed_123__I_3p20",
+        "known_long__ordinary_baseline__seed_123__I_3p50",
+        "known_long__ordinary_baseline__seed_456__I_1p67",
+        "known_long__ordinary_baseline__seed_456__I_3p20",
+        "known_long__ordinary_baseline__seed_456__I_3p50",
+        "known_long__ordinary_baseline__seed_789__I_1p67",
+        "known_long__ordinary_baseline__seed_789__I_3p20",
+        "known_long__ordinary_baseline__seed_789__I_3p50",
+        "known_long__ordinary_baseline__seed_2026__I_1p67",
+        "known_long__ordinary_baseline__seed_2026__I_3p20",
+        "known_long__ordinary_baseline__seed_2026__I_3p50",
+        "unseen_long__parameter_aware__seed_42__I_3p29",
+        "unseen_long__parameter_aware__seed_42__I_3p34",
+        "unseen_long__parameter_aware__seed_123__I_3p29",
+        "unseen_long__parameter_aware__seed_123__I_3p34",
+        "unseen_long__parameter_aware__seed_456__I_3p29",
+        "unseen_long__parameter_aware__seed_456__I_3p34",
+        "unseen_long__parameter_aware__seed_789__I_3p29",
+        "unseen_long__parameter_aware__seed_789__I_3p34",
+        "unseen_long__parameter_aware__seed_2026__I_3p29",
+        "unseen_long__parameter_aware__seed_2026__I_3p34",
+        "unseen_long__ordinary_baseline__seed_42__I_3p29",
+        "unseen_long__ordinary_baseline__seed_42__I_3p34",
+        "unseen_long__ordinary_baseline__seed_123__I_3p29",
+        "unseen_long__ordinary_baseline__seed_123__I_3p34",
+        "unseen_long__ordinary_baseline__seed_456__I_3p29",
+        "unseen_long__ordinary_baseline__seed_456__I_3p34",
+        "unseen_long__ordinary_baseline__seed_789__I_3p29",
+        "unseen_long__ordinary_baseline__seed_789__I_3p34",
+        "unseen_long__ordinary_baseline__seed_2026__I_3p29",
+        "unseen_long__ordinary_baseline__seed_2026__I_3p34",
+        "continuous__parameter_aware__seed_42",
+        "continuous__parameter_aware__seed_123",
+        "continuous__parameter_aware__seed_456",
+        "continuous__parameter_aware__seed_789",
+        "continuous__parameter_aware__seed_2026",
+        "continuous__ordinary_baseline__seed_42",
+        "continuous__ordinary_baseline__seed_123",
+        "continuous__ordinary_baseline__seed_456",
+        "continuous__ordinary_baseline__seed_789",
+        "continuous__ordinary_baseline__seed_2026"
+      ],
+      "scientific_purpose": "Compare overall predictive accuracy and normalized valid horizon across all frozen benchmark records.",
+      "seed": [
+        42,
+        123,
+        456,
+        789,
+        2026
+      ],
+      "selection_statement": "Record selection was fixed before benchmark access and was not based on performance.",
+      "source_result_families": [
+        "known_short",
+        "known_long",
+        "unseen_short",
+        "unseen_long",
+        "continuous"
+      ],
+      "verified_performance_values": {
+        "continuous": {
+          "ordinary_baseline": {
+            "divergence_count": 0,
+            "evaluated_prediction_steps": [
+              497999
+            ],
+            "median_normalized_vpt_percent": 0.05080331486609411,
+            "median_nrmse": 0.9620530817714608,
+            "record_count": 5,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          },
+          "parameter_aware": {
+            "divergence_count": 2,
+            "evaluated_prediction_steps": [
+              497999
+            ],
+            "median_normalized_vpt_percent": 14.752037654694085,
+            "median_nrmse": 0.78561248920145,
+            "record_count": 5,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          }
+        },
+        "known_long": {
+          "ordinary_baseline": {
+            "divergence_count": 0,
+            "evaluated_prediction_steps": [
+              27999
+            ],
+            "median_normalized_vpt_percent": 4.8966034501232185,
+            "median_nrmse": 0.6642867239904601,
+            "record_count": 15,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          },
+          "parameter_aware": {
+            "divergence_count": 3,
+            "evaluated_prediction_steps": [
+              27999
+            ],
+            "median_normalized_vpt_percent": 100.0,
+            "median_nrmse": 0.023331741769925557,
+            "record_count": 15,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          }
+        },
+        "known_short": {
+          "ordinary_baseline": {
+            "divergence_count": 0,
+            "evaluated_prediction_steps": [
+              8000
+            ],
+            "median_normalized_vpt_percent": 12.45,
+            "median_nrmse": 0.6591389962326202,
+            "record_count": 45,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          },
+          "parameter_aware": {
+            "divergence_count": 9,
+            "evaluated_prediction_steps": [
+              8000
+            ],
+            "median_normalized_vpt_percent": 100.0,
+            "median_nrmse": 0.005261829751769206,
+            "record_count": 45,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          }
+        },
+        "unseen_long": {
+          "ordinary_baseline": {
+            "divergence_count": 0,
+            "evaluated_prediction_steps": [
+              27999
+            ],
+            "median_normalized_vpt_percent": 2.3018679238544233,
+            "median_nrmse": 0.6093595459851598,
+            "record_count": 10,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          },
+          "parameter_aware": {
+            "divergence_count": 2,
+            "evaluated_prediction_steps": [
+              27999
+            ],
+            "median_normalized_vpt_percent": 4.934104789456766,
+            "median_nrmse": 0.7543654864140811,
+            "record_count": 10,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          }
+        },
+        "unseen_short": {
+          "ordinary_baseline": {
+            "divergence_count": 0,
+            "evaluated_prediction_steps": [
+              8000
+            ],
+            "median_normalized_vpt_percent": 8.3125,
+            "median_nrmse": 0.5954501727420685,
+            "record_count": 30,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          },
+          "parameter_aware": {
+            "divergence_count": 6,
+            "evaluated_prediction_steps": [
+              8000
+            ],
+            "median_normalized_vpt_percent": 18.30625,
+            "median_nrmse": 0.58560079790774,
+            "record_count": 30,
+            "seed_values": [
+              42,
+              123,
+              456,
+              789,
+              2026
+            ]
+          }
+        }
+      },
+      "window_identifier": "all frozen windows and horizons",
+      "window_start": [
+        70000,
+        80000,
+        89999
+      ]
+    }
+  ],
+  "font": "STIXGeneral",
+  "image_file_count": 8,
+  "output_directory": "chapter2/final_results/figures_thesis",
+  "schema": "chapter2_thesis_figures_v1",
+  "selection_policy": {
+    "all_divergent_records_retained_in_figure_4": true,
+    "fixed_forecast_range": [
+      72000,
+      80000
+    ],
+    "known_and_unseen_combined_visually_but_aggregated_separately": true,
+    "performance_selected": false,
+    "representative_seed": 42,
+    "representative_window": 1
+  },
+  "source_artifacts": {
+    "chapter2/final_results/selected_model.json": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472",
+    "chapter2/final_results/step8_aggregate_results.json": "f0367185d12c9a56279ef7b78ad51add5d30a71af60e3f78b3e4f4b62ee88711",
+    "chapter2/final_results/step8_evaluation_manifest.json": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31",
+    "chapter2/final_results/step8_raw_results.json": "24033a8ed2bff722fd5d4324d45da908ffa85057f68a5c53fd6b3630be5bb2c3",
+    "chapter2/final_results/step8_seed_stability_audit.json": "7176118b2964359a7c7cb7f11e8039cec5f2bd14f96acb5ef241969833999f9b"
+  }
+}

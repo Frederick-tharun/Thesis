@@ -1,0 +1,539 @@
+{
+  "aggregate_hash": "f0367185d12c9a56279ef7b78ad51add5d30a71af60e3f78b3e4f4b62ee88711",
+  "completed_record_count": 210,
+  "completed_record_ids": [
+    "known_short__parameter_aware__seed_42__I_1p67__window_1",
+    "known_short__parameter_aware__seed_42__I_1p67__window_2",
+    "known_short__parameter_aware__seed_42__I_1p67__window_3",
+    "known_short__parameter_aware__seed_42__I_3p20__window_1",
+    "known_short__parameter_aware__seed_42__I_3p20__window_2",
+    "known_short__parameter_aware__seed_42__I_3p20__window_3",
+    "known_short__parameter_aware__seed_42__I_3p50__window_1",
+    "known_short__parameter_aware__seed_42__I_3p50__window_2",
+    "known_short__parameter_aware__seed_42__I_3p50__window_3",
+    "known_short__parameter_aware__seed_123__I_1p67__window_1",
+    "known_short__parameter_aware__seed_123__I_1p67__window_2",
+    "known_short__parameter_aware__seed_123__I_1p67__window_3",
+    "known_short__parameter_aware__seed_123__I_3p20__window_1",
+    "known_short__parameter_aware__seed_123__I_3p20__window_2",
+    "known_short__parameter_aware__seed_123__I_3p20__window_3",
+    "known_short__parameter_aware__seed_123__I_3p50__window_1",
+    "known_short__parameter_aware__seed_123__I_3p50__window_2",
+    "known_short__parameter_aware__seed_123__I_3p50__window_3",
+    "known_short__parameter_aware__seed_456__I_1p67__window_1",
+    "known_short__parameter_aware__seed_456__I_1p67__window_2",
+    "known_short__parameter_aware__seed_456__I_1p67__window_3",
+    "known_short__parameter_aware__seed_456__I_3p20__window_1",
+    "known_short__parameter_aware__seed_456__I_3p20__window_2",
+    "known_short__parameter_aware__seed_456__I_3p20__window_3",
+    "known_short__parameter_aware__seed_456__I_3p50__window_1",
+    "known_short__parameter_aware__seed_456__I_3p50__window_2",
+    "known_short__parameter_aware__seed_456__I_3p50__window_3",
+    "known_short__parameter_aware__seed_789__I_1p67__window_1",
+    "known_short__parameter_aware__seed_789__I_1p67__window_2",
+    "known_short__parameter_aware__seed_789__I_1p67__window_3",
+    "known_short__parameter_aware__seed_789__I_3p20__window_1",
+    "known_short__parameter_aware__seed_789__I_3p20__window_2",
+    "known_short__parameter_aware__seed_789__I_3p20__window_3",
+    "known_short__parameter_aware__seed_789__I_3p50__window_1",
+    "known_short__parameter_aware__seed_789__I_3p50__window_2",
+    "known_short__parameter_aware__seed_789__I_3p50__window_3",
+    "known_short__parameter_aware__seed_2026__I_1p67__window_1",
+    "known_short__parameter_aware__seed_2026__I_1p67__window_2",
+    "known_short__parameter_aware__seed_2026__I_1p67__window_3",
+    "known_short__parameter_aware__seed_2026__I_3p20__window_1",
+    "known_short__parameter_aware__seed_2026__I_3p20__window_2",
+    "known_short__parameter_aware__seed_2026__I_3p20__window_3",
+    "known_short__parameter_aware__seed_2026__I_3p50__window_1",
+    "known_short__parameter_aware__seed_2026__I_3p50__window_2",
+    "known_short__parameter_aware__seed_2026__I_3p50__window_3",
+    "known_short__ordinary_baseline__seed_42__I_1p67__window_1",
+    "known_short__ordinary_baseline__seed_42__I_1p67__window_2",
+    "known_short__ordinary_baseline__seed_42__I_1p67__window_3",
+    "known_short__ordinary_baseline__seed_42__I_3p20__window_1",
+    "known_short__ordinary_baseline__seed_42__I_3p20__window_2",
+    "known_short__ordinary_baseline__seed_42__I_3p20__window_3",
+    "known_short__ordinary_baseline__seed_42__I_3p50__window_1",
+    "known_short__ordinary_baseline__seed_42__I_3p50__window_2",
+    "known_short__ordinary_baseline__seed_42__I_3p50__window_3",
+    "known_short__ordinary_baseline__seed_123__I_1p67__window_1",
+    "known_short__ordinary_baseline__seed_123__I_1p67__window_2",
+    "known_short__ordinary_baseline__seed_123__I_1p67__window_3",
+    "known_short__ordinary_baseline__seed_123__I_3p20__window_1",
+    "known_short__ordinary_baseline__seed_123__I_3p20__window_2",
+    "known_short__ordinary_baseline__seed_123__I_3p20__window_3",
+    "known_short__ordinary_baseline__seed_123__I_3p50__window_1",
+    "known_short__ordinary_baseline__seed_123__I_3p50__window_2",
+    "known_short__ordinary_baseline__seed_123__I_3p50__window_3",
+    "known_short__ordinary_baseline__seed_456__I_1p67__window_1",
+    "known_short__ordinary_baseline__seed_456__I_1p67__window_2",
+    "known_short__ordinary_baseline__seed_456__I_1p67__window_3",
+    "known_short__ordinary_baseline__seed_456__I_3p20__window_1",
+    "known_short__ordinary_baseline__seed_456__I_3p20__window_2",
+    "known_short__ordinary_baseline__seed_456__I_3p20__window_3",
+    "known_short__ordinary_baseline__seed_456__I_3p50__window_1",
+    "known_short__ordinary_baseline__seed_456__I_3p50__window_2",
+    "known_short__ordinary_baseline__seed_456__I_3p50__window_3",
+    "known_short__ordinary_baseline__seed_789__I_1p67__window_1",
+    "known_short__ordinary_baseline__seed_789__I_1p67__window_2",
+    "known_short__ordinary_baseline__seed_789__I_1p67__window_3",
+    "known_short__ordinary_baseline__seed_789__I_3p20__window_1",
+    "known_short__ordinary_baseline__seed_789__I_3p20__window_2",
+    "known_short__ordinary_baseline__seed_789__I_3p20__window_3",
+    "known_short__ordinary_baseline__seed_789__I_3p50__window_1",
+    "known_short__ordinary_baseline__seed_789__I_3p50__window_2",
+    "known_short__ordinary_baseline__seed_789__I_3p50__window_3",
+    "known_short__ordinary_baseline__seed_2026__I_1p67__window_1",
+    "known_short__ordinary_baseline__seed_2026__I_1p67__window_2",
+    "known_short__ordinary_baseline__seed_2026__I_1p67__window_3",
+    "known_short__ordinary_baseline__seed_2026__I_3p20__window_1",
+    "known_short__ordinary_baseline__seed_2026__I_3p20__window_2",
+    "known_short__ordinary_baseline__seed_2026__I_3p20__window_3",
+    "known_short__ordinary_baseline__seed_2026__I_3p50__window_1",
+    "known_short__ordinary_baseline__seed_2026__I_3p50__window_2",
+    "known_short__ordinary_baseline__seed_2026__I_3p50__window_3",
+    "unseen_short__parameter_aware__seed_42__I_3p29__window_1",
+    "unseen_short__parameter_aware__seed_42__I_3p29__window_2",
+    "unseen_short__parameter_aware__seed_42__I_3p29__window_3",
+    "unseen_short__parameter_aware__seed_42__I_3p34__window_1",
+    "unseen_short__parameter_aware__seed_42__I_3p34__window_2",
+    "unseen_short__parameter_aware__seed_42__I_3p34__window_3",
+    "unseen_short__parameter_aware__seed_123__I_3p29__window_1",
+    "unseen_short__parameter_aware__seed_123__I_3p29__window_2",
+    "unseen_short__parameter_aware__seed_123__I_3p29__window_3",
+    "unseen_short__parameter_aware__seed_123__I_3p34__window_1",
+    "unseen_short__parameter_aware__seed_123__I_3p34__window_2",
+    "unseen_short__parameter_aware__seed_123__I_3p34__window_3",
+    "unseen_short__parameter_aware__seed_456__I_3p29__window_1",
+    "unseen_short__parameter_aware__seed_456__I_3p29__window_2",
+    "unseen_short__parameter_aware__seed_456__I_3p29__window_3",
+    "unseen_short__parameter_aware__seed_456__I_3p34__window_1",
+    "unseen_short__parameter_aware__seed_456__I_3p34__window_2",
+    "unseen_short__parameter_aware__seed_456__I_3p34__window_3",
+    "unseen_short__parameter_aware__seed_789__I_3p29__window_1",
+    "unseen_short__parameter_aware__seed_789__I_3p29__window_2",
+    "unseen_short__parameter_aware__seed_789__I_3p29__window_3",
+    "unseen_short__parameter_aware__seed_789__I_3p34__window_1",
+    "unseen_short__parameter_aware__seed_789__I_3p34__window_2",
+    "unseen_short__parameter_aware__seed_789__I_3p34__window_3",
+    "unseen_short__parameter_aware__seed_2026__I_3p29__window_1",
+    "unseen_short__parameter_aware__seed_2026__I_3p29__window_2",
+    "unseen_short__parameter_aware__seed_2026__I_3p29__window_3",
+    "unseen_short__parameter_aware__seed_2026__I_3p34__window_1",
+    "unseen_short__parameter_aware__seed_2026__I_3p34__window_2",
+    "unseen_short__parameter_aware__seed_2026__I_3p34__window_3",
+    "unseen_short__ordinary_baseline__seed_42__I_3p29__window_1",
+    "unseen_short__ordinary_baseline__seed_42__I_3p29__window_2",
+    "unseen_short__ordinary_baseline__seed_42__I_3p29__window_3",
+    "unseen_short__ordinary_baseline__seed_42__I_3p34__window_1",
+    "unseen_short__ordinary_baseline__seed_42__I_3p34__window_2",
+    "unseen_short__ordinary_baseline__seed_42__I_3p34__window_3",
+    "unseen_short__ordinary_baseline__seed_123__I_3p29__window_1",
+    "unseen_short__ordinary_baseline__seed_123__I_3p29__window_2",
+    "unseen_short__ordinary_baseline__seed_123__I_3p29__window_3",
+    "unseen_short__ordinary_baseline__seed_123__I_3p34__window_1",
+    "unseen_short__ordinary_baseline__seed_123__I_3p34__window_2",
+    "unseen_short__ordinary_baseline__seed_123__I_3p34__window_3",
+    "unseen_short__ordinary_baseline__seed_456__I_3p29__window_1",
+    "unseen_short__ordinary_baseline__seed_456__I_3p29__window_2",
+    "unseen_short__ordinary_baseline__seed_456__I_3p29__window_3",
+    "unseen_short__ordinary_baseline__seed_456__I_3p34__window_1",
+    "unseen_short__ordinary_baseline__seed_456__I_3p34__window_2",
+    "unseen_short__ordinary_baseline__seed_456__I_3p34__window_3",
+    "unseen_short__ordinary_baseline__seed_789__I_3p29__window_1",
+    "unseen_short__ordinary_baseline__seed_789__I_3p29__window_2",
+    "unseen_short__ordinary_baseline__seed_789__I_3p29__window_3",
+    "unseen_short__ordinary_baseline__seed_789__I_3p34__window_1",
+    "unseen_short__ordinary_baseline__seed_789__I_3p34__window_2",
+    "unseen_short__ordinary_baseline__seed_789__I_3p34__window_3",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_1",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_2",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p29__window_3",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_1",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_2",
+    "unseen_short__ordinary_baseline__seed_2026__I_3p34__window_3",
+    "known_long__parameter_aware__seed_42__I_1p67",
+    "known_long__parameter_aware__seed_42__I_3p20",
+    "known_long__parameter_aware__seed_42__I_3p50",
+    "known_long__parameter_aware__seed_123__I_1p67",
+    "known_long__parameter_aware__seed_123__I_3p20",
+    "known_long__parameter_aware__seed_123__I_3p50",
+    "known_long__parameter_aware__seed_456__I_1p67",
+    "known_long__parameter_aware__seed_456__I_3p20",
+    "known_long__parameter_aware__seed_456__I_3p50",
+    "known_long__parameter_aware__seed_789__I_1p67",
+    "known_long__parameter_aware__seed_789__I_3p20",
+    "known_long__parameter_aware__seed_789__I_3p50",
+    "known_long__parameter_aware__seed_2026__I_1p67",
+    "known_long__parameter_aware__seed_2026__I_3p20",
+    "known_long__parameter_aware__seed_2026__I_3p50",
+    "known_long__ordinary_baseline__seed_42__I_1p67",
+    "known_long__ordinary_baseline__seed_42__I_3p20",
+    "known_long__ordinary_baseline__seed_42__I_3p50",
+    "known_long__ordinary_baseline__seed_123__I_1p67",
+    "known_long__ordinary_baseline__seed_123__I_3p20",
+    "known_long__ordinary_baseline__seed_123__I_3p50",
+    "known_long__ordinary_baseline__seed_456__I_1p67",
+    "known_long__ordinary_baseline__seed_456__I_3p20",
+    "known_long__ordinary_baseline__seed_456__I_3p50",
+    "known_long__ordinary_baseline__seed_789__I_1p67",
+    "known_long__ordinary_baseline__seed_789__I_3p20",
+    "known_long__ordinary_baseline__seed_789__I_3p50",
+    "known_long__ordinary_baseline__seed_2026__I_1p67",
+    "known_long__ordinary_baseline__seed_2026__I_3p20",
+    "known_long__ordinary_baseline__seed_2026__I_3p50",
+    "unseen_long__parameter_aware__seed_42__I_3p29",
+    "unseen_long__parameter_aware__seed_42__I_3p34",
+    "unseen_long__parameter_aware__seed_123__I_3p29",
+    "unseen_long__parameter_aware__seed_123__I_3p34",
+    "unseen_long__parameter_aware__seed_456__I_3p29",
+    "unseen_long__parameter_aware__seed_456__I_3p34",
+    "unseen_long__parameter_aware__seed_789__I_3p29",
+    "unseen_long__parameter_aware__seed_789__I_3p34",
+    "unseen_long__parameter_aware__seed_2026__I_3p29",
+    "unseen_long__parameter_aware__seed_2026__I_3p34",
+    "unseen_long__ordinary_baseline__seed_42__I_3p29",
+    "unseen_long__ordinary_baseline__seed_42__I_3p34",
+    "unseen_long__ordinary_baseline__seed_123__I_3p29",
+    "unseen_long__ordinary_baseline__seed_123__I_3p34",
+    "unseen_long__ordinary_baseline__seed_456__I_3p29",
+    "unseen_long__ordinary_baseline__seed_456__I_3p34",
+    "unseen_long__ordinary_baseline__seed_789__I_3p29",
+    "unseen_long__ordinary_baseline__seed_789__I_3p34",
+    "unseen_long__ordinary_baseline__seed_2026__I_3p29",
+    "unseen_long__ordinary_baseline__seed_2026__I_3p34",
+    "continuous__parameter_aware__seed_42",
+    "continuous__parameter_aware__seed_123",
+    "continuous__parameter_aware__seed_456",
+    "continuous__parameter_aware__seed_789",
+    "continuous__parameter_aware__seed_2026",
+    "continuous__ordinary_baseline__seed_42",
+    "continuous__ordinary_baseline__seed_123",
+    "continuous__ordinary_baseline__seed_456",
+    "continuous__ordinary_baseline__seed_789",
+    "continuous__ordinary_baseline__seed_2026"
+  ],
+  "failure": {
+    "affected_interval_count": 6,
+    "benchmark_access_started": true,
+    "message": "Continuous per-current intervals with divergent state metrics retained defined spike/burst metrics; generic reporting defect only. Predictions, state metrics, models, locks, and protocol are unchanged.",
+    "timestamp": "2026-08-10T13:11:26.920265+00:00",
+    "type": "PostBenchmarkEventValidityAudit"
+  },
+  "final_model_count": 10,
+  "first_benchmark_access_timestamp": "2026-08-10T13:02:04.460378+00:00",
+  "lock_hashes": {
+    "chapter2/final_results/selected_model.json": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472",
+    "chapter2/final_results/step8_evaluation_manifest.json": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31"
+  },
+  "model_manifest_hash": "7189d541cbe0dad0d24e0c04dcb9ac23410c5dd779ec00ceb91a741e4e16210f",
+  "preflight": {
+    "audit_backup_hashes": {
+      "chapter2/optimisation_results/pre_resume_fix/step7_ordinary_baseline_history.json": "b001a8976c98667a23422354b6c3b6e2dd1e026ad74451e7e91c62293dd3b537",
+      "chapter2/optimisation_results/pre_resume_fix/step7_parameter_aware_history.json": "b762bca77533a71ca74261bde82ae098f72c884c214f910c1591981bafdecce6",
+      "chapter2/optimisation_results/pre_resume_fix/step7_selection.json": "770b438a267bc76b6b9eac84ecc252578b9f11795948196433442cbc8ffa4239"
+    },
+    "benchmark_numerical_values_inspected": false,
+    "chapter1_tracked_tree_hash": "7f68c47e235ff64ceaf853e37255f851aace45d62167a4ccf1c85b4b077db7f6",
+    "checked_at": "2026-08-10T12:57:23.571162+00:00",
+    "dataset_hashes": {
+      "chapter2/outputs/data/continuous_switched_currents.npz": "0921cbad321da1830433dc84e58f25ff2b0b6a6d571a31cae769bdfd6dc00a7b",
+      "chapter2/outputs/data/fixed_I_1p67.npz": "cc89af5e9a27d05a9501ea995a2ef361c146d6513ec1b19765238603af9ffb2b",
+      "chapter2/outputs/data/fixed_I_3p20.npz": "c4292a1e0fa5575d08419e7d302f980e2ed085878187f67659aa59decc486ded",
+      "chapter2/outputs/data/fixed_I_3p29.npz": "2ed394f457e5de5f0d14a5dd450611fd9774c02cb13fc68f7b21a2621273b7b4",
+      "chapter2/outputs/data/fixed_I_3p34.npz": "8cad49948c553df9b65a24deacf067dc999325dadb580a4787ded12b6315585d",
+      "chapter2/outputs/data/fixed_I_3p50.npz": "4d042da6adbde026468207c4e9f74443f8587c635dff2d28b69e2b1784d5cbbf"
+    },
+    "dataset_headers": {
+      "chapter2/outputs/data/continuous_switched_currents.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            500000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            500000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            500000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            500000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            500000
+          ]
+        }
+      },
+      "chapter2/outputs/data/fixed_I_1p67.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        }
+      },
+      "chapter2/outputs/data/fixed_I_3p20.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        }
+      },
+      "chapter2/outputs/data/fixed_I_3p29.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        }
+      },
+      "chapter2/outputs/data/fixed_I_3p34.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        }
+      },
+      "chapter2/outputs/data/fixed_I_3p50.npz": {
+        "I": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "t": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "x": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "y": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        },
+        "z": {
+          "dtype": "float64",
+          "fortran_order": false,
+          "shape": [
+            100000
+          ]
+        }
+      }
+    },
+    "fixed_windows": [
+      {
+        "forecast_range": [
+          72000,
+          80000
+        ],
+        "start": 70000,
+        "warmup_range": [
+          70000,
+          72000
+        ],
+        "window": 1
+      },
+      {
+        "forecast_range": [
+          82000,
+          90000
+        ],
+        "start": 80000,
+        "warmup_range": [
+          80000,
+          82000
+        ],
+        "window": 2
+      },
+      {
+        "forecast_range": [
+          91999,
+          99999
+        ],
+        "start": 89999,
+        "warmup_range": [
+          89999,
+          91999
+        ],
+        "window": 3
+      }
+    ],
+    "history_hashes": {
+      "chapter2/optimisation_results/step7_ordinary_baseline_history.json": "b73a62b16703d1ec8706a87365578d2437980e9d7ab01785aa27e134d902299f",
+      "chapter2/optimisation_results/step7_parameter_aware_history.json": "7df7502de84a3ed2ae583cbcc10741bd54625aa6cfdfa76ce8e02f18fd2d2dfa"
+    },
+    "inspection_basis": [
+      "raw-byte SHA-256",
+      "NPZ member names",
+      "NPY headers",
+      "array shapes",
+      "array dtypes",
+      "transition counts",
+      "strict Step 7 JSON metadata and metrics"
+    ],
+    "schema": "chapter2_step8_v1",
+    "selection_hash": "856985bd18d2b671d6919c8116924380eb521131a7284754937e45bf793dda67"
+  },
+  "raw_results_hash": "3e96831cfec1a3e10326a26707e785d0a6345bddff179a344a99462fa667264b",
+  "runtime": {
+    "hostname": "tg080",
+    "machine": "x86_64",
+    "mkl_num_threads": "8",
+    "omp_num_threads": "8",
+    "openblas_num_threads": "8",
+    "slurm_job_id": "1773009",
+    "slurm_node": "tg080"
+  },
+  "schema": "chapter2_step8_v1",
+  "state": "FAILED",
+  "updated_at": "2026-08-10T13:11:26.922618+00:00",
+  "verification_hash": "09e532b68b1af269c79261df62836a8a904a792cf166a1d4e8ffac2304d825d1"
+}

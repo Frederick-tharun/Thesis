@@ -1,0 +1,12 @@
+name: thesis-chapter2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.13
+  - numpy=1.26.4
+  - pandas=2.2.3
+  - scipy=1.13.1
+  - matplotlib=3.9.2
+  - scikit-learn=1.5.2
+  - scikit-optimize=0.10.2
+  - pytest=7.4.4

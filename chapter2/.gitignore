@@ -1,2 +1,43 @@
+# Python caches and test/tool output
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Local environments and editor/OS metadata
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# Logs, temporary/backup files, and transport archives
+logs/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*~
+*.swp
+*.swo
+*.zip
+*.zip.sha256
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.patch
+
+# Superseded presentation outputs; protected JSON references remain
+final_results/figures/
+final_results/figures_final/

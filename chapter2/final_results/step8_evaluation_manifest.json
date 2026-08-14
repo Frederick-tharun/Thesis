@@ -1,0 +1,225 @@
+{
+  "aggregation": {
+    "continuous_family_weight": "one equal weight per seed",
+    "failed_rollouts": "retained; undefined NRMSE contributes frozen failure score",
+    "families_kept_separate": [
+      "known_short",
+      "unseen_short",
+      "known_long",
+      "unseen_long",
+      "continuous"
+    ],
+    "long_family_weight": "one equal weight per seed/current rollout",
+    "paired_comparison": "same seed/current/window or benchmark record",
+    "short_family_weight": "one equal weight per seed/current/window",
+    "statistics": [
+      "mean",
+      "population_std",
+      "median",
+      "worst"
+    ]
+  },
+  "continuous": {
+    "aware_transition_alignment": "[predicted state at t, I_t] -> state at t+1",
+    "baseline_receives_current": false,
+    "boundary_half_window_transitions": 2000,
+    "forecast_range": [
+      2000,
+      499999
+    ],
+    "reset_count": 1,
+    "rewarm_at_boundaries": false,
+    "switch_indices": [
+      100000,
+      200000,
+      300000,
+      400000
+    ],
+    "warmup_range": [
+      0,
+      2000
+    ]
+  },
+  "created_at": "2026-08-10T12:57:26.407437+00:00",
+  "events": {
+    "burst_duration": "last spike time minus first spike time in each accepted burst",
+    "burst_min_gap_prominence": 4.0,
+    "burst_min_intervals_per_timescale": 2,
+    "burst_min_log_isi_gap": 0.15,
+    "burst_min_spikes": 2,
+    "chapter1_attribution": "Chapter 1 uses scipy peak detection and a 20-step spike matching tolerance. Step 8 uses the already frozen Chapter 2 physical-state peak and adaptive log-ISI burst definitions because Chapter 1 contains no single unambiguous burst definition.",
+    "minimum_spike_distance_steps": 20,
+    "spike_height": 0.0,
+    "spike_match_tolerance_steps": 20,
+    "spike_prominence": 0.5,
+    "spike_time_error": "mean absolute timing error of greedily nearest one-to-one matches within 20 steps"
+  },
+  "expected_artifacts": [
+    "selected_model.json",
+    "step8_evaluation_manifest.json",
+    "step8_status.json",
+    "step8_raw_results.json",
+    "step8_aggregate_results.json",
+    "step8_known_heldout.csv",
+    "step8_unseen_currents.csv",
+    "step8_long_horizon.csv",
+    "step8_continuous.csv",
+    "step8_event_metrics.csv",
+    "step8_verification.json",
+    "figures/*.png",
+    "figures/*.pdf",
+    "final_models/model_manifest.json",
+    "final_models/*.npz"
+  ],
+  "failure_handling": "Preserve all seeds and failures; do not tune, reselect, adapt, shorten horizons, or change scaling after benchmark access.",
+  "final_training": {
+    "current_scaler_fit_range": [
+      0,
+      70000
+    ],
+    "currents": [
+      1.67,
+      3.2,
+      3.5
+    ],
+    "scaler_currents": [
+      1.67,
+      3.2,
+      3.5
+    ],
+    "state_and_output_scaler_fit_range": [
+      0,
+      70000
+    ],
+    "transition_range": [
+      0,
+      70000
+    ],
+    "washout_per_independently_reset_trajectory": 2000
+  },
+  "fixed_short_windows": [
+    {
+      "forecast_range": [
+        72000,
+        80000
+      ],
+      "start": 70000,
+      "warmup_range": [
+        70000,
+        72000
+      ],
+      "window": 1
+    },
+    {
+      "forecast_range": [
+        82000,
+        90000
+      ],
+      "start": 80000,
+      "warmup_range": [
+        80000,
+        82000
+      ],
+      "window": 2
+    },
+    {
+      "forecast_range": [
+        91999,
+        99999
+      ],
+      "start": 89999,
+      "warmup_range": [
+        89999,
+        91999
+      ],
+      "window": 3
+    }
+  ],
+  "known_currents": [
+    1.67,
+    3.2,
+    3.5
+  ],
+  "long_horizon": {
+    "forecast_range": [
+      72000,
+      99999
+    ],
+    "reset_or_rewarm_during_forecast": false,
+    "reset_transition": 70000,
+    "warmup_range": [
+      70000,
+      72000
+    ]
+  },
+  "metrics": {
+    "collapse_std_ratio_threshold": 0.05,
+    "definitions_source": "chapter2/esn_metrics.py (unchanged from Step 7)",
+    "divergence_threshold": 5.0,
+    "nonfinite_failure_score": 1000000.0,
+    "normalisation_scale": "final-training state population standard deviations",
+    "undefined_representation": "None plus defined flags and contributor counts",
+    "valid_prediction_threshold": 0.4
+  },
+  "plot_selection": {
+    "cherry_picking_allowed": false,
+    "formats": [
+      "png",
+      "pdf"
+    ],
+    "representative_seed": 42,
+    "representative_window": 1
+  },
+  "protocol_correction": {
+    "approved_window_starts": [
+      70000,
+      80000,
+      89999
+    ],
+    "benchmark_numerical_values_inspected": false,
+    "decision_evidence": [
+      "raw-byte SHA-256",
+      "NPZ member names",
+      "NPY headers",
+      "array shapes",
+      "array dtypes",
+      "transition counts",
+      "strict Step 7 JSON metadata and metrics"
+    ],
+    "final": true,
+    "reason": "Header-only inspection proved that each fixed dataset has 100,000 states and 99,999 transitions, leaving only 29,999 held-out transitions [70,000, 99,999).",
+    "shared_transition": 89999,
+    "shared_transition_use": "scored in window 2 and used only in the unscored warm-up of window 3; scored forecast intervals do not overlap"
+  },
+  "python_and_package_versions": {
+    "matplotlib": "3.9.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "python": "3.12.13",
+    "scikit-learn": "1.5.2",
+    "scikit-optimize": "0.10.2",
+    "scipy": "1.13.1"
+  },
+  "runtime": {
+    "hostname": "tg080",
+    "machine": "x86_64",
+    "mkl_num_threads": "8",
+    "omp_num_threads": "8",
+    "openblas_num_threads": "8",
+    "slurm_job_id": "1773009",
+    "slurm_node": "tg080"
+  },
+  "schema": "chapter2_step8_v1",
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    2026
+  ],
+  "status": "FROZEN BEFORE BENCHMARK ACCESS",
+  "unseen_currents": [
+    3.29,
+    3.34
+  ]
+}

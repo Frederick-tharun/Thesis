@@ -1,0 +1,101 @@
+{
+  "correction": {
+    "affected_interval_count": 6,
+    "affected_intervals": [
+      {
+        "current": 1.67,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          2000,
+          100000
+        ]
+      },
+      {
+        "current": 3.29,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          100000,
+          200000
+        ]
+      },
+      {
+        "current": 3.5,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          200000,
+          300000
+        ]
+      },
+      {
+        "current": 3.34,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          300000,
+          400000
+        ]
+      },
+      {
+        "current": 3.2,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          400000,
+          499999
+        ]
+      },
+      {
+        "current": 3.29,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_789",
+        "seed": 789,
+        "transition_range": [
+          100000,
+          200000
+        ]
+      }
+    ],
+    "benchmark_access_had_started": true,
+    "corrected_esn_step8_source_sha256": "847d5ba8828973503a01aebf53e52b8be735ed5bedea8dd197ad4e82ae2d7999",
+    "decided_at": "2026-08-10T13:16:07.007302+00:00",
+    "locked_esn_step8_source_sha256": "2202e02d9d54dcca38a56b775b5bbc8a533680e9a5979feb85761a18c264880b",
+    "post_correction_raw_sha256": "24033a8ed2bff722fd5d4324d45da908ffa85057f68a5c53fd6b3630be5bb2c3",
+    "pre_correction_raw_sha256": "3e96831cfec1a3e10326a26707e785d0a6345bddff179a344a99462fa667264b",
+    "reason": "A continuous per-current interval whose state metrics diverged must have undefined spike/burst metrics. Forecasts and state metrics were already correct.",
+    "regression_test": "chapter2/tests/test_esn_step8.py::test_divergent_interval_event_metrics_are_invalidated",
+    "rerun_method": "Deterministic postprocessing of the existing strict JSON record; source benchmark arrays were not reopened and forecasts were not rerun.",
+    "scientific_scope": "Event-metric defined flags/errors only; no forecast, model, scaler, lock, state metric, aggregate, window, seed, or hyperparameter changed.",
+    "type": "generic_postprocessing_defect"
+  },
+  "correction_runner": {
+    "path": "chapter2/correct_step8_event_validity.py",
+    "sha256": "a8461730c79c8295978eab194fe4f856d7caf913288d54e95ca02cfbeada4a54"
+  },
+  "created_at": "2026-08-10T13:16:17.235272+00:00",
+  "evaluation_manifest_sha256": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31",
+  "model_manifest_sha256": "7189d541cbe0dad0d24e0c04dcb9ac23410c5dd779ec00ceb91a741e4e16210f",
+  "post_correction_artifact_hashes": {
+    "step8_aggregate_results.json": "f0367185d12c9a56279ef7b78ad51add5d30a71af60e3f78b3e4f4b62ee88711",
+    "step8_raw_results.json": "24033a8ed2bff722fd5d4324d45da908ffa85057f68a5c53fd6b3630be5bb2c3",
+    "step8_status.json": "b4247db337df3b6fcc7f507bd23fb7bbcc1bcee1c47622d83f4b7aa2dc9f172f",
+    "step8_verification.json": "79f3e7d2ae159432b51591387b8cee205acbe2b30ba83ce5b3fae62c8f1476ad"
+  },
+  "pre_correction_artifact_hashes": {
+    "step8_aggregate_results.json": "f0367185d12c9a56279ef7b78ad51add5d30a71af60e3f78b3e4f4b62ee88711",
+    "step8_continuous.csv": "eb5cac21666b944a3d83b8a148cf52b733b93f88539b6d071510a6cdde066c1f",
+    "step8_event_metrics.csv": "91115406cad29e755d0d37f6470d29d1e3187162d822b9b8a4007b9f6550eb9e",
+    "step8_raw_results.json": "3e96831cfec1a3e10326a26707e785d0a6345bddff179a344a99462fa667264b",
+    "step8_status.json": "a0075100c98b30c947afd80e3e7ee9dbd0a49be9b01731c81b1f0b01329c7182",
+    "step8_verification.json": "09e532b68b1af269c79261df62836a8a904a792cf166a1d4e8ffac2304d825d1"
+  },
+  "schema": "chapter2_step8_post_benchmark_correction_v1",
+  "selection_lock_sha256": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472"
+}
