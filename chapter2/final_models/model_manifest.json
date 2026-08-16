@@ -1,0 +1,263 @@
+{
+  "completed_at": "2026-08-10T13:02:04.314039+00:00",
+  "created_at": "2026-08-10T12:57:26.599083+00:00",
+  "lock_hashes": {
+    "chapter2/final_results/selected_model.json": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472",
+    "chapter2/final_results/step8_evaluation_manifest.json": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31"
+  },
+  "model_count": 10,
+  "models": [
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 4,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "seed": 42,
+        "spectral_radius": 0.4118313967689876
+      },
+      "model_type": "parameter_aware",
+      "path": "chapter2/final_models/parameter_aware_seed_42.npz",
+      "round_trip_inference_exact": true,
+      "seed": 42,
+      "sha256": "2ab05e5909b81856aaa30da95989d2b8d1146b40bb210ae438fd5beb23e7c535",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 4,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "seed": 123,
+        "spectral_radius": 0.4118313967689876
+      },
+      "model_type": "parameter_aware",
+      "path": "chapter2/final_models/parameter_aware_seed_123.npz",
+      "round_trip_inference_exact": true,
+      "seed": 123,
+      "sha256": "5ce249f08add3cac6203516d3a28f48a69c84b420769018edc5108c95f17fa2e",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 4,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "seed": 456,
+        "spectral_radius": 0.4118313967689876
+      },
+      "model_type": "parameter_aware",
+      "path": "chapter2/final_models/parameter_aware_seed_456.npz",
+      "round_trip_inference_exact": true,
+      "seed": 456,
+      "sha256": "45f1762a04d47d69660c4fd2d7cede159868224b1b8a72e47f8d6402f5b138c9",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 4,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "seed": 789,
+        "spectral_radius": 0.4118313967689876
+      },
+      "model_type": "parameter_aware",
+      "path": "chapter2/final_models/parameter_aware_seed_789.npz",
+      "round_trip_inference_exact": true,
+      "seed": 789,
+      "sha256": "7d8578de7ddfbc3156a2af7f290fd72a8610842da3ff6cdeecc3300d9dedb815",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 4,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "seed": 2026,
+        "spectral_radius": 0.4118313967689876
+      },
+      "model_type": "parameter_aware",
+      "path": "chapter2/final_models/parameter_aware_seed_2026.npz",
+      "round_trip_inference_exact": true,
+      "seed": 2026,
+      "sha256": "e55f9ef065de2b885f100aa7acf681aec6db2082598a9edf97495d5af3597cdd",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 3,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "seed": 42,
+        "spectral_radius": 0.01
+      },
+      "model_type": "ordinary_baseline",
+      "path": "chapter2/final_models/ordinary_baseline_seed_42.npz",
+      "round_trip_inference_exact": true,
+      "seed": 42,
+      "sha256": "f44225c7b84ed9558b7932f40a6615de9165612e7125afdef9c3703225ad06b0",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 3,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "seed": 123,
+        "spectral_radius": 0.01
+      },
+      "model_type": "ordinary_baseline",
+      "path": "chapter2/final_models/ordinary_baseline_seed_123.npz",
+      "round_trip_inference_exact": true,
+      "seed": 123,
+      "sha256": "6c3c9666aa07595dacfe1faec53d455ca7b0ce1cadb2c6e53c20f4515249f765",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 3,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "seed": 456,
+        "spectral_radius": 0.01
+      },
+      "model_type": "ordinary_baseline",
+      "path": "chapter2/final_models/ordinary_baseline_seed_456.npz",
+      "round_trip_inference_exact": true,
+      "seed": 456,
+      "sha256": "8072523c200d12748241e47fbeb5d95e56fdee150cabb6f963a321f9c9b82f31",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 3,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "seed": 789,
+        "spectral_radius": 0.01
+      },
+      "model_type": "ordinary_baseline",
+      "path": "chapter2/final_models/ordinary_baseline_seed_789.npz",
+      "round_trip_inference_exact": true,
+      "seed": 789,
+      "sha256": "fa660b818a7147ba032713d80b802e565ca50c2273067fad139d4bbfab2ec081",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    },
+    {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_dimension": 3,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "seed": 2026,
+        "spectral_radius": 0.01
+      },
+      "model_type": "ordinary_baseline",
+      "path": "chapter2/final_models/ordinary_baseline_seed_2026.npz",
+      "round_trip_inference_exact": true,
+      "seed": 2026,
+      "sha256": "1d3685a52bf3035e6b49f5bdb889d01bce42c8d15e240fb571508391f08c653e",
+      "training_transition_range": [
+        0,
+        70000
+      ],
+      "washout_per_trajectory": 2000
+    }
+  ],
+  "schema": "chapter2_final_model_manifest_v1",
+  "status": "complete"
+}

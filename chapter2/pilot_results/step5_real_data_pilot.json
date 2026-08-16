@@ -1,0 +1,94 @@
+{
+  "alignment": {
+    "prediction_row_zero": "state at transition target 42001",
+    "supplied_current_is_predicted": false,
+    "target_row_zero": "state at transition target 42001"
+  },
+  "data_scope": {
+    "continuous_benchmark_loaded": false,
+    "fitting_transition_range_used_per_current": [
+      0,
+      5000
+    ],
+    "fitting_transitions_per_current": 5000,
+    "held_out_loaded": false,
+    "scored_transition_range": [
+      42000,
+      43000
+    ],
+    "scored_transitions": 1000,
+    "total_fitting_transitions": 15000,
+    "training_currents": [
+      1.67,
+      3.2,
+      3.5
+    ],
+    "training_washout_per_current": 100,
+    "unseen_current_loaded": false,
+    "validation_current": 3.2,
+    "validation_window": 1,
+    "warmup_transition_range": [
+      40000,
+      42000
+    ],
+    "warmup_transitions": 2000
+  },
+  "metric_thresholds_are_final_selected_values": false,
+  "metrics": {
+    "diverged": false,
+    "divergence_index": null,
+    "divergence_reason": null,
+    "divergence_threshold": 5.0,
+    "divergence_time": null,
+    "dt": 0.01,
+    "nrmse_state": 0.21644409343201784,
+    "nrmse_x": 0.2762114878291327,
+    "nrmse_y": 0.2534509776765342,
+    "nrmse_z": 0.0037353247315459266,
+    "rmse_state": 0.48304520719783095,
+    "rmse_x": 0.14784620031318657,
+    "rmse_y": 0.8234862951140483,
+    "rmse_z": 0.0031367822172897837,
+    "sample_count": 1000,
+    "valid_prediction_steps": 642,
+    "valid_prediction_threshold": 0.4,
+    "valid_prediction_time": 6.42
+  },
+  "model_config": {
+    "bias_scaling": 0.1,
+    "input_dimension": 4,
+    "input_scaling": 0.3,
+    "leak_rate": 0.5,
+    "output_dimension": 3,
+    "regularise_bias": false,
+    "reservoir_connectivity": 0.2,
+    "reservoir_size": 30,
+    "ridge_regularisation": 1e-06,
+    "seed": 42,
+    "spectral_radius": 0.8
+  },
+  "model_config_is_selected_hyperparameters": false,
+  "purpose": "Small real-data mechanics pilot only; no hyperparameter selection or benchmark evaluation.",
+  "scaling": {
+    "current_mean": [
+      2.79
+    ],
+    "current_scale": [
+      0.8013738203859669
+    ],
+    "fitted_from_all_training_current_fitting_inputs": true,
+    "metric_normalisation": "training-fitted state standard deviations; validation statistics were not fitted",
+    "state_mean": [
+      -0.9047618790592522,
+      -4.523795665260519,
+      2.7625879383353875
+    ],
+    "state_scale": [
+      0.5352644869160755,
+      3.249094963701498,
+      0.839761585063469
+    ]
+  },
+  "schema": "chapter2_step5_real_data_pilot_v1",
+  "scientific_claim": "This pilot checks pipeline operation only and does not establish biological prediction accuracy or generalisation."
+}

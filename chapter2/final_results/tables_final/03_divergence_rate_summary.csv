@@ -1,0 +1,11 @@
+family,model_type,record_count,divergence_count,divergence_percent,collapse_count,collapse_percent
+known_short,parameter_aware,45,9,20.0,0,0.0
+known_short,ordinary_baseline,45,0,0.0,0,0.0
+unseen_short,parameter_aware,30,6,20.0,0,0.0
+unseen_short,ordinary_baseline,30,0,0.0,0,0.0
+known_long,parameter_aware,15,3,20.0,0,0.0
+known_long,ordinary_baseline,15,0,0.0,0,0.0
+unseen_long,parameter_aware,10,2,20.0,0,0.0
+unseen_long,ordinary_baseline,10,0,0.0,0,0.0
+continuous,parameter_aware,5,2,40.0,0,0.0
+continuous,ordinary_baseline,5,0,0.0,0,0.0

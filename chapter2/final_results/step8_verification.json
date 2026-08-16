@@ -1,0 +1,304 @@
+{
+  "all_five_seeds_per_model": {
+    "ordinary_baseline": [
+      42,
+      123,
+      456,
+      789,
+      2026
+    ],
+    "parameter_aware": [
+      42,
+      123,
+      456,
+      789,
+      2026
+    ]
+  },
+  "benchmark_results_changed_selection_or_models": false,
+  "chapter1_tracked_tree_hash_unchanged": "7f68c47e235ff64ceaf853e37255f851aace45d62167a4ccf1c85b4b077db7f6",
+  "complete_record_count": 210,
+  "dataset_hashes_unchanged": {
+    "chapter2/outputs/data/continuous_switched_currents.npz": "0921cbad321da1830433dc84e58f25ff2b0b6a6d571a31cae769bdfd6dc00a7b",
+    "chapter2/outputs/data/fixed_I_1p67.npz": "cc89af5e9a27d05a9501ea995a2ef361c146d6513ec1b19765238603af9ffb2b",
+    "chapter2/outputs/data/fixed_I_3p20.npz": "c4292a1e0fa5575d08419e7d302f980e2ed085878187f67659aa59decc486ded",
+    "chapter2/outputs/data/fixed_I_3p29.npz": "2ed394f457e5de5f0d14a5dd450611fd9774c02cb13fc68f7b21a2621273b7b4",
+    "chapter2/outputs/data/fixed_I_3p34.npz": "8cad49948c553df9b65a24deacf067dc999325dadb580a4787ded12b6315585d",
+    "chapter2/outputs/data/fixed_I_3p50.npz": "4d042da6adbde026468207c4e9f74443f8587c635dff2d28b69e2b1784d5cbbf"
+  },
+  "expected_record_count": 210,
+  "figure_artifacts": [
+    {
+      "path": "chapter2/final_results/figures/01_known_current_nrmse_by_current.png",
+      "sha256": "2d634761d88b804f3c5bd300d4716138637b23d8a7ca062199d40e64ce57e8a1"
+    },
+    {
+      "path": "chapter2/final_results/figures/01_known_current_nrmse_by_current.pdf",
+      "sha256": "a14dab284f02462c8503bf75a0c27fc5a2a8688811bd1b1ffaa1aa3f6372f00b"
+    },
+    {
+      "path": "chapter2/final_results/figures/02_unseen_current_nrmse_by_current.png",
+      "sha256": "6d44f1e873d8fcf1f3e15525b031c8f66c2615b7b5a13c3e4577ae23042b5d81"
+    },
+    {
+      "path": "chapter2/final_results/figures/02_unseen_current_nrmse_by_current.pdf",
+      "sha256": "f24d70770a6a862cd7926a3b18af03bfcd2abc0a46736ce1c6e6243e2be08e48"
+    },
+    {
+      "path": "chapter2/final_results/figures/03_known_representative_truth_vs_prediction.png",
+      "sha256": "36a674e416eadff1ce53d611e295137ec29b7e985d67fd6b679f214d1434064d"
+    },
+    {
+      "path": "chapter2/final_results/figures/03_known_representative_truth_vs_prediction.pdf",
+      "sha256": "d6b5550774531948db2abbf6ad1c3257c5aa53f543ed8c9a08650465ea205de1"
+    },
+    {
+      "path": "chapter2/final_results/figures/04_unseen_representative_truth_vs_prediction.png",
+      "sha256": "ed4c6142c98720293f9dd1f12780b7a3aa9b9833e245ef31d0280deb3de65232"
+    },
+    {
+      "path": "chapter2/final_results/figures/04_unseen_representative_truth_vs_prediction.pdf",
+      "sha256": "55c8ab929a9f28ea8f58f9961713b21b9d38b184996bf9854a5750cbfc6cc1a4"
+    },
+    {
+      "path": "chapter2/final_results/figures/05_continuous_current_and_state_predictions.png",
+      "sha256": "3acc7f40202253fc08f1eead9e78a95b55e8cf62616ed87a9d0579c2c6611b9f"
+    },
+    {
+      "path": "chapter2/final_results/figures/05_continuous_current_and_state_predictions.pdf",
+      "sha256": "76cd3a505c8946c14e454c614d554ff5f864ad9b8cb673df7a0d3b94659aacdb"
+    },
+    {
+      "path": "chapter2/final_results/figures/06_continuous_normalised_error.png",
+      "sha256": "acafb2d382cdc877b7428ded39d32e4377ff29447eb297ac7fd96933a42c06cb"
+    },
+    {
+      "path": "chapter2/final_results/figures/06_continuous_normalised_error.pdf",
+      "sha256": "5a08bd0e616b1e3c8d0730503be7063f7777f904066dc37ea48815527703252d"
+    },
+    {
+      "path": "chapter2/final_results/figures/07_valid_prediction_time_comparison.png",
+      "sha256": "84529255516d9e38909ee74549c2f97dd0be8775bc65763967d37223a740ad1a"
+    },
+    {
+      "path": "chapter2/final_results/figures/07_valid_prediction_time_comparison.pdf",
+      "sha256": "e1ebb61c12ea6835ff2e907a46166aee23d23307dad1d21876bfa740e1f7d08a"
+    },
+    {
+      "path": "chapter2/final_results/figures/08_long_horizon_spike_burst_summary.png",
+      "sha256": "f42021da86e34ccbabb97719fe39fb27c4d549ad0ee30263d19d3b6eac9e2fc4"
+    },
+    {
+      "path": "chapter2/final_results/figures/08_long_horizon_spike_burst_summary.pdf",
+      "sha256": "9019f7fb4031801f01231eb6cdebfe93a9e6af7e1921b697076ba93b18115e9c"
+    },
+    {
+      "path": "chapter2/final_results/figures/09_rollout_nrmse_distribution.png",
+      "sha256": "5d3e01b93c27c25a72f15157b3abc77522731c5d9b07a8c04c380d27e687ade0"
+    },
+    {
+      "path": "chapter2/final_results/figures/09_rollout_nrmse_distribution.pdf",
+      "sha256": "bae6fd359f36b16b21a696c59e5abf2bc20076e2152f6ae4d707f1fc2935e171"
+    },
+    {
+      "path": "chapter2/final_results/figures/10_divergence_collapse_summary.png",
+      "sha256": "31e1ba31b41d3b8aa5a66dd4bb4653dad45795913b90adfd2127e9b5996295a5"
+    },
+    {
+      "path": "chapter2/final_results/figures/10_divergence_collapse_summary.pdf",
+      "sha256": "e194207b8c404ca2e00ea910416c63c7cec810e7f2e9089699c9dca704cc09aa"
+    }
+  ],
+  "final_model_hashes_unchanged": {
+    "chapter2/final_models/ordinary_baseline_seed_123.npz": "6c3c9666aa07595dacfe1faec53d455ca7b0ce1cadb2c6e53c20f4515249f765",
+    "chapter2/final_models/ordinary_baseline_seed_2026.npz": "1d3685a52bf3035e6b49f5bdb889d01bce42c8d15e240fb571508391f08c653e",
+    "chapter2/final_models/ordinary_baseline_seed_42.npz": "f44225c7b84ed9558b7932f40a6615de9165612e7125afdef9c3703225ad06b0",
+    "chapter2/final_models/ordinary_baseline_seed_456.npz": "8072523c200d12748241e47fbeb5d95e56fdee150cabb6f963a321f9c9b82f31",
+    "chapter2/final_models/ordinary_baseline_seed_789.npz": "fa660b818a7147ba032713d80b802e565ca50c2273067fad139d4bbfab2ec081",
+    "chapter2/final_models/parameter_aware_seed_123.npz": "5ce249f08add3cac6203516d3a28f48a69c84b420769018edc5108c95f17fa2e",
+    "chapter2/final_models/parameter_aware_seed_2026.npz": "e55f9ef065de2b885f100aa7acf681aec6db2082598a9edf97495d5af3597cdd",
+    "chapter2/final_models/parameter_aware_seed_42.npz": "2ab05e5909b81856aaa30da95989d2b8d1146b40bb210ae438fd5beb23e7c535",
+    "chapter2/final_models/parameter_aware_seed_456.npz": "45f1762a04d47d69660c4fd2d7cede159868224b1b8a72e47f8d6402f5b138c9",
+    "chapter2/final_models/parameter_aware_seed_789.npz": "7d8578de7ddfbc3156a2af7f290fd72a8610842da3ff6cdeecc3300d9dedb815"
+  },
+  "independent_aggregate_recomputation": {
+    "continuous": {
+      "ordinary_baseline": {
+        "count": 5,
+        "mean_nrmse_math_fsum": 0.9657366772038218,
+        "population_std_statistics": 0.009993812574946116,
+        "saved_mean_match": true
+      },
+      "parameter_aware": {
+        "count": 5,
+        "mean_nrmse_math_fsum": 2.0554193659473277,
+        "population_std_statistics": 2.5820116816043903,
+        "saved_mean_match": true
+      }
+    },
+    "known_long": {
+      "ordinary_baseline": {
+        "count": 15,
+        "mean_nrmse_math_fsum": 0.7756765579848682,
+        "population_std_statistics": 0.23732253957738125,
+        "saved_mean_match": true
+      },
+      "parameter_aware": {
+        "count": 15,
+        "mean_nrmse_math_fsum": 1.5145451835205483,
+        "population_std_statistics": 3.0139516935445307,
+        "saved_mean_match": true
+      }
+    },
+    "known_short": {
+      "ordinary_baseline": {
+        "count": 45,
+        "mean_nrmse_math_fsum": 0.7081053849006241,
+        "population_std_statistics": 0.2327616725776721,
+        "saved_mean_match": true
+      },
+      "parameter_aware": {
+        "count": 45,
+        "mean_nrmse_math_fsum": 1.4970334566561763,
+        "population_std_statistics": 3.0238034111632754,
+        "saved_mean_match": true
+      }
+    },
+    "unseen_long": {
+      "ordinary_baseline": {
+        "count": 10,
+        "mean_nrmse_math_fsum": 0.6090899288144078,
+        "population_std_statistics": 0.0483642286058282,
+        "saved_mean_match": true
+      },
+      "parameter_aware": {
+        "count": 10,
+        "mean_nrmse_math_fsum": 1.8715944725360543,
+        "population_std_statistics": 2.3756921612117696,
+        "saved_mean_match": true
+      }
+    },
+    "unseen_short": {
+      "ordinary_baseline": {
+        "count": 30,
+        "mean_nrmse_math_fsum": 0.6008132987769702,
+        "population_std_statistics": 0.06632896630092365,
+        "saved_mean_match": true
+      },
+      "parameter_aware": {
+        "count": 30,
+        "mean_nrmse_math_fsum": 1.753096788900778,
+        "population_std_statistics": 2.49630251919315,
+        "saved_mean_match": true
+      }
+    }
+  },
+  "no_failed_or_collapsed_rollout_omitted": true,
+  "post_benchmark_correction": {
+    "affected_interval_count": 6,
+    "affected_intervals": [
+      {
+        "current": 1.67,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          2000,
+          100000
+        ]
+      },
+      {
+        "current": 3.29,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          100000,
+          200000
+        ]
+      },
+      {
+        "current": 3.5,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          200000,
+          300000
+        ]
+      },
+      {
+        "current": 3.34,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          300000,
+          400000
+        ]
+      },
+      {
+        "current": 3.2,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_456",
+        "seed": 456,
+        "transition_range": [
+          400000,
+          499999
+        ]
+      },
+      {
+        "current": 3.29,
+        "model_type": "parameter_aware",
+        "record_id": "continuous__parameter_aware__seed_789",
+        "seed": 789,
+        "transition_range": [
+          100000,
+          200000
+        ]
+      }
+    ],
+    "benchmark_access_had_started": true,
+    "corrected_esn_step8_source_sha256": "847d5ba8828973503a01aebf53e52b8be735ed5bedea8dd197ad4e82ae2d7999",
+    "decided_at": "2026-08-10T13:16:07.007302+00:00",
+    "locked_esn_step8_source_sha256": "2202e02d9d54dcca38a56b775b5bbc8a533680e9a5979feb85761a18c264880b",
+    "post_correction_raw_sha256": "24033a8ed2bff722fd5d4324d45da908ffa85057f68a5c53fd6b3630be5bb2c3",
+    "pre_correction_raw_sha256": "3e96831cfec1a3e10326a26707e785d0a6345bddff179a344a99462fa667264b",
+    "reason": "A continuous per-current interval whose state metrics diverged must have undefined spike/burst metrics. Forecasts and state metrics were already correct.",
+    "regression_test": "chapter2/tests/test_esn_step8.py::test_divergent_interval_event_metrics_are_invalidated",
+    "rerun_method": "Deterministic postprocessing of the existing strict JSON record; source benchmark arrays were not reopened and forecasts were not rerun.",
+    "scientific_scope": "Event-metric defined flags/errors only; no forecast, model, scaler, lock, state metric, aggregate, window, seed, or hyperparameter changed.",
+    "type": "generic_postprocessing_defect"
+  },
+  "record_matrix_exact": true,
+  "runtime": {
+    "hostname": "tinyx",
+    "machine": "x86_64",
+    "mkl_num_threads": null,
+    "omp_num_threads": null,
+    "openblas_num_threads": null,
+    "slurm_job_id": null,
+    "slurm_node": null
+  },
+  "schema": "chapter2_step8_v1",
+  "selection_and_manifest_hashes_unchanged": {
+    "chapter2/final_results/selected_model.json": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472",
+    "chapter2/final_results/step8_evaluation_manifest.json": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31"
+  },
+  "state_error_aggregates_changed_by_correction": false,
+  "training_and_scaling_isolation": {
+    "continuous_used": false,
+    "held_out_used": false,
+    "training_currents_only": [
+      1.67,
+      3.2,
+      3.5
+    ],
+    "transition_range_only": [
+      0,
+      70000
+    ],
+    "unseen_used": false
+  },
+  "verified_at": "2026-08-10T13:16:17.135292+00:00"
+}

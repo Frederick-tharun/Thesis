@@ -1,0 +1,276 @@
+{
+  "additional_frozen_references": {
+    "correction_manifest": {
+      "path": "chapter2/final_results/post_benchmark_event_correction/correction_manifest.json",
+      "sha256": "0e0c5693ed90701b49a364c10de53618ad50a183817968ce6bf480381f11f7eb",
+      "size_bytes": 4342
+    },
+    "evaluation_manifest": {
+      "path": "chapter2/final_results/step8_evaluation_manifest.json",
+      "sha256": "0d23c6047a9e49fec280fa735fef77f0382553a7cfb9ee4d4bb03f26fa025b31",
+      "size_bytes": 5697
+    },
+    "selection_lock": {
+      "path": "chapter2/final_results/selected_model.json",
+      "sha256": "f94f5c33faacdfb2c7b79010504097a00effd579686c42a9cf48ac682760f472",
+      "size_bytes": 6474
+    }
+  },
+  "binary_release_assets": {
+    "archive_format": "tar (uncompressed; NPZ payloads are already compressed)",
+    "archives": [
+      {
+        "filename": "chapter2-v1.0.0-scientific-binaries.tar",
+        "sha256": "2f8319624ff41f7890044943743d288c031eccba1183efbb5191803304be4a36",
+        "size_bytes": 383119360
+      }
+    ],
+    "distribution": "GitHub Release",
+    "external_directory_name": "chapter2-v1.0.0",
+    "release_name": "chapter2-v1.0.0",
+    "scientific_binaries": {
+      "counts": {
+        "frozen_dataset": 6,
+        "model_bundle": 10,
+        "raw_rollout": 210
+      },
+      "file_count": 226,
+      "size_bytes": 381534011
+    },
+    "sidecars": [
+      {
+        "filename": "chapter2-v1.0.0-archives.sha256",
+        "sha256": "d087433d668a3dca9c71b7d809c86e07b5de91711e9bc690fcc4157f77f60445",
+        "size_bytes": 106
+      },
+      {
+        "filename": "chapter2-v1.0.0-scientific-binaries.json",
+        "sha256": "4b8562f1cb2c2d64319662647eea6e75153942fd343aeabba9f37b2f243c6ac6",
+        "size_bytes": 60199
+      },
+      {
+        "filename": "chapter2-v1.0.0-scientific-binaries.sha256",
+        "sha256": "1781ffda8bf1089b4518f8e35427c609612aef553981bcc6013b2291b5560f47",
+        "size_bytes": 35186
+      },
+      {
+        "filename": "README.md",
+        "sha256": "26c3e995256a43f6f9be92035b4e03219e84133e4a53b7b9a736c9b481f1b01f",
+        "size_bytes": 683
+      }
+    ],
+    "status": "prepared locally; not uploaded"
+  },
+  "figure_manifest": {
+    "path": "chapter2/final_results/figures_thesis/figure_manifest.json",
+    "sha256": "dc3949361ea9b18bf8ea6357db3dfa4f51c4a9c7350e28b09bd8b9e1531ad7c2",
+    "size_bytes": 57324
+  },
+  "final_tables": {
+    "artifacts": [
+      {
+        "path": "chapter2/final_results/tables_final/01_recomputed_aggregate_summary.csv",
+        "sha256": "22f9f21dab1fc9bf06bf91e8032992c27f8b3cef22715093a79287fcb4104c29",
+        "size_bytes": 2081
+      },
+      {
+        "path": "chapter2/final_results/tables_final/02_per_seed_nrmse_vpt_summary.csv",
+        "sha256": "f5ebd3c4f214d94ddc380fa3786d53a4b86929ec6b4c0821dfa6954a5b5a6407",
+        "size_bytes": 6015
+      },
+      {
+        "path": "chapter2/final_results/tables_final/03_divergence_rate_summary.csv",
+        "sha256": "d7c9465c5c9dd0e9e50147e4d27b4df00aeec23f0f949cf9daf4300b85914db8",
+        "size_bytes": 551
+      },
+      {
+        "path": "chapter2/final_results/tables_final/04_collapse_summary.csv",
+        "sha256": "5663ea879c1e28954c24d635db9f08142728a0211ea4f814a012c757451b1c91",
+        "size_bytes": 156
+      },
+      {
+        "path": "chapter2/final_results/tables_final/05_event_error_contributors.csv",
+        "sha256": "34dd254dbff09271e608c8627df72d885d74694bb27cea784fea8b077092cfa7",
+        "size_bytes": 736
+      }
+    ],
+    "directory": "chapter2/final_results/tables_final",
+    "expected_table_count": 5
+  },
+  "historical_artifact_status": {
+    "legacy_figure_directories": {
+      "chapter2/final_results/figures": "superseded and absent; historical verification references remain",
+      "chapter2/final_results/figures_final": "superseded and absent; historical audit references remain"
+    },
+    "official_figure_directory": "chapter2/final_results/figures_thesis",
+    "original_step8_execution_source": {
+      "exact_source_recovered": false,
+      "sha256": "2202e02d9d54dcca38a56b775b5bbc8a533680e9a5979feb85761a18c264880b",
+      "status": "recorded hash survives; source bytes were not recovered"
+    },
+    "post_correction_pre_hardening_source": {
+      "path": "chapter2/provenance/esn_step8_post_correction_pre_hardening_sha256_847d5ba8828973503a01aebf53e52b8be735ed5bedea8dd197ad4e82ae2d7999.py.snapshot",
+      "sha256": "847d5ba8828973503a01aebf53e52b8be735ed5bedea8dd197ad4e82ae2d7999",
+      "size_bytes": 87937,
+      "status": "byte-preserved historical snapshot; never execute"
+    },
+    "saved_audit": {
+      "path": "chapter2/final_results/step8_seed_stability_audit.json",
+      "sha256": "7176118b2964359a7c7cb7f11e8039cec5f2bd14f96acb5ef241969833999f9b",
+      "size_bytes": 107389,
+      "status": "protected historical audit; current audit source is not its exact producer"
+    }
+  },
+  "official_figures": {
+    "artifacts": [
+      {
+        "path": "chapter2/final_results/figures_thesis/01_fixed_current_predictions_known_and_unseen.pdf",
+        "sha256": "1e5fb7d6e695dbf5bac3a4b33cebb9defaae9762d3fca7b578bc51e58a95e449",
+        "size_bytes": 38406
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/01_fixed_current_predictions_known_and_unseen.png",
+        "sha256": "dbaef4798da723d9b0bc458d6a9739708f830e9c7b8e8522fdfdddd5cc39dfbf",
+        "size_bytes": 341757
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/02_continuous_current_prediction.pdf",
+        "sha256": "19198f7f0a80d0684d4be6c2357e432661380e0e4edb04ae44bd1c46149b2f18",
+        "size_bytes": 60930
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/02_continuous_current_prediction.png",
+        "sha256": "2a9ae21eabf04ff78d18ba445fb5753abef2480b3831ca1e3cacc53db1ae6366",
+        "size_bytes": 370870
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/03_current_transition_tracking.pdf",
+        "sha256": "e8802b9459413cf6dd30db749dfbf3dbfb393def561f7071322a39ff26982656",
+        "size_bytes": 18953
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/03_current_transition_tracking.png",
+        "sha256": "bb9c69ed84b8f95d26cafcaf18d8ba1828f4d6c19bd6e6f81296fea0f98db8b9",
+        "size_bytes": 172556
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/04_overall_predictive_performance.pdf",
+        "sha256": "360a1825cbc36680151c8c10e64c5870243385a63331ad587f860688d80698ab",
+        "size_bytes": 11227
+      },
+      {
+        "path": "chapter2/final_results/figures_thesis/04_overall_predictive_performance.png",
+        "sha256": "613e28cd60bb29bf6c51a9b53ce11f157329cf5536ece14c864f68f6d1b21473",
+        "size_bytes": 165041
+      }
+    ],
+    "directory": "chapter2/final_results/figures_thesis",
+    "expected_pdf_count": 4,
+    "expected_png_count": 4
+  },
+  "references": {
+    "model_manifest": {
+      "expected_model_count": 10,
+      "path": "chapter2/final_models/model_manifest.json",
+      "sha256": "7189d541cbe0dad0d24e0c04dcb9ac23410c5dd779ec00ceb91a741e4e16210f",
+      "size_bytes": 8385
+    },
+    "raw_results": {
+      "expected_record_count": 210,
+      "path": "chapter2/final_results/step8_raw_results.json",
+      "sha256": "24033a8ed2bff722fd5d4324d45da908ffa85057f68a5c53fd6b3630be5bb2c3",
+      "size_bytes": 1288510
+    }
+  },
+  "release_sources": {
+    "artifacts": [
+      {
+        "path": "chapter2/audit_step8.py",
+        "sha256": "714bae29fd76b99e3e0828a71c5aafa01fe26892d05eeeb0a7723e9153e1621d",
+        "size_bytes": 60848
+      },
+      {
+        "path": "chapter2/config_ch2.py",
+        "sha256": "6939f23a9e69709ae3dfb58483ed23c1ab02d824a29a63d4c55ee347ead2faa5",
+        "size_bytes": 2347
+      },
+      {
+        "path": "chapter2/correct_step8_event_validity.py",
+        "sha256": "a8461730c79c8295978eab194fe4f856d7caf913288d54e95ca02cfbeada4a54",
+        "size_bytes": 6104
+      },
+      {
+        "path": "chapter2/dynamics_analysis_ch2.py",
+        "sha256": "a38efcf4d627bf6cc6b1b6a057ff1c2b0202829e8a011feb0af0c7ea2871cced",
+        "size_bytes": 13903
+      },
+      {
+        "path": "chapter2/esn_config.py",
+        "sha256": "1871208cc56db7470e7715afc94dbbf935fa5898347dd0489318cbb9b5ee4363",
+        "size_bytes": 13416
+      },
+      {
+        "path": "chapter2/esn_data.py",
+        "sha256": "873da4bd59698b9118ae6d315f902f10f21317b6a4c3327b4b9a2b6e1f9e6930",
+        "size_bytes": 24310
+      },
+      {
+        "path": "chapter2/esn_metrics.py",
+        "sha256": "7552557239004b3aec1535ce9f14c53be4e6b11605d14a76c1537d96d09daf48",
+        "size_bytes": 17264
+      },
+      {
+        "path": "chapter2/esn_model.py",
+        "sha256": "130c0f0f1753c7429a37bf14dbfd49de5bc8a0e04741893ef0b360126d8edcd3",
+        "size_bytes": 21113
+      },
+      {
+        "path": "chapter2/esn_optimisation.py",
+        "sha256": "4ea899297171bae6e65d39a2c26f7e46e4b1515e8102396129fc6fd1a6a93ad5",
+        "size_bytes": 50462
+      },
+      {
+        "path": "chapter2/esn_step8.py",
+        "sha256": "636a8cbd8d7005dddee044c24818765a7eaea75cd3130bcf22a6eef2789eaa73",
+        "size_bytes": 106439
+      },
+      {
+        "path": "chapter2/generate_diagnostics.py",
+        "sha256": "6d8ccf203bd382df07b7fdd14a493bb5a8f94ad6d9330d4de7b7323e4e310f7e",
+        "size_bytes": 30305
+      },
+      {
+        "path": "chapter2/hr_data_ch2.py",
+        "sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+        "size_bytes": 8743
+      },
+      {
+        "path": "chapter2/plot_thesis_figures.py",
+        "sha256": "8a0242e8705da4c669cbcfa7458fc863ee7edd88bfd727773def34da5c56dffd",
+        "size_bytes": 42460
+      },
+      {
+        "path": "chapter2/run_bayesian_optimisation.py",
+        "sha256": "10122b4b5d7194f48c8456ff3c5939f3bd0c0e2c274380ecd778aaea655b26ad",
+        "size_bytes": 4431
+      },
+      {
+        "path": "chapter2/run_esn_pilot.py",
+        "sha256": "fa30c0e54ab67399e2295d1cdc31835b8886aa55a98f5ad11bcc5681acb69bae",
+        "size_bytes": 7546
+      },
+      {
+        "path": "chapter2/run_step8.py",
+        "sha256": "6c2e3708b58decf65f9fb0addaf645ee34d7e719e56a2b3f30e55f11930cd907",
+        "size_bytes": 178
+      },
+      {
+        "path": "chapter2/verify_release.py",
+        "sha256": "cba8ac120019d0fe9e865a895abbf534d5c3b79b720a55db24722b7892fadd42",
+        "size_bytes": 9523
+      }
+    ]
+  },
+  "release_version": "chapter2-v1.0.0",
+  "schema": "chapter2_release_manifest_v1"
+}

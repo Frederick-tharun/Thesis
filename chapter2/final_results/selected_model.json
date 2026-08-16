@@ -1,0 +1,164 @@
+{
+  "benchmark_policy": "Benchmark results cannot modify model selection, hyperparameters, seeds, preprocessing, training, or evaluation rules.",
+  "chapter1_tracked_tree_hash": "7f68c47e235ff64ceaf853e37255f851aace45d62167a4ccf1c85b4b077db7f6",
+  "created_at": "2026-08-10T12:57:26.151979+00:00",
+  "dataset_hashes": {
+    "chapter2/outputs/data/continuous_switched_currents.npz": "0921cbad321da1830433dc84e58f25ff2b0b6a6d571a31cae769bdfd6dc00a7b",
+    "chapter2/outputs/data/fixed_I_1p67.npz": "cc89af5e9a27d05a9501ea995a2ef361c146d6513ec1b19765238603af9ffb2b",
+    "chapter2/outputs/data/fixed_I_3p20.npz": "c4292a1e0fa5575d08419e7d302f980e2ed085878187f67659aa59decc486ded",
+    "chapter2/outputs/data/fixed_I_3p29.npz": "2ed394f457e5de5f0d14a5dd450611fd9774c02cb13fc68f7b21a2621273b7b4",
+    "chapter2/outputs/data/fixed_I_3p34.npz": "8cad49948c553df9b65a24deacf067dc999325dadb580a4787ded12b6315585d",
+    "chapter2/outputs/data/fixed_I_3p50.npz": "4d042da6adbde026468207c4e9f74443f8587c635dff2d28b69e2b1784d5cbbf"
+  },
+  "final_training": {
+    "currents": [
+      1.67,
+      3.2,
+      3.5
+    ],
+    "scaler_fit_transition_range": [
+      0,
+      70000
+    ],
+    "transition_range": [
+      0,
+      70000
+    ],
+    "washout_per_independently_reset_trajectory": 2000
+  },
+  "git": {
+    "commit": "7cc557872057c5ef9daf166cfebea5807a37b5c4",
+    "dirty": true,
+    "status_short": [
+      " M chapter2/README.md",
+      "?? chapter2/EXPERIMENT_PROTOCOL.md",
+      "?? chapter2/esn_config.py",
+      "?? chapter2/esn_data.py",
+      "?? chapter2/esn_metrics.py",
+      "?? chapter2/esn_model.py",
+      "?? chapter2/esn_optimisation.py",
+      "?? chapter2/esn_step8.py",
+      "?? chapter2/final_results/",
+      "?? chapter2/optimisation_results/",
+      "?? chapter2/pilot_results/",
+      "?? chapter2/run_bayesian_optimisation.py",
+      "?? chapter2/run_esn_pilot.py",
+      "?? chapter2/run_step8.py",
+      "?? chapter2/tests/test_esn_data.py",
+      "?? chapter2/tests/test_esn_metrics.py",
+      "?? chapter2/tests/test_esn_model.py",
+      "?? chapter2/tests/test_esn_optimisation.py",
+      "?? chapter2/tests/test_esn_step8.py",
+      "?? run_chapter2_step7.slurm",
+      "?? run_chapter2_step8.slurm"
+    ]
+  },
+  "models": {
+    "ordinary_baseline": {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_scaling": 0.01,
+        "leak_rate": 1.0,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 1.0,
+        "reservoir_size": 300,
+        "ridge_regularisation": 0.01,
+        "spectral_radius": 0.01
+      },
+      "final_seeds": [
+        42,
+        123,
+        456,
+        789,
+        2026
+      ],
+      "input_dimension": 3,
+      "model_type": "ordinary_baseline",
+      "robust_validation_metrics": {
+        "collapse_rollout_count": 0,
+        "divergence_rollout_count": 0,
+        "mean_objective_nrmse": 0.7071937104502228,
+        "mean_valid_prediction_steps": 568.2222222222222,
+        "worst_current_mean_nrmse": 0.9152808484027574
+      },
+      "source_trial": 12
+    },
+    "parameter_aware": {
+      "configuration": {
+        "bias_scaling": 0.1,
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "output_dimension": 3,
+        "regularise_bias": false,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "spectral_radius": 0.4118313967689876
+      },
+      "final_seeds": [
+        42,
+        123,
+        456,
+        789,
+        2026
+      ],
+      "input_dimension": 4,
+      "model_type": "parameter_aware",
+      "robust_validation_metrics": {
+        "collapse_rollout_count": 0,
+        "divergence_rollout_count": 0,
+        "mean_objective_nrmse": 0.017368919325506615,
+        "mean_valid_prediction_steps": 7638.177777777778,
+        "worst_current_mean_nrmse": 0.031499040070510936
+      },
+      "source_trial": 4
+    }
+  },
+  "python_and_package_versions": {
+    "matplotlib": "3.9.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "python": "3.12.13",
+    "scikit-learn": "1.5.2",
+    "scikit-optimize": "0.10.2",
+    "scipy": "1.13.1"
+  },
+  "runtime": {
+    "hostname": "tg080",
+    "machine": "x86_64",
+    "mkl_num_threads": "8",
+    "omp_num_threads": "8",
+    "openblas_num_threads": "8",
+    "slurm_job_id": "1773009",
+    "slurm_node": "tg080"
+  },
+  "schema": "chapter2_step8_v1",
+  "source_code_hashes": {
+    "chapter2/config_ch2.py": "6939f23a9e69709ae3dfb58483ed23c1ab02d824a29a63d4c55ee347ead2faa5",
+    "chapter2/dynamics_analysis_ch2.py": "a38efcf4d627bf6cc6b1b6a057ff1c2b0202829e8a011feb0af0c7ea2871cced",
+    "chapter2/esn_config.py": "1871208cc56db7470e7715afc94dbbf935fa5898347dd0489318cbb9b5ee4363",
+    "chapter2/esn_data.py": "873da4bd59698b9118ae6d315f902f10f21317b6a4c3327b4b9a2b6e1f9e6930",
+    "chapter2/esn_metrics.py": "7552557239004b3aec1535ce9f14c53be4e6b11605d14a76c1537d96d09daf48",
+    "chapter2/esn_model.py": "130c0f0f1753c7429a37bf14dbfd49de5bc8a0e04741893ef0b360126d8edcd3",
+    "chapter2/esn_optimisation.py": "4ea899297171bae6e65d39a2c26f7e46e4b1515e8102396129fc6fd1a6a93ad5",
+    "chapter2/esn_step8.py": "2202e02d9d54dcca38a56b775b5bbc8a533680e9a5979feb85761a18c264880b",
+    "chapter2/run_step8.py": "6c2e3708b58decf65f9fb0addaf645ee34d7e719e56a2b3f30e55f11930cd907"
+  },
+  "status": "VALIDATION-SELECTED \u2014 LOCKED BEFORE BENCHMARK ACCESS",
+  "step7_artifacts": {
+    "audit_backups": {
+      "chapter2/optimisation_results/pre_resume_fix/step7_ordinary_baseline_history.json": "b001a8976c98667a23422354b6c3b6e2dd1e026ad74451e7e91c62293dd3b537",
+      "chapter2/optimisation_results/pre_resume_fix/step7_parameter_aware_history.json": "b762bca77533a71ca74261bde82ae098f72c884c214f910c1591981bafdecce6",
+      "chapter2/optimisation_results/pre_resume_fix/step7_selection.json": "770b438a267bc76b6b9eac84ecc252578b9f11795948196433442cbc8ffa4239"
+    },
+    "histories": {
+      "chapter2/optimisation_results/step7_ordinary_baseline_history.json": "b73a62b16703d1ec8706a87365578d2437980e9d7ab01785aa27e134d902299f",
+      "chapter2/optimisation_results/step7_parameter_aware_history.json": "7df7502de84a3ed2ae583cbcc10741bd54625aa6cfdfa76ce8e02f18fd2d2dfa"
+    },
+    "selection": {
+      "path": "chapter2/optimisation_results/step7_selection.json",
+      "sha256": "856985bd18d2b671d6919c8116924380eb521131a7284754937e45bf793dda67"
+    }
+  }
+}
