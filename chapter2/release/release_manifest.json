@@ -27,7 +27,9 @@
     ],
     "distribution": "GitHub Release",
     "external_directory_name": "chapter2-v1.0.0",
+    "published_at_utc": "2026-08-17T07:18:21Z",
     "release_name": "chapter2-v1.0.0",
+    "release_url": "https://github.com/Frederick-tharun/Thesis/releases/tag/chapter2-v1.0.0",
     "scientific_binaries": {
       "counts": {
         "frozen_dataset": 6,
@@ -59,7 +61,7 @@
         "size_bytes": 683
       }
     ],
-    "status": "prepared locally; not uploaded"
+    "status": "published"
   },
   "figure_manifest": {
     "path": "chapter2/final_results/figures_thesis/figure_manifest.json",
