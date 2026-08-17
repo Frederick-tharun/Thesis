@@ -50,15 +50,15 @@ Do not add the 210 raw rollout NPZ files or ten model bundles to ordinary Git
 history. The selected distribution is a GitHub Release named
 `chapter2-v1.0.0`, not Git LFS. Its archive also carries the six frozen input
 datasets so every scientific binary can be obtained and checked as one
-versioned asset. The archive has been prepared locally but has not been
-uploaded; release creation remains a separately approved publication step.
+versioned asset. The `chapter2-v1.0.0` release is published at
+https://github.com/Frederick-tharun/Thesis/releases/tag/chapter2-v1.0.0.
 
 The raw-result JSON records a SHA-256 for each rollout NPZ, the model manifest
 records all ten model hashes, the frozen protocol records dataset hashes, and
 the release manifest records official figure/table and reference hashes.
 These manifests stay in ordinary Git even when payloads are external.
 
-## Prepared GitHub Release assets
+## Published GitHub Release assets
 
 The persistent preparation directory, outside this Git repository, is:
 
@@ -80,7 +80,8 @@ selection-lock, and diagnostic manifests; `README.md`;
 `chapter2-v1.0.0-scientific-binaries.json`; and
 `chapter2-v1.0.0-scientific-binaries.sha256`.
 
-Prepared sidecars are:
+The TAR and the following four sidecar files were uploaded to the published
+GitHub Release:
 
 | Sidecar | Size (bytes) | SHA-256 |
 |---|---:|---|
@@ -88,23 +89,24 @@ Prepared sidecars are:
 | `chapter2-v1.0.0-scientific-binaries.json` | 60,199 | `4b8562f1cb2c2d64319662647eea6e75153942fd343aeabba9f37b2f243c6ac6` |
 | `chapter2-v1.0.0-scientific-binaries.sha256` | 35,186 | `1781ffda8bf1089b4518f8e35427c609612aef553981bcc6013b2291b5560f47` |
 | `README.md` | 683 | `26c3e995256a43f6f9be92035b4e03219e84133e4a53b7b9a736c9b481f1b01f` |
-| `package_report.json` | 909 | `463acca8ae5ef5a46baf29f43c9a631b59d28a51d716ac4e22e452dac5695ca1` |
 
-No download URL is recorded because the GitHub Release does not yet exist.
+`package_report.json` (909 bytes; SHA-256
+`463acca8ae5ef5a46baf29f43c9a631b59d28a51d716ac4e22e452dac5695ca1`)
+is a local-only packaging record and was not uploaded.
+
+The published release and its downloadable assets are available at
+https://github.com/Frederick-tharun/Thesis/releases/tag/chapter2-v1.0.0.
 
 ## Safe publication and retrieval workflow
 
-1. Commit and push the selectively staged repository files only after review.
-2. Create the `chapter2-v1.0.0` GitHub Release only after explicit approval.
-3. Upload the TAR and checksum/manifest sidecars from the persistent external
-   preparation directory; do not upload `package_report.json` unless desired
-   as an additional machine-readable packaging log.
-4. Verify the uploaded asset against `chapter2-v1.0.0-archives.sha256`.
-5. In a clean checkout, extract the TAR at the repository root so its preserved
-   paths restore the binary payloads.
-6. Run `sha256sum -c chapter2-v1.0.0-scientific-binaries.sha256`, followed by
+1. Open the published `chapter2-v1.0.0` release at the URL above and download
+   the TAR and all four uploaded sidecar files.
+2. Verify the downloaded TAR against
+   `chapter2-v1.0.0-archives.sha256`.
+3. In a clean checkout, extract the verified TAR at the repository root so its
+   preserved paths restore the binary payloads.
+4. Run `sha256sum -c chapter2-v1.0.0-scientific-binaries.sha256`, followed by
    `python3 -m chapter2.verify_release`.
-7. Add the real immutable release URL to documentation only after publication.
 
 Do not broadly ignore `*.npz`; the scientific binaries must remain visible in
 `git status` until the distribution decision is complete. Repository
