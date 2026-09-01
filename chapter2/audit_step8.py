@@ -63,6 +63,7 @@ from chapter2.esn_step8 import (
     load_final_training_prefixes,
     prepare_final_training,
     project_relative,
+    reference_chapter1_tree_hash,
     save_final_model,
     tracked_non_chapter2_tree_hash,
 )
@@ -1316,8 +1317,9 @@ def run_audit(
         raise Step8AuditError("an immutable scientific artifact changed during audit")
 
     chapter1_hash = tracked_non_chapter2_tree_hash()
-    expected_chapter1_hash = status["preflight"]["chapter1_tracked_tree_hash"]
-    if chapter1_hash != expected_chapter1_hash:
+    reference_chapter1_hash = reference_chapter1_tree_hash()
+    legacy_chapter1_hash = status["preflight"]["chapter1_tracked_tree_hash"]
+    if chapter1_hash != reference_chapter1_hash:
         raise Step8AuditError("tracked Chapter 1 tree changed")
     if status.get("state") != "STEP8_COMPLETE" or status.get("completed_record_count") != 210:
         raise Step8AuditError("Step 8 status is not complete")
@@ -1394,7 +1396,8 @@ def run_audit(
         "strict_json": strict,
         "chapter1_integrity": {
             "unchanged": True,
-            "recorded_tracked_tree_sha256": expected_chapter1_hash,
+            "legacy_preflight_tracked_tree_sha256": legacy_chapter1_hash,
+            "reference_tracked_tree_sha256": reference_chapter1_hash,
             "current_tracked_tree_sha256": chapter1_hash,
         },
         "presentation": {

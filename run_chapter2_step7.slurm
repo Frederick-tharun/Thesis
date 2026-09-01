@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=chapter2_step7
-#SBATCH --partition=rtx3080
+#SBATCH --partition=work
 #SBATCH --time=24:00:00
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:rtx3080:1
+#SBATCH --gres=gpu:1
 #SBATCH --output=logs/chapter2_step7_%j.out
 #SBATCH --error=logs/chapter2_step7_%j.err
 

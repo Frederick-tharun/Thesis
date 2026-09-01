@@ -29,3 +29,7 @@ __pycache__/
 /RNN.pdf
 /finite_time_parameter_sensitivity_attractive.png
 /finite_time_parameter_sensitivity_attractive.pdf
+
+# Transferred Chapter 2 scientific binaries retained outside Git
+chapter2/final_models/*.npz
+chapter2/final_results/raw_arrays/

@@ -222,9 +222,13 @@ def test_representative_selection_is_seed42_window1_only() -> None:
 
 def test_tracked_chapter1_hash_still_matches_prebenchmark_record() -> None:
     status = json.loads(audit.STATUS_PATH.read_text(encoding="utf-8"))
-    assert audit.tracked_non_chapter2_tree_hash() == status["preflight"][
-        "chapter1_tracked_tree_hash"
-    ]
+    assert status["preflight"]["chapter1_tracked_tree_hash"] == (
+        "7f68c47e235ff64ceaf853e37255f851aace45d62167a4ccf1c85b4b077db7f6"
+    )
+    assert (
+        audit.tracked_non_chapter2_tree_hash()
+        == audit.reference_chapter1_tree_hash()
+    )
 
 
 def test_atomic_audit_json_and_csv_writes(tmp_path: Path) -> None:

@@ -419,3 +419,21 @@ def test_step8_helpers_do_not_write_chapter1_files() -> None:
     step8.validate_selected_models(_selection())
     after = step8.tracked_non_chapter2_tree_hash()
     assert after == before
+
+
+def test_chapter1_guard_detects_protected_changes_and_ignores_unrelated_files(
+    tmp_path: Path,
+) -> None:
+    chapter1_path = tmp_path / "config.py"
+    unrelated_path = tmp_path / "scripts/analysis/estimate_hr_lyapunov.py"
+    chapter1_path.write_text("protected = 1\n", encoding="utf-8")
+    unrelated_path.parent.mkdir(parents=True)
+    unrelated_path.write_text("approved = 1\n", encoding="utf-8")
+    tracked_names = ("config.py", "scripts/analysis/estimate_hr_lyapunov.py")
+
+    baseline = step8._chapter1_tree_hash(tmp_path, tracked_names)
+    unrelated_path.write_text("approved = 2\n", encoding="utf-8")
+    assert step8._chapter1_tree_hash(tmp_path, tracked_names) == baseline
+
+    chapter1_path.write_text("protected = 2\n", encoding="utf-8")
+    assert step8._chapter1_tree_hash(tmp_path, tracked_names) != baseline

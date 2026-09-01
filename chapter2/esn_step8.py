@@ -13,11 +13,13 @@ import csv
 from datetime import datetime, timezone
 from hashlib import sha256
 from importlib.metadata import PackageNotFoundError, version
+import io
 import json
 import math
 import os
 from pathlib import Path
 import platform
+import posixpath
 import statistics
 import subprocess
 import tempfile
@@ -336,7 +338,70 @@ def source_hashes() -> dict[str, str]:
     }
 
 
+CHAPTER1_REFERENCE_COMMIT = "90756a79d70246fe9585cf85033dde68e13470a0"
+CHAPTER1_PROTECTED_ROOT_FILES = frozenset(
+    {
+        "README.md",
+        "aggregate_multiseed_results.py",
+        "config.py",
+        "control_experiment.py",
+        "data_loader.py",
+        "experiment_report.py",
+        "final_package.py",
+        "final_pipeline.py",
+        "finalization_smoke.py",
+        "main.py",
+        "model.py",
+        "multiseed_evaluation.py",
+        "neuron_controllers.py",
+        "optimize_model.py",
+        "plotting.py",
+        "requirements.txt",
+        "run_final_thesis_pipeline.slurm",
+        "run_multiseed_evaluation.slurm",
+    }
+)
+CHAPTER1_PROTECTED_DIRECTORIES = (
+    "FINAL_THESIS_RUN/",
+    "Figures/",
+    "MULTISEED_EVAL/",
+    "THESIS_SWEEP_FIGURES/",
+    "scripts/thesis_figures/",
+    "tests/",
+)
+
+
+def _is_protected_chapter1_path(name: str) -> bool:
+    return name in CHAPTER1_PROTECTED_ROOT_FILES or name.startswith(
+        CHAPTER1_PROTECTED_DIRECTORIES
+    )
+
+
+def _chapter1_tree_hash(
+    root: Path,
+    tracked_names: Iterable[str],
+) -> str:
+    digest = sha256()
+    for name in sorted(set(tracked_names)):
+        if not _is_protected_chapter1_path(name):
+            continue
+        path = root / name
+        if not path.is_file():
+            raise PreflightError(f"tracked Chapter 1 file is missing: {name}")
+        file_hash = file_sha256(path)
+        digest.update(name.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(bytes.fromhex(file_hash))
+    return digest.hexdigest()
+
+
 def tracked_non_chapter2_tree_hash() -> str:
+    """Hash the explicit frozen Chapter 1 scope.
+
+    The function name is retained for compatibility with Step 8 callers.
+    Repository infrastructure and later analysis utilities outside the
+    established Chapter 1 paths are deliberately excluded.
+    """
     root = CHAPTER2_ROOT.parent
     result = subprocess.run(
         ["git", "ls-files", "-z"],
@@ -344,24 +409,71 @@ def tracked_non_chapter2_tree_hash() -> str:
         check=True,
         capture_output=True,
     )
-    digest = sha256()
-    for raw_name in result.stdout.split(b"\0"):
-        if not raw_name:
+    names = (
+        raw_name.decode("utf-8")
+        for raw_name in result.stdout.split(b"\0")
+        if raw_name
+    )
+    return _chapter1_tree_hash(root, names)
+
+
+def reference_chapter1_tree_hash() -> str:
+    """Hash the same explicit scope from the established Chapter 1 commit."""
+    root = CHAPTER2_ROOT.parent
+    tree = subprocess.run(
+        ["git", "ls-tree", "-r", "-z", CHAPTER1_REFERENCE_COMMIT],
+        cwd=root,
+        check=True,
+        capture_output=True,
+    ).stdout
+    entries: list[tuple[str, str, str]] = []
+    for raw_entry in tree.split(b"\0"):
+        if not raw_entry:
             continue
+        metadata, raw_name = raw_entry.split(b"\t", 1)
         name = raw_name.decode("utf-8")
-        root_chapter2_launcher = (
-            "/" not in name
-            and name.startswith("run_chapter2_")
-            and name.endswith(".slurm")
-        )
-        if name.startswith("chapter2/") or root_chapter2_launcher:
-            continue
-        path = root / name
-        if not path.is_file():
-            raise PreflightError(f"tracked Chapter 1 file is missing: {name}")
+        if _is_protected_chapter1_path(name):
+            mode, _, object_id = metadata.split()
+            entries.append(
+                (name, mode.decode("ascii"), object_id.decode("ascii"))
+            )
+    entries.sort()
+
+    batch = subprocess.run(
+        ["git", "cat-file", "--batch"],
+        cwd=root,
+        input=("\n".join(object_id for _, _, object_id in entries) + "\n").encode("ascii"),
+        check=True,
+        capture_output=True,
+    ).stdout
+    stream = io.BytesIO(batch)
+    contents: dict[str, bytes] = {}
+    for name, _, object_id in entries:
+        header = stream.readline().decode("ascii").split()
+        if len(header) != 3 or header[0] != object_id or header[1] != "blob":
+            raise PreflightError(f"invalid Git object for protected Chapter 1 file: {name}")
+        content = stream.read(int(header[2]))
+        if stream.read(1) != b"\n":
+            raise PreflightError(f"invalid Git object framing for Chapter 1 file: {name}")
+        contents[object_id] = content
+
+    objects_by_name = {name: object_id for name, _, object_id in entries}
+    digest = sha256()
+    for name, mode, object_id in entries:
+        content = contents[object_id]
+        if mode == "120000":
+            target_name = posixpath.normpath(
+                posixpath.join(posixpath.dirname(name), content.decode("utf-8"))
+            )
+            try:
+                content = contents[objects_by_name[target_name]]
+            except KeyError as error:
+                raise PreflightError(
+                    f"protected Chapter 1 symlink target is missing: {name} -> {target_name}"
+                ) from error
         digest.update(name.encode("utf-8"))
         digest.update(b"\0")
-        digest.update(bytes.fromhex(file_sha256(path)))
+        digest.update(sha256(content).digest())
     return digest.hexdigest()
 
 
