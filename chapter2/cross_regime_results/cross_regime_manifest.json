@@ -1,0 +1,312 @@
+{
+  "benchmark_numerical_values_inspected_for_tuning": false,
+  "configuration": {
+    "continuous_schedules": {
+      "alternating_mixed": [
+        3.5,
+        3.34,
+        1.67,
+        3.2,
+        3.29
+      ],
+      "chaotic_then_regular": [
+        3.2,
+        3.34,
+        1.67,
+        3.29,
+        3.5
+      ],
+      "regular_then_chaotic": [
+        1.67,
+        3.29,
+        3.5,
+        3.2,
+        3.34
+      ]
+    },
+    "continuous_state_count": 500000,
+    "continuous_switch_indices": [
+      100000,
+      200000,
+      300000,
+      400000
+    ],
+    "continuous_warmup_transitions": 2000,
+    "expected": {
+      "continuous_records": 45,
+      "large_binary_artifacts": 363,
+      "long_records": 75,
+      "models": 15,
+      "records": 345,
+      "schedule_datasets": 3,
+      "short_records": 225
+    },
+    "hyperparameters": {
+      "bias_scaling": 0.1,
+      "input_dimension": 4,
+      "input_scaling": 0.06402022818477646,
+      "leak_rate": 0.9375840772954693,
+      "output_dimension": 3,
+      "regularise_bias": false,
+      "reservoir_connectivity": 0.08881598524963213,
+      "reservoir_size": 100,
+      "ridge_regularisation": 3.968208883661854e-10,
+      "spectral_radius": 0.4118313967689876
+    },
+    "long_forecast_range": [
+      72000,
+      99999
+    ],
+    "long_warmup_range": [
+      70000,
+      72000
+    ],
+    "mixed_block_order_rule": "np.random.default_rng(100000 + seed).permutation([1.67, 3.20, 3.29, 3.34, 3.50])",
+    "mixed_block_orders": {
+      "123": [
+        3.34,
+        3.2,
+        3.29,
+        1.67,
+        3.5
+      ],
+      "2026": [
+        3.5,
+        3.34,
+        3.29,
+        1.67,
+        3.2
+      ],
+      "42": [
+        3.29,
+        3.34,
+        3.5,
+        1.67,
+        3.2
+      ],
+      "456": [
+        3.2,
+        3.5,
+        3.29,
+        1.67,
+        3.34
+      ],
+      "789": [
+        1.67,
+        3.29,
+        3.34,
+        3.5,
+        3.2
+      ]
+    },
+    "model_type": "parameter_aware",
+    "representative_seed": 42,
+    "scenarios": {
+      "chaotic_to_regular": {
+        "effective_samples": 130000,
+        "primary_cross_regime_currents": [
+          1.67,
+          3.29,
+          3.5
+        ],
+        "raw_training_transitions": {
+          "3.20": 67000,
+          "3.34": 67000
+        },
+        "training_currents": [
+          3.2,
+          3.34
+        ]
+      },
+      "mixed_shuffled": {
+        "effective_samples": 130000,
+        "primary_cross_regime_currents": [],
+        "raw_training_transitions": {
+          "1.67": 28000,
+          "3.20": 28000,
+          "3.29": 28000,
+          "3.34": 28000,
+          "3.50": 28000
+        },
+        "training_currents": [
+          1.67,
+          3.2,
+          3.29,
+          3.34,
+          3.5
+        ]
+      },
+      "regular_to_chaotic": {
+        "effective_samples": 130000,
+        "primary_cross_regime_currents": [
+          3.2,
+          3.34
+        ],
+        "raw_training_transitions": {
+          "1.67": 45334,
+          "3.29": 45333,
+          "3.50": 45333
+        },
+        "training_currents": [
+          1.67,
+          3.29,
+          3.5
+        ]
+      }
+    },
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      2026
+    ],
+    "short_forecast_transitions": 8000,
+    "short_window_starts": [
+      70000,
+      80000,
+      89999
+    ],
+    "source": "chapter2/optimisation_results/step7_selection.json",
+    "thresholds": {
+      "collapse": 0.05,
+      "divergence": 5.0,
+      "valid_prediction": 0.4
+    },
+    "warmup_transitions": 2000,
+    "washout_per_block": 2000
+  },
+  "created_at": "2026-09-05T08:43:59.257057+00:00",
+  "environment": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.5.0",
+    "pandas": "3.0.3",
+    "python": "3.12.13",
+    "scikit-learn": "1.5.2",
+    "scikit-optimize": "0.10.2",
+    "scipy": "1.18.0"
+  },
+  "limitation": "The frozen hyperparameters were previously selected using mixed-regime validation currents. This experiment isolates the effect of the final training data and fitted readout under a fixed, previously selected ESN architecture. It does not demonstrate that every design decision was learned exclusively from one regime.",
+  "pilot_report_sha256": "2717b3ea6af6ab35f9d7170e835839b9c236d416c9bc6192f7ff812377bcf2c6",
+  "preflight": {
+    "base_commit": "4dbafbafa552be6439b43a011dc60b9ee1afa9f5",
+    "branch": "chapter2-cross-regime-parameter-aware",
+    "fixed_dataset_hashes": {
+      "chapter2/outputs/data/fixed_I_1p67.npz": "cc89af5e9a27d05a9501ea995a2ef361c146d6513ec1b19765238603af9ffb2b",
+      "chapter2/outputs/data/fixed_I_3p20.npz": "c4292a1e0fa5575d08419e7d302f980e2ed085878187f67659aa59decc486ded",
+      "chapter2/outputs/data/fixed_I_3p29.npz": "2ed394f457e5de5f0d14a5dd450611fd9774c02cb13fc68f7b21a2621273b7b4",
+      "chapter2/outputs/data/fixed_I_3p34.npz": "8cad49948c553df9b65a24deacf067dc999325dadb580a4787ded12b6315585d",
+      "chapter2/outputs/data/fixed_I_3p50.npz": "4d042da6adbde026468207c4e9f74443f8587c635dff2d28b69e2b1784d5cbbf"
+    },
+    "head": "4dbafbafa552be6439b43a011dc60b9ee1afa9f5",
+    "hostname": "tinyx",
+    "original_scientific_binaries": {
+      "actual_count": 226,
+      "expected_count": 226,
+      "mismatches": [],
+      "unique_count": 226,
+      "valid": true
+    },
+    "protected_paths_unchanged": true,
+    "repository": "/home/hpc/dsnf/dsnf129h/Thesis",
+    "tracked_worktree_clean": false,
+    "user": "dsnf129h"
+  },
+  "regime_evidence": [
+    {
+      "classification_rule": "converged clearly positive LLE supports chaotic; periodic waveform evidence or converged near-zero/non-positive LLE supports the prespecified non-chaotic group; I=3.29 remains qualitatively uncertain",
+      "current": 1.67,
+      "experiment_classification": "regular",
+      "largest_lyapunov_exponent": 0.00019531963917531855,
+      "lyapunov_evidence": "not_converged",
+      "qualitative_regime": "periodic bursting",
+      "sources": [
+        "chapter2/outputs/dynamics_summary.csv",
+        "chapter2/outputs/dynamics_summary.md",
+        "chapter2/outputs/lyapunov_convergence.csv"
+      ]
+    },
+    {
+      "classification_rule": "converged clearly positive LLE supports chaotic; periodic waveform evidence or converged near-zero/non-positive LLE supports the prespecified non-chaotic group; I=3.29 remains qualitatively uncertain",
+      "current": 3.2,
+      "experiment_classification": "chaotic",
+      "largest_lyapunov_exponent": 0.011420290964722529,
+      "lyapunov_evidence": "converged positive",
+      "qualitative_regime": "chaotic bursting",
+      "sources": [
+        "chapter2/outputs/dynamics_summary.csv",
+        "chapter2/outputs/dynamics_summary.md",
+        "chapter2/outputs/lyapunov_convergence.csv"
+      ]
+    },
+    {
+      "classification_rule": "converged clearly positive LLE supports chaotic; periodic waveform evidence or converged near-zero/non-positive LLE supports the prespecified non-chaotic group; I=3.29 remains qualitatively uncertain",
+      "current": 3.29,
+      "experiment_classification": "regular",
+      "largest_lyapunov_exponent": 0.0006856194984316945,
+      "lyapunov_evidence": "converged near zero",
+      "qualitative_regime": "uncertain",
+      "sources": [
+        "chapter2/outputs/dynamics_summary.csv",
+        "chapter2/outputs/dynamics_summary.md",
+        "chapter2/outputs/lyapunov_convergence.csv"
+      ]
+    },
+    {
+      "classification_rule": "converged clearly positive LLE supports chaotic; periodic waveform evidence or converged near-zero/non-positive LLE supports the prespecified non-chaotic group; I=3.29 remains qualitatively uncertain",
+      "current": 3.34,
+      "experiment_classification": "chaotic",
+      "largest_lyapunov_exponent": 0.01224151011021557,
+      "lyapunov_evidence": "converged positive",
+      "qualitative_regime": "chaotic bursting",
+      "sources": [
+        "chapter2/outputs/dynamics_summary.csv",
+        "chapter2/outputs/dynamics_summary.md",
+        "chapter2/outputs/lyapunov_convergence.csv"
+      ]
+    },
+    {
+      "classification_rule": "converged clearly positive LLE supports chaotic; periodic waveform evidence or converged near-zero/non-positive LLE supports the prespecified non-chaotic group; I=3.29 remains qualitatively uncertain",
+      "current": 3.5,
+      "experiment_classification": "regular",
+      "largest_lyapunov_exponent": -0.0007120309203858866,
+      "lyapunov_evidence": "not_converged non-positive",
+      "qualitative_regime": "periodic spiking",
+      "sources": [
+        "chapter2/outputs/dynamics_summary.csv",
+        "chapter2/outputs/dynamics_summary.md",
+        "chapter2/outputs/lyapunov_convergence.csv"
+      ]
+    }
+  ],
+  "schema": "chapter2_cross_regime_v1",
+  "scientific_question": "Can a parameter-aware ESN trained only on one HR regime generalize to the other, relative to shuffled mixed-regime training?",
+  "source_hashes": {
+    "chapter2/CROSS_REGIME_PROTOCOL.md": "2ff687286ae33af06154d8df06985ca70dcfab4872a748197690ac10594aacb5",
+    "chapter2/audit_cross_regime.py": "22ca843de8ce035eac7298464687c598200cfda20e6571f7144696f3b07808e4",
+    "chapter2/audit_step8.py": "8c75ffd014658cbac691b25ac7c1fcd54a16dfe612932cf138561de01b9af9e1",
+    "chapter2/config_ch2.py": "6939f23a9e69709ae3dfb58483ed23c1ab02d824a29a63d4c55ee347ead2faa5",
+    "chapter2/correct_step8_event_validity.py": "a8461730c79c8295978eab194fe4f856d7caf913288d54e95ca02cfbeada4a54",
+    "chapter2/cross_regime.py": "d091218befde25537ccf2a5c8d0c1a30bdba44878c3b81443d841384c09b21d8",
+    "chapter2/cross_regime_config.py": "f4b7d5a2f0ba352918b2a234d6fcf5025dd8a55582e0239d75773d6bd75c7390",
+    "chapter2/dynamics_analysis_ch2.py": "a38efcf4d627bf6cc6b1b6a057ff1c2b0202829e8a011feb0af0c7ea2871cced",
+    "chapter2/esn_config.py": "1871208cc56db7470e7715afc94dbbf935fa5898347dd0489318cbb9b5ee4363",
+    "chapter2/esn_data.py": "873da4bd59698b9118ae6d315f902f10f21317b6a4c3327b4b9a2b6e1f9e6930",
+    "chapter2/esn_metrics.py": "7552557239004b3aec1535ce9f14c53be4e6b11605d14a76c1537d96d09daf48",
+    "chapter2/esn_model.py": "130c0f0f1753c7429a37bf14dbfd49de5bc8a0e04741893ef0b360126d8edcd3",
+    "chapter2/esn_optimisation.py": "4ea899297171bae6e65d39a2c26f7e46e4b1515e8102396129fc6fd1a6a93ad5",
+    "chapter2/esn_step8.py": "2666e669e0532100cdbfa5d632fe038bd440614eba27bb65e5e2e86bae5e1979",
+    "chapter2/generate_diagnostics.py": "6d8ccf203bd382df07b7fdd14a493bb5a8f94ad6d9330d4de7b7323e4e310f7e",
+    "chapter2/hr_data_ch2.py": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+    "chapter2/optimisation_results/step7_selection.json": "856985bd18d2b671d6919c8116924380eb521131a7284754937e45bf793dda67",
+    "chapter2/plot_thesis_figures.py": "8a0242e8705da4c669cbcfa7458fc863ee7edd88bfd727773def34da5c56dffd",
+    "chapter2/run_bayesian_optimisation.py": "10122b4b5d7194f48c8456ff3c5939f3bd0c0e2c274380ecd778aaea655b26ad",
+    "chapter2/run_cross_regime.py": "e02c1617726d813035bc08c1b9f4cbd792b032a994fd932400b1b1b45bbfaca9",
+    "chapter2/run_esn_pilot.py": "fa30c0e54ab67399e2295d1cdc31835b8886aa55a98f5ad11bcc5681acb69bae",
+    "chapter2/run_step8.py": "6c2e3708b58decf65f9fb0addaf645ee34d7e719e56a2b3f30e55f11930cd907",
+    "chapter2/tests/test_cross_regime.py": "09512e0377ca8dc9e7bbe06428839870efb420770437ed869431049495a81499",
+    "chapter2/verify_release.py": "cba8ac120019d0fe9e865a895abbf534d5c3b79b720a55db24722b7892fadd42",
+    "run_chapter2_cross_regime.slurm": "6c79d074b7b0cffc4b2fb2a67b9596672a6fd52edf65bf1fb10c15ae511c4796"
+  },
+  "status": "FROZEN BEFORE CROSS-REGIME BENCHMARK ACCESS"
+}

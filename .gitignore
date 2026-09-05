@@ -33,3 +33,10 @@ __pycache__/
 # Transferred Chapter 2 scientific binaries retained outside Git
 chapter2/final_models/*.npz
 chapter2/final_results/raw_arrays/
+
+# Cross-regime runtime evidence; protocol lock is committed separately
+chapter2/cross_regime_models/
+chapter2/cross_regime_pilot/
+chapter2/cross_regime_results/*
+!chapter2/cross_regime_results/cross_regime_manifest.json
+chapter2/CROSS_REGIME_RESULTS.md
