@@ -46,7 +46,11 @@ from chapter2.esn_data import (
     StateCurrentScalers,
     file_sha256,
 )
-from chapter2.esn_metrics import evaluate_rollout, pointwise_normalised_error
+from chapter2.cross_regime_numerics import (
+    evaluate_predictions,
+    first_nonfinite_prediction_step,
+    metric_prediction_view,
+)
 from chapter2.esn_model import EchoStateNetwork, TrainingSequence
 from chapter2.esn_optimisation import NONFINITE_FAILURE_SCORE
 from chapter2.esn_step8 import (
@@ -320,15 +324,21 @@ def recursive_forecast(
                 failure_step = index
                 failure_reason = "non_finite_recursive_input"
                 break
-            predictions[index] = prediction
             if not np.all(np.isfinite(prediction)):
                 failure_step = index
                 failure_reason = "non_finite_prediction"
                 break
+            physical_prediction = (
+                prediction * scalers.state.scale + scalers.state.mean
+            )
+            if not np.all(np.isfinite(physical_prediction)):
+                failure_step = index
+                failure_reason = "non_finite_physical_prediction"
+                break
+            predictions[index] = physical_prediction
             state = prediction
     model.reset_reservoir()
-    physical = predictions * scalers.state.scale + scalers.state.mean
-    return physical, failure_step, failure_reason
+    return predictions, failure_step, failure_reason
 
 
 def evaluation_classification(scenario: str, current: float) -> str:
@@ -420,15 +430,11 @@ def transition_boundary_metrics(
         local = boundary - forecast_start
         start = max(0, local - half_window)
         stop = min(len(predictions), local + half_window)
-        metrics = evaluate_rollout(
+        fields, _, _ = evaluate_predictions(
             predictions[start:stop],
             targets[start:stop],
-            normalisation_scale=scale,
-            dt=0.01,
-            valid_prediction_threshold=0.4,
-            divergence_threshold=5.0,
-            collapse_std_ratio_threshold=0.05,
-        ).to_dict()
+            scale,
+        )
         results.append(
             {
                 "boundary_state_index": boundary,
@@ -436,10 +442,74 @@ def transition_boundary_metrics(
                 "current_after": float(currents[local]),
                 "raw_array_range": [start, stop],
                 "transition_range": [forecast_start + start, forecast_start + stop],
-                "metrics": metrics,
+                "metrics": fields["metrics"],
             }
         )
     return results
+
+
+def pointwise_sha256(pointwise: np.ndarray) -> str:
+    """Hash derived errors independently of the immutable historical archive."""
+    return sha256(np.ascontiguousarray(pointwise, dtype="<f8").tobytes()).hexdigest()
+
+
+def derive_record_fields(
+    record: Mapping[str, Any], arrays: Mapping[str, np.ndarray], scale: np.ndarray
+) -> tuple[dict[str, Any], np.ndarray]:
+    """Derive metadata only; never forecast, read a model, or write an archive."""
+    fields, physical, pointwise = evaluate_predictions(
+        arrays["predictions"], arrays["targets"], scale
+    )
+    metric_predictions = metric_prediction_view(physical, fields["failure_step"])
+    fields["event_metrics"] = invalidate_divergent_event_metrics(
+        event_metrics(metric_predictions, arrays["targets"], 0.01), fields["metrics"]
+    )
+    if record["family"] == "continuous":
+        fields["transition_boundaries"] = transition_boundary_metrics(
+            metric_predictions, arrays["targets"], arrays["current"], scale,
+            forecast_start=record["forecast_range"][0],
+        )
+    return fields, pointwise
+
+
+def validate_record_source(
+    record: Mapping[str, Any], arrays: Mapping[str, np.ndarray],
+    trajectory: FixedCurrentTrajectory | ContinuousCurrentTrajectory,
+) -> None:
+    """Verify frozen identity, window and exact target/time/current alignment."""
+    expected_id = record_id(
+        record["family"], record["scenario"], int(record["seed"]),
+        current=record["current"], window=record["window"], schedule=record["schedule"],
+    )
+    if record["record_id"] != expected_id:
+        raise CrossRegimeError("record identity mismatch")
+    if record["family"] == "fixed_short":
+        if record["window"] not in (1, 2, 3):
+            raise CrossRegimeError("evaluation window mismatch")
+        start = (70_000, 80_000, 89_999)[record["window"] - 1]
+        warmup, forecast = [start, start + 2_000], [start + 2_000, start + 10_000]
+    elif record["family"] == "fixed_long":
+        warmup, forecast = [70_000, 72_000], [72_000, 99_999]
+    elif record["family"] == "continuous":
+        warmup, forecast = [0, 2_000], [2_000, 499_999]
+    else:
+        raise CrossRegimeError("unknown evaluation family")
+    if list(record["warmup_range"]) != warmup or list(record["forecast_range"]) != forecast:
+        raise CrossRegimeError("evaluation window mismatch")
+    begin, stop = forecast
+    expected = {
+        "targets": trajectory.states[begin + 1:stop + 1],
+        "time": trajectory.time[begin + 1:stop + 1],
+        "current": trajectory.current_values[begin:stop],
+    }
+    if not all(np.array_equal(arrays[key], value) for key, value in expected.items()):
+        raise CrossRegimeError("raw targets/time/current differ from source trajectory")
+    expected_class = (
+        "continuous mixed-regime transition schedule" if record["family"] == "continuous"
+        else evaluation_classification(record["scenario"], record["current"])
+    )
+    if record["evaluation_class"] != expected_class:
+        raise CrossRegimeError("evaluation classification mismatch")
 
 
 def build_evaluation_record(
@@ -462,29 +532,10 @@ def build_evaluation_record(
     window: int | None = None,
     schedule: str | None = None,
 ) -> dict[str, Any]:
-    metrics = evaluate_rollout(
-        predictions,
-        targets,
-        normalisation_scale=scalers.state.scale,
-        dt=0.01,
-        valid_prediction_threshold=0.4,
-        divergence_threshold=5.0,
-        collapse_std_ratio_threshold=0.05,
-    ).to_dict()
-    pointwise = pointwise_normalised_error(
-        predictions, targets, normalisation_scale=scalers.state.scale
-    )
-    atomic_save_npz(
-        raw_path,
-        predictions=predictions,
-        targets=targets,
-        pointwise_normalised_error=pointwise,
-        time=times,
-        current=currents,
-    )
-    events = invalidate_divergent_event_metrics(
-        event_metrics(predictions, targets, 0.01), metrics
-    )
+    predictions = np.asarray(predictions, dtype=float).copy()
+    physical_failure_step = first_nonfinite_prediction_step(predictions)
+    if physical_failure_step is not None:
+        predictions[physical_failure_step:] = np.nan
     record: dict[str, Any] = {
         "record_id": identifier,
         "family": family,
@@ -500,28 +551,20 @@ def build_evaluation_record(
         ),
         "warmup_range": list(warmup_range),
         "forecast_range": list(forecast_range),
-        "metrics": metrics,
-        "aggregate_nrmse_value": (
-            float(metrics["nrmse_state"])
-            if metrics["nrmse_state"] is not None
-            else NONFINITE_FAILURE_SCORE
-        ),
-        "numerical_failure": failure_step is not None,
-        "failure_step": failure_step,
-        "failure_reason": failure_reason,
-        "valid_prefix_steps": failure_step if failure_step is not None else len(predictions),
-        "event_metrics": events,
+        "generation_failure_step": failure_step,
+        "generation_failure_reason": failure_reason,
         "raw_arrays_path": str(raw_path),
-        "raw_arrays_sha256": file_sha256(raw_path),
     }
-    if family == "continuous":
-        record["transition_boundaries"] = transition_boundary_metrics(
-            predictions,
-            targets,
-            currents,
-            scalers.state.scale,
-            forecast_start=forecast_range[0],
-        )
+    fields, pointwise = derive_record_fields(
+        record, {"predictions": predictions, "targets": targets, "current": currents},
+        scalers.state.scale,
+    )
+    record.update(fields)
+    atomic_save_npz(
+        raw_path, predictions=predictions, targets=targets,
+        pointwise_normalised_error=pointwise, time=times, current=currents,
+    )
+    record["raw_arrays_sha256"] = file_sha256(raw_path)
     return record
 
 

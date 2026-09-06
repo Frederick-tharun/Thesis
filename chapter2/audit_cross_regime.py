@@ -19,12 +19,12 @@ from chapter2.cross_regime import (
     atomic_write_text,
     expected_model_keys,
     file_hash_inventory,
+    derive_record_fields,
+    pointwise_sha256,
+    validate_record_source,
     load_model_bundle,
     prepare_training,
     strict_load_json,
-    record_id,
-    evaluation_classification,
-    transition_boundary_metrics,
     validate_raw_array,
     validate_record_matrix,
 )
@@ -45,9 +45,6 @@ from chapter2.cross_regime_config import (
     model_config,
 )
 from chapter2.esn_data import file_sha256, load_fixed_trajectory
-from chapter2.esn_optimisation import NONFINITE_FAILURE_SCORE
-from chapter2.esn_metrics import evaluate_rollout, pointwise_normalised_error
-from chapter2.esn_step8 import event_metrics, invalidate_divergent_event_metrics
 from chapter2.run_cross_regime import (
     AGGREGATE_PATH,
     DATASET_MANIFEST_PATH,
@@ -145,7 +142,9 @@ def audit_datasets(manifest: Mapping[str, Any]) -> dict[str, Any]:
     return {"dataset_count": len(names), "exact": True, "names": names}
 
 
-def audit_records(raw: Mapping[str, Any], model_manifest: Mapping[str, Any]) -> dict[str, Any]:
+def audit_records(
+    raw: Mapping[str, Any], model_manifest: Mapping[str, Any], *, derived: bool = False
+) -> dict[str, Any]:
     records = raw["records"]
     validate_record_matrix(records)
     scalers = {}
@@ -160,62 +159,27 @@ def audit_records(raw: Mapping[str, Any], model_manifest: Mapping[str, Any]) -> 
     collapses = 0
     for item in records:
         arrays = validate_raw_array(item)
-        expected_id = record_id(item["family"], item["scenario"], int(item["seed"]),
-                                current=item["current"], window=item["window"], schedule=item["schedule"])
-        if expected_id != item["record_id"]:
-            raise CrossRegimeAuditError("record identity mismatch")
-        if item["family"] == "fixed_short":
-            start = (70_000, 80_000, 89_999)[item["window"] - 1]
-            warmup, forecast = [start, start + 2_000], [start + 2_000, start + 10_000]
-        elif item["family"] == "fixed_long":
-            warmup, forecast = [70_000, 72_000], [72_000, 99_999]
-        else:
-            warmup, forecast = [0, 2_000], [2_000, 499_999]
-        if item["warmup_range"] != warmup or item["forecast_range"] != forecast:
-            raise CrossRegimeAuditError("evaluation window mismatch")
         trajectory = schedules[item["schedule"]] if item["family"] == "continuous" else fixed[item["current"]]
-        begin, stop = forecast
-        expected_arrays = {"targets": trajectory.states[begin + 1:stop + 1],
-                           "time": trajectory.time[begin + 1:stop + 1],
-                           "current": trajectory.current_values[begin:stop]}
-        if not all(np.array_equal(arrays[key], value) for key, value in expected_arrays.items()):
-            raise CrossRegimeAuditError("raw targets/time/current differ from source trajectory")
-        expected_class = ("continuous mixed-regime transition schedule" if item["family"] == "continuous"
-                          else evaluation_classification(item["scenario"], item["current"]))
-        if item["evaluation_class"] != expected_class:
-            raise CrossRegimeAuditError("evaluation classification mismatch")
+        try:
+            validate_record_source(item, arrays, trajectory)
+        except CrossRegimeError as error:
+            raise CrossRegimeAuditError(str(error)) from error
         scaler = scalers[(item["scenario"], int(item["seed"]))]
-        metrics = evaluate_rollout(
-            arrays["predictions"], arrays["targets"],
-            normalisation_scale=scaler.state.scale, dt=0.01,
-            valid_prediction_threshold=0.4, divergence_threshold=5.0,
-            collapse_std_ratio_threshold=0.05,
-        ).to_dict()
-        if not close(metrics, item["metrics"]):
-            raise CrossRegimeAuditError(f"metric recomputation mismatch: {item['record_id']}")
-        pointwise = pointwise_normalised_error(arrays["predictions"], arrays["targets"], normalisation_scale=scaler.state.scale)
-        if not np.array_equal(pointwise, arrays["pointwise_normalised_error"], equal_nan=True):
+        fields, pointwise = derive_record_fields(item, arrays, scaler.state.scale)
+        # Failure classification is checked before metrics and penalty agreement.
+        for key in ("failure_step", "numerical_failure", "failure_reason", "valid_prefix_steps"):
+            if item.get(key) != fields[key]:
+                raise CrossRegimeAuditError(f"numerical failure classification mismatch: {key}")
+        for key, value in fields.items():
+            if not close(value, item.get(key)):
+                label = "failure penalty" if key == "aggregate_nrmse_value" else key
+                raise CrossRegimeAuditError(f"{label} recomputation mismatch: {item['record_id']}")
+        if derived:
+            if item.get("derived_pointwise_sha256") != pointwise_sha256(pointwise):
+                raise CrossRegimeAuditError(f"derived pointwise-error mismatch: {item['record_id']}")
+        elif not np.array_equal(pointwise, arrays["pointwise_normalised_error"], equal_nan=True):
             raise CrossRegimeAuditError(f"pointwise-error mismatch: {item['record_id']}")
-        events = invalidate_divergent_event_metrics(event_metrics(arrays["predictions"], arrays["targets"], 0.01), metrics)
-        if not close(events, item["event_metrics"]):
-            raise CrossRegimeAuditError(f"event recomputation mismatch: {item['record_id']}")
-        penalty = metrics["nrmse_state"] if metrics["nrmse_state"] is not None else NONFINITE_FAILURE_SCORE
-        if not close(penalty, item["aggregate_nrmse_value"]):
-            raise CrossRegimeAuditError("failure penalty mismatch")
-        bad = np.flatnonzero(~np.all(np.isfinite(arrays["predictions"]), axis=1))
-        failure_step = int(bad[0]) if len(bad) else None
-        if item["failure_step"] != failure_step or item["numerical_failure"] != bool(len(bad)):
-            raise CrossRegimeAuditError("numerical failure classification mismatch")
-        if item["valid_prefix_steps"] != (failure_step if failure_step is not None else len(arrays["predictions"])):
-            raise CrossRegimeAuditError("valid prefix length mismatch")
-        if item["family"] == "continuous":
-            boundaries = transition_boundary_metrics(arrays["predictions"], arrays["targets"], arrays["current"], scaler.state.scale, forecast_start=begin)
-            if not close(boundaries, item.get("transition_boundaries")):
-                raise CrossRegimeAuditError("transition boundary recomputation mismatch")
-            if len(item.get("transition_boundaries", [])) != 4:
-                raise CrossRegimeAuditError(f"continuous boundary metrics missing: {item['record_id']}")
-            if item["warmup_range"] != [0, 2_000] or item["forecast_range"] != [2_000, 499_999]:
-                raise CrossRegimeAuditError(f"continuous reset/warm-up contract mismatch: {item['record_id']}")
+        metrics = fields["metrics"]
         failures += bool(item["numerical_failure"])
         divergences += bool(metrics["diverged"])
         collapses += bool(metrics["prediction_collapse_any"])
@@ -333,7 +297,19 @@ def run_audit() -> dict[str, Any]:
 
 
 def main(argv: Sequence[str] | None=None) -> int:
-    parser=argparse.ArgumentParser(description=__doc__); parser.parse_args(argv); result=run_audit(); print(result["verdict"]); return 0
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--post-hoc-correction", type=Path,
+        help="verify a derived correction against its original Git source lock",
+    )
+    args = parser.parse_args(argv)
+    if args.post_hoc_correction is not None:
+        from chapter2.correct_cross_regime_numerics import audit_correction
+        result = audit_correction(args.post_hoc_correction)
+    else:
+        result = run_audit()
+    print(result["verdict"])
+    return 0
 
 
 if __name__ == "__main__": raise SystemExit(main())

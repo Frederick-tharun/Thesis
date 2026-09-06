@@ -6,7 +6,10 @@ from collections import defaultdict
 from dataclasses import asdict
 from datetime import datetime, timezone
 import argparse
-import fcntl
+try:
+    import fcntl
+except ImportError:  # Derived-result tools are also usable on Windows.
+    fcntl = None
 import json
 import math
 import os
@@ -762,11 +765,14 @@ def flatten_record(item: Mapping[str, Any]) -> dict[str, Any]:
     return {key: ("" if value is None else value) for key, value in row.items()}
 
 
-def write_tables(records: Sequence[Mapping[str, Any]], aggregate: Mapping[str, Any]) -> None:
-    atomic_write_csv(RESULT_ROOT / "fixed_short_results.csv", [flatten_record(item) for item in records if item["family"] == "fixed_short"])
-    atomic_write_csv(RESULT_ROOT / "fixed_long_results.csv", [flatten_record(item) for item in records if item["family"] == "fixed_long"])
-    atomic_write_csv(RESULT_ROOT / "continuous_schedule_results.csv", [flatten_record(item) for item in records if item["family"] == "continuous"])
-    atomic_write_csv(RESULT_ROOT / "transfer_target_comparison.csv", [
+def write_tables(
+    records: Sequence[Mapping[str, Any]], aggregate: Mapping[str, Any], *,
+    output_root: Path = RESULT_ROOT,
+) -> None:
+    atomic_write_csv(output_root / "fixed_short_results.csv", [flatten_record(item) for item in records if item["family"] == "fixed_short"])
+    atomic_write_csv(output_root / "fixed_long_results.csv", [flatten_record(item) for item in records if item["family"] == "fixed_long"])
+    atomic_write_csv(output_root / "continuous_schedule_results.csv", [flatten_record(item) for item in records if item["family"] == "continuous"])
+    atomic_write_csv(output_root / "transfer_target_comparison.csv", [
         {"training_scenario": comparison["training_scenario"], "family": comparison["family"],
          "target_current": comparison["target_current"], "model_role": role, **comparison[role]}
         for comparison in aggregate["transfer_target_comparisons"] for role in ("transfer", "mixed_reference")
@@ -778,9 +784,9 @@ def write_tables(records: Sequence[Mapping[str, Any]], aggregate: Mapping[str, A
             seed_rows.append({"scenario":scenario,"seed":seed,**summary(values)})
         overall=aggregate["scenarios"][scenario]["overall"]
         divergence.append({"scenario":scenario,"record_count":overall["record_count"],"divergence_count":overall["divergence_count"],"divergence_rate":overall["divergence_rate"],"collapse_count":overall["collapse_count"],"collapse_rate":overall["collapse_rate"],"numerical_failure_count":overall["numerical_failure_count"]})
-    atomic_write_csv(RESULT_ROOT / "per_seed_summary.csv", seed_rows)
-    atomic_write_csv(RESULT_ROOT / "divergence_summary.csv", divergence)
-    atomic_write_csv(RESULT_ROOT / "scenario_comparison.csv", [{"scenario":scenario,**aggregate["scenarios"][scenario]["overall"]} for scenario in SCENARIO_TRAINING_CURRENTS])
+    atomic_write_csv(output_root / "per_seed_summary.csv", seed_rows)
+    atomic_write_csv(output_root / "divergence_summary.csv", divergence)
+    atomic_write_csv(output_root / "scenario_comparison.csv", [{"scenario":scenario,**aggregate["scenarios"][scenario]["overall"]} for scenario in SCENARIO_TRAINING_CURRENTS])
 
 
 def create_results_document(aggregate: Mapping[str, Any]) -> None:
@@ -794,6 +800,8 @@ def create_results_document(aggregate: Mapping[str, Any]) -> None:
 
 
 def run_full() -> None:
+    if fcntl is None:
+        raise CrossRegimeError("full execution requires Unix file locking")
     RESULT_ROOT.mkdir(parents=True, exist_ok=True)
     with (RESULT_ROOT / ".execution.lock").open("a") as lock:
         try:

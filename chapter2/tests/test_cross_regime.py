@@ -80,6 +80,16 @@ class FeedbackSpy:
         self.resets += 1
 
 
+class PredictionSequenceSpy(FeedbackSpy):
+    def __init__(self, outputs):
+        super().__init__()
+        self.outputs = [np.asarray(output, dtype=float) for output in outputs]
+
+    def predict_one_step(self, value):
+        self.inputs.append(value.copy())
+        return self.outputs[len(self.inputs) - 1]
+
+
 def test_recursive_feedback_ignores_future_truth_and_never_rewarms_at_switch():
     model = FeedbackSpy()
     states = np.arange(30, dtype=float).reshape(10, 3)
@@ -101,6 +111,117 @@ def test_nonfinite_forecast_retains_prefix_and_marks_suffix():
         np.zeros((10, 3)), np.ones(10), warmup_range=(0, 2), forecast_range=(2, 9))
     assert step == 2 and reason == "non_finite_prediction"
     assert np.isfinite(predictions[:2]).all() and np.isnan(predictions[2:]).all()
+
+
+@pytest.mark.parametrize("component", (0, 1, 2))
+def test_physical_conversion_overflow_marks_exact_step_and_nan_suffix(component):
+    overflowing = np.zeros(3)
+    overflowing[component] = np.finfo(float).max
+    model = PredictionSequenceSpy(
+        [np.array([1.0, 2.0, 3.0]), overflowing]
+    )
+    scalers = StateCurrentScalers(
+        NumpyStandardScaler(np.zeros(3), np.full(3, 2.0)),
+        NumpyStandardScaler(np.zeros(1), np.ones(1)),
+    )
+
+    predictions, step, reason = core.recursive_forecast(
+        model,
+        scalers,
+        np.zeros((8, 3)),
+        np.ones(8),
+        warmup_range=(0, 2),
+        forecast_range=(2, 7),
+    )
+
+    assert step == 1
+    assert reason == "non_finite_physical_prediction"
+    np.testing.assert_array_equal(predictions[0], [2.0, 4.0, 6.0])
+    assert np.isnan(predictions[1:]).all()
+    assert not np.isinf(predictions).any()
+    assert len(model.inputs) == 2 and model.resets == 1
+
+
+def test_physical_mean_addition_overflow_is_detected():
+    maximum = np.finfo(float).max
+    scalers = StateCurrentScalers(
+        NumpyStandardScaler(np.array([maximum, 0., 0.]), np.ones(3)),
+        NumpyStandardScaler(np.zeros(1), np.ones(1)),
+    )
+    model = PredictionSequenceSpy([[maximum, 0., 0.]])
+    predictions, step, reason = core.recursive_forecast(
+        model, scalers, np.zeros((5, 3)), np.ones(5),
+        warmup_range=(0, 2), forecast_range=(2, 4),
+    )
+    assert step == 0 and reason == "non_finite_physical_prediction"
+    assert np.isnan(predictions).all()
+
+
+def test_metric_unsafe_values_do_not_stop_recursive_feedback():
+    outputs = [np.array([1.e200, 0., 0.]), np.array([1., 2., 3.])]
+    model = PredictionSequenceSpy(outputs)
+    predictions, step, reason = core.recursive_forecast(
+        model, unit_scalers(), np.zeros((5, 3)), np.ones(5),
+        warmup_range=(0, 2), forecast_range=(2, 4),
+    )
+    np.testing.assert_array_equal(predictions, outputs)
+    np.testing.assert_array_equal(model.inputs[1][:3], outputs[0])
+    assert step is None and reason is None
+
+
+def test_record_builder_and_audit_share_physical_failure_classification(
+    tmp_path, monkeypatch
+):
+    trajectory = runner.synthetic_prefix(3.20, 100000)
+    begin, stop = 72000, 80000
+    predictions = trajectory.states[begin + 1:stop + 1].copy()
+    predictions[2, 0] = np.inf
+    item = core.build_evaluation_record(
+        identifier=core.record_id(
+            "fixed_short", "regular_to_chaotic", 42, current=3.20, window=1
+        ),
+        family="fixed_short",
+        scenario="regular_to_chaotic",
+        seed=42,
+        scalers=unit_scalers(),
+        predictions=predictions,
+        targets=trajectory.states[begin + 1:stop + 1],
+        times=trajectory.time[begin + 1:stop + 1],
+        currents=trajectory.current_values[begin:stop],
+        raw_path=tmp_path / "raw.npz",
+        warmup_range=(70000, 72000),
+        forecast_range=(begin, stop),
+        failure_step=None,
+        failure_reason=None,
+        current=3.20,
+        window=1,
+    )
+
+    assert item["numerical_failure"] is True
+    assert item["failure_step"] == 2
+    assert item["failure_reason"] == "non_finite_physical_prediction"
+    assert item["aggregate_nrmse_value"] == core.NONFINITE_FAILURE_SCORE
+    with np.load(tmp_path / "raw.npz", allow_pickle=False) as saved:
+        np.testing.assert_array_equal(
+            saved["predictions"][:2], predictions[:2]
+        )
+        assert np.isnan(saved["predictions"][2:]).all()
+        assert not np.isinf(saved["predictions"]).any()
+
+    monkeypatch.setattr(audit, "validate_record_matrix", lambda records: None)
+    monkeypatch.setattr(audit, "load_fixed_trajectory", lambda current: trajectory)
+    monkeypatch.setattr(audit, "load_schedules", lambda manifest: {})
+    monkeypatch.setattr(audit, "strict_load_json", lambda path: {})
+    monkeypatch.setattr(
+        audit, "load_model_bundle", lambda path: (None, unit_scalers(), {})
+    )
+    models = {
+        "models": [
+            {"scenario": "regular_to_chaotic", "seed": 42, "path": "unused"}
+        ]
+    }
+    result = audit.audit_records({"records": [item]}, models)
+    assert result["failure_count"] == 1
 
 
 def test_model_training_serialization_and_resume_lock(tmp_path, monkeypatch):
@@ -173,3 +294,22 @@ def test_strict_json_rejects_nonfinite_and_preserves_previous_file(tmp_path):
     with pytest.raises(ValueError):
         core.atomic_write_json(path, {"value": float("nan")})
     assert core.strict_load_json(path) == {"value": 1}
+
+
+def test_derived_audit_cli_does_not_run_original_publishing_audit(tmp_path, monkeypatch):
+    from chapter2 import correct_cross_regime_numerics as correction
+
+    called = []
+    monkeypatch.setattr(
+        correction, "audit_correction",
+        lambda path: called.append(path) or {"verdict": "DERIVED CORRECTION AUDIT PASSED"},
+    )
+    monkeypatch.setattr(audit, "run_audit", lambda: pytest.fail("original audit invoked"))
+    assert audit.main(["--post-hoc-correction", str(tmp_path)]) == 0
+    assert called == [tmp_path]
+
+
+def test_full_execution_still_requires_real_unix_locking(monkeypatch):
+    monkeypatch.setattr(runner, "fcntl", None)
+    with pytest.raises(core.CrossRegimeError, match="Unix file locking"):
+        runner.run_full()
