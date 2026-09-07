@@ -3,7 +3,7 @@
 #SBATCH --partition=work
 #SBATCH --time=24:00:00
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
 #SBATCH --output=logs/chapter2_cross_regime_improvement_final_%j.out
 #SBATCH --error=logs/chapter2_cross_regime_improvement_final_%j.err
 
