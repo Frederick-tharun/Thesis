@@ -1,0 +1,24 @@
+{
+  "schema": "parameter_transfer_fresh_benchmark_v1",
+  "status": "PRESPECIFIED_NOT_GENERATED",
+  "currents": [1.67, 3.2, 3.29, 3.34, 3.5],
+  "initial_state": [0.1, 0.0, 0.0],
+  "initial_state_source": "config.py:HR_PARAMETER_SETS.periodic_spiking.x0",
+  "independence_note": "Different deterministic initial condition; statistical independence and distinct attractors are not assumed.",
+  "parameters": {"a": 1.0, "b": 3.0, "c": 1.0, "d": 5.0, "r": 0.006, "s": 4.0, "x_r": -1.6},
+  "integrator": "chapter2.hr_data_ch2.simulate_fixed_current:RK4",
+  "dt": 0.01,
+  "transient_steps": 100000,
+  "retained_samples": 100000,
+  "windows": [
+    ["short_1", [70000, 72000], [72000, 80000]],
+    ["short_2", [80000, 82000], [82000, 90000]],
+    ["short_3", [89999, 91999], [91999, 99999]],
+    ["long", [70000, 72000], [72000, 99999]]
+  ],
+  "reservoir_seeds": [42, 123, 456, 789, 2026],
+  "trajectory_rng_seeds": null,
+  "continuous_schedules": [],
+  "expected_records": 200,
+  "generation_gate": "selection locked and all ten final models trained and hash-verified"
+}
