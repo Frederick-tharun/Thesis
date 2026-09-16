@@ -1,0 +1,28 @@
+### Starting TaskPrologue of job 1522799 on tf091 at Wed Sep 16 09:38:32 AM CEST 2026
+Running on cores 32,96 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+Illustrative chaotic tour schedule (low to high): [2.984962, 3.2, 3.34, 3.368421, 3.37594, 3.383459, 3.390977, 3.398496]
+Full confirmed-chaotic span: 2.9850 to 3.3985 (0.4135 wide)
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/final_evaluation_long/illustrative_chaotic_tour.npz
+=== JOB_STATISTICS ===
+=== current date     : Wed Sep 16 09:40:19 AM CEST 2026
+= Job-ID             : 1522799 on tinyfat
+= Job-Name           : ch2p2_tour
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_tour.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:01:48
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf091
+= Subm/Elig/Start/End: 2026-09-16T09:38:31 / 2026-09-16T09:38:31 / 2026-09-16T09:38:31 / 2026-09-16T09:40:19
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.6G   104.9G   209.7G        N/A     122K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

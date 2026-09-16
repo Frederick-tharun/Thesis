@@ -1,0 +1,44 @@
+{
+  "combination_rule": "per-timestep, per-state-dimension median across the 5 independently-fitted EchoStateNetwork instances, fed back as the shared next input to all members",
+  "design_hash": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "ensemble_hyperparameters": {
+    "input_scaling": 0.06402022818477646,
+    "leak_rate": 0.9375840772954693,
+    "reservoir_connectivity": 0.08881598524963213,
+    "reservoir_size": 100,
+    "ridge_regularisation": 3.968208883661854e-10,
+    "spectral_radius": 0.4118313967689876
+  },
+  "ensemble_seeds": [
+    42,
+    123,
+    456,
+    789,
+    2026
+  ],
+  "family": "chaotic",
+  "kind": "selection",
+  "lock_sha256": "baf792ed80524be2ffae0dd347129886eeebbc733ee808a35b63025e289156a5",
+  "method": "median_ensemble",
+  "original_strict_gate_cleared": false,
+  "rationale": "The single-model search (any one hyperparameter+seed combination) could not simultaneously satisfy the original >=0.80 min-VPT-fraction gate AND zero divergence across all 5 registered seeds (Phase C recovery search: 0/96 candidates eligible). Diagnosis showed a clean, uniform 3-good/2-bad seed split at the Part-1 anchor hyperparameters. A per-step median across all 5 seeds (a standard robust-statistics ensembling technique, not a new network architecture) fully eliminates divergence/collapse/numerical failure (0/15 in every case, vs 30/45 catastrophic divergences for individual bad seeds) while preserving strong accuracy (median 68% of the 80-time-unit horizon tracked correctly). This does not clear the original per-rollout 0.80 bar on the single hardest rollout (0.426); it is locked as the best available, most stable chaotic source model, with this limitation stated explicitly rather than the gate being silently weakened.",
+  "source_validation_summary": {
+    "collapse_count": 0,
+    "divergence_count": 0,
+    "mean_nrmse": 0.14793154609919842,
+    "median_nrmse": 0.08469780645545463,
+    "median_vpt_fraction": 0.684375,
+    "min_vpt_fraction": 0.42575,
+    "n_rollouts": 15,
+    "numerical_failure_count": 0,
+    "worst_nrmse": 0.44307634430895815
+  },
+  "stability_failure_mode_resolved": true,
+  "training_currents": [
+    2.9849624060150375,
+    3.2,
+    3.34,
+    3.3684210526315788,
+    3.3909774436090223
+  ]
+}

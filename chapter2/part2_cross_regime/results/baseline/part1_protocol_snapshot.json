@@ -1,0 +1,145 @@
+{
+  "bias_scaling": 0.1,
+  "final_seeds": [
+    42,
+    123,
+    456,
+    789,
+    2026
+  ],
+  "fitting_transition_range": [
+    0,
+    40000
+  ],
+  "kind": "part1_protocol_snapshot",
+  "notes": "The original Part-1 Step 7 trained one JOINT parameter-aware ESN on all three currents (1.67, 3.20, 3.50) together, objective = mean NRMSE over 9 rollouts (3 currents x 3 windows). Part 2 reuses this exact architecture, search space, washout, and validation-window shape, but trains SEPARATE regular-only and chaotic-only models, each over its own (larger) training-current list, with the objective generalised accordingly (see validation.source_objective).",
+  "original_training_currents": [
+    1.67,
+    3.2,
+    3.5
+  ],
+  "original_unseen_currents": [
+    3.29,
+    3.34
+  ],
+  "regularise_bias": false,
+  "search_settings": {
+    "acquisition_function": "EI",
+    "base_estimator": "GP",
+    "bayesian_calls_per_model": 40,
+    "candidate_model_seed": 42,
+    "initial_point_generator": "random",
+    "initial_random_calls": 10,
+    "search_seed_parameter_aware": 2026
+  },
+  "search_space": {
+    "input_scaling": {
+      "high": 3.0,
+      "low": 0.01,
+      "type": "uniform"
+    },
+    "leak_rate": {
+      "high": 1.0,
+      "low": 0.01,
+      "type": "uniform"
+    },
+    "reservoir_connectivity": {
+      "high": 1.0,
+      "low": 0.01,
+      "type": "uniform"
+    },
+    "reservoir_size": {
+      "type": "categorical",
+      "values": [
+        100,
+        200,
+        300
+      ]
+    },
+    "ridge_regularisation": {
+      "high": 0.01,
+      "low": 1e-10,
+      "type": "log-uniform"
+    },
+    "spectral_radius": {
+      "high": 3.0,
+      "low": 0.01,
+      "type": "uniform"
+    }
+  },
+  "source_files": [
+    "chapter2/esn_config.py",
+    "chapter2/esn_optimisation.py",
+    "chapter2/esn_step8.py",
+    "chapter2/optimisation_results/step7_selection.json"
+  ],
+  "step7_selected_parameter_aware_hyperparameters": {
+    "input_scaling": 0.06402022818477646,
+    "leak_rate": 0.9375840772954693,
+    "reservoir_connectivity": 0.08881598524963213,
+    "reservoir_size": 100,
+    "ridge_regularisation": 3.968208883661854e-10,
+    "spectral_radius": 0.4118313967689876
+  },
+  "step7_selected_parameter_aware_robust_aggregate": {
+    "collapse_rollout_count": 0,
+    "divergence_rollout_count": 0,
+    "finite_rollout_mean_nrmse": 0.017368919325506615,
+    "mean_objective_nrmse": 0.017368919325506615,
+    "mean_valid_prediction_steps": 7638.177777777778,
+    "median_objective_nrmse": 0.00500880190472772,
+    "per_current_mean_nrmse": {
+      "1.67": 0.003457230571879012,
+      "3.20": 0.031499040070510936,
+      "3.50": 0.0171504873341299
+    },
+    "robust_rollout_count": 45,
+    "robust_seed_count": 5,
+    "std_objective_nrmse": 0.032595210880243204,
+    "worst_current_mean_nrmse": 0.031499040070510936,
+    "worst_objective_nrmse": 0.19443160173809718
+  },
+  "thresholds": {
+    "collapse_std_ratio_threshold": 0.05,
+    "divergence_threshold": 5.0,
+    "nonfinite_failure_score": 1000000.0,
+    "valid_prediction_threshold": 0.4
+  },
+  "top_candidate_count_for_confirmation": 5,
+  "training_washout": 2000,
+  "validation_windows": [
+    {
+      "number": 1,
+      "scored_range": [
+        42000,
+        50000
+      ],
+      "warmup_range": [
+        40000,
+        42000
+      ]
+    },
+    {
+      "number": 2,
+      "scored_range": [
+        52000,
+        60000
+      ],
+      "warmup_range": [
+        50000,
+        52000
+      ]
+    },
+    {
+      "number": 3,
+      "scored_range": [
+        62000,
+        70000
+      ],
+      "warmup_range": [
+        60000,
+        62000
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "detail": "git diff returncode=0",
+      "name": "part1_and_chapter1_unchanged",
+      "passed": true
+    },
+    {
+      "detail": "stored=f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d recomputed=f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+      "name": "design_hash_matches",
+      "passed": true
+    },
+    {
+      "detail": "overlap=set()",
+      "name": "no_train_test_overlap",
+      "passed": true
+    },
+    {
+      "detail": "plain load correctly refused",
+      "name": "final_test_firewall",
+      "passed": true
+    },
+    {
+      "detail": "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/final_evaluation_long/final_long_horizon_results.json",
+      "name": "final_benchmark_result_exists",
+      "passed": true
+    },
+    {
+      "detail": "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/final_evaluation",
+      "name": "superseded_final_evaluation_dir_absent",
+      "passed": true
+    },
+    {
+      "detail": "mismatches=[]",
+      "name": "regular_and_frozen_artifacts_unchanged",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chaotic_recovery_protocol_exists",
+      "passed": true
+    },
+    {
+      "detail": "[42, 123, 456]",
+      "name": "chaotic_recovery_search_seeds_registered",
+      "passed": true
+    },
+    {
+      "detail": "[42, 123, 456, 789, 2026]",
+      "name": "chaotic_recovery_confirmation_seeds_registered",
+      "passed": true
+    },
+    {
+      "detail": "{'anchor': 1, 'gp_ei': 64, 'lhs': 30, 'previous_best_non_anchor': 1, 'total': 96}",
+      "name": "chaotic_recovery_candidate_count_is_96",
+      "passed": true
+    },
+    {
+      "detail": "n=96 unique=96",
+      "name": "chaotic_recovery_candidates_unique",
+      "passed": true
+    },
+    {
+      "detail": "n=96",
+      "name": "chaotic_recovery_candidate_count_matches",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chaotic_recovery_hard_filter_recomputes",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chaotic_recovery_loco_only_after_confirmation",
+      "passed": true
+    },
+    {
+      "detail": "mismatches=[]",
+      "name": "trajectory_hashes_match",
+      "passed": true
+    },
+    {
+      "detail": "['reservoir_size', 'reservoir_connectivity', 'input_scaling', 'spectral_radius', 'ridge_regularisation', 'leak_rate']",
+      "name": "search_space_matches_part1",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "regular_selection_exists",
+      "passed": true
+    },
+    {
+      "detail": "['design_hash', 'eligible_candidate_count', 'family', 'kind', 'locked_hyperparameters', 'loco_summary', 'top_k_confirmed_count', 'training_currents']",
+      "name": "regular_selection_well_formed",
+      "passed": true
+    },
+    {
+      "detail": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d vs f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+      "name": "regular_selection_design_hash_matches",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chaotic_selection_exists",
+      "passed": true
+    },
+    {
+      "detail": "selection_failure",
+      "name": "chaotic_single_model_selection_documented_as_failed",
+      "passed": true
+    },
+    {
+      "detail": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d vs f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+      "name": "chaotic_selection_design_hash_matches",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "chaotic_ensemble_selection_exists",
+      "passed": true
+    },
+    {
+      "detail": "['combination_rule', 'design_hash', 'ensemble_hyperparameters', 'ensemble_seeds', 'family', 'kind', 'lock_sha256', 'method', 'original_strict_gate_cleared', 'rationale', 'source_validation_summary', 'stability_failure_mode_resolved', 'training_currents']",
+      "name": "chaotic_ensemble_selection_well_formed",
+      "passed": true
+    },
+    {
+      "detail": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d vs f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+      "name": "chaotic_ensemble_selection_design_hash_matches",
+      "passed": true
+    },
+    {
+      "detail": "baf792ed80524be2ffae0dd347129886eeebbc733ee808a35b63025e289156a5 vs baf792ed80524be2ffae0dd347129886eeebbc733ee808a35b63025e289156a5",
+      "name": "chaotic_ensemble_selection_lock_hash_matches",
+      "passed": true
+    }
+  ]
+}

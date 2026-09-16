@@ -1,0 +1,133 @@
+### Starting TaskPrologue of job 1519121 on tf075 at Sun Sep 13 12:23:41 PM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+[chaotic] anchor     mean_obj=8.09634 min_vpt=0.0135 survives_filter=False
+[chaotic] prev_best  mean_obj=3.43371e+39 min_vpt=0.0536 survives_filter=False
+[chaotic] lhs        mean_obj=1.14058e+27 min_vpt=0.0165 survives_filter=False
+[chaotic] lhs        mean_obj=0.803865 min_vpt=0.0509 survives_filter=True
+[chaotic] lhs        mean_obj=1.13239e+26 min_vpt=0.0311 survives_filter=False
+[chaotic] lhs        mean_obj=0.967101 min_vpt=0.0021 survives_filter=False
+[chaotic] lhs        mean_obj=1.23634e+39 min_vpt=0.0225 survives_filter=False
+[chaotic] lhs        mean_obj=0.685888 min_vpt=0.0432 survives_filter=True
+[chaotic] lhs        mean_obj=1.19344 min_vpt=0.0240 survives_filter=False
+[chaotic] lhs        mean_obj=1.09081e+34 min_vpt=0.0490 survives_filter=False
+[chaotic] lhs        mean_obj=4.67368e+27 min_vpt=0.0141 survives_filter=False
+[chaotic] lhs        mean_obj=8.14226e+90 min_vpt=0.0377 survives_filter=False
+[chaotic] lhs        mean_obj=4.71489e+40 min_vpt=0.1573 survives_filter=False
+[chaotic] lhs        mean_obj=2.97267e+18 min_vpt=0.0336 survives_filter=False
+[chaotic] lhs        mean_obj=5.15909e+68 min_vpt=0.0257 survives_filter=False
+[chaotic] lhs        mean_obj=0.979121 min_vpt=0.0375 survives_filter=True
+[chaotic] lhs        mean_obj=1.10276e+17 min_vpt=0.0390 survives_filter=False
+[chaotic] lhs        mean_obj=6.91441e+23 min_vpt=0.0394 survives_filter=False
+[chaotic] lhs        mean_obj=1.30568 min_vpt=0.0024 survives_filter=True
+[chaotic] lhs        mean_obj=0.44343 min_vpt=0.0874 survives_filter=True
+[chaotic] lhs        mean_obj=0.98022 min_vpt=0.0248 survives_filter=True
+[chaotic] lhs        mean_obj=1.19614 min_vpt=0.0269 survives_filter=True
+[chaotic] lhs        mean_obj=1.28324 min_vpt=0.0103 survives_filter=False
+[chaotic] lhs        mean_obj=2.48613e+39 min_vpt=0.0515 survives_filter=False
+[chaotic] lhs        mean_obj=99.261 min_vpt=0.0020 survives_filter=False
+[chaotic] lhs        mean_obj=3.12571e+20 min_vpt=0.0578 survives_filter=False
+[chaotic] lhs        mean_obj=4.62142e+139 min_vpt=0.0361 survives_filter=False
+[chaotic] lhs        mean_obj=2.2617e+29 min_vpt=0.0340 survives_filter=False
+[chaotic] lhs        mean_obj=4.81663e+22 min_vpt=0.0103 survives_filter=False
+[chaotic] lhs        mean_obj=1.60129e+47 min_vpt=0.0244 survives_filter=False
+[chaotic] lhs        mean_obj=3.66921e+11 min_vpt=0.1541 survives_filter=False
+[chaotic] lhs        mean_obj=6.32556e+16 min_vpt=0.0854 survives_filter=False
+[chaotic] gp         mean_obj=2.48372e+14 min_vpt=0.0300 survives_filter=False (33/96)
+[chaotic] gp         mean_obj=1.43196 min_vpt=0.0073 survives_filter=True (34/96)
+[chaotic] gp         mean_obj=2.85235e+47 min_vpt=0.0090 survives_filter=False (35/96)
+[chaotic] gp         mean_obj=7.38635e+13 min_vpt=0.0085 survives_filter=False (36/96)
+[chaotic] gp         mean_obj=2.36291e+40 min_vpt=0.0043 survives_filter=False (37/96)
+[chaotic] gp         mean_obj=1.25381e+39 min_vpt=0.0095 survives_filter=False (38/96)
+[chaotic] gp         mean_obj=1.23334 min_vpt=0.0080 survives_filter=True (39/96)
+[chaotic] gp         mean_obj=1.22039 min_vpt=0.0097 survives_filter=False (40/96)
+[chaotic] gp         mean_obj=6.37485e+42 min_vpt=0.0404 survives_filter=False (41/96)
+[chaotic] gp         mean_obj=1.03853e+22 min_vpt=0.0096 survives_filter=False (42/96)
+[chaotic] gp         mean_obj=7.27899e+23 min_vpt=0.0355 survives_filter=False (43/96)
+[chaotic] gp         mean_obj=3.03412e+46 min_vpt=0.0222 survives_filter=False (44/96)
+[chaotic] gp         mean_obj=5.25524e+25 min_vpt=0.0181 survives_filter=False (45/96)
+[chaotic] gp         mean_obj=8997.4 min_vpt=0.0246 survives_filter=False (46/96)
+[chaotic] gp         mean_obj=4.05583e+24 min_vpt=0.0224 survives_filter=False (47/96)
+[chaotic] gp         mean_obj=2.44963e+28 min_vpt=0.0096 survives_filter=False (48/96)
+[chaotic] gp         mean_obj=1.37471 min_vpt=0.0136 survives_filter=False (49/96)
+[chaotic] gp         mean_obj=0.99662 min_vpt=0.0020 survives_filter=False (50/96)
+[chaotic] gp         mean_obj=1.03911e+19 min_vpt=0.0160 survives_filter=False (51/96)
+[chaotic] gp         mean_obj=5.3766e+21 min_vpt=0.0160 survives_filter=False (52/96)
+[chaotic] gp         mean_obj=7751.78 min_vpt=0.0236 survives_filter=False (53/96)
+[chaotic] gp         mean_obj=0.98865 min_vpt=0.0256 survives_filter=False (54/96)
+[chaotic] gp         mean_obj=1.92464e+18 min_vpt=0.0092 survives_filter=False (55/96)
+[chaotic] gp         mean_obj=1.32186 min_vpt=0.0089 survives_filter=False (56/96)
+[chaotic] gp         mean_obj=5.04129e+12 min_vpt=0.0241 survives_filter=False (57/96)
+[chaotic] gp         mean_obj=1.02838 min_vpt=0.0329 survives_filter=True (58/96)
+[chaotic] gp         mean_obj=1.12106e+21 min_vpt=0.0130 survives_filter=False (59/96)
+[chaotic] gp         mean_obj=7.5383e+25 min_vpt=0.0367 survives_filter=False (60/96)
+[chaotic] gp         mean_obj=3.68578e+42 min_vpt=0.0244 survives_filter=False (61/96)
+[chaotic] gp         mean_obj=3.30751e+54 min_vpt=0.0203 survives_filter=False (62/96)
+[chaotic] gp         mean_obj=1.161 min_vpt=0.0230 survives_filter=False (63/96)
+[chaotic] gp         mean_obj=3.21888e+20 min_vpt=0.0149 survives_filter=False (64/96)
+[chaotic] gp         mean_obj=1.08125e+45 min_vpt=0.0066 survives_filter=False (65/96)
+[chaotic] gp         mean_obj=2.07132e+13 min_vpt=0.0351 survives_filter=False (66/96)
+[chaotic] gp         mean_obj=3.69087e+20 min_vpt=0.0086 survives_filter=False (67/96)
+[chaotic] gp         mean_obj=1.292e+29 min_vpt=0.0195 survives_filter=False (68/96)
+[chaotic] gp         mean_obj=1.08106 min_vpt=0.0189 survives_filter=False (69/96)
+[chaotic] gp         mean_obj=2.43274e+30 min_vpt=0.0225 survives_filter=False (70/96)
+[chaotic] gp         mean_obj=2.9471e+13 min_vpt=0.0387 survives_filter=False (71/96)
+[chaotic] gp         mean_obj=5.425e+14 min_vpt=0.0321 survives_filter=False (72/96)
+[chaotic] gp         mean_obj=4.53131e+29 min_vpt=0.0300 survives_filter=False (73/96)
+[chaotic] gp         mean_obj=3.27541e+30 min_vpt=0.0220 survives_filter=False (74/96)
+[chaotic] gp         mean_obj=4.14273e+14 min_vpt=0.0520 survives_filter=False (75/96)
+[chaotic] gp         mean_obj=6.9851e+24 min_vpt=0.0232 survives_filter=False (76/96)
+[chaotic] gp         mean_obj=4.63308e+12 min_vpt=0.0191 survives_filter=False (77/96)
+[chaotic] gp         mean_obj=232101 min_vpt=0.0389 survives_filter=False (78/96)
+[chaotic] gp         mean_obj=1.85127e+102 min_vpt=0.0614 survives_filter=False (79/96)
+[chaotic] gp         mean_obj=1.50753e+113 min_vpt=0.0591 survives_filter=False (80/96)
+[chaotic] gp         mean_obj=1.08513 min_vpt=0.0243 survives_filter=False (81/96)
+[chaotic] gp         mean_obj=2.18329e+11 min_vpt=0.0115 survives_filter=False (82/96)
+[chaotic] gp         mean_obj=1.28347e+21 min_vpt=0.0109 survives_filter=False (83/96)
+[chaotic] gp         mean_obj=1.60593e+21 min_vpt=0.0168 survives_filter=False (84/96)
+[chaotic] gp         mean_obj=403.265 min_vpt=0.0346 survives_filter=False (85/96)
+[chaotic] gp         mean_obj=1.14996e+13 min_vpt=0.0401 survives_filter=False (86/96)
+[chaotic] gp         mean_obj=1.3306e+23 min_vpt=0.0350 survives_filter=False (87/96)
+[chaotic] gp         mean_obj=1.97772e+17 min_vpt=0.0126 survives_filter=False (88/96)
+[chaotic] gp         mean_obj=7.95458e+32 min_vpt=0.0349 survives_filter=False (89/96)
+[chaotic] gp         mean_obj=1.7628e+17 min_vpt=0.0151 survives_filter=False (90/96)
+[chaotic] gp         mean_obj=8.10254e+133 min_vpt=0.0635 survives_filter=False (91/96)
+[chaotic] gp         mean_obj=0.918188 min_vpt=0.0382 survives_filter=False (92/96)
+[chaotic] gp         mean_obj=1.27024 min_vpt=0.0161 survives_filter=False (93/96)
+[chaotic] gp         mean_obj=2.61881e+31 min_vpt=0.0100 survives_filter=False (94/96)
+[chaotic] gp         mean_obj=8.38546e+19 min_vpt=0.0090 survives_filter=False (95/96)
+[chaotic] gp         mean_obj=5.40997e+19 min_vpt=0.0176 survives_filter=False (96/96)
+=== search done: 96 candidates, 10 survive the hard stability filter ===
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[confirm] gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+CONTROLLED FAILURE: zero of the top 10 recovery-search candidates passed the robust gate
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 01:44:10 PM CEST 2026
+= Job-ID             : 1519121 on tinyfat
+= Job-Name           : ch2p2_chaos_rec
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_recovery.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 06:00:00
+= Elapsed runtime    : 01:20:30
+= Total RAM usage    : 0.4 GiB of requested  GiB (%)   
+= Node list          : tf075
+= Subm/Elig/Start/End: 2026-09-13T12:23:40 / 2026-09-13T12:23:40 / 2026-09-13T12:23:40 / 2026-09-13T13:44:10
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

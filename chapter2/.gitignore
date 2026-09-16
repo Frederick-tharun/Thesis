@@ -41,3 +41,13 @@ logs/
 # Superseded presentation outputs; protected JSON references remain
 final_results/figures/
 final_results/figures_final/
+
+# Part 2 rebuild: raw HR trajectories, model bundles, and large result arrays
+# are reproducible from chapter2/part2_regime_map and chapter2/part2_cross_regime
+# code + the recorded seeds/hashes in results/. They are deliberately kept out
+# of ordinary git, matching this repo's existing treatment of Part 1's raw
+# rollout arrays (see chapter2/README.md, "Release, provenance, and artifact
+# policy"). Every JSON/MD record, PNG figure, and hash needed to verify or
+# regenerate them is still tracked.
+part2_cross_regime/data/**/*.npz
+part2_cross_regime/results/**/*.npz

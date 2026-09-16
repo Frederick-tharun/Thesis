@@ -1,0 +1,26 @@
+### Starting TaskPrologue of job 1519227 on tf064 at Sun Sep 13 03:50:01 PM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/chaotic_ensemble/before_after_ensemble_fix.png
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 03:50:52 PM CEST 2026
+= Job-ID             : 1519227 on tinyfat
+= Job-Name           : ch2p2_ens_fig
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_ensemble_figure.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:15:00
+= Elapsed runtime    : 00:00:52
+= Total RAM usage    : 0.4 GiB of requested  GiB (%)   
+= Node list          : tf064
+= Subm/Elig/Start/End: 2026-09-13T15:50:00 / 2026-09-13T15:50:00 / 2026-09-13T15:50:00 / 2026-09-13T15:50:52
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     122K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

@@ -1,0 +1,10 @@
+/home/hpc/dsnf/dsnf129h/Thesis/chapter2/esn_model.py:371: RuntimeWarning: overflow encountered in matmul
+  prediction = weights @ self._readout_feature(checked, state)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/optimisation.py", line 416, in <module>
+    run_and_lock(sys.argv[1])
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/optimisation.py", line 376, in run_and_lock
+    raise NoEligibleCandidateError(
+NoEligibleCandidateError: [chaotic] zero of the top 10 candidates passed the robust source-quality gate; stopping (controlled failure), not locking a winner.

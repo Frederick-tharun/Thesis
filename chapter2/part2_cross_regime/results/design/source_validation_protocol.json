@@ -1,0 +1,178 @@
+{
+  "chaotic_training_currents": [
+    2.9849624060150375,
+    3.2,
+    3.34,
+    3.3684210526315788,
+    3.3909774436090223
+  ],
+  "fitting_transition_range": [
+    0,
+    40000
+  ],
+  "kind": "source_validation_protocol",
+  "loco_folds": {
+    "chaotic": [
+      {
+        "fit_on": [
+          3.2,
+          3.34,
+          3.3684210526315788,
+          3.3909774436090223
+        ],
+        "validate_on": 2.9849624060150375
+      },
+      {
+        "fit_on": [
+          2.9849624060150375,
+          3.34,
+          3.3684210526315788,
+          3.3909774436090223
+        ],
+        "validate_on": 3.2
+      },
+      {
+        "fit_on": [
+          2.9849624060150375,
+          3.2,
+          3.3684210526315788,
+          3.3909774436090223
+        ],
+        "validate_on": 3.34
+      },
+      {
+        "fit_on": [
+          2.9849624060150375,
+          3.2,
+          3.34,
+          3.3909774436090223
+        ],
+        "validate_on": 3.3684210526315788
+      },
+      {
+        "fit_on": [
+          2.9849624060150375,
+          3.2,
+          3.34,
+          3.3684210526315788
+        ],
+        "validate_on": 3.3909774436090223
+      }
+    ],
+    "regular": [
+      {
+        "fit_on": [
+          1.67,
+          1.9022556390977443,
+          3.4285714285714284,
+          3.5,
+          3.7969924812030076
+        ],
+        "validate_on": 1.4210526315789473
+      },
+      {
+        "fit_on": [
+          1.4210526315789473,
+          1.9022556390977443,
+          3.4285714285714284,
+          3.5,
+          3.7969924812030076
+        ],
+        "validate_on": 1.67
+      },
+      {
+        "fit_on": [
+          1.4210526315789473,
+          1.67,
+          3.4285714285714284,
+          3.5,
+          3.7969924812030076
+        ],
+        "validate_on": 1.9022556390977443
+      },
+      {
+        "fit_on": [
+          1.4210526315789473,
+          1.67,
+          1.9022556390977443,
+          3.5,
+          3.7969924812030076
+        ],
+        "validate_on": 3.4285714285714284
+      },
+      {
+        "fit_on": [
+          1.4210526315789473,
+          1.67,
+          1.9022556390977443,
+          3.4285714285714284,
+          3.7969924812030076
+        ],
+        "validate_on": 3.5
+      },
+      {
+        "fit_on": [
+          1.4210526315789473,
+          1.67,
+          1.9022556390977443,
+          3.4285714285714284,
+          3.5
+        ],
+        "validate_on": 3.7969924812030076
+      }
+    ]
+  },
+  "note": "Frozen before any Part-2 optimisation call. Not changed after observing optimisation results.",
+  "regular_training_currents": [
+    1.4210526315789473,
+    1.67,
+    1.9022556390977443,
+    3.4285714285714284,
+    3.5,
+    3.7969924812030076
+  ],
+  "reused_from_part1": "chapter2.esn_config.VALIDATION_WINDOWS (three windows per current: reset, 2000-transition teacher-forced warm-up, 8000-transition autonomous scored rollout, at transitions [40000,42000)/[42000,50000), [50000,52000)/[52000,60000), [60000,62000)/[62000,70000)); chapter2.esn_optimisation.TRAINING_WASHOUT=2000 within a [0,40000) fitting range.",
+  "source_quality_gate": {
+    "derivation": "Part-1 step7_selection.json best_robust_aggregate achieved mean_valid_prediction_steps=7638.18/8000=0.9548 with zero divergence and zero collapse across 45 five-seed rollouts (3 currents x 3 windows x 5 seeds). This gate requires >=0.80 VPT fraction on EVERY individual rollout (not just the mean) and zero failures/divergence/collapse, fixed before Part-2 production optimisation.",
+    "max_collapse_count": 0,
+    "max_divergence_count": 0,
+    "max_numerical_failures": 0,
+    "min_vpt_fraction_per_rollout": 0.8
+  },
+  "training_washout": 2000,
+  "validation_windows": [
+    {
+      "number": 1,
+      "scored_range": [
+        42000,
+        50000
+      ],
+      "warmup_range": [
+        40000,
+        42000
+      ]
+    },
+    {
+      "number": 2,
+      "scored_range": [
+        52000,
+        60000
+      ],
+      "warmup_range": [
+        50000,
+        52000
+      ]
+    },
+    {
+      "number": 3,
+      "scored_range": [
+        62000,
+        70000
+      ],
+      "warmup_range": [
+        60000,
+        62000
+      ]
+    }
+  ]
+}

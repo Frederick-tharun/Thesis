@@ -1,0 +1,112 @@
+{
+  "candidate_currents": [
+    2.15,
+    2.3,
+    2.45,
+    2.5,
+    2.62,
+    2.68,
+    2.75,
+    2.9
+  ],
+  "elapsed_seconds": 277.33660912513733,
+  "kind": "step1_targeted_lyapunov_diagnostics",
+  "records": [
+    {
+      "burst_structure": "uncertain",
+      "current": 2.15,
+      "interburst_interval_cv": null,
+      "isi_cv": 0.854790126482649,
+      "lyapunov_classification": "near zero",
+      "lyapunov_convergence": "converged",
+      "lyapunov_exponent": -0.00010903036429632815,
+      "mean_spikes_per_burst": null,
+      "spike_count": 21,
+      "within_burst_isi_cv": null
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.3,
+      "interburst_interval_cv": 3.8176966818032177e-05,
+      "isi_cv": 0.910767445923666,
+      "lyapunov_classification": "near zero",
+      "lyapunov_convergence": "converged",
+      "lyapunov_exponent": -0.00017454070479876248,
+      "mean_spikes_per_burst": 3.0,
+      "spike_count": 24,
+      "within_burst_isi_cv": 0.23317013463892286
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.45,
+      "interburst_interval_cv": 3.618166659222095e-05,
+      "isi_cv": 0.8938890448727789,
+      "lyapunov_classification": "near zero",
+      "lyapunov_convergence": "converged",
+      "lyapunov_exponent": 9.828709435221723e-05,
+      "mean_spikes_per_burst": 2.875,
+      "spike_count": 24,
+      "within_burst_isi_cv": 0.19052585091702237
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.5,
+      "interburst_interval_cv": 0.0002307800234321942,
+      "isi_cv": 0.9402430028033577,
+      "lyapunov_classification": "uncertain",
+      "lyapunov_convergence": "not_converged",
+      "lyapunov_exponent": 5.0835491525864915e-05,
+      "mean_spikes_per_burst": 3.0,
+      "spike_count": 24,
+      "within_burst_isi_cv": 0.17920015927911984
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.62,
+      "interburst_interval_cv": 3.2842860250134787e-05,
+      "isi_cv": 0.8847407649395721,
+      "lyapunov_classification": "near zero",
+      "lyapunov_convergence": "converged",
+      "lyapunov_exponent": 5.4592215918407016e-05,
+      "mean_spikes_per_burst": 3.857142857142857,
+      "spike_count": 27,
+      "within_burst_isi_cv": 0.4371942514891426
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.68,
+      "interburst_interval_cv": 2.7003369008677637e-05,
+      "isi_cv": 0.9015933614936318,
+      "lyapunov_classification": "near zero",
+      "lyapunov_convergence": "converged",
+      "lyapunov_exponent": -2.107620840548061e-05,
+      "mean_spikes_per_burst": 4.0,
+      "spike_count": 28,
+      "within_burst_isi_cv": 0.36750458954517884
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.75,
+      "interburst_interval_cv": 0.0001251127880851396,
+      "isi_cv": 0.9230495378282517,
+      "lyapunov_classification": "uncertain",
+      "lyapunov_convergence": "not_converged",
+      "lyapunov_exponent": -0.000551287819923703,
+      "mean_spikes_per_burst": 3.875,
+      "spike_count": 31,
+      "within_burst_isi_cv": 0.3202331494398132
+    },
+    {
+      "burst_structure": "bursting",
+      "current": 2.9,
+      "interburst_interval_cv": 0.05302669595737261,
+      "isi_cv": 0.8726932188774599,
+      "lyapunov_classification": "uncertain",
+      "lyapunov_convergence": "not_converged",
+      "lyapunov_exponent": 0.00030162689909019486,
+      "mean_spikes_per_burst": 4.0,
+      "spike_count": 28,
+      "within_burst_isi_cv": 0.4371383012660626
+    }
+  ]
+}

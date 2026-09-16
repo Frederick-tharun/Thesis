@@ -1,0 +1,520 @@
+{
+  "design_hash": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "git_head": "6d40954fe6dd9df377b098c14f0c662226c3917a",
+  "kind": "part2_cross_regime_data_manifest",
+  "trajectories": [
+    {
+      "all_finite": true,
+      "current": 1.4210526315789473,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_1p421053.npz",
+      "regime_label": "periodic spiking",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "654e86d46c84d7e076d1317bbe867d3a037195c975efe9cb9affdd10db943929",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 1.67,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_1p670000.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "a1ee852ed5a5a4f6aa516e81e0c901af17792d94da7cf10fa70a6962c0d15421",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 1.9022556390977443,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_1p902256.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "fb6756821f729859e8172dc68b809073db85af428cd3304a447d5b40f2aa4d80",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.4285714285714284,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_3p428571.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "ec07a17f47c597d7bad9dd245c65560f159c48a85c9be6a05595afe8668ed85d",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.5,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_3p500000.npz",
+      "regime_label": "periodic spiking",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "6e680f82c395828e36369d5d3059efdcec73498d93df088241aa7acbd2e67093",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.7969924812030076,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_regular/fixed_I_3p796992.npz",
+      "regime_label": "periodic spiking",
+      "retained_samples": 100000,
+      "role": "regular_training",
+      "sha256": "4042b52175e4ef24f4549d5c14225ced32901595be229ea4b8ee69189179666e",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 2.9849624060150375,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_chaotic/fixed_I_2p984962.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "chaotic_training",
+      "sha256": "bf2c39e3d85953174e21ddd6f571bb3caa5afe3d96bc2100f7a0ca48f19b3290",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.2,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_chaotic/fixed_I_3p200000.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "chaotic_training",
+      "sha256": "dca60af9c9d1f8d84a44b0a9a3e390a7fc5aced1603d0fd40e164952f589403d",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.34,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_chaotic/fixed_I_3p340000.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "chaotic_training",
+      "sha256": "110cdf5892b01cbfac0d12ff88630ddaf64fdc3955aa0fe829e641e6851d60d8",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.3684210526315788,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_chaotic/fixed_I_3p368421.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "chaotic_training",
+      "sha256": "e8259d9f086d3a42dc20cb698519adc005cf98588839739b1a7d90b735624cc2",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.3909774436090223,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/source_chaotic/fixed_I_3p390977.npz",
+      "regime_label": "chaotic spiking",
+      "retained_samples": 100000,
+      "role": "chaotic_training",
+      "sha256": "5bbef43c829721846e60500e86b4cabd26997557becc7d91fe5497fc502e79fd",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 1.7969924812030076,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_1p796992.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "8d5205de51ada2955d7d55bffcf2431386ac62ed6af79bc1e99b55dbaf2ffae1",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 2.0,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_2p000000.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "9b003c271e2741482b5dae675bbaeb82e6392c69505aaab5c0853139cad35d7b",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.6466165413533833,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p646617.npz",
+      "regime_label": "periodic spiking",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "9ff8296bf2cace6587629342a323ece6d36ff015142db92f30d2f5fd1955dbcf",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.37593984962406,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p375940.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "7398b5537da7c07af90da6105397d5a47e66da5111011db6e0a4a7e56c905027",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.3834586466165413,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p383459.npz",
+      "regime_label": "chaotic spiking",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "4dc2e4d87a02d0bc5296b38081044cc06d0cc35e0faa040c39259515a61ffb8a",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.398496240601504,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p398496.npz",
+      "regime_label": "chaotic bursting",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "19efcd3211b8a69167c7465f533a5faf2d55ac519f875d01024c40ad3897585a",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.29,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p290000.npz",
+      "regime_label": "transition/uncertain",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "104d21d73322e18a377f372e47436fd1dc8793685a289f909da08efd2f67d41f",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    },
+    {
+      "all_finite": true,
+      "current": 3.443609022556391,
+      "dt": 0.01,
+      "hr_parameters": {
+        "a": 1.0,
+        "b": 3.0,
+        "c": 1.0,
+        "d": 5.0,
+        "r": 0.006,
+        "s": 4.0,
+        "x_r": -1.6
+      },
+      "initial_state": [
+        -1.0,
+        -3.0,
+        3.0
+      ],
+      "n_samples": 100000,
+      "path": "chapter2/part2_cross_regime/data/final_test_locked/fixed_I_3p443609.npz",
+      "regime_label": "periodic bursting",
+      "retained_samples": 100000,
+      "role": "final_test",
+      "sha256": "f67a0319191f0c821c4d8a96aa853b023d161a7e7361e4c8c6296a07c6000f8f",
+      "simulator_source_sha256": "45d7f50b65370750590ca7e157732138c109c45276642b4bea333c3b346184f1",
+      "transient_steps": 100000
+    }
+  ]
+}

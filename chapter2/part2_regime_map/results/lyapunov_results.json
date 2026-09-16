@@ -1,0 +1,205 @@
+{
+  "elapsed_seconds": 804.358941078186,
+  "git_head": "6d40954fe6dd9df377b098c14f0c662226c3917a",
+  "kind": "lyapunov_subset",
+  "max_extra_currents": 40,
+  "records": [
+    {
+      "classification": "negative",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.300751879699248,
+      "largest_lyapunov_exponent": -0.0020893428985829243
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.3082706766917294,
+      "largest_lyapunov_exponent": -0.0004791502863598719
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.4360902255639099,
+      "largest_lyapunov_exponent": 1.8436521028967944e-05
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.556390977443609,
+      "largest_lyapunov_exponent": 0.00019009412689373033
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.5639097744360901,
+      "largest_lyapunov_exponent": 0.00018011416907976244
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.67,
+      "largest_lyapunov_exponent": 0.0001953196391754215
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 1.8195488721804511,
+      "largest_lyapunov_exponent": -0.00015615427681800242
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.075187969924812,
+      "largest_lyapunov_exponent": -0.00021064123228662713
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.082706766917293,
+      "largest_lyapunov_exponent": 0.0002456424292364265
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.3233082706766917,
+      "largest_lyapunov_exponent": 0.00017723474192511243
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.556390977443609,
+      "largest_lyapunov_exponent": -0.00026853516993355966
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.56390977443609,
+      "largest_lyapunov_exponent": -0.00033811261600174365
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.571428571428571,
+      "largest_lyapunov_exponent": -0.00011638435200476971
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 2.5789473684210527,
+      "largest_lyapunov_exponent": 5.489685569208736e-06
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0019125513969032598,
+      "current": 2.9849624060150375,
+      "largest_lyapunov_exponent": 0.009562756984516299
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0023170283087211516,
+      "current": 3.2,
+      "largest_lyapunov_exponent": 0.011585141543605758
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.29,
+      "largest_lyapunov_exponent": 0.0006856194984186997
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0023576878874142864,
+      "current": 3.34,
+      "largest_lyapunov_exponent": 0.01178843943707143
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.002110058712017042,
+      "current": 3.3684210526315788,
+      "largest_lyapunov_exponent": 0.010550293560085208
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0016587891792311704,
+      "current": 3.37593984962406,
+      "largest_lyapunov_exponent": 0.008293945896155851
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0018863554450860014,
+      "current": 3.3834586466165413,
+      "largest_lyapunov_exponent": 0.009431777225430007
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0014539500132284783,
+      "current": 3.3909774436090223,
+      "largest_lyapunov_exponent": 0.007269750066142391
+    },
+    {
+      "classification": "positive",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0010209242683872093,
+      "current": 3.398496240601504,
+      "largest_lyapunov_exponent": 0.005104621341936046
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.443609022556391,
+      "largest_lyapunov_exponent": -0.00030255046378032475
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.481203007518797,
+      "largest_lyapunov_exponent": -6.26525283463952e-05
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.488721804511278,
+      "largest_lyapunov_exponent": -7.350053650041251e-06
+    },
+    {
+      "classification": "uncertain",
+      "convergence": "not_converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.5,
+      "largest_lyapunov_exponent": -0.0007120309203857852
+    },
+    {
+      "classification": "near zero",
+      "convergence": "converged",
+      "convergence_tolerance": 0.0005,
+      "current": 3.744360902255639,
+      "largest_lyapunov_exponent": -0.00017299698316453215
+    }
+  ],
+  "selected_count": 28
+}

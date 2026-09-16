@@ -1,0 +1,29 @@
+{
+  "design_hash": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "eligible_candidate_count": 1,
+  "family": "regular",
+  "kind": "selection",
+  "locked_hyperparameters": {
+    "input_scaling": 0.5969844033224692,
+    "leak_rate": 0.9956155159725752,
+    "reservoir_connectivity": 0.5866993769617647,
+    "reservoir_size": 200,
+    "ridge_regularisation": 1.2716555639829158e-08,
+    "spectral_radius": 0.32623112005449034
+  },
+  "loco_summary": {
+    "mean_nrmse": 6.84327089517583e+127,
+    "median_nrmse": 1.6024171595488603,
+    "median_vpt": 91.5,
+    "worst_nrmse": 6.158895757270451e+129
+  },
+  "top_k_confirmed_count": 10,
+  "training_currents": [
+    1.4210526315789473,
+    1.67,
+    1.9022556390977443,
+    3.4285714285714284,
+    3.5,
+    3.7969924812030076
+  ]
+}

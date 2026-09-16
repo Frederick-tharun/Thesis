@@ -1,0 +1,45 @@
+### Starting TaskPrologue of job 1519222 on tf062 at Sun Sep 13 03:46:29 PM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+Fitting ensemble of 11 members (seeds=[42, 123, 456, 789, 2026, 1, 2, 3, 4, 5, 6]) at anchor hyperparameters...
+Evaluating median-ensemble rollout on all 5 chaotic source currents x 3 windows...
+min_vpt_fraction=0.4285 median_vpt_fraction=0.6850 divergence=0 collapse=0 numerical_failure=0 mean_nrmse=0.1441
+  I=2.9850 win=1 vpt=8000.0 nrmse=0.003356 diverged=False
+  I=2.9850 win=2 vpt=3428.0 nrmse=0.08491 diverged=False
+  I=2.9850 win=3 vpt=4793.0 nrmse=0.07746 diverged=False
+  I=3.2000 win=1 vpt=5515.0 nrmse=0.4366 diverged=False
+  I=3.2000 win=2 vpt=8000.0 nrmse=0.02108 diverged=False
+  I=3.2000 win=3 vpt=4214.0 nrmse=0.2946 diverged=False
+  I=3.3400 win=1 vpt=3979.0 nrmse=0.07813 diverged=False
+  I=3.3400 win=2 vpt=4035.0 nrmse=0.08092 diverged=False
+  I=3.3400 win=3 vpt=4035.0 nrmse=0.07368 diverged=False
+  I=3.3684 win=1 vpt=8000.0 nrmse=0.01609 diverged=False
+  I=3.3684 win=2 vpt=5480.0 nrmse=0.1492 diverged=False
+  I=3.3684 win=3 vpt=8000.0 nrmse=0.007198 diverged=False
+  I=3.3910 win=1 vpt=5829.0 nrmse=0.1708 diverged=False
+  I=3.3910 win=2 vpt=7212.0 nrmse=0.4501 diverged=False
+  I=3.3910 win=3 vpt=3541.0 nrmse=0.2174 diverged=False
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/chaotic_ensemble/median_ensemble_result_n11.json
+PASSES FROZEN GATE: False
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 03:48:21 PM CEST 2026
+= Job-ID             : 1519222 on tinyfat
+= Job-Name           : ch2p2_ensemble
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_ensemble.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:01:53
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf062
+= Subm/Elig/Start/End: 2026-09-13T15:46:27 / 2026-09-13T15:46:27 / 2026-09-13T15:46:28 / 2026-09-13T15:48:21
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     122K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================
