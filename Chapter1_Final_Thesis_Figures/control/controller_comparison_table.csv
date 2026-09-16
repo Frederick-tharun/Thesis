@@ -1,0 +1,4 @@
+controller,K,delay_steps,sign,state_rmse,spike_reduction_percent,recurrence_error_norm,recurrence_correlation,control_effort_mean_sq
+Linear feedback,1.005,,,2.360513934557384e-06,100.0,,,6.753462715541933e-07
+Finite-time feedback,0.9144561403508772,,,0.0002502693870573333,100.0,,,6.745573169484721e-07
+Pyragas delayed feedback,0.7680909090909092,1600,-1,1.044783476025219,-175.0,0.013430689505203718,0.9999096994223066,0.00028573933247347255
