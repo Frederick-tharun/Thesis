@@ -36,7 +36,6 @@ from chapter2.esn_metrics import evaluate_rollout
 
 from . import config, data, validation
 from .chaotic_ensemble import fit_ensemble, median_ensemble_rollout
-from .final_evaluation import _validation_cases_with_scalers
 from .validation import (
     COLLAPSE_STD_RATIO_THRESHOLD,
     DIVERGENCE_THRESHOLD,
@@ -65,6 +64,41 @@ def _prepared_long(fixed):
     scored = create_one_step_pairs(fixed, LONG_WINDOW.scored, include_current=True)
     view = ValidationWindowView(LONG_WINDOW, warmup, scored)
     return PreparedOptimisationTrajectory(fixed.current, fitting, (view,))
+
+
+def _validation_cases_with_scalers(prepared, scalers):
+    """Build ValidationCase objects for ``prepared`` using scalers already
+    fitted on the TRAINING model's own currents, instead of fitting new ones
+    on the final-test current itself (which would leak test-current
+    statistics into the scaling). Same per-window construction as
+    validation.prepare_model_data_for_currents, minus the internal
+    _fit_scalers_from_permitted_views call.
+    """
+    cases = []
+    for view in prepared.validation_windows:
+        scaled_warmup = scale_one_step_pairs(view.warmup, scalers)
+        scaled_scored = scale_one_step_pairs(view.scored, scalers)
+        if not np.array_equal(scaled_warmup.targets[-1], scaled_scored.inputs[0, :3]):
+            raise ValueError("validation warm-up and scored states are misaligned")
+        cases.append(
+            validation.ValidationCase(
+                current=prepared.current,
+                window=view.definition.number,
+                warmup_inputs=np.asarray(scaled_warmup.inputs, dtype=float).copy(),
+                initial_state=scaled_warmup.targets[-1].copy(),
+                current_values=scaled_scored.inputs[:, 3].copy(),
+                targets_physical=scalers.inverse_states(scaled_scored.targets),
+                warmup_range=(
+                    int(view.warmup.transition_indices[0]),
+                    int(view.warmup.transition_indices[-1]) + 1,
+                ),
+                scored_range=(
+                    int(view.scored.transition_indices[0]),
+                    int(view.scored.transition_indices[-1]) + 1,
+                ),
+            )
+        )
+    return cases
 
 
 def _climate_stats(series: np.ndarray) -> dict:

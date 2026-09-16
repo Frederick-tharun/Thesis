@@ -72,9 +72,9 @@
       ]
     }
   },
-  "headline_finding": "Regular-to-chaotic transfer (RC) works well (0/9 diverged, spike counts within 10% on 3/3 tests). Chaotic-to-regular transfer (CR) works ONLY when the test current falls inside or near the narrow confirmed-chaotic training span (2.98-3.40): interpolation cases (I=3.29, I=3.44) succeed, far-extrapolation (I=1.797) fails completely (wrong attractor). This is explained by training-span geometry, not an inherent asymmetry between chaos and regularity: the regular model trains across a much wider current span (1.42-3.80) which brackets nearly every chaotic test current, while the chaotic model only ever sees a narrow 0.41-wide band, making extrapolation far more likely when testing it on regular data.",
+  "headline_finding": "Regular-trained ESNs transferred to unseen chaotic currents without divergence and preserved spike statistics (0/9 diverged, spike counts within 10% on 3/3 tests), although pointwise trajectory agreement (median valid-prediction time) was limited to roughly 53 of the 280 time units. Chaotic-to-regular transfer (CR) works ONLY when the test current falls inside or near the narrow confirmed-chaotic training span (2.98-3.40): interpolation cases (I=3.29, I=3.44) succeed, far-extrapolation (I=1.797) fails completely (wrong attractor). This is explained by training-span geometry, not an inherent asymmetry between chaos and regularity: the regular model trains across a much wider current span (1.42-3.80) which brackets nearly every chaotic test current, while the chaotic model only ever sees a narrow 0.41-wide band, making extrapolation far more likely when testing it on regular data.",
   "kind": "chapter2_part2_final_lock",
-  "lock_sha256": "a786e00af3246409512936af9e0f11defde1224c42c6bd89273b4af3e6f1d404",
+  "lock_sha256": "0da3720e96e9aa245811fc604e6cf0d0e011e759fb1bac60524c636ad665f1a5",
   "locked_models": {
     "chaotic": {
       "ensemble_seeds": [
@@ -114,7 +114,7 @@
         "ridge_regularisation": 1.2716555639829158e-08,
         "spectral_radius": 0.32623112005449034
       },
-      "method": "single configuration, single seed (42) for final evaluation",
+      "method": "single configuration selected by single-seed (42) search; evaluated in the final benchmark as a 5-seed median ensemble (seeds 42, 123, 456, 789, 2026), identically to the chaotic family",
       "source_file": "chapter2/part2_cross_regime/results/optimisation/regular_selection.json",
       "training_currents": [
         1.4210526315789473,

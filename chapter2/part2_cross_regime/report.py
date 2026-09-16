@@ -13,7 +13,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from . import config, data, validation
+from . import config, validation
 
 
 def _load(path):
@@ -26,7 +26,6 @@ def build_family_report(family: str) -> dict:
     loco = _load(config.OPTIMISATION_DIR / f"{family}_loco.json")
     history = _load(config.OPTIMISATION_DIR / f"{family}_history.json")
 
-    winner_key = validation.__dict__  # no-op import anchor, not used
     from .optimisation import _dedup_key
 
     winner_hp = selection["locked_hyperparameters"]
