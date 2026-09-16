@@ -187,13 +187,19 @@ def write_table(results, out_path):
     lines = [
         "# Chapter 2 Part 2 - long-horizon cross-regime results (280 time units)",
         "",
-        "| Direction | Role | Median NRMSE | Median VPT (tu) | Diverged | Spike count within 10% |",
-        "|---|---|---:|---:|---:|---:|",
+        "Median NRMSE alone can hide a catastrophic outlier when n=3: CR's median "
+        "(0.567) looks comparable to CC's (0.628), but CR's mean is 6.37 because "
+        "one of its three test currents (I=1.797, far below the chaotic training "
+        "span) diverges almost immediately (see fig2, bottom-right). Both columns "
+        "are reported here so the table cannot contradict that figure.",
+        "",
+        "| Direction | Role | Median NRMSE | Mean NRMSE | Median VPT (tu) | Diverged | Spike count within 10% |",
+        "|---|---|---:|---:|---:|---:|---:|",
     ]
     for d in ["RR", "RC", "CC", "CR"]:
         s = results["directions"][d]["summary"]
         lines.append(
-            f"| {d} | {roles[d]} | {s['median_nrmse']:.3g} | {s['median_vpt_time']:.1f} | "
+            f"| {d} | {roles[d]} | {s['median_nrmse']:.3g} | {s['mean_nrmse']:.3g} | {s['median_vpt_time']:.1f} | "
             f"{s['divergence_count']}/{s['n_rollouts']} | {s['spike_ratio_within_10pct']}/{s['n_rollouts']} |")
     lines += [
         "",
