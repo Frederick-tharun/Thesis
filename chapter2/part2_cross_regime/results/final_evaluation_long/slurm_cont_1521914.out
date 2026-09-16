@@ -1,0 +1,29 @@
+### Starting TaskPrologue of job 1521914 on tf093 at Mon Sep 14 08:44:27 PM CEST 2026
+Running on cores 10,74 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+Building REGULAR-model continuous schedule (RR then RC currents)...
+Building CHAOTIC-model continuous schedule (CC then CR currents)...
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/final_evaluation_long/continuous_schedule_regular.npz
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/final_evaluation_long/continuous_schedule_chaotic.npz
+=== JOB_STATISTICS ===
+=== current date     : Mon Sep 14 08:47:18 PM CEST 2026
+= Job-ID             : 1521914 on tinyfat
+= Job-Name           : ch2p2_continuous
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_continuous.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:02:52
+= Total RAM usage    : 0.4 GiB of requested  GiB (%)   
+= Node list          : tf093
+= Subm/Elig/Start/End: 2026-09-14T20:44:26 / 2026-09-14T20:44:26 / 2026-09-14T20:44:26 / 2026-09-14T20:47:18
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     122K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

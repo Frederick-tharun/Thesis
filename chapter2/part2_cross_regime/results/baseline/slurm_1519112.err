@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/baseline.py", line 75, in <module>
+    run()
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/baseline.py", line 57, in run
+    report[family] = evaluate_anchor(design, family, anchor)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/baseline.py", line 31, in evaluate_anchor
+    result = evaluator(anchor_hyperparameters, config.CANDIDATE_MODEL_SEED)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/esn_optimisation.py", line 751, in __call__
+    objective = rollout_objective(rollouts)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hpc/dsnf/dsnf129h/Thesis/chapter2/esn_optimisation.py", line 628, in rollout_objective
+    raise ValueError("objective requires exactly three currents by three windows")
+ValueError: objective requires exactly three currents by three windows

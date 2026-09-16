@@ -1,0 +1,88 @@
+### Starting TaskPrologue of job 1519115 on tf061 at Sun Sep 13 10:14:52 AM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+=== [regular] Step 4D-4E: 48-candidate search ===
+[regular] anchor objective=0.00867153
+[regular] lhs    objective=0.856339
+[regular] lhs    objective=342253
+[regular] lhs    objective=0.931591
+[regular] lhs    objective=6.82589e+07
+[regular] lhs    objective=1.25387e+59
+[regular] lhs    objective=0.383551
+[regular] lhs    objective=5.03355e+28
+[regular] lhs    objective=0.857331
+[regular] lhs    objective=1.01444
+[regular] lhs    objective=0.750333
+[regular] lhs    objective=0.0569672
+[regular] lhs    objective=4.45628e+47
+[regular] lhs    objective=0.287931
+[regular] lhs    objective=4.95166e+48
+[regular] lhs    objective=0.798047
+[regular] gp     objective=1.03767e+42 (17/48)
+[regular] gp     objective=1.1735 (18/48)
+[regular] gp     objective=5.30138e+19 (19/48)
+[regular] gp     objective=5.29114e+60 (20/48)
+[regular] gp     objective=0.815563 (21/48)
+[regular] gp     objective=0.898049 (22/48)
+[regular] gp     objective=0.184628 (23/48)
+[regular] gp     objective=1.36298e+55 (24/48)
+[regular] gp     objective=0.508155 (25/48)
+[regular] gp     objective=3.44795e+45 (26/48)
+[regular] gp     objective=0.115587 (27/48)
+[regular] gp     objective=5.05151e+24 (28/48)
+[regular] gp     objective=0.463788 (29/48)
+[regular] gp     objective=4.46021e+124 (30/48)
+[regular] gp     objective=3.17672e+32 (31/48)
+[regular] gp     objective=0.00185396 (32/48)
+[regular] gp     objective=1.28842e+68 (33/48)
+[regular] gp     objective=3.61265e+23 (34/48)
+[regular] gp     objective=6.91103e+118 (35/48)
+[regular] gp     objective=4.18332e+30 (36/48)
+[regular] gp     objective=1.47102e+77 (37/48)
+[regular] gp     objective=5.43656e+09 (38/48)
+[regular] gp     objective=2.18667e+31 (39/48)
+[regular] gp     objective=4.36622e+15 (40/48)
+[regular] gp     objective=2.78595e+36 (41/48)
+[regular] gp     objective=4.12062e+67 (42/48)
+[regular] gp     objective=714.261 (43/48)
+[regular] gp     objective=2.83533e+29 (44/48)
+[regular] gp     objective=1.57144e+117 (45/48)
+[regular] gp     objective=0.803319 (46/48)
+[regular] gp     objective=0.765057 (47/48)
+[regular] gp     objective=183.949 (48/48)
+=== [regular] Step 4G: top-10 multi-seed confirmation ===
+[regular] confirm gate_pass_count=4/5 zero_tolerance_ok=True eligible=True
+[regular] confirm gate_pass_count=1/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=True eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=1/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[regular] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+=== [regular] Step 4H: LOCO over 1 eligible candidate(s) ===
+[regular] LOCO median_nrmse=1.60242 median_vpt=91.5
+=== [regular] LOCKED: {'reservoir_size': 200, 'reservoir_connectivity': 0.5866993769617647, 'input_scaling': 0.5969844033224692, 'spectral_radius': 0.32623112005449034, 'ridge_regularisation': 1.2716555639829158e-08, 'leak_rate': 0.9956155159725752} ===
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 10:52:27 AM CEST 2026
+= Job-ID             : 1519115 on tinyfat
+= Job-Name           : ch2p2_opt_reg
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_optimise_regular.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 12:00:00
+= Elapsed runtime    : 00:37:35
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf061
+= Subm/Elig/Start/End: 2026-09-13T10:14:51 / 2026-09-13T10:14:51 / 2026-09-13T10:14:52 / 2026-09-13T10:52:27
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

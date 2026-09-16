@@ -1,0 +1,78 @@
+### Starting TaskPrologue of job 1519095 on tf060 at Sat Sep 12 05:21:59 PM CEST 2026
+Running on cores 32,96 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+Stage 1/2: dense sweep + sparse Lyapunov subset
+Dense sweep: 405 currents in [1.0, 4.0], transient=100000, retained=100000
+dense sweep: 25/405 currents done
+dense sweep: 50/405 currents done
+dense sweep: 75/405 currents done
+dense sweep: 100/405 currents done
+dense sweep: 125/405 currents done
+dense sweep: 150/405 currents done
+dense sweep: 175/405 currents done
+dense sweep: 200/405 currents done
+dense sweep: 225/405 currents done
+dense sweep: 250/405 currents done
+dense sweep: 275/405 currents done
+dense sweep: 300/405 currents done
+dense sweep: 325/405 currents done
+dense sweep: 350/405 currents done
+dense sweep: 375/405 currents done
+dense sweep: 400/405 currents done
+dense sweep: 405/405 currents done
+Dense sweep complete in 1993.8s -> /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_regime_map/results/dense_sweep_results.json
+lyapunov subset: 1/28 currents done (I=1.30075, exponent=-0.00208934, negative, converged)
+lyapunov subset: 2/28 currents done (I=1.30827, exponent=-0.00047915, uncertain, not_converged)
+lyapunov subset: 3/28 currents done (I=1.43609, exponent=1.84365e-05, near zero, converged)
+lyapunov subset: 4/28 currents done (I=1.55639, exponent=0.000190094, uncertain, not_converged)
+lyapunov subset: 5/28 currents done (I=1.56391, exponent=0.000180114, near zero, converged)
+lyapunov subset: 6/28 currents done (I=1.67, exponent=0.00019532, uncertain, not_converged)
+lyapunov subset: 7/28 currents done (I=1.81955, exponent=-0.000156154, near zero, converged)
+lyapunov subset: 8/28 currents done (I=2.07519, exponent=-0.000210641, uncertain, not_converged)
+lyapunov subset: 9/28 currents done (I=2.08271, exponent=0.000245642, near zero, converged)
+lyapunov subset: 10/28 currents done (I=2.32331, exponent=0.000177235, uncertain, not_converged)
+lyapunov subset: 11/28 currents done (I=2.55639, exponent=-0.000268535, near zero, converged)
+lyapunov subset: 12/28 currents done (I=2.56391, exponent=-0.000338113, near zero, converged)
+lyapunov subset: 13/28 currents done (I=2.57143, exponent=-0.000116384, near zero, converged)
+lyapunov subset: 14/28 currents done (I=2.57895, exponent=5.48969e-06, uncertain, not_converged)
+lyapunov subset: 15/28 currents done (I=2.98496, exponent=0.00956276, positive, converged)
+lyapunov subset: 16/28 currents done (I=3.2, exponent=0.0115851, positive, converged)
+lyapunov subset: 17/28 currents done (I=3.29, exponent=0.000685619, near zero, converged)
+lyapunov subset: 18/28 currents done (I=3.34, exponent=0.0117884, positive, converged)
+lyapunov subset: 19/28 currents done (I=3.36842, exponent=0.0105503, positive, converged)
+lyapunov subset: 20/28 currents done (I=3.37594, exponent=0.00829395, positive, converged)
+lyapunov subset: 21/28 currents done (I=3.38346, exponent=0.00943178, positive, converged)
+lyapunov subset: 22/28 currents done (I=3.39098, exponent=0.00726975, positive, converged)
+lyapunov subset: 23/28 currents done (I=3.3985, exponent=0.00510462, positive, converged)
+lyapunov subset: 24/28 currents done (I=3.44361, exponent=-0.00030255, uncertain, not_converged)
+lyapunov subset: 25/28 currents done (I=3.4812, exponent=-6.26525e-05, uncertain, not_converged)
+lyapunov subset: 26/28 currents done (I=3.48872, exponent=-7.35005e-06, uncertain, not_converged)
+lyapunov subset: 27/28 currents done (I=3.5, exponent=-0.000712031, uncertain, not_converged)
+lyapunov subset: 28/28 currents done (I=3.74436, exponent=-0.000172997, near zero, converged)
+Lyapunov subset complete (28 currents) in 804.4s -> /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_regime_map/results/lyapunov_results.json
+Total elapsed: 2798.3s
+Stage 2/2: classification, candidate regions, bifurcation figure
+Wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_regime_map/results/regime_summary.json
+Wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_regime_map/results/bifurcation_map.png
+=== JOB_STATISTICS ===
+=== current date     : Sat Sep 12 06:09:04 PM CEST 2026
+= Job-ID             : 1519095 on tinyfat
+= Job-Name           : ch2_part2_regime_map
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_regime_map.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 04:00:00
+= Elapsed runtime    : 00:47:06
+= Total RAM usage    : 0.2 GiB of requested  GiB (%)   
+= Node list          : tf060
+= Subm/Elig/Start/End: 2026-09-12T17:21:57 / 2026-09-12T17:21:57 / 2026-09-12T17:21:58 / 2026-09-12T18:09:04
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.4G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

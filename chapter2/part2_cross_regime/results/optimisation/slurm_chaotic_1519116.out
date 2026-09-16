@@ -1,0 +1,85 @@
+### Starting TaskPrologue of job 1519116 on tf061 at Sun Sep 13 10:14:52 AM CEST 2026
+Running on cores 1,65 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+=== [chaotic] Step 4D-4E: 48-candidate search ===
+[chaotic] anchor objective=0.0799849
+[chaotic] lhs    objective=1.01618e+47
+[chaotic] lhs    objective=0.962123
+[chaotic] lhs    objective=2773.51
+[chaotic] lhs    objective=9.7998e+16
+[chaotic] lhs    objective=1.08777
+[chaotic] lhs    objective=1.98278e+25
+[chaotic] lhs    objective=1e+06
+[chaotic] lhs    objective=1.00309
+[chaotic] lhs    objective=1.2147
+[chaotic] lhs    objective=0.538008
+[chaotic] lhs    objective=0.921429
+[chaotic] lhs    objective=9.75742e+46
+[chaotic] lhs    objective=0.758934
+[chaotic] lhs    objective=1.33897
+[chaotic] lhs    objective=0.748073
+[chaotic] gp     objective=4.09892e+133 (17/48)
+[chaotic] gp     objective=1.63805e+24 (18/48)
+[chaotic] gp     objective=1.13916 (19/48)
+[chaotic] gp     objective=0.965398 (20/48)
+[chaotic] gp     objective=1.04865 (21/48)
+[chaotic] gp     objective=3.92413e+27 (22/48)
+[chaotic] gp     objective=1.76993 (23/48)
+[chaotic] gp     objective=1.80255 (24/48)
+[chaotic] gp     objective=1.80687e+10 (25/48)
+[chaotic] gp     objective=8.02162 (26/48)
+[chaotic] gp     objective=0.999182 (27/48)
+[chaotic] gp     objective=3.8218e+39 (28/48)
+[chaotic] gp     objective=1.11191 (29/48)
+[chaotic] gp     objective=1.07316 (30/48)
+[chaotic] gp     objective=1.33612e+10 (31/48)
+[chaotic] gp     objective=2.09205e+17 (32/48)
+[chaotic] gp     objective=1.04155 (33/48)
+[chaotic] gp     objective=0.985535 (34/48)
+[chaotic] gp     objective=1.14341e+18 (35/48)
+[chaotic] gp     objective=1.2269 (36/48)
+[chaotic] gp     objective=0.770409 (37/48)
+[chaotic] gp     objective=2.34245e+21 (38/48)
+[chaotic] gp     objective=3.69674e+18 (39/48)
+[chaotic] gp     objective=0.817048 (40/48)
+[chaotic] gp     objective=1.14994 (41/48)
+[chaotic] gp     objective=1.30745 (42/48)
+[chaotic] gp     objective=1.12835 (43/48)
+[chaotic] gp     objective=1.0763 (44/48)
+[chaotic] gp     objective=0.911574 (45/48)
+[chaotic] gp     objective=1.18095 (46/48)
+[chaotic] gp     objective=1.69176e+11 (47/48)
+[chaotic] gp     objective=1.00845 (48/48)
+=== [chaotic] Step 4G: top-10 multi-seed confirmation ===
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+[chaotic] confirm gate_pass_count=0/5 zero_tolerance_ok=False eligible=False
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 10:42:37 AM CEST 2026
+= Job-ID             : 1519116 on tinyfat
+= Job-Name           : ch2p2_opt_cha
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_optimise_chaotic.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 12:00:00
+= Elapsed runtime    : 00:27:45
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf061
+= Subm/Elig/Start/End: 2026-09-13T10:14:51 / 2026-09-13T10:14:51 / 2026-09-13T10:14:52 / 2026-09-13T10:42:37
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

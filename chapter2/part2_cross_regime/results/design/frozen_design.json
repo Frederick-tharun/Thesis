@@ -1,0 +1,481 @@
+{
+  "design_hash_sha256": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "i_3_29_withheld_from_chaotic_training": true,
+  "i_3_29_withholding_rationale": "I=3.29 is a deliberate test-design decision, not a silent reinterpretation: it is excluded from chaotic_training (never fitted, never used for scaling/optimisation/LOCO) specifically so it can serve as the star CR interpolation test.",
+  "models": {
+    "chaotic_trained": {
+      "cc_test_currents": [
+        {
+          "burst_structure": "bursting",
+          "current": 3.37593984962406,
+          "interburst_interval_cv": 0.14072235396309343,
+          "interpolation_status": "interpolation for both models",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2598313286968664,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.008293945896155851
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "chaotic bursting",
+          "role": "RC_and_CC_test",
+          "selection_reason": "LOW-within-band confirmed chaotic bursting, interpolation between chaotic-training anchors 3.368 and 3.391.",
+          "spike_count": 28,
+          "within_burst_isi_cv": 0.019656389361907188
+        },
+        {
+          "burst_structure": "uncertain",
+          "current": 3.3834586466165413,
+          "interburst_interval_cv": null,
+          "interpolation_status": "interpolation for both models",
+          "is_previously_known_current": false,
+          "isi_cv": 0.26576447425583516,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.009431777225430007
+          },
+          "mean_spikes_per_burst": null,
+          "regime_label": "chaotic spiking",
+          "role": "RC_and_CC_test",
+          "selection_reason": "MID-within-band confirmed CHAOTIC SPIKING, interpolation between 3.368 and 3.391; distinct flavor from the bursting tests.",
+          "spike_count": 29,
+          "within_burst_isi_cv": null
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.398496240601504,
+          "interburst_interval_cv": 0.0694293818202483,
+          "interpolation_status": "interpolation for the regular model; mild (~1 grid step) extrapolation for the chaotic model",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2701690212307731,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.005104621341936046
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "chaotic bursting",
+          "role": "RC_and_CC_test",
+          "selection_reason": "HIGH-within-band confirmed chaotic bursting, one grid step (0.007) past the chaotic-training upper anchor 3.391.",
+          "spike_count": 29,
+          "within_burst_isi_cv": 0.09914460299578805
+        }
+      ],
+      "cr_test_currents": [
+        {
+          "burst_structure": "bursting",
+          "current": 3.29,
+          "interburst_interval_cv": 0.014502453832724648,
+          "interpolation_status": "interpolation (strictly between 3.20 and 3.34)",
+          "is_previously_known_current": true,
+          "isi_cv": 0.6890678771005435,
+          "lyapunov": {
+            "classification": "near zero",
+            "convergence": "converged",
+            "exponent": 0.0006856194984186997
+          },
+          "mean_spikes_per_burst": 3.875,
+          "regime_label": "transition/uncertain",
+          "role": "CR_test",
+          "selection_reason": "STAR CANDIDATE / MAIN INTERPOLATION TEST. Converged, near-zero Lyapunov (0.000686) confirms non-chaotic; sits strictly between chaotic-training anchors 3.20 (below, 0.09) and 3.34 (above, 0.05): genuine interpolation for the chaotic-trained model.",
+          "spike_count": 32,
+          "within_burst_isi_cv": 0.2905852784402332
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.443609022556391,
+          "interburst_interval_cv": 7.239824225357453e-05,
+          "interpolation_status": "mild extrapolation (nearest regular point above the chaotic training span)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.20752086144828383,
+          "lyapunov": {
+            "classification": "uncertain",
+            "convergence": "not_converged",
+            "exponent": -0.00030255046378032475
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "CR_test",
+          "selection_reason": "MAIN INTERPOLATION TEST (secondary). Regular (periodic bursting) current immediately above the chaotic training band's upper anchor (3.391), distance 0.05.",
+          "spike_count": 30,
+          "within_burst_isi_cv": 9.495628329035622e-05
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 1.7969924812030076,
+          "interburst_interval_cv": 3.494301152351867e-05,
+          "interpolation_status": "extrapolation (deep, intentional stress test)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.784583755920079,
+          "lyapunov": null,
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "CR_test",
+          "selection_reason": "EXTRAPOLATION STRESS TEST (intentional). Deep low-I periodic bursting, far from the chaotic training band [2.985,3.391] (distance ~1.19); characterizes accuracy degradation with extrapolation distance. Reused from the RR-test pool.",
+          "spike_count": 14,
+          "within_burst_isi_cv": 0.0002595860827588039
+        }
+      ],
+      "training_currents": [
+        {
+          "burst_structure": "bursting",
+          "current": 2.9849624060150375,
+          "interburst_interval_cv": 0.3463056364564812,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.7763735800678778,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.009562756984516299
+          },
+          "mean_spikes_per_burst": 3.4285714285714284,
+          "regime_label": "chaotic bursting",
+          "role": "chaotic_training",
+          "selection_reason": "Lowest CONFIRMED (Lyapunov positive, converged) chaotic-bursting current found anywhere in the evidence gathered (see negative_evidence_2p1_to_2p9 below for the extensive band ruled OUT below this).",
+          "spike_count": 26,
+          "within_burst_isi_cv": 0.4191938514785531
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.2,
+          "interburst_interval_cv": 0.22620360202351916,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": true,
+          "isi_cv": 0.7107001137043971,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.011585141543605758
+          },
+          "mean_spikes_per_burst": 4.428571428571429,
+          "regime_label": "chaotic bursting",
+          "role": "chaotic_training",
+          "selection_reason": "Professor-anchor current; confirmed chaotic bursting; brackets I=3.29 from BELOW (distance 0.09).",
+          "spike_count": 31,
+          "within_burst_isi_cv": 0.49832979444553965
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.34,
+          "interburst_interval_cv": 0.4068874198911879,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": true,
+          "isi_cv": 0.4227532332212971,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.01178843943707143
+          },
+          "mean_spikes_per_burst": 2.5555555555555554,
+          "regime_label": "chaotic bursting",
+          "role": "chaotic_training",
+          "selection_reason": "Professor-anchor current; confirmed chaotic bursting; brackets I=3.29 from ABOVE (distance 0.05).",
+          "spike_count": 28,
+          "within_burst_isi_cv": 0.1735049521389166
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.3684210526315788,
+          "interburst_interval_cv": 0.30396552149820855,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2921279968341948,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.010550293560085208
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "chaotic bursting",
+          "role": "chaotic_training",
+          "selection_reason": "Confirmed chaotic bursting, extends the training span toward the upper edge of the confirmed band.",
+          "spike_count": 29,
+          "within_burst_isi_cv": 0.05445114655779347
+        },
+        {
+          "burst_structure": "uncertain",
+          "current": 3.3909774436090223,
+          "interburst_interval_cv": null,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.24747490741113895,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.007269750066142391
+          },
+          "mean_spikes_per_burst": null,
+          "regime_label": "chaotic spiking",
+          "role": "chaotic_training",
+          "selection_reason": "Confirmed CHAOTIC SPIKING (not bursting) -- a second dynamical flavor within the same confirmed band.",
+          "spike_count": 28,
+          "within_burst_isi_cv": null
+        }
+      ]
+    },
+    "regular_trained": {
+      "rc_test_currents": [
+        {
+          "burst_structure": "bursting",
+          "current": 3.37593984962406,
+          "interburst_interval_cv": 0.14072235396309343,
+          "interpolation_status": "interpolation for both models",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2598313286968664,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.008293945896155851
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "chaotic bursting",
+          "role": "RC_and_CC_test",
+          "selection_reason": "LOW-within-band confirmed chaotic bursting, interpolation between chaotic-training anchors 3.368 and 3.391.",
+          "spike_count": 28,
+          "within_burst_isi_cv": 0.019656389361907188
+        },
+        {
+          "burst_structure": "uncertain",
+          "current": 3.3834586466165413,
+          "interburst_interval_cv": null,
+          "interpolation_status": "interpolation for both models",
+          "is_previously_known_current": false,
+          "isi_cv": 0.26576447425583516,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.009431777225430007
+          },
+          "mean_spikes_per_burst": null,
+          "regime_label": "chaotic spiking",
+          "role": "RC_and_CC_test",
+          "selection_reason": "MID-within-band confirmed CHAOTIC SPIKING, interpolation between 3.368 and 3.391; distinct flavor from the bursting tests.",
+          "spike_count": 29,
+          "within_burst_isi_cv": null
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.398496240601504,
+          "interburst_interval_cv": 0.0694293818202483,
+          "interpolation_status": "interpolation for the regular model; mild (~1 grid step) extrapolation for the chaotic model",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2701690212307731,
+          "lyapunov": {
+            "classification": "positive",
+            "convergence": "converged",
+            "exponent": 0.005104621341936046
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "chaotic bursting",
+          "role": "RC_and_CC_test",
+          "selection_reason": "HIGH-within-band confirmed chaotic bursting, one grid step (0.007) past the chaotic-training upper anchor 3.391.",
+          "spike_count": 29,
+          "within_burst_isi_cv": 0.09914460299578805
+        }
+      ],
+      "rr_test_currents": [
+        {
+          "burst_structure": "bursting",
+          "current": 1.7969924812030076,
+          "interburst_interval_cv": 3.494301152351867e-05,
+          "interpolation_status": "interpolation (between 1.67 and 1.90)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.784583755920079,
+          "lyapunov": null,
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "RR_test",
+          "selection_reason": "Interior low-I periodic bursting, strictly between training currents 1.67 and 1.90 (true interpolation); reused as a CR-test target too (see CR notes).",
+          "spike_count": 14,
+          "within_burst_isi_cv": 0.0002595860827588039
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 2.0,
+          "interburst_interval_cv": 3.851012879097533e-05,
+          "interpolation_status": "interpolation (within global training range [1.42,3.80])",
+          "is_previously_known_current": false,
+          "isi_cv": 0.8073250016579766,
+          "lyapunov": null,
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "RR_test",
+          "selection_reason": "Interior low-I periodic bursting near the upper edge of the low-I regular region; within the regular model's global training range.",
+          "spike_count": 16,
+          "within_burst_isi_cv": 0.0003350083752093731
+        },
+        {
+          "burst_structure": "tonic",
+          "current": 3.6466165413533833,
+          "interburst_interval_cv": null,
+          "interpolation_status": "interpolation (between 3.50 and 3.80)",
+          "is_previously_known_current": false,
+          "isi_cv": 5.993333856510968e-05,
+          "lyapunov": null,
+          "mean_spikes_per_burst": null,
+          "regime_label": "periodic spiking",
+          "role": "RR_test",
+          "selection_reason": "Interior high-I periodic spiking, strictly between training currents 3.50 and 3.80 (true interpolation).",
+          "spike_count": 37,
+          "within_burst_isi_cv": null
+        }
+      ],
+      "training_currents": [
+        {
+          "burst_structure": "tonic",
+          "current": 1.4210526315789473,
+          "interburst_interval_cv": null,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 3.1850023311024364e-05,
+          "lyapunov": null,
+          "mean_spikes_per_burst": null,
+          "regime_label": "periodic spiking",
+          "role": "regular_training",
+          "selection_reason": "Interior low-I periodic spiking (tonic), away from the quiescent boundary (~1.30) and the spiking->bursting onset (~1.56).",
+          "spike_count": 6,
+          "within_burst_isi_cv": null
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 1.67,
+          "interburst_interval_cv": 2.555009858083603e-05,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": true,
+          "isi_cv": 0.7491379552374102,
+          "lyapunov": {
+            "classification": "uncertain",
+            "convergence": "not_converged",
+            "exponent": 0.0001953196391754215
+          },
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "regular_training",
+          "selection_reason": "Professor-anchor current; previously studied (Chapter 2 5-current study); clean periodic bursting, 2 spikes/burst.",
+          "spike_count": 14,
+          "within_burst_isi_cv": 0.00021382633444910073
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 1.9022556390977443,
+          "interburst_interval_cv": 3.803946165576207e-05,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.7945492243766304,
+          "lyapunov": null,
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "regular_training",
+          "selection_reason": "Second, deeper-interior low-I periodic-bursting point for within-flavor diversity.",
+          "spike_count": 16,
+          "within_burst_isi_cv": 0.0
+        },
+        {
+          "burst_structure": "bursting",
+          "current": 3.4285714285714284,
+          "interburst_interval_cv": 0.00011148704883443451,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.2323173328880473,
+          "lyapunov": null,
+          "mean_spikes_per_burst": 2.0,
+          "regime_label": "periodic bursting",
+          "role": "regular_training",
+          "selection_reason": "Interior high-I periodic bursting (2 spikes/burst), deep inside the narrow post-chaos bursting band.",
+          "spike_count": 30,
+          "within_burst_isi_cv": 0.00014758472198719995
+        },
+        {
+          "burst_structure": "tonic",
+          "current": 3.5,
+          "interburst_interval_cv": null,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": true,
+          "isi_cv": 0.005705799995205039,
+          "lyapunov": {
+            "classification": "uncertain",
+            "convergence": "not_converged",
+            "exponent": -0.0007120309203857852
+          },
+          "mean_spikes_per_burst": null,
+          "regime_label": "periodic spiking",
+          "role": "regular_training",
+          "selection_reason": "Professor-anchor current; previously studied; clean tonic periodic spiking.",
+          "spike_count": 32,
+          "within_burst_isi_cv": null
+        },
+        {
+          "burst_structure": "tonic",
+          "current": 3.7969924812030076,
+          "interburst_interval_cv": null,
+          "interpolation_status": "n/a (training)",
+          "is_previously_known_current": false,
+          "isi_cv": 0.0001855973980320535,
+          "lyapunov": null,
+          "mean_spikes_per_burst": null,
+          "regime_label": "periodic spiking",
+          "role": "regular_training",
+          "selection_reason": "Deep-interior high-I periodic spiking, far from any boundary.",
+          "spike_count": 42,
+          "within_burst_isi_cv": null
+        }
+      ]
+    }
+  },
+  "negative_evidence_2p1_to_2p9_band": {
+    "conclusion": "The confirmed-chaotic band in this HR parameter set is considerably narrower than assumed: only I in approximately [2.985,3.398] has directly Lyapunov-confirmed positive, converged chaos anywhere in the evidence gathered (Step-1 regime-map sparse subset plus these 8 new targeted points). The chaotic training/test currents below are therefore drawn entirely from this narrower, honestly-confirmed band rather than being artificially spread across the originally assumed wider [2.08,3.40] range.",
+    "finding": "All eight targeted Lyapunov diagnostics across I in [2.15,2.90] returned 'near zero' (six points, five converged) or 'uncertain, not_converged' (three points) -- NONE returned a confirmed positive, converged exponent. This directly contradicts the regime map's coarse 'chaotic_candidate' labeling for this range, which was based only on spike/burst irregularity (high ISI-CV, non-integer spikes-per-burst), not on Lyapunov confirmation. Per Step-1 instructions, irregular burst statistics alone are descriptive evidence, not proof of chaos.",
+    "investigated_currents": [
+      2.15,
+      2.3,
+      2.45,
+      2.5,
+      2.62,
+      2.68,
+      2.75,
+      2.9
+    ],
+    "raw_diagnostic_file": "results/design/targeted_lyapunov_diagnostics.json"
+  },
+  "no_esn_trained_for_this_design": true,
+  "professor_anchor_currents": {
+    "chaotic": [
+      3.2,
+      3.34
+    ],
+    "regular": [
+      1.67,
+      3.5
+    ],
+    "represented_as_intended": true,
+    "special_window": 3.29
+  },
+  "protocol_version": "part2_cross_regime_design_v1",
+  "step1_evidence_file_hashes": {
+    "chapter2/part2_cross_regime/results/design/targeted_lyapunov_diagnostics.json": "befa3853721b01312b6f48396d661f403437625d9e38e9c0f75dae373dd328ec",
+    "chapter2/part2_regime_map/results/dense_sweep_results.json": "3953827f06fd83c22379b5c66c97d069d15ad8a8c6bb359aed7b75a2d26a279c",
+    "chapter2/part2_regime_map/results/lyapunov_results.json": "01278027446bc0c51aa116ee7504d7e0f5b564ea17c375c66e3ee7927b3c3845",
+    "chapter2/part2_regime_map/results/regime_summary.json": "5c2abfb244fa72a9d33bb48e8144cd382b245065c4374f934c8272bc86d25bec"
+  },
+  "timestamp_utc": "2026-09-13T07:55:14.349370+00:00",
+  "window_2_56_2_58_investigation": {
+    "bracketing_points_tested": {
+      "above": [
+        2.62
+      ],
+      "below": [
+        2.5
+      ]
+    },
+    "bracketing_result": "Both 2.50 and 2.62 (immediately below/above the window) returned non-chaotic Lyapunov results (uncertain/not_converged and near zero/converged respectively). Combined with the pre-existing evidence that the nearest confirmed-chaotic point (2.985) is 0.41-0.42 away, this window has NO confirmed chaotic bracketing on either side within the evidence gathered.",
+    "decision": "NOT selected as a CR test (would be wide, one-sided extrapolation, not interpolation).",
+    "window_currents_confirmed_regular": [
+      2.5564,
+      2.5639,
+      2.5714
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+### Starting TaskPrologue of job 1519203 on tf062 at Sun Sep 13 03:36:08 PM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+noise=0.000 seed=   42 min_vpt=0.3595 div=0 coll=0 mean_nrmse=0.07998
+noise=0.000 seed=  123 min_vpt=0.4928 div=0 coll=0 mean_nrmse=0.1039
+noise=0.000 seed=  456 min_vpt=0.0135 div=15 coll=0 mean_nrmse=24.11
+noise=0.000 seed=  789 min_vpt=0.0214 div=15 coll=0 mean_nrmse=21.16
+noise=0.000 seed= 2026 min_vpt=0.3595 div=0 coll=0 mean_nrmse=0.09771
+noise=0.005 seed=   42 min_vpt=0.0724 div=2 coll=0 mean_nrmse=0.692
+noise=0.005 seed=  123 min_vpt=0.1506 div=0 coll=0 mean_nrmse=0.668
+noise=0.005 seed=  456 min_vpt=0.0872 div=2 coll=0 mean_nrmse=1.333e+05
+noise=0.005 seed=  789 min_vpt=0.1431 div=0 coll=0 mean_nrmse=0.5227
+noise=0.005 seed= 2026 min_vpt=0.1472 div=0 coll=0 mean_nrmse=0.4579
+noise=0.010 seed=   42 min_vpt=0.0601 div=2 coll=0 mean_nrmse=1.333e+05
+noise=0.010 seed=  123 min_vpt=0.1365 div=0 coll=0 mean_nrmse=0.7763
+noise=0.010 seed=  456 min_vpt=0.0537 div=5 coll=0 mean_nrmse=3.333e+05
+noise=0.010 seed=  789 min_vpt=0.1394 div=0 coll=0 mean_nrmse=0.6911
+noise=0.010 seed= 2026 min_vpt=0.0516 div=0 coll=0 mean_nrmse=0.6053
+noise=0.020 seed=   42 min_vpt=0.0551 div=1 coll=0 mean_nrmse=0.9068
+noise=0.020 seed=  123 min_vpt=0.0724 div=0 coll=0 mean_nrmse=0.9332
+noise=0.020 seed=  456 min_vpt=0.0575 div=5 coll=0 mean_nrmse=3.333e+05
+noise=0.020 seed=  789 min_vpt=0.0504 div=3 coll=0 mean_nrmse=2e+05
+noise=0.020 seed= 2026 min_vpt=0.0416 div=0 coll=0 mean_nrmse=0.7622
+noise=0.050 seed=   42 min_vpt=0.0419 div=0 coll=0 mean_nrmse=1.073
+noise=0.050 seed=  123 min_vpt=0.0426 div=0 coll=0 mean_nrmse=1.066
+noise=0.050 seed=  456 min_vpt=0.0874 div=1 coll=0 mean_nrmse=1.165
+noise=0.050 seed=  789 min_vpt=0.0394 div=0 coll=0 mean_nrmse=1.02
+noise=0.050 seed= 2026 min_vpt=0.0391 div=0 coll=0 mean_nrmse=1.07
+noise=0.100 seed=   42 min_vpt=0.0362 div=0 coll=0 mean_nrmse=1.132
+noise=0.100 seed=  123 min_vpt=0.0396 div=0 coll=1 mean_nrmse=1.164
+noise=0.100 seed=  456 min_vpt=0.0390 div=0 coll=2 mean_nrmse=1.012
+noise=0.100 seed=  789 min_vpt=0.0491 div=0 coll=9 mean_nrmse=0.9559
+noise=0.100 seed= 2026 min_vpt=0.0440 div=0 coll=0 mean_nrmse=1.205
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/chaotic_noise_robust/proof_of_concept.json
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 03:41:29 PM CEST 2026
+= Job-ID             : 1519203 on tinyfat
+= Job-Name           : ch2p2_noise_poc
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_noise_poc.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:05:22
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf062
+= Subm/Elig/Start/End: 2026-09-13T15:36:07 / 2026-09-13T15:36:07 / 2026-09-13T15:36:07 / 2026-09-13T15:41:29
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

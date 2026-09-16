@@ -1,0 +1,9 @@
+{
+  "chapter2/part2_cross_regime/results/design/frozen_design.json": "5155528aed8889be514ed341f8ef434a3ad77898a91f3486aaedab1998095821",
+  "chapter2/part2_cross_regime/results/design/source_validation_protocol.json": "0f6c924ac68d0117fcec5a5119c7a48e73d5f37e48c710d10093f1338689cf1f",
+  "chapter2/part2_cross_regime/results/optimisation/regular_confirmation.json": "63fd3a4c04b729cf7beb033ff8048cb47e404a57decd4f1dd3cad1ff8ad21ab7",
+  "chapter2/part2_cross_regime/results/optimisation/regular_history.json": "9e41b3805d3e9a33bfd761efed09403678689837581dbccd3be808aed1645f96",
+  "chapter2/part2_cross_regime/results/optimisation/regular_loco.json": "35fec65470deeef764db15af0876e0154dd11e8a360339fc0ab3ad4fc67dd19e",
+  "chapter2/part2_cross_regime/results/optimisation/regular_selection.json": "f21d5c4046bb14f17b7fcf36c3e0aa73727fc6dd8092415c560ce66d841b2ee5",
+  "chapter2/part2_cross_regime/results/validation/regular_source_validation.png": "d1865b0ae7ed503f05886d2734fab2f5103e587896d36bfd027ed1c2f427eea9"
+}

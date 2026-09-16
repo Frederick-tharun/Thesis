@@ -1,0 +1,34 @@
+### Starting TaskPrologue of job 1519120 on tf075 at Sun Sep 13 12:11:49 PM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+=== Phase A: reproducibility check ===
+stored objective=0.07998492603 fresh objective=0.07998492603 matches=True
+=== Phase B: diagnosing candidates ===
+  diagnosing rank1_anchor over seeds [42, 123, 456, 789, 2026]...
+  diagnosing rank2_best_non_anchor over seeds [42, 123, 456, 789, 2026]...
+  diagnosing rank3 over seeds [42, 456]...
+  diagnosing rank6 over seeds [42, 456]...
+=== Figures ===
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/chaotic_diagnostic/diagnostic_results.json
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 12:20:37 PM CEST 2026
+= Job-ID             : 1519120 on tinyfat
+= Job-Name           : ch2p2_chaos_diag
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_chaotic_diagnostic.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:08:49
+= Total RAM usage    : 0.4 GiB of requested  GiB (%)   
+= Node list          : tf075
+= Subm/Elig/Start/End: 2026-09-13T12:11:48 / 2026-09-13T12:11:48 / 2026-09-13T12:11:48 / 2026-09-13T12:20:37
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

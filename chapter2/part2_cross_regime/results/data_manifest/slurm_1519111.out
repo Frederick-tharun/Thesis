@@ -1,0 +1,46 @@
+### Starting TaskPrologue of job 1519111 on tf069 at Sun Sep 13 09:56:26 AM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+generating datasets for design_hash=f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d
+wrote 19 trajectory records to /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/data_manifest/data_manifest.json
+  I=1.421053 role=regular_training   n=100000 finite=True
+  I=1.670000 role=regular_training   n=100000 finite=True
+  I=1.902256 role=regular_training   n=100000 finite=True
+  I=3.428571 role=regular_training   n=100000 finite=True
+  I=3.500000 role=regular_training   n=100000 finite=True
+  I=3.796992 role=regular_training   n=100000 finite=True
+  I=2.984962 role=chaotic_training   n=100000 finite=True
+  I=3.200000 role=chaotic_training   n=100000 finite=True
+  I=3.340000 role=chaotic_training   n=100000 finite=True
+  I=3.368421 role=chaotic_training   n=100000 finite=True
+  I=3.390977 role=chaotic_training   n=100000 finite=True
+  I=1.796992 role=final_test         n=100000 finite=True
+  I=2.000000 role=final_test         n=100000 finite=True
+  I=3.646617 role=final_test         n=100000 finite=True
+  I=3.375940 role=final_test         n=100000 finite=True
+  I=3.383459 role=final_test         n=100000 finite=True
+  I=3.398496 role=final_test         n=100000 finite=True
+  I=3.290000 role=final_test         n=100000 finite=True
+  I=3.443609 role=final_test         n=100000 finite=True
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 09:58:26 AM CEST 2026
+= Job-ID             : 1519111 on tinyfat
+= Job-Name           : ch2p2_data
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_data.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:02:01
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf069
+= Subm/Elig/Start/End: 2026-09-13T09:56:25 / 2026-09-13T09:56:25 / 2026-09-13T09:56:25 / 2026-09-13T09:58:26
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================

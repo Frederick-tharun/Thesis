@@ -1,0 +1,55 @@
+{
+  "all_confirmation_seeds": [
+    42,
+    123,
+    456,
+    789,
+    2026
+  ],
+  "candidate_composition": {
+    "anchor": 1,
+    "gp_ei": 64,
+    "lhs": 30,
+    "previous_best_non_anchor": 1,
+    "total": 96
+  },
+  "confirmation_only_seeds": [
+    789,
+    2026
+  ],
+  "design_hash": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "gp_seed": 81201,
+  "hard_filter": "any numerical failure / divergence / collapse on ANY of the 45 search-seed rollouts excludes the candidate from confirmation",
+  "kind": "chaotic_recovery_search_protocol",
+  "lhs_seed": 71201,
+  "robust_seed_rule": {
+    "max_failing_seeds_for_vpt_gate": 1,
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      2026
+    ],
+    "zero_tolerance_for": [
+      "numerical_failure",
+      "divergence",
+      "collapse"
+    ]
+  },
+  "search_seeds": [
+    42,
+    123,
+    456
+  ],
+  "search_space": "unchanged Part-1 space (no restriction: Phase B found no region-specific pathology, only a seed-dependent one)",
+  "search_space_restriction_applied": false,
+  "source_quality_gate": {
+    "derivation": "Part-1 step7_selection.json best_robust_aggregate achieved mean_valid_prediction_steps=7638.18/8000=0.9548 with zero divergence and zero collapse across 45 five-seed rollouts (3 currents x 3 windows x 5 seeds). This gate requires >=0.80 VPT fraction on EVERY individual rollout (not just the mean) and zero failures/divergence/collapse, fixed before Part-2 production optimisation.",
+    "max_collapse_count": 0,
+    "max_divergence_count": 0,
+    "max_numerical_failures": 0,
+    "min_vpt_fraction_per_rollout": 0.8
+  },
+  "top_k_for_confirmation": 12
+}

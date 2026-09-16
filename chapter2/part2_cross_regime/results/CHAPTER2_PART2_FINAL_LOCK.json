@@ -1,0 +1,140 @@
+{
+  "design_hash": "f465ddd16aef4e5a6041b62708144f441e784de61315363d01f0579c0346445d",
+  "final_benchmark": {
+    "both_families_use_median_ensemble": true,
+    "file_sha256": "f431383970b7202fb49c80c9a69796621bf62a7bc9378cf835ad065d5d5eade0",
+    "headline_summary": {
+      "CC": {
+        "collapse_count": 0,
+        "divergence_count": 0,
+        "horizon_time_units": 279.99,
+        "mean_nrmse": 0.5977429863758252,
+        "mean_vpt_time": 58.02,
+        "median_nrmse": 0.6281061526253989,
+        "median_spike_count_ratio": 1.0,
+        "median_vpt_time": 58.81,
+        "n_rollouts": 3,
+        "numerical_failure_count": 0,
+        "spike_ratio_within_10pct": 2
+      },
+      "CR": {
+        "collapse_count": 0,
+        "divergence_count": 1,
+        "horizon_time_units": 279.99,
+        "mean_nrmse": 6.374507051613171,
+        "mean_vpt_time": 15.186666666666667,
+        "median_nrmse": 0.5673391775937114,
+        "median_spike_count_ratio": 1.0,
+        "median_vpt_time": 21.240000000000002,
+        "n_rollouts": 3,
+        "numerical_failure_count": 0,
+        "spike_ratio_within_10pct": 2
+      },
+      "RC": {
+        "collapse_count": 0,
+        "divergence_count": 0,
+        "horizon_time_units": 279.99,
+        "mean_nrmse": 0.3129359236732488,
+        "mean_vpt_time": 49.85,
+        "median_nrmse": 0.29303302036504697,
+        "median_spike_count_ratio": 1.0,
+        "median_vpt_time": 52.95,
+        "n_rollouts": 3,
+        "numerical_failure_count": 0,
+        "spike_ratio_within_10pct": 3
+      },
+      "RR": {
+        "collapse_count": 0,
+        "divergence_count": 0,
+        "horizon_time_units": 279.99,
+        "mean_nrmse": 0.48682368143973126,
+        "mean_vpt_time": 47.21,
+        "median_nrmse": 0.5113729539354388,
+        "median_spike_count_ratio": 1.0,
+        "median_vpt_time": 35.65,
+        "n_rollouts": 3,
+        "numerical_failure_count": 0,
+        "spike_ratio_within_10pct": 3
+      }
+    },
+    "source_file": "chapter2/part2_cross_regime/results/final_evaluation_long/final_long_horizon_results.json",
+    "window": {
+      "forecast_range": [
+        72000,
+        99999
+      ],
+      "forecast_steps": 27999,
+      "forecast_time_units": 279.99,
+      "source": "identical to chapter2/esn_step8.py Step-8 long_horizon window",
+      "warmup_range": [
+        70000,
+        72000
+      ]
+    }
+  },
+  "headline_finding": "Regular-to-chaotic transfer (RC) works well (0/9 diverged, spike counts within 10% on 3/3 tests). Chaotic-to-regular transfer (CR) works ONLY when the test current falls inside or near the narrow confirmed-chaotic training span (2.98-3.40): interpolation cases (I=3.29, I=3.44) succeed, far-extrapolation (I=1.797) fails completely (wrong attractor). This is explained by training-span geometry, not an inherent asymmetry between chaos and regularity: the regular model trains across a much wider current span (1.42-3.80) which brackets nearly every chaotic test current, while the chaotic model only ever sees a narrow 0.41-wide band, making extrapolation far more likely when testing it on regular data.",
+  "kind": "chapter2_part2_final_lock",
+  "lock_sha256": "a786e00af3246409512936af9e0f11defde1224c42c6bd89273b4af3e6f1d404",
+  "locked_models": {
+    "chaotic": {
+      "ensemble_seeds": [
+        42,
+        123,
+        456,
+        789,
+        2026
+      ],
+      "file_sha256": "835af11bd343bd0d8915df3042836b46acc2fa92f62a2882f2fe8dc7f1f41a12",
+      "hyperparameters": {
+        "input_scaling": 0.06402022818477646,
+        "leak_rate": 0.9375840772954693,
+        "reservoir_connectivity": 0.08881598524963213,
+        "reservoir_size": 100,
+        "ridge_regularisation": 3.968208883661854e-10,
+        "spectral_radius": 0.4118313967689876
+      },
+      "known_limitation": "Does not clear the original strict per-rollout 0.80 min-VPT-fraction gate (original_strict_gate_cleared=False in chaotic_ensemble_selection.json). Locked as the best available, most stable solution found; the limitation is stated explicitly, not hidden.",
+      "method": "median_ensemble",
+      "source_file": "chapter2/part2_cross_regime/results/chaotic_research/chaotic_ensemble_selection.json",
+      "training_currents": [
+        2.9849624060150375,
+        3.2,
+        3.34,
+        3.3684210526315788,
+        3.3909774436090223
+      ]
+    },
+    "regular": {
+      "file_sha256": "f21d5c4046bb14f17b7fcf36c3e0aa73727fc6dd8092415c560ce66d841b2ee5",
+      "hyperparameters": {
+        "input_scaling": 0.5969844033224692,
+        "leak_rate": 0.9956155159725752,
+        "reservoir_connectivity": 0.5866993769617647,
+        "reservoir_size": 200,
+        "ridge_regularisation": 1.2716555639829158e-08,
+        "spectral_radius": 0.32623112005449034
+      },
+      "method": "single configuration, single seed (42) for final evaluation",
+      "source_file": "chapter2/part2_cross_regime/results/optimisation/regular_selection.json",
+      "training_currents": [
+        1.4210526315789473,
+        1.67,
+        1.9022556390977443,
+        3.4285714285714284,
+        3.5,
+        3.7969924812030076
+      ]
+    }
+  },
+  "official_figures": [
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig0a_continuous_regular_model.png",
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig0b_continuous_chaotic_model.png",
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig1_cross_regime_long_horizon.png",
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig2_cross_regime_asymmetry.png",
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig3_cross_regime_context.png",
+    "chapter2/part2_cross_regime/results/final_evaluation_long/long_horizon_summary_table.md"
+  ],
+  "supplementary_illustrative_only": [
+    "chapter2/part2_cross_regime/results/final_evaluation_long/fig_illustrative_chaotic_tour.png"
+  ]
+}

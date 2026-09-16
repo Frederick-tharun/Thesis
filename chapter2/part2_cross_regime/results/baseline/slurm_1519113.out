@@ -1,0 +1,28 @@
+### Starting TaskPrologue of job 1519113 on tf061 at Sun Sep 13 10:03:47 AM CEST 2026
+Running on cores 0,64 with governor ondemand
+No GPU known
+### Finished TaskPrologue
+
+[regular] objective=0.00867153 min_vpt_fraction=0.5333 divergences=0 collapses=0 gate_passed=False
+[chaotic] objective=0.0799849 min_vpt_fraction=0.3595 divergences=0 collapses=0 gate_passed=False
+wrote /home/hpc/dsnf/dsnf129h/Thesis/chapter2/part2_cross_regime/results/baseline/anchor_baseline_report.json
+=== JOB_STATISTICS ===
+=== current date     : Sun Sep 13 10:04:15 AM CEST 2026
+= Job-ID             : 1519113 on tinyfat
+= Job-Name           : ch2p2_baseline
+= Job-Command        : /home/hpc/dsnf/dsnf129h/Thesis/run_chapter2_part2_cross_regime_baseline.slurm
+= Initial workdir    : /home/hpc/dsnf/dsnf129h/Thesis
+= Queue/Partition    : work
+= Slurm account      : dsnf with QOS=normal
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:00:29
+= Total RAM usage    : 0.3 GiB of requested  GiB (%)   
+= Node list          : tf061
+= Subm/Elig/Start/End: 2026-09-13T10:03:46 / 2026-09-13T10:03:46 / 2026-09-13T10:03:46 / 2026-09-13T10:04:15
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              36.5G   104.9G   209.7G        N/A     121K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+======================
