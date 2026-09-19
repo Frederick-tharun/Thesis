@@ -1,5 +1,14 @@
 import os
 
+import numpy as np
+
+# NumPy 2.0 removed the top-level `np.in1d` alias in favor of `np.isin`.
+# scikit-optimize==0.10.2's GBRT learner (skopt/learning/gbrt.py) still
+# calls the removed name; restore it so GBRT works under numpy==2.5.0
+# without patching the third-party package or downgrading numpy.
+if not hasattr(np, "in1d"):
+    np.in1d = np.isin
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "DRG3_MdFoF.csv")
 OUTPUT_ROOT = os.path.join(BASE_DIR, "outputs")
