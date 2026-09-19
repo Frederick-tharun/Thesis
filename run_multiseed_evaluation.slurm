@@ -36,7 +36,12 @@ export CONDA_PKGS_DIRS="$HOME/.conda/pkgs"
 SEEDS=(42 123 456 789 2026)
 SEED="${SEEDS[$SLURM_ARRAY_TASK_ID]}"
 
-REFERENCE_RUN="${REFERENCE_RUN:-$PROJECT_DIR/FINAL_THESIS_RUN}"
+if [[ -z "${REFERENCE_RUN:-}" ]]; then
+  echo "REFERENCE_RUN must be set explicitly to the corrected evidence directory"
+  echo "(e.g. export REFERENCE_RUN=\$PROJECT_DIR/FINAL_THESIS_RUN_<jobid>)."
+  echo "Refusing to silently default to a possibly stale FINAL_THESIS_RUN."
+  exit 2
+fi
 OUTPUT_ROOT="${OUTPUT_ROOT:-$HOME/Thesis_evidence_20260624/MULTISEED_EVAL_${SLURM_ARRAY_JOB_ID}}"
 
 echo "========================================================================"

@@ -863,6 +863,7 @@ def _summarize_control_metrics(
     )
 
     corrected_error_norm = _compute_error_norms(corrected, target_state)
+    raw_error_norm = _compute_error_norms(raw, target_state)
     control_norm_sq = np.sum(control_window**2, axis=1)
     control_norm = np.sqrt(control_norm_sq)
 
@@ -888,6 +889,13 @@ def _summarize_control_metrics(
     evaluation_time_to_tolerance = _settling_time(
         times[:end],
         corrected_error_norm[:end],
+        start,
+        settling_tolerance,
+        settling_consecutive,
+    )
+    raw_readout_time_to_tolerance = _settling_time(
+        times[:end],
+        raw_error_norm[:end],
         start,
         settling_tolerance,
         settling_consecutive,
@@ -924,8 +932,15 @@ def _summarize_control_metrics(
         "max_control_norm": float(np.max(control_norm)),
         "evaluation_time_to_tolerance": evaluation_time_to_tolerance,
         "settling_time": evaluation_time_to_tolerance,
+        "raw_readout_settling_time": raw_readout_time_to_tolerance,
         "mean_error_norm_post": float(np.mean(corrected_error_norm[start:end])),
         "max_error_norm_post": float(np.max(corrected_error_norm[start:end])),
+        "raw_readout_mean_error_norm_post": float(
+            np.mean(raw_error_norm[start:end])
+        ),
+        "raw_readout_max_error_norm_post": float(
+            np.max(raw_error_norm[start:end])
+        ),
         # Deprecated aliases retained for old analysis scripts.
         "target_rmse_state": corrected_rmse_state,
         "target_rmse_x": corrected_rmse_x,
@@ -1134,17 +1149,29 @@ def _selection_score(row, config):
             + score_weight("PYRAGAS_SCORE_K_WEIGHT", 0.02) * K
         )
 
+    # The linear_feedback/finite_time control law is
+    # next_input = y_pred - K * (y_pred - target), i.e. a convex blend
+    # (1 - K) * y_pred + K * target. Its distance to the target shrinks
+    # toward zero as K -> 1 by that algebra alone, regardless of whether
+    # the ESN's own dynamics are actually being stabilized. Selecting K
+    # on that quantity therefore rewards gain saturation, not genuine
+    # control. raw_readout_target_rmse_state/raw_readout_settling_time
+    # measure the ESN's readout before the K-dependent blend is applied
+    # and are not subject to this construction, so they are used as the
+    # primary selection criteria instead.
     rmse = _safe_float(
         row.get(
-            "corrected_feedback_input_target_rmse_state",
-            row.get("target_rmse_state"),
+            "raw_readout_target_rmse_state",
+            row.get("corrected_feedback_input_target_rmse_state"),
         ),
         np.inf,
     )
     energy = _safe_float(
         row.get("control_effort_mean_sq", row.get("control_energy")), np.inf
     )
-    settling = _safe_float(row.get("settling_time"), np.nan)
+    settling = _safe_float(row.get("raw_readout_settling_time"), np.nan)
+    if not np.isfinite(settling):
+        settling = _safe_float(row.get("settling_time"), np.nan)
     if not np.isfinite(settling):
         sample_dt = _safe_float(row.get("control_sample_dt"), 1.0)
         sample_count = _safe_float(row.get("evaluation_sample_count"), 1.0)

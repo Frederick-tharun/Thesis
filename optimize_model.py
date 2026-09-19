@@ -782,17 +782,29 @@ def _relative_error(predicted: float, reference: float) -> float:
 
 
 def _burst_summary(peaks: np.ndarray, sample_dt: float) -> dict:
-    """Detect burst grouping from a separated pair of ISI timescales."""
+    """Detect burst grouping from a separated pair of ISI timescales.
+
+    The first and last burst segment may be a fragment: the true burst
+    can extend before the first observed peak or after the last one if
+    the window boundary falls mid-burst. Their spike counts and onset
+    times are therefore unreliable, so ``mean_spikes_per_burst`` and
+    ``mean_inter_burst_interval`` are computed only from interior
+    segments that are fully bounded by detected burst gaps on both
+    sides. ``burst_count`` still reports every detected segment,
+    including edge fragments, since that count does not depend on
+    whether a segment is complete.
+    """
     peaks = np.asarray(peaks, dtype=int).reshape(-1)
+    empty_result = {
+        "burst_structure_detected": False,
+        "burst_count": 0,
+        "mean_spikes_per_burst": None,
+        "mean_inter_burst_interval": None,
+        "burst_boundary_isi_threshold": None,
+        "isi_timescale_ratio": None,
+    }
     if peaks.size < 4:
-        return {
-            "burst_structure_detected": False,
-            "burst_count": 0,
-            "mean_spikes_per_burst": None,
-            "mean_inter_burst_interval": None,
-            "burst_boundary_isi_threshold": None,
-            "isi_timescale_ratio": None,
-        }
+        return dict(empty_result)
 
     intervals = np.diff(peaks).astype(float) * float(sample_dt)
     ordered = np.sort(intervals)
@@ -800,14 +812,9 @@ def _burst_summary(peaks: np.ndarray, sample_dt: float) -> dict:
     split = int(np.argmax(ratios))
     timescale_ratio = float(ratios[split])
     if timescale_ratio < 1.5:
-        return {
-            "burst_structure_detected": False,
-            "burst_count": 0,
-            "mean_spikes_per_burst": None,
-            "mean_inter_burst_interval": None,
-            "burst_boundary_isi_threshold": None,
-            "isi_timescale_ratio": timescale_ratio,
-        }
+        result = dict(empty_result)
+        result["isi_timescale_ratio"] = timescale_ratio
+        return result
 
     threshold = float(np.sqrt(ordered[split] * ordered[split + 1]))
     boundary_intervals = np.flatnonzero(intervals > threshold)
@@ -816,16 +823,33 @@ def _burst_summary(peaks: np.ndarray, sample_dt: float) -> dict:
     spikes_per_burst = ends - starts
     burst_onsets = peaks[starts].astype(float) * float(sample_dt)
     detected = bool(starts.size >= 2 and np.mean(spikes_per_burst) >= 1.5)
+    if not detected:
+        result = dict(empty_result)
+        result["isi_timescale_ratio"] = timescale_ratio
+        return result
+
+    interior_spikes_per_burst = (
+        spikes_per_burst[1:-1] if spikes_per_burst.size >= 3 else np.empty(0, dtype=int)
+    )
+    interior_onsets = burst_onsets[1:-1] if burst_onsets.size >= 3 else np.empty(0)
+    interior_inter_burst = (
+        np.diff(interior_onsets) if interior_onsets.size >= 2 else np.empty(0)
+    )
     return {
-        "burst_structure_detected": detected,
-        "burst_count": int(starts.size) if detected else 0,
+        "burst_structure_detected": True,
+        "burst_count": int(starts.size),
+        "interior_burst_count": int(interior_spikes_per_burst.size),
         "mean_spikes_per_burst": (
-            float(np.mean(spikes_per_burst)) if detected else None
+            float(np.mean(interior_spikes_per_burst))
+            if interior_spikes_per_burst.size > 0
+            else None
         ),
         "mean_inter_burst_interval": (
-            float(np.mean(np.diff(burst_onsets))) if detected else None
+            float(np.mean(interior_inter_burst))
+            if interior_inter_burst.size > 0
+            else None
         ),
-        "burst_boundary_isi_threshold": threshold if detected else None,
+        "burst_boundary_isi_threshold": threshold,
         "isi_timescale_ratio": timescale_ratio,
     }
 
@@ -913,23 +937,32 @@ def _validation_window_metrics(
     burst_applicable = bool(true_bursts["burst_structure_detected"])
     burst_error = None
     if burst_applicable and pred_bursts["burst_structure_detected"]:
-        burst_error = float(
-            np.mean(
-                [
-                    _relative_error(
-                        pred_bursts["burst_count"], true_bursts["burst_count"]
-                    ),
-                    _relative_error(
-                        pred_bursts["mean_spikes_per_burst"],
-                        true_bursts["mean_spikes_per_burst"],
-                    ),
-                    _relative_error(
-                        pred_bursts["mean_inter_burst_interval"],
-                        true_bursts["mean_inter_burst_interval"],
-                    ),
-                ]
+        burst_components = [
+            _relative_error(
+                pred_bursts["burst_count"], true_bursts["burst_count"]
             )
-        )
+        ]
+        if (
+            pred_bursts["mean_spikes_per_burst"] is not None
+            and true_bursts["mean_spikes_per_burst"] is not None
+        ):
+            burst_components.append(
+                _relative_error(
+                    pred_bursts["mean_spikes_per_burst"],
+                    true_bursts["mean_spikes_per_burst"],
+                )
+            )
+        if (
+            pred_bursts["mean_inter_burst_interval"] is not None
+            and true_bursts["mean_inter_burst_interval"] is not None
+        ):
+            burst_components.append(
+                _relative_error(
+                    pred_bursts["mean_inter_burst_interval"],
+                    true_bursts["mean_inter_burst_interval"],
+                )
+            )
+        burst_error = float(np.mean(burst_components))
     elif burst_applicable:
         burst_error = 1.0
 
