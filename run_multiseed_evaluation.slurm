@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=chapter1_seeds
 #SBATCH --partition=work
+#SBATCH --gres=gpu:1
 #SBATCH --array=0-4%5
 #SBATCH --time=00:20:00
 #SBATCH --cpus-per-task=4
