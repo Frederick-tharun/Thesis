@@ -22,6 +22,16 @@ def _get_hr_params():
     return config.HR_PARAMETER_SETS[mode]
 
 
+def get_hr_transient_steps(params=None):
+    """Return the explicitly configured burn-in for the active HR regime."""
+    if params is None:
+        params = _get_hr_params()
+    burn = int(params.get("transient_steps", config.HR_TRANSIENT))
+    if burn < 0:
+        raise ValueError(f"HR transient_steps must be non-negative, got {burn}")
+    return burn
+
+
 def _hr_rhs(state, params):
     x, y, z = state
 
@@ -364,10 +374,10 @@ class DataLoader:
         print("\n[DataLoader] Generating Hindmarsh–Rose data")
 
         total = int(config.HR_TOTAL_STEPS)
-        burn = int(config.HR_TRANSIENT)
         dt = float(config.HR_DT)
 
         params = _get_hr_params()
+        burn = get_hr_transient_steps(params)
         mode = getattr(config, "HR_MODE", "periodic_spiking")
 
         traj = _rk4_hr(
@@ -388,6 +398,10 @@ class DataLoader:
 
         print(f"[DataLoader] HR mode: {mode}")
         print(f"[DataLoader] HR input current I: {params['I']}")
+        print(
+            f"[DataLoader] Burn-in: {burn} steps "
+            f"({burn * dt:.2f} time units)"
+        )
         print(f"[DataLoader] Loaded HR: {self.n_samples} steps x {self.n_neurons} states")
         print(f"[DataLoader] Time: {self.time[0]:.2f}s to {self.time[-1]:.2f}s")
 

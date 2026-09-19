@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import warnings
 
 import numpy as np
 
@@ -55,6 +56,7 @@ class EchoStateNetwork:
         self.input_std = None
 
         self.is_fitted = False
+        self.readout_diagnostics = None
 
         self._rng = np.random.default_rng(self.seed)
         self._initialize_weights()
@@ -213,13 +215,53 @@ class EchoStateNetwork:
         I = np.eye(XtX.shape[0])
         A = XtX + ridge * I
 
+        solver = "normal_equations_positive_definite_solve"
+        fallback_reason = None
         try:
             if scipy_linalg is not None:
-                solution = scipy_linalg.solve(A, XtY, assume_a="pos")
+                with warnings.catch_warnings():
+                    warnings.simplefilter("error", scipy_linalg.LinAlgWarning)
+                    solution = scipy_linalg.solve(A, XtY, assume_a="pos")
             else:
                 solution = np.linalg.solve(A, XtY)
-        except Exception:
-            solution = np.linalg.pinv(A) @ XtY
+        except Exception as exc:
+            # Do not silently accept an ill-conditioned normal-equation solve.
+            # The augmented ridge problem avoids squaring the condition number.
+            solver = "augmented_ridge_least_squares_fallback"
+            fallback_reason = f"{type(exc).__name__}: {exc}"
+            augmented_X = np.vstack([X, np.sqrt(ridge) * I])
+            augmented_Y = np.vstack(
+                [Y, np.zeros((I.shape[0], Y.shape[1]), dtype=float)]
+            )
+            if scipy_linalg is not None:
+                solution, *_ = scipy_linalg.lstsq(
+                    augmented_X,
+                    augmented_Y,
+                    lapack_driver="gelsy",
+                )
+            else:
+                solution, *_ = np.linalg.lstsq(
+                    augmented_X,
+                    augmented_Y,
+                    rcond=None,
+                )
+
+        if not np.all(np.isfinite(solution)):
+            raise FloatingPointError("ridge readout solution is non-finite")
+        relative_residual = float(
+            np.linalg.norm(X @ solution - Y)
+            / max(np.linalg.norm(Y), np.finfo(float).eps)
+        )
+        self.readout_diagnostics = {
+            "solver": solver,
+            "fallback_used": bool(fallback_reason is not None),
+            "fallback_reason": fallback_reason,
+            "regularization": float(ridge),
+            "training_rows": int(X.shape[0]),
+            "feature_count": int(X.shape[1]),
+            "relative_training_residual": relative_residual,
+            "solution_finite": True,
+        }
 
         self.Wout = solution.T
         self.is_fitted = True

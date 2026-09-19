@@ -52,7 +52,7 @@ OPTIMIZERS_TO_COMPARE = ["gp", "dummy", "forest", "gbrt"]
 BO_N_CALLS = 30
 BO_N_RANDOM_STARTS = 8
 BO_RESERVOIR_SEED = 42
-BO_EVALUATION_SEEDS = [42]
+BO_EVALUATION_SEEDS = [42, 43, 44]
 
 # Validation-only recursive model selection. The three non-overlapping windows
 # are drawn from the 70% training portion and are never allowed to touch the
@@ -66,6 +66,7 @@ PREDICTION_STATE_X_WEIGHT = 0.55
 PREDICTION_MULTISTATE_WEIGHT = 0.25
 PREDICTION_SPIKE_FREQUENCY_WEIGHT = 1.0
 PREDICTION_SPIKE_INTERVAL_WEIGHT = 0.50
+PREDICTION_BURST_METRIC_WEIGHT = 0.50
 PREDICTION_DIVERGENCE_PENALTY = 1_000_000.0
 
 # Locked final-test quality gates. These are broad scientific acceptability
@@ -88,9 +89,9 @@ BO_SEARCH_SPACE = {
     "spectral_radius": (0.50, 1.20, "float", False),
     "leak_rate":       (0.10, 0.80, "float", False),
     "input_scaling":   (0.05, 1.00, "float", False),
-    "regularization":  (1e-10, 1e-3, "float", True),
-    "sparsity":        (0.02, 0.20, "float", False),
-    "washout":         (50, 500, "int", False),
+    "regularization":  (1e-8, 1e-3, "float", True),
+    "sparsity":        (0.02, 0.35, "float", False),
+    "washout":         (50, 1000, "int", False),
 }
 # Spectral radii above one are intentional empirical candidates. Autonomous
 # stability is checked explicitly by the BO objective; rho < 1 is sufficient
@@ -105,7 +106,19 @@ TS_VAL_LEN = 80
 
 HR_DT = 0.01
 HR_TOTAL_STEPS = 150000
-HR_TRANSIENT = 5000
+# Discard a conservative 2,000 time units before retaining any trajectory.
+# The previous value (5,000 steps = 50 time units) left visible convergence in
+# the nominal periodic regimes and was therefore not a defensible burn-in.
+HR_TRANSIENT = 200000
+HR_LYAPUNOV_ESTIMATION_STEPS = 150000
+HR_LYAPUNOV_RENORMALIZATION_STEPS = 10
+HR_LYAPUNOV_CONVERGENCE_TAIL_FRACTION = 0.20
+HR_LYAPUNOV_SEPARATION_MULTIPLIER = 3.0
+HR_CHAOS_MIN_LYAPUNOV_EXPONENT = 1e-3
+CHAOTIC_VALID_PREDICTION_ERROR_THRESHOLD = 0.4
+CHAOTIC_ERROR_SMOOTHING_STEPS = 100
+CHAOTIC_ERROR_CROSSING_PERSISTENCE_STEPS = 100
+PREDICTION_BASELINE_AR1_REGULARIZATION = 1e-6
 
 # Choose one:
 # "periodic_spiking"
@@ -122,8 +135,12 @@ HR_PARAMETER_SETS = {
         "r": 0.006,
         "s": 4.0,
         "xr": -1.6,
-        "I": 2.5,
+        # I=2.5 produces a repeating three-spike burst, not tonic spiking.
+        "I": 4.0,
         "x0": [0.1, 0.0, 0.0],
+        "transient_steps": 200000,
+        "expected_regime": "periodic_spiking",
+        "expected_isi_cycle_length": 1,
     },
 
     "periodic_bursting": {
@@ -136,6 +153,9 @@ HR_PARAMETER_SETS = {
         "xr": -1.6,
         "I": 3.0,
         "x0": [0.1, 0.0, 0.0],
+        "transient_steps": 200000,
+        "expected_regime": "periodic_bursting",
+        "expected_isi_cycle_length": 8,
     },
 
     "chaotic_bursting": {
@@ -148,6 +168,9 @@ HR_PARAMETER_SETS = {
         "xr": -1.6,
         "I": 3.25,
         "x0": [-1.0, -3.0, 3.0],
+        "transient_steps": 200000,
+        "expected_regime": "chaotic_bursting",
+        "expected_isi_cycle_length": None,
     },
 }
 

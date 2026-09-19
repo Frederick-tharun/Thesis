@@ -66,6 +66,15 @@ class FinalizationAcceptanceTests(unittest.TestCase):
         )
         self.assertGreater(wrong_metrics["score"], correct_metrics["score"])
 
+    def test_isi_is_marked_unavailable_instead_of_false_zero(self):
+        true = np.full((120, 3), -1.0)
+        predicted = true.copy()
+        metrics = _validation_window_metrics(predicted, true, 0.0)
+
+        self.assertIsNone(metrics["isi_rel_error"])
+        self.assertFalse(metrics["isi_comparison_available"])
+        self.assertIn("fewer_than_two_spikes", metrics["isi_comparison_status"])
+
     def test_saved_esn_round_trip_preserves_identity_and_prediction(self):
         rng = np.random.default_rng(42)
         training = rng.normal(size=(90, 3))

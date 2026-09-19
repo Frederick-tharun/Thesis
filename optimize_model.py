@@ -655,6 +655,12 @@ def prediction_validation_spec(
                 "mean_plus_max",
             )
         ),
+        "state_metric_scope": "three_non_overlapping_80_time_unit_windows",
+        "event_metric_scope": "one_contiguous_240_time_unit_rollout",
+        "event_metric_reason": (
+            "short windows may contain fewer than two spikes and cannot "
+            "support an inter-spike-interval comparison"
+        ),
         "test_data_used_for_selection": False,
         "index_semantics": "zero_based_half_open_[start,end)",
     }
@@ -775,10 +781,61 @@ def _relative_error(predicted: float, reference: float) -> float:
     return float(abs(predicted - reference) / abs(reference))
 
 
+def _burst_summary(peaks: np.ndarray, sample_dt: float) -> dict:
+    """Detect burst grouping from a separated pair of ISI timescales."""
+    peaks = np.asarray(peaks, dtype=int).reshape(-1)
+    if peaks.size < 4:
+        return {
+            "burst_structure_detected": False,
+            "burst_count": 0,
+            "mean_spikes_per_burst": None,
+            "mean_inter_burst_interval": None,
+            "burst_boundary_isi_threshold": None,
+            "isi_timescale_ratio": None,
+        }
+
+    intervals = np.diff(peaks).astype(float) * float(sample_dt)
+    ordered = np.sort(intervals)
+    ratios = ordered[1:] / np.maximum(ordered[:-1], 1e-12)
+    split = int(np.argmax(ratios))
+    timescale_ratio = float(ratios[split])
+    if timescale_ratio < 1.5:
+        return {
+            "burst_structure_detected": False,
+            "burst_count": 0,
+            "mean_spikes_per_burst": None,
+            "mean_inter_burst_interval": None,
+            "burst_boundary_isi_threshold": None,
+            "isi_timescale_ratio": timescale_ratio,
+        }
+
+    threshold = float(np.sqrt(ordered[split] * ordered[split + 1]))
+    boundary_intervals = np.flatnonzero(intervals > threshold)
+    starts = np.r_[0, boundary_intervals + 1]
+    ends = np.r_[boundary_intervals + 1, peaks.size]
+    spikes_per_burst = ends - starts
+    burst_onsets = peaks[starts].astype(float) * float(sample_dt)
+    detected = bool(starts.size >= 2 and np.mean(spikes_per_burst) >= 1.5)
+    return {
+        "burst_structure_detected": detected,
+        "burst_count": int(starts.size) if detected else 0,
+        "mean_spikes_per_burst": (
+            float(np.mean(spikes_per_burst)) if detected else None
+        ),
+        "mean_inter_burst_interval": (
+            float(np.mean(np.diff(burst_onsets))) if detected else None
+        ),
+        "burst_boundary_isi_threshold": threshold if detected else None,
+        "isi_timescale_ratio": timescale_ratio,
+    }
+
+
 def _validation_window_metrics(
     pred_norm: np.ndarray,
     true_norm: np.ndarray,
     spike_threshold_norm: float,
+    *,
+    include_event_score: bool = True,
 ) -> dict:
     pred_norm = as_2d(pred_norm)
     true_norm = as_2d(true_norm)
@@ -801,6 +858,11 @@ def _validation_window_metrics(
             "mean_isi_true": 0.0,
             "mean_isi_pred": 0.0,
             "isi_rel_error": 1_000_000.0,
+            "isi_comparison_available": False,
+            "burst_metrics_applicable": False,
+            "burst_metric_error": 1_000_000.0,
+            "event_score": 1_000_000.0,
+            "event_score_included": bool(include_event_score),
             "std_ratio": 1_000_000.0,
             "mean_gap": 1_000_000.0,
             "penalty": 1_000_000.0,
@@ -829,19 +891,47 @@ def _validation_window_metrics(
     true_isi = (
         float(np.mean(np.diff(true_peaks)) * sample_dt)
         if len(true_peaks) >= 2
-        else 0.0
+        else None
     )
     pred_isi = (
         float(np.mean(np.diff(pred_peaks)) * sample_dt)
         if len(pred_peaks) >= 2
-        else 0.0
+        else None
     )
     if len(true_peaks) >= 2 and len(pred_peaks) >= 2:
         isi_error = _relative_error(pred_isi, true_isi)
+        isi_status = "available"
     elif len(true_peaks) < 2 and len(pred_peaks) < 2:
-        isi_error = 0.0
+        isi_error = None
+        isi_status = "unavailable_fewer_than_two_spikes_in_both"
     else:
         isi_error = 1.0
+        isi_status = "unavailable_fewer_than_two_spikes_in_one_series"
+
+    true_bursts = _burst_summary(true_peaks, sample_dt)
+    pred_bursts = _burst_summary(pred_peaks, sample_dt)
+    burst_applicable = bool(true_bursts["burst_structure_detected"])
+    burst_error = None
+    if burst_applicable and pred_bursts["burst_structure_detected"]:
+        burst_error = float(
+            np.mean(
+                [
+                    _relative_error(
+                        pred_bursts["burst_count"], true_bursts["burst_count"]
+                    ),
+                    _relative_error(
+                        pred_bursts["mean_spikes_per_burst"],
+                        true_bursts["mean_spikes_per_burst"],
+                    ),
+                    _relative_error(
+                        pred_bursts["mean_inter_burst_interval"],
+                        true_bursts["mean_inter_burst_interval"],
+                    ),
+                ]
+            )
+        )
+    elif burst_applicable:
+        burst_error = 1.0
 
     penalty = 0.0
     if std_ratio < 0.10:
@@ -857,16 +947,29 @@ def _validation_window_metrics(
 
     x_error = nrmse(pred_x, true_x)
     all_error = nrmse(pred_norm, true_norm)
+    event_score = (
+        float(
+            getattr(config, "PREDICTION_SPIKE_FREQUENCY_WEIGHT", 1.0)
+        )
+        * frequency_error
+        + (
+            float(getattr(config, "PREDICTION_SPIKE_INTERVAL_WEIGHT", 0.50))
+            * isi_error
+            if isi_error is not None
+            else 0.0
+        )
+        + (
+            float(getattr(config, "PREDICTION_BURST_METRIC_WEIGHT", 0.50))
+            * burst_error
+            if burst_error is not None
+            else 0.0
+        )
+    )
     score = (
         float(getattr(config, "PREDICTION_STATE_X_WEIGHT", 0.55)) * x_error
         + float(getattr(config, "PREDICTION_MULTISTATE_WEIGHT", 0.25))
         * all_error
-        + float(
-            getattr(config, "PREDICTION_SPIKE_FREQUENCY_WEIGHT", 1.0)
-        )
-        * frequency_error
-        + float(getattr(config, "PREDICTION_SPIKE_INTERVAL_WEIGHT", 0.50))
-        * isi_error
+        + (event_score if include_event_score else 0.0)
         + penalty
     )
 
@@ -881,9 +984,31 @@ def _validation_window_metrics(
         "spike_frequency_rel_error": _safe_metric(frequency_error),
         "spike_frequency_units": "inverse_time_unit",
         "inter_spike_interval_units": "time_unit",
-        "mean_isi_true": _safe_metric(true_isi),
-        "mean_isi_pred": _safe_metric(pred_isi),
-        "isi_rel_error": _safe_metric(isi_error),
+        "mean_isi_true": true_isi,
+        "mean_isi_pred": pred_isi,
+        "isi_rel_error": isi_error,
+        "isi_comparison_available": bool(isi_error is not None),
+        "isi_comparison_status": isi_status,
+        "burst_metrics_applicable": burst_applicable,
+        "burst_structure_detected_true": bool(
+            true_bursts["burst_structure_detected"]
+        ),
+        "burst_structure_detected_pred": bool(
+            pred_bursts["burst_structure_detected"]
+        ),
+        "burst_count_true": int(true_bursts["burst_count"]),
+        "burst_count_pred": int(pred_bursts["burst_count"]),
+        "mean_spikes_per_burst_true": true_bursts["mean_spikes_per_burst"],
+        "mean_spikes_per_burst_pred": pred_bursts["mean_spikes_per_burst"],
+        "mean_inter_burst_interval_true": true_bursts[
+            "mean_inter_burst_interval"
+        ],
+        "mean_inter_burst_interval_pred": pred_bursts[
+            "mean_inter_burst_interval"
+        ],
+        "burst_metric_error": burst_error,
+        "event_score": _safe_metric(event_score),
+        "event_score_included": bool(include_event_score),
         "std_ratio": _safe_metric(std_ratio),
         "mean_gap": _safe_metric(mean_gap),
         "penalty": _safe_metric(penalty),
@@ -971,6 +1096,7 @@ def _evaluate_params_for_seed(
                 pred_norm[window_slice],
                 val_eval[window_slice],
                 spike_threshold_norm=spike_threshold_norm,
+                include_event_score=False,
             )
             metrics["window_index"] = int(window_index)
             metrics["start_in_validation_block"] = int(window_slice.start)
@@ -986,10 +1112,17 @@ def _evaluate_params_for_seed(
                 reservoir_seed,
             )
 
+        full_event_metrics = _validation_window_metrics(
+            pred_norm,
+            val_eval,
+            spike_threshold_norm=spike_threshold_norm,
+            include_event_score=True,
+        )
+        state_window_score = _aggregate_window_scores(
+            [metrics["score"] for metrics in window_metrics]
+        )
         score = min(
-            _aggregate_window_scores(
-                [metrics["score"] for metrics in window_metrics]
-            ),
+            state_window_score + float(full_event_metrics["event_score"]),
             max_score,
         )
         metric_mapping = {
@@ -998,16 +1131,6 @@ def _evaluate_params_for_seed(
             "validation_std_ratio": "std_ratio",
             "validation_mean_gap": "mean_gap",
             "validation_penalty": "penalty",
-            "validation_spike_count_true": "spike_count_true",
-            "validation_spike_count_pred": "spike_count_pred",
-            "validation_spike_frequency_true": "spike_frequency_true",
-            "validation_spike_frequency_pred": "spike_frequency_pred",
-            "validation_spike_frequency_rel_error": (
-                "spike_frequency_rel_error"
-            ),
-            "validation_mean_isi_true": "mean_isi_true",
-            "validation_mean_isi_pred": "mean_isi_pred",
-            "validation_isi_rel_error": "isi_rel_error",
         }
         metrics = {
             "reservoir_seed": int(reservoir_seed),
@@ -1018,6 +1141,13 @@ def _evaluate_params_for_seed(
                 len(val_eval) // len(window_metrics)
             ),
             "validation_divergent_window_count": int(divergent_count),
+            "validation_state_window_score": _safe_metric(state_window_score),
+            "validation_event_score": _safe_metric(
+                full_event_metrics["event_score"]
+            ),
+            "validation_event_metric_scope": (
+                "full_contiguous_validation_rollout"
+            ),
             "validation_spike_frequency_units": "inverse_time_unit",
             "validation_inter_spike_interval_units": "time_unit",
             "validation_aggregation": str(
@@ -1030,6 +1160,16 @@ def _evaluate_params_for_seed(
             "validation_window_metrics_json": json.dumps(
                 window_metrics, sort_keys=True
             ),
+            "validation_event_metrics_json": json.dumps(
+                full_event_metrics, sort_keys=True
+            ),
+            "readout_solver": esn.readout_diagnostics["solver"],
+            "readout_solver_fallback_used": esn.readout_diagnostics[
+                "fallback_used"
+            ],
+            "readout_relative_training_residual": _safe_metric(
+                esn.readout_diagnostics["relative_training_residual"]
+            ),
             "stable": True,
             "reason": "ok",
         }
@@ -1041,6 +1181,26 @@ def _evaluate_params_for_seed(
                         for window in window_metrics
                     ]
                 )
+            )
+        event_metric_mapping = {
+            "validation_spike_count_true": "spike_count_true",
+            "validation_spike_count_pred": "spike_count_pred",
+            "validation_spike_frequency_true": "spike_frequency_true",
+            "validation_spike_frequency_pred": "spike_frequency_pred",
+            "validation_spike_frequency_rel_error": (
+                "spike_frequency_rel_error"
+            ),
+            "validation_mean_isi_true": "mean_isi_true",
+            "validation_mean_isi_pred": "mean_isi_pred",
+            "validation_isi_rel_error": "isi_rel_error",
+            "validation_burst_count_true": "burst_count_true",
+            "validation_burst_count_pred": "burst_count_pred",
+            "validation_burst_metric_error": "burst_metric_error",
+        }
+        for output_name, source_name in event_metric_mapping.items():
+            value = full_event_metrics[source_name]
+            metrics[output_name] = (
+                None if value is None else _safe_metric(value)
             )
         for window in window_metrics:
             index = window["window_index"]

@@ -175,9 +175,20 @@ def verify_against_locked_metrics(regime: str, bundle: dict) -> dict:
 
 STATE_LABELS = (r"$x$", r"$y$", r"$z$")
 
+# The thesis page places these figures at \textwidth = 15 cm (~5.9 in),
+# while they are rendered here at 13.0 in wide (see build_figure). Without
+# compensation, text sized for the render canvas would print at roughly
+# 0.45x its nominal point size and become illegible on paper. FONT_SCALE
+# counteracts that shrink so on-page text reads at its intended size.
+FONT_SCALE = 3.0
+
+
+def fs(points: float) -> float:
+    return round(points * FONT_SCALE, 1)
+
 
 def add_state_panels(fig, gridspec_slot, time_full, reference_full, prediction_full, display_stride):
-    grid = gridspec_slot.subgridspec(nrows=3, ncols=1, hspace=0.08)
+    grid = gridspec_slot.subgridspec(nrows=3, ncols=1, hspace=0.10)
 
     t_disp = time_full[::display_stride]
     ref_disp = reference_full[::display_stride]
@@ -187,19 +198,16 @@ def add_state_panels(fig, gridspec_slot, time_full, reference_full, prediction_f
     for i in range(3):
         ax = fig.add_subplot(grid[i, 0], sharex=axes[0] if axes else None)
         axes.append(ax)
-        ax.plot(t_disp, ref_disp[:, i], linewidth=1.2, label="Reference")
-        ax.plot(t_disp, pred_disp[:, i], linestyle="--", linewidth=1.2, label="ESN prediction")
-        ax.set_ylabel(STATE_LABELS[i], rotation=0, labelpad=12, fontsize=12)
+        ax.plot(t_disp, ref_disp[:, i], linewidth=2.0, label="Reference")
+        ax.plot(t_disp, pred_disp[:, i], linestyle="--", linewidth=2.0, label="ESN prediction")
+        ax.set_ylabel(STATE_LABELS[i], rotation=0, labelpad=22, fontsize=fs(12))
         ax.grid(True, alpha=0.20)
-        ax.tick_params(axis="both", labelsize=9)
+        ax.tick_params(axis="both", labelsize=fs(9))
         if i < 2:
             ax.tick_params(labelbottom=False)
 
-    axes[-1].set_xlabel("Held-out time", fontsize=11)
-    axes[0].legend(loc="upper right", fontsize=9, ncol=2, frameon=True)
-    axes[0].text(
-        0.01, 0.88, "(a)", transform=axes[0].transAxes, fontsize=12, fontweight="bold"
-    )
+    axes[-1].set_xlabel("Held-out time", fontsize=fs(11))
+    axes[0].set_title("(a)", fontsize=fs(9), fontweight="bold", pad=8, loc="left")
     return axes
 
 
@@ -281,44 +289,48 @@ def select_two_spike_zoom(truth_x: np.ndarray) -> tuple[int, int]:
 
 def add_zoom_panel(fig, gridspec_slot, time, reference, prediction, start, end, title, mark_axis):
     for boundary in (time[start], time[end - 1]):
-        mark_axis.axvline(boundary, linestyle=":", linewidth=1.1, color="0.35")
+        mark_axis.axvline(boundary, linestyle=":", linewidth=1.8, color="0.35")
 
     ax = fig.add_subplot(gridspec_slot)
-    ax.plot(time[start:end], reference[start:end, 0], linewidth=1.8, label="Reference")
+    ax.plot(time[start:end], reference[start:end, 0], linewidth=2.8, label="Reference")
     ax.plot(
-        time[start:end], prediction[start:end, 0], linestyle="--", linewidth=1.7,
+        time[start:end], prediction[start:end, 0], linestyle="--", linewidth=2.6,
         label="ESN prediction",
     )
-    ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
-    ax.set_xlabel("Held-out time", fontsize=10)
-    ax.set_ylabel(r"$x$", fontsize=12, rotation=0, labelpad=12)
-    ax.tick_params(axis="both", labelsize=9)
+    ax.set_title(f"(b) {title}", fontsize=fs(9), fontweight="bold", pad=8, loc="left")
+    ax.set_xlabel("Held-out time", fontsize=fs(10))
+    ax.set_ylabel(r"$x$", fontsize=fs(12), rotation=0, labelpad=22)
+    ax.tick_params(axis="both", labelsize=fs(9))
     ax.grid(True, alpha=0.20)
-    ax.legend(loc="best", fontsize=8, frameon=True)
     ax.set_box_aspect(1.05)
-    ax.text(0.03, 0.95, "(b)", transform=ax.transAxes, fontsize=11, fontweight="bold", va="top")
     return ax
 
 
-def add_phase_portrait_panel(fig, gridspec_slot, reference, prediction, n_points=4000):
+def add_phase_portrait_panel(fig, gridspec_slot, reference, prediction, n_points=6000):
     stride = max(1, len(reference) // n_points)
     ref_p = reference[::stride]
     pred_p = prediction[::stride]
 
     ax = fig.add_subplot(gridspec_slot, projection="3d")
-    ax.plot(ref_p[:, 0], ref_p[:, 1], ref_p[:, 2], linewidth=1.2, label="Reference")
+    ax.set_proj_type("ortho")
+    for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
+        axis.pane.set_facecolor((1.0, 1.0, 1.0, 0.0))
+        axis.pane.set_edgecolor("0.75")
     ax.plot(
-        pred_p[:, 0], pred_p[:, 1], pred_p[:, 2], linestyle="--", linewidth=1.2,
-        label="ESN prediction",
+        ref_p[:, 0], ref_p[:, 1], ref_p[:, 2], linewidth=2.3, color="#1f77b4",
+        label="Reference", alpha=0.95,
     )
-    ax.set_xlabel(r"$x$", fontsize=11, labelpad=4)
-    ax.set_ylabel(r"$y$", fontsize=11, labelpad=4)
-    ax.set_zlabel(r"$z$", fontsize=11, labelpad=4)
-    ax.tick_params(axis="both", labelsize=8)
-    ax.view_init(elev=24, azim=-58)
-    ax.legend(loc="upper right", fontsize=8, frameon=True)
-    ax.set_title("Reconstructed attractor phase portrait", fontsize=11, fontweight="bold", pad=2)
-    ax.text2D(0.03, 0.95, "(b)", transform=ax.transAxes, fontsize=11, fontweight="bold")
+    ax.plot(
+        pred_p[:, 0], pred_p[:, 1], pred_p[:, 2], linestyle="--", linewidth=2.1,
+        color="#ff7f0e", label="ESN prediction", alpha=0.95,
+    )
+    ax.set_box_aspect((1.3, 1.3, 1.0))
+    ax.set_xlabel(r"$x$", fontsize=fs(12), labelpad=14)
+    ax.set_ylabel(r"$y$", fontsize=fs(12), labelpad=14)
+    ax.set_zlabel(r"$z$", fontsize=fs(12), labelpad=10)
+    ax.tick_params(axis="both", labelsize=fs(9), pad=2)
+    ax.view_init(elev=22, azim=-52)
+    ax.set_title("(b) Reconstructed attractor", fontsize=fs(9), fontweight="bold", pad=18, loc="left")
     return ax
 
 
@@ -330,7 +342,7 @@ def build_figure(regime: str, time, reference, prediction, nrmse_x, nrmse_all):
     display_stride = max(1, len(time) // 15000)
 
     fig = plt.figure(figsize=(13.0, 7.4))
-    outer = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[2.25, 1.05], wspace=0.17)
+    outer = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[1.5, 1.8], wspace=0.24)
 
     axes = add_state_panels(fig, outer[0], time, reference, prediction, display_stride)
 
@@ -340,18 +352,23 @@ def build_figure(regime: str, time, reference, prediction, nrmse_x, nrmse_all):
         start, end = select_representative_burst(reference[:, 0])
         add_zoom_panel(
             fig, outer[1], time, reference, prediction, start, end,
-            "Representative bursting interval", mark_axis=axes[0],
+            "Bursting interval", mark_axis=axes[0],
         )
     elif regime == "periodic_spiking":
         start, end = select_two_spike_zoom(reference[:, 0])
         add_zoom_panel(
             fig, outer[1], time, reference, prediction, start, end,
-            "Representative two-spike interval", mark_axis=axes[0],
+            "Two-spike interval", mark_axis=axes[0],
         )
     else:
         raise ValueError(f"Unknown regime: {regime}")
 
-    fig.subplots_adjust(left=0.075, right=0.98, top=0.96, bottom=0.09)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles, labels, loc="upper center", ncol=2, fontsize=fs(10),
+        frameon=True, bbox_to_anchor=(0.5, 1.0),
+    )
+    fig.subplots_adjust(left=0.075, right=0.98, top=0.74, bottom=0.09)
     return fig
 
 

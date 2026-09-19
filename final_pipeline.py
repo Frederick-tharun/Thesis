@@ -20,6 +20,7 @@ import config
 from control_experiment import run_control_experiment
 from data_loader import DataLoader
 from final_package import assert_valid_final_package
+from hr_regime_validation import regime_metadata, validate_hr_trajectory
 from main import (
     HR_REGIMES,
     make_model,
@@ -38,6 +39,9 @@ from optimize_model import (
     resolve_washout,
     rmse,
 )
+from prediction_baselines import autonomous_baselines
+from prediction_diagnostics import chaotic_valid_prediction_horizon
+from scripts.analysis.estimate_hr_lyapunov import estimate_largest_lyapunov
 
 
 PACKAGE_DIRECTORIES = (
@@ -194,6 +198,83 @@ def _load_regime(regime: str):
     return loader, series, times, train, test
 
 
+def _validate_regime_science(regime: str, series: np.ndarray) -> dict:
+    """Prove the configured regime hypothesis before model selection starts."""
+    parameter_set = config.HR_PARAMETER_SETS[regime]
+    metadata = regime_metadata(parameter_set)
+    parameters = {
+        name: float(parameter_set[name])
+        for name in ("a", "b", "c", "d", "r", "s", "xr", "I")
+    }
+    result = estimate_largest_lyapunov(
+        parameters,
+        parameter_set["x0"],
+        dt=float(config.HR_DT),
+        transient_steps=metadata["transient_steps"],
+        estimation_steps=int(config.HR_LYAPUNOV_ESTIMATION_STEPS),
+        renormalization_steps=int(
+            config.HR_LYAPUNOV_RENORMALIZATION_STEPS
+        ),
+    )
+    fraction = float(config.HR_LYAPUNOV_CONVERGENCE_TAIL_FRACTION)
+    if not 0.0 < fraction <= 1.0:
+        raise ValueError("HR_LYAPUNOV_CONVERGENCE_TAIL_FRACTION must be in (0, 1]")
+    tail_start = max(
+        0,
+        len(result.convergence_exponents)
+        - int(np.ceil(fraction * len(result.convergence_exponents))),
+    )
+    convergence_tail = result.convergence_exponents[tail_start:]
+    tail_std = float(np.std(convergence_tail))
+
+    validation = validate_hr_trajectory(
+        series,
+        dt=float(config.HR_DT),
+        expected_regime=metadata["expected_regime"],
+        expected_cycle_length=metadata["expected_cycle_length"],
+        transient_steps=metadata["transient_steps"],
+        largest_lyapunov_exponent=float(result.exponent),
+        lyapunov_tail_std=tail_std,
+        lyapunov_separation_multiplier=float(
+            config.HR_LYAPUNOV_SEPARATION_MULTIPLIER
+        ),
+        minimum_chaotic_lyapunov_exponent=float(
+            config.HR_CHAOS_MIN_LYAPUNOV_EXPONENT
+        ),
+    )
+    validation["parameters"] = parameters
+    validation["initial_state"] = [
+        float(value) for value in parameter_set["x0"]
+    ]
+    validation["lyapunov_method"] = (
+        "Benettin tangent-linear method with RK4"
+    )
+    validation["lyapunov_estimation_steps"] = int(
+        config.HR_LYAPUNOV_ESTIMATION_STEPS
+    )
+    validation["lyapunov_estimation_time"] = float(result.elapsed_time)
+    validation["lyapunov_renormalization_steps"] = int(
+        config.HR_LYAPUNOV_RENORMALIZATION_STEPS
+    )
+    validation["lyapunov_convergence_tail_fraction"] = fraction
+    validation["lyapunov_convergence_tail_span"] = float(
+        np.ptp(convergence_tail)
+    )
+    validation["lyapunov_convergence_tail_samples"] = int(
+        len(convergence_tail)
+    )
+    if not validation["passed"]:
+        failed = [
+            name
+            for name, passed in validation["conditions"].items()
+            if not passed
+        ]
+        raise RuntimeError(
+            f"Scientific HR regime validation failed for {regime}: {failed}"
+        )
+    return validation
+
+
 def _heldout_metrics(
     pred_norm: np.ndarray,
     test_norm: np.ndarray,
@@ -229,8 +310,91 @@ def _heldout_metrics(
         "inter_spike_interval_units": dynamics[
             "inter_spike_interval_units"
         ],
+        "isi_comparison_available": dynamics["isi_comparison_available"],
+        "isi_comparison_status": dynamics["isi_comparison_status"],
+        "burst_metrics_applicable": dynamics["burst_metrics_applicable"],
+        "burst_structure_detected_true": dynamics[
+            "burst_structure_detected_true"
+        ],
+        "burst_structure_detected_pred": dynamics[
+            "burst_structure_detected_pred"
+        ],
+        "burst_count_true": dynamics["burst_count_true"],
+        "burst_count_pred": dynamics["burst_count_pred"],
+        "mean_spikes_per_burst_true": dynamics[
+            "mean_spikes_per_burst_true"
+        ],
+        "mean_spikes_per_burst_pred": dynamics[
+            "mean_spikes_per_burst_pred"
+        ],
+        "mean_inter_burst_interval_true": dynamics[
+            "mean_inter_burst_interval_true"
+        ],
+        "mean_inter_burst_interval_pred": dynamics[
+            "mean_inter_burst_interval_pred"
+        ],
+        "burst_metric_error": dynamics["burst_metric_error"],
         "divergence_detected": not bool(dynamics["stable"]),
     }
+
+
+def _evaluate_prediction_baselines(
+    prediction_dir: Path,
+    *,
+    train_norm: np.ndarray,
+    test_norm: np.ndarray,
+    test_raw: np.ndarray,
+    mean: np.ndarray,
+    std: np.ndarray,
+    threshold_norm: float,
+) -> dict[str, dict]:
+    """Evaluate fixed training-only baselines on the identical held-out split."""
+    generated = autonomous_baselines(
+        train_norm,
+        len(test_norm),
+        ar_regularization=float(
+            config.PREDICTION_BASELINE_AR1_REGULARIZATION
+        ),
+    )
+    metrics_by_name: dict[str, dict] = {}
+    prediction_arrays = {}
+    for name, artifact in generated.items():
+        pred_norm = np.asarray(artifact["prediction"], dtype=float)
+        pred_raw = pred_norm * std + mean
+        metrics = _heldout_metrics(
+            pred_norm,
+            test_norm,
+            pred_raw,
+            test_raw,
+            threshold_norm,
+        )
+        metrics.update(
+            {
+                "baseline": name,
+                "description": artifact["description"],
+                "uses_heldout_observations": bool(
+                    artifact["uses_heldout_observations"]
+                ),
+            }
+        )
+        if "regularization" in artifact:
+            metrics["regularization"] = artifact["regularization"]
+            metrics["transition"] = artifact["transition"]
+            metrics["intercept"] = artifact["intercept"]
+        metrics_by_name[name] = metrics
+        prediction_arrays[f"{name}_normalized"] = pred_norm
+        prediction_arrays[f"{name}_raw"] = pred_raw
+
+    _write_json(prediction_dir / "baseline_metrics.json", metrics_by_name)
+    _write_csv(
+        prediction_dir / "baseline_metrics.csv",
+        [dict(metrics) for metrics in metrics_by_name.values()],
+    )
+    np.savez_compressed(
+        prediction_dir / "baseline_predictions.npz",
+        **prediction_arrays,
+    )
+    return metrics_by_name
 
 
 def _quality_gate(regime: str, metrics: dict) -> dict:
@@ -314,6 +478,11 @@ def _train_and_evaluate_regime(
 ) -> dict:
     data_started = time.perf_counter()
     loader, series, times, train, test = _load_regime(regime)
+    regime_validation = _validate_regime_science(regime, series)
+    _write_json(
+        root / "00_manifest" / "hr_regime_validation" / f"{regime}.json",
+        regime_validation,
+    )
     timings.append(
         {
             "stage": f"data_generation_{regime}",
@@ -397,6 +566,7 @@ def _train_and_evaluate_regime(
             "configuration_hash": config_hash,
             "reservoir_seed": int(esn.seed),
             "normalization": "external_training_statistics",
+            "readout_diagnostics": esn.readout_diagnostics,
         },
         external_mean=mean,
         external_std=std,
@@ -418,10 +588,16 @@ def _train_and_evaluate_regime(
         "validation_windows_file": (
             Path("02_bo_optimization") / regime / "validation_windows.json"
         ).as_posix(),
+        "source_regime_validation_file": (
+            Path("00_manifest")
+            / "hr_regime_validation"
+            / f"{regime}.json"
+        ).as_posix(),
         "model_bundle": bundle_relative.as_posix(),
         "model_identity_hash": model_identity,
         "model_configuration_hash": config_hash,
         "model_seed": int(esn.seed),
+        "readout_diagnostics": esn.readout_diagnostics,
         "git_commit": git_commit,
         "training_start": 0,
         "training_end": len(train),
@@ -463,10 +639,66 @@ def _train_and_evaluate_regime(
             "source_regime": regime,
             "selected_optimizer": optimizer_name,
             "model_identity_hash": model_identity,
+            "readout_diagnostics": esn.readout_diagnostics,
             "heldout_test_start": len(train),
             "heldout_test_end": len(series),
         }
     )
+    baseline_metrics = _evaluate_prediction_baselines(
+        prediction_dir,
+        train_norm=train_norm,
+        test_norm=test_norm,
+        test_raw=test,
+        mean=mean,
+        std=std,
+        threshold_norm=threshold_norm,
+    )
+    finite_baseline_nrmse = {
+        name: float(metrics["nrmse_recursive_x"])
+        for name, metrics in baseline_metrics.items()
+        if np.isfinite(float(metrics["nrmse_recursive_x"]))
+    }
+    best_baseline_name = min(finite_baseline_nrmse, key=finite_baseline_nrmse.get)
+    best_baseline_nrmse = finite_baseline_nrmse[best_baseline_name]
+    heldout["baseline_comparison"] = {
+        "best_baseline": best_baseline_name,
+        "best_baseline_nrmse_recursive_x": best_baseline_nrmse,
+        "esn_nrmse_recursive_x": float(heldout["nrmse_recursive_x"]),
+        "esn_beats_best_baseline_nrmse_x": bool(
+            float(heldout["nrmse_recursive_x"]) < best_baseline_nrmse
+        ),
+        "comparison_split": "identical_untouched_heldout_test",
+    }
+    chaotic_horizon = None
+    if regime == "chaotic_bursting":
+        chaotic_horizon, error_curve = chaotic_valid_prediction_horizon(
+            pred_norm,
+            test_norm,
+            dt=float(config.HR_DT),
+            largest_lyapunov_exponent=float(
+                regime_validation["largest_lyapunov_exponent"]
+            ),
+            error_threshold=float(
+                config.CHAOTIC_VALID_PREDICTION_ERROR_THRESHOLD
+            ),
+            smoothing_steps=int(config.CHAOTIC_ERROR_SMOOTHING_STEPS),
+            persistence_steps=int(
+                config.CHAOTIC_ERROR_CROSSING_PERSISTENCE_STEPS
+            ),
+        )
+        heldout["chaotic_valid_prediction_horizon"] = chaotic_horizon
+        heldout["long_horizon_interpretation"] = (
+            "pointwise accuracy is interpreted only up to the valid prediction "
+            "horizon; the remaining rollout is evaluated statistically"
+        )
+        _write_json(
+            prediction_dir / "chaotic_valid_prediction_horizon.json",
+            chaotic_horizon,
+        )
+        _write_csv(
+            prediction_dir / "chaotic_error_growth.csv",
+            error_curve,
+        )
     gate = _quality_gate(regime, heldout)
     heldout["quality_gate"] = gate
     _write_json(prediction_dir / "heldout_test_metrics.json", heldout)
@@ -506,6 +738,9 @@ def _train_and_evaluate_regime(
         "best_params": best_params,
         "heldout_metrics": heldout,
         "quality_gate": gate,
+        "regime_validation": regime_validation,
+        "baseline_metrics": baseline_metrics,
+        "chaotic_valid_prediction_horizon": chaotic_horizon,
     }
 
 
@@ -927,6 +1162,7 @@ def _package_manifest(
         "pyragas_controller": "05_pyragas/control_summary.json",
         "comparisons": "06_comparison_tables",
         "report_figures": "07_report_figures/figure_index.json",
+        "hr_regime_validation": "00_manifest/hr_regime_validation",
     }
     packages = {}
     for name in ("numpy", "scipy", "scikit-learn", "scikit-optimize", "matplotlib"):
@@ -971,6 +1207,16 @@ def _package_manifest(
             },
             "control_model_source": config.CONTROL_MODEL_SOURCE,
             "pyragas_signs": list(config.PYRAGAS_SIGNS),
+            "hr_regimes": {
+                name: _json_safe(config.HR_PARAMETER_SETS[name])
+                for name in config.FINAL_HR_REGIMES
+            },
+            "hr_dt": float(config.HR_DT),
+            "hr_retained_steps": int(config.HR_TOTAL_STEPS),
+            "hr_default_transient_steps": int(config.HR_TRANSIENT),
+            "hr_lyapunov_estimation_steps": int(
+                config.HR_LYAPUNOV_ESTIMATION_STEPS
+            ),
         },
         "bo_invocations": bo_invocations,
         "package_references": package_references,
