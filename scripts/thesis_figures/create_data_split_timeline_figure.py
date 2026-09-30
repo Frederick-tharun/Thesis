@@ -175,7 +175,7 @@ def build_figure(boundaries: dict):
     ax.set_xticks(tick_positions)
     ax.set_xticklabels([f"{t:g}" for t in tick_positions], fontsize=fs(9))
     ax.set_xlabel(
-        "Held-out time $t$ (from end of discarded transient)",
+        "Time $t$ (from end of discarded transient)",
         fontsize=fs(10), labelpad=fs(6),
     )
 
