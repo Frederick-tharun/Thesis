@@ -39,7 +39,9 @@ PROTECTED_PATHS = (
     "FINAL_THESIS_RUN",
 )
 
-STARTING_COMMIT = "6d40954fe6dd9df377b098c14f0c662226c3917a"
+# Rebaselined from 6d40954f after the deliberate Chapter 1 rerun (Slurm job
+# 1816958, committed in 119cbdf8); Chapter 2 does not read Chapter 1 code or outputs.
+STARTING_COMMIT = "aa68e5cc7c65730238d61ea12ff22ad469f88cea"
 
 
 @dataclass
