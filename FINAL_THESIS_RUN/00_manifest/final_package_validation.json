@@ -5,7 +5,7 @@
     {
       "control_model_source": "validation_selected",
       "controller": "linear_feedback",
-      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
       "reference_type": "empirical_quiet_state_reference",
       "section": "03_linear_feedback",
       "stable": true
@@ -13,7 +13,7 @@
     {
       "control_model_source": "validation_selected",
       "controller": "finite_time",
-      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
       "reference_type": "empirical_quiet_state_reference",
       "section": "04_finite_time",
       "stable": true
@@ -21,7 +21,7 @@
     {
       "control_model_source": "validation_selected",
       "controller": "pyragas",
-      "model_identity_hash": "f178fb2eab9a19f289f9fa93b4826174596b155822adaf1e3a5212f0fa4a2db2",
+      "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
       "reference_type": "empirical_quiet_state_reference",
       "section": "05_pyragas",
       "stable": true
@@ -36,15 +36,7 @@
         "02_bo_optimization/periodic_bursting/optimizer_history.csv",
         "02_bo_optimization/periodic_bursting/optimizer_results.csv"
       ],
-      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
-    },
-    {
-      "extension": ".csv",
-      "files": [
-        "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
-        "02_bo_optimization/chaotic_bursting/optimizer_results.csv"
-      ],
-      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
     },
     {
       "extension": ".csv",
@@ -52,31 +44,15 @@
         "02_bo_optimization/periodic_spiking/optimizer_history.csv",
         "02_bo_optimization/periodic_spiking/optimizer_results.csv"
       ],
-      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
     },
     {
-      "extension": ".json",
+      "extension": ".csv",
       "files": [
-        "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
-        "01_prediction_all_regimes/chaotic_bursting/metrics.json"
+        "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+        "02_bo_optimization/chaotic_bursting/optimizer_results.csv"
       ],
-      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
-    },
-    {
-      "extension": ".json",
-      "files": [
-        "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
-        "01_prediction_all_regimes/periodic_bursting/metrics.json"
-      ],
-      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
-    },
-    {
-      "extension": ".json",
-      "files": [
-        "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
-        "01_prediction_all_regimes/periodic_spiking/metrics.json"
-      ],
-      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
     },
     {
       "extension": ".json",
@@ -85,7 +61,31 @@
         "02_bo_optimization/periodic_bursting/validation_windows.json",
         "02_bo_optimization/periodic_spiking/validation_windows.json"
       ],
-      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+        "01_prediction_all_regimes/periodic_bursting/metrics.json"
+      ],
+      "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+        "01_prediction_all_regimes/periodic_spiking/metrics.json"
+      ],
+      "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
+    },
+    {
+      "extension": ".json",
+      "files": [
+        "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+        "01_prediction_all_regimes/chaotic_bursting/metrics.json"
+      ],
+      "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
     },
     {
       "extension": ".png",
@@ -93,12 +93,12 @@
         "05_pyragas/control_sweep_summary.png",
         "05_pyragas/pyragas_periodic_k_sweep_summary.png"
       ],
-      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
     }
   ],
   "duplicate_prediction_violations": [],
   "errors": [],
-  "expected_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "expected_commit": "2ccca0deaacb537ba266ffcb73912821db81330f",
   "expected_controller_summaries_present": true,
   "file_hashes": [
     {
@@ -108,643 +108,698 @@
     },
     {
       "extension": ".json",
+      "file": "00_manifest/hr_regime_validation/chaotic_bursting.json",
+      "sha256": "b108724021e7859ea363367df258ebb0bfcbacec704afdb23057d9d28f187f5d"
+    },
+    {
+      "extension": ".json",
+      "file": "00_manifest/hr_regime_validation/periodic_bursting.json",
+      "sha256": "4a9ab7e998cf85658da90c9b8afedcad78563727a405e429349275ff4e1565cd"
+    },
+    {
+      "extension": ".json",
+      "file": "00_manifest/hr_regime_validation/periodic_spiking.json",
+      "sha256": "f8719ad7bb412219f57f7ab1583982e8720bc2513e5c9260b9883464f4f13941"
+    },
+    {
+      "extension": ".json",
       "file": "00_manifest/run_manifest.json",
-      "sha256": "802c1978f38cfa64653d367c1b8975a953f91a669915b8e16512b248a275eba5"
+      "sha256": "dbe20665a5b58b094077d05b75325d2be9fc92e1543364e63b742d15c14140c6"
     },
     {
       "extension": ".json",
       "file": "00_manifest/source_hashes.json",
-      "sha256": "482b97736241bb37b080efb67604fcb49beaa038e122576f68bdcd138a513204"
+      "sha256": "385d85b60b071653200efc6b7bed4e69d398c0b990178e8e3ee23e83f400fd87"
     },
     {
       "extension": ".csv",
       "file": "00_manifest/stage_timings.csv",
-      "sha256": "a6d2d64e705cafb2b86d8d4ef646d6860c16885aceaec71a89a11f5214d9cd66"
+      "sha256": "b7110fa13b1ab674a2961ba075bfbf52cf03d898d0da8da338706bf7d6d529ac"
+    },
+    {
+      "extension": ".csv",
+      "file": "01_prediction_all_regimes/chaotic_bursting/baseline_metrics.csv",
+      "sha256": "8656a4947e28da014752debba14ade1cd662f32b8996c1bcdeabe1cb8ecef4c2"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/chaotic_bursting/baseline_metrics.json",
+      "sha256": "78e44dc4a85aa52cba2376830ebdd8b95d902de37c1f2dbfc1ad5808a3e58958"
+    },
+    {
+      "extension": ".csv",
+      "file": "01_prediction_all_regimes/chaotic_bursting/chaotic_error_growth.csv",
+      "sha256": "1af2335bccf1254091c07ed62c1faec06de627798acc7de765fd15edd831520e"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/chaotic_bursting/chaotic_valid_prediction_horizon.json",
+      "sha256": "a1e4f32f5df363a754bda73a964e83bbb0cabd7f84434b74db1b6449fdf78e90"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
-      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+      "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/chaotic_bursting/metrics.json",
-      "sha256": "4b4befbcff624b712728b7129809147c62564c806307a1f94dbed7fce0593f4e"
+      "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/chaotic_bursting/results_all_states.png",
-      "sha256": "21d4f8969d65b02524d83002e7d48541e7e4b04b54f7e66353a13539cf816efd"
+      "sha256": "ef559db38bcae3885617ef9f8eb5294e1af94f731be7dec527da0b702b3d789c"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png",
-      "sha256": "0b71677c4cc39f74f2425073e101d36067c38d11d04306356086d46d96cef0b4"
+      "sha256": "7e9b292432164de88d030d996211540391742d5fda877ca58758fa2d51b98cc2"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png",
-      "sha256": "cda8e19f1b2bec00bc254a080f768cf6133c8805dba0db14e53847e6daa703c7"
+      "sha256": "22fd79859d9ad07fa663c5d5d10456579fed51a890660fa76e5ff975fffaf025"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/chaotic_bursting/selected_model.json",
-      "sha256": "d2eb222f13b65f1fc250d53bc288e0b5675ddfc6869a1771b29554e13cabba20"
+      "sha256": "ce833145ad6d0ea4a774a4002cd7d822e226e88202fe74e2c0b4318cf7d04396"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png",
-      "sha256": "9ffd660bb7d0338f8c2a23932907e0fb2bd84d9ead6be85345ef458fa0863e13"
+      "sha256": "e485e5645b75439ef2e9fa24bb9ca3ef995c6c009a6e0a6127f5c6d3d7b013ac"
+    },
+    {
+      "extension": ".csv",
+      "file": "01_prediction_all_regimes/periodic_bursting/baseline_metrics.csv",
+      "sha256": "f42442cd6261f008aa9aba7e2856e530f2c569cbd726a14aedf1fed006658c95"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_bursting/baseline_metrics.json",
+      "sha256": "9c452d5939532d6dffa879cf742b79531f665cf4317885e46e77a5374dfce759"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
-      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+      "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_bursting/metrics.json",
-      "sha256": "5af16ab60543912aa0862fe6c4502211adbe05e229d181deb269e1635dc5ed0e"
+      "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_bursting/results_all_states.png",
-      "sha256": "b90e3a0e895695a9e696a480785a7eafc597083cf95266f09fc1ed221248dadf"
+      "sha256": "42f43084c7aebc1348666851a1968494b4019a0fef369a307258f21ad6ff345e"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_bursting/results_full_zoom.png",
-      "sha256": "e68047ce1ce4203cb2688e2b0fcfc136267bc2050eb84c5d73636698b69ec102"
+      "sha256": "4ee47d409bd97ca8cb3578053c76dbde1e44f0197d5f785e992bbe4853e6c95f"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png",
-      "sha256": "ef0a73834e59fa0605013ff0d97dd3fb5b5c5f4ce2b8ea644f12a239952f49a3"
+      "sha256": "2f40d16d3b944aba720c33992bec5f8817665f3dbc317214a92f43509724d8d2"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_bursting/selected_model.json",
-      "sha256": "b67ab6029121e2e479e169d5dcbd84f04be95176ec65fd59d29226ef5cb5ecef"
+      "sha256": "d0e542d465749b59da3694ca05f821f3e10009af6ca58a35a26013041f0b15d9"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png",
-      "sha256": "440489f1260733f4adf9ca0fafcda068539c78b05398cc650cb117ab868268cd"
+      "sha256": "0eb5e43c9183deae3dd9ee8fbf53155c10f9c8ec30c01f53935f184855394e10"
+    },
+    {
+      "extension": ".csv",
+      "file": "01_prediction_all_regimes/periodic_spiking/baseline_metrics.csv",
+      "sha256": "5ac2c681d9055211237224060f76fd9b4a2722357c75ae43045d149c6549dce4"
+    },
+    {
+      "extension": ".json",
+      "file": "01_prediction_all_regimes/periodic_spiking/baseline_metrics.json",
+      "sha256": "c05f59eb0c8ea4169e54e0d1331fdf25f22ec77bc29b6866dedaf3eaed5f9ae8"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
-      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_spiking/metrics.json",
-      "sha256": "ab56897ecec680f9fb59058000442f3f6e8cf2b2125d1b3c7e94561017f61286"
+      "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_spiking/results_all_states.png",
-      "sha256": "d81f58019972b292f11a817f78357e5e43737c0b23eb6af6b1cd99a1ecf47cad"
+      "sha256": "e49a4d3cfb9c84e919d929c2ffcc292d5e64bf621e6a2620ea22d529e9e6f86d"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_spiking/results_full_zoom.png",
-      "sha256": "219e72fe120eef1d417d85e3ef76e387452efcd394c0a5397c2ba30336d7afea"
+      "sha256": "384a2fd89e25006023536dd73bb9233485f580f46dfdc8e32f645991f43cdde9"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png",
-      "sha256": "a4d886d08ad3ff929727ee7ad685d03c0582302985cc1f7eab48e36dd9e89b99"
+      "sha256": "3651dcab291fb299788d39f95ddf11da3cb068654aad54ac438fcaa6c3999534"
     },
     {
       "extension": ".json",
       "file": "01_prediction_all_regimes/periodic_spiking/selected_model.json",
-      "sha256": "c35b160db397a8c457b1e9ff6777349277b17ecfc1a15376db783ab717ccbec5"
+      "sha256": "c5a5dcb27a688ca733fbca3bfb87da9ea45233f971f154231c18d2794fb09ada"
     },
     {
       "extension": ".png",
       "file": "01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png",
-      "sha256": "d25ceda3b8996c78fb13b6388362a31e4c053c1c418ae8b769398dc4a29d6cc2"
+      "sha256": "d00e92417cfbc8cdb8a330c201746314024ab365954527e81fd1b148bcea7aa9"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params.json",
-      "sha256": "495bae24fd55970a29ce23198e5af23133a44473459718ae1d7c082786ad6cf1"
+      "sha256": "b99238540a76803fdfb27b56a4f628ac736a496a75c48927a0209951fc574279"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params_auto.json",
-      "sha256": "a6023fa42cb9b15a0cbd74d2ab18a2df3b6bdd74c853874b479aa3034e3e3222"
+      "sha256": "b9d09f678a4aa7db59ee3a58ee5aadc5c1015e45cc0ea12b73fae7c3bf5ecb17"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params_dummy.json",
-      "sha256": "c13bd5e7c7e9c8371e954f327d3d6126cb1f38228aa4771220a759063e1877f4"
+      "sha256": "25d20f76099d6182209c662061f77f6f5fb353b752951766b18e574a68807234"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params_forest.json",
-      "sha256": "34419843933a2e2d70d4f393d9a7dc1fc1abb6e51657e2eee8ba8de17c4c4cf2"
+      "sha256": "702904d05ef9b6f0a194415bb8ab10753c6c60fe570f2e2c315efcf760b177db"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params_gbrt.json",
-      "sha256": "38b775b192ada280b0a2339beac8fe4ea446d1b23d1d3b4b503899d6fdaad94c"
+      "sha256": "316ba1923cb44c789a0c1df8b550578cd4bf92d021d39202e34eb0417f795eec"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/best_params_gp.json",
-      "sha256": "dea1be2e7fdeaa50fdb9ebd4f57e39daaaf2596d21d4883affd9029c2cabce28"
+      "sha256": "4d1d93dd0966c3a76c17af086554381ac7a3645c90add140e70cf5f440994000"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png",
-      "sha256": "7fa41344f68bdf31da43fcc86608be4ff728ea9923a1d2b6e94ae291129bfa67"
+      "sha256": "6d497704fdfcf3424bf883f74a6aaf7f56945739cd244d69dce75a313de8ff61"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_convergence.png",
-      "sha256": "35c243f6ed115b73f0dab16d287ad2a9a1c1107e2426a5c15d7ed2ea54b65c39"
+      "sha256": "eb0ab4349858d494a167c92c93468863816988057ca2fcc7928021142af6d41c"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
-      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv",
-      "sha256": "764b69b5c224a8e5f30952776505cc9a363d0953accb3ede97eac4bda34f706d"
+      "sha256": "10ccfa3200f2884133a7fa828fe51b36d642dfd0b2322e7e2179a78ada6fac45"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_results.csv",
-      "sha256": "82c4cea4b96c710f3fc2f68a4b68c78c1a4296960747ae613fbe0f2720ceae9a"
+      "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_summary.json",
-      "sha256": "81cb685500696b24ba7819c298e3bc21f468fb93d27f851c6b7a8fb1eb37894e"
+      "sha256": "809115c1c33db4a30eecbbdc5af85f73dc66f82bb832d5a64c2db5c897ba5deb"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/chaotic_bursting/optimizer_validation_summary.csv",
-      "sha256": "63acb0154bd51499d0371f4d296c50cff2b354031cd859bb9505bde013e47894"
+      "sha256": "869369cb851e1248f1a56ce8d51ba86d9cb7303aaa1b36f2dea26a4ca1df26b2"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/chaotic_bursting/validation_windows.json",
-      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params.json",
-      "sha256": "8b227e83b0560ec8380ba7fc52e36c441eb2c5a4d7391fa4b87bed1b8d8bae4e"
+      "sha256": "552d432f0e9c4b9ac54e7c04e84029c63606180f1dfa70ec5c48ad544e89a3cb"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params_auto.json",
-      "sha256": "6bd1e32c3c1bc788c028db0505abc3f7beaef0dc8428a91af66027d7c768fcf5"
+      "sha256": "3d9f4342bde8010fe082e841999c7cec73712c0aa438329291fc2488c63a8c85"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params_dummy.json",
-      "sha256": "39b6f50706f8393463b60b346d879106e1f92572b66449f04e8aebb913d188db"
+      "sha256": "78b6f1d9e56fc3e2140f9da3656b94d41ff0fa4f6d6bf25ee2c6cae37f8355aa"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params_forest.json",
-      "sha256": "64d92f0357fea1a3fc5e14c10e28bf7d434eb01577766ff116887fb1ca659c24"
+      "sha256": "3ca80200ee76183e1280aa6323794538ab9aee1768fe14dd0810e603896bd4fa"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params_gbrt.json",
-      "sha256": "ab1985739cac9818354b05ea19cdc532d9174267106ec26d582591d7f239ea8c"
+      "sha256": "c83089ee64c7992b71b17ecc27012271fbab3df7d8704f8e8691b3861827bb73"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/best_params_gp.json",
-      "sha256": "530a3348f3f76564848bfb5af2e1896e1b2f1bc4a8d539763cb5d168d18685d8"
+      "sha256": "dc31cd2adbe59a4ce919f53336deea64f1df50501bc302cf4c7c2a029f19c738"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png",
-      "sha256": "40a0dc73e941e8812b573cb639fe6254a2dc5120eedbda1ae4a56f0da4536c13"
+      "sha256": "b5ed23ee4504c246175c2634599b281bbbeaa142ec49e3659719bc5a2c4f8a71"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/periodic_bursting/optimizer_convergence.png",
-      "sha256": "18b7dc3411a0fe70c68e82166fa47048e11ac2d9255e21db6708950f628c1a14"
+      "sha256": "e99416aaadbf0330dacb369c1a6e9578562b984c4dd6045104245b5fec0eee53"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_bursting/optimizer_history.csv",
-      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+      "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv",
-      "sha256": "7502a7b343e246253305edc45bfa4ab8e4528da36e4e0f408a2e05d167d8834f"
+      "sha256": "e08c347721a1c50ea352fe5faf1d8e85b3b1d3b9e2c9e6f0c86b2e3567405dda"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_bursting/optimizer_results.csv",
-      "sha256": "2f59d3b59fe6f8a5fb04033093bdda4749d262d48ed4a85f296373e1f5593dba"
+      "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/optimizer_summary.json",
-      "sha256": "88c5165fcaf89405595bb394c57503dae021c151c288012fe7ecf2d88ae25bf1"
+      "sha256": "e4a938cb0ae3a71ee7f27b6475703578b30c9a721548b361ee547cb02c33ca94"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_bursting/optimizer_validation_summary.csv",
-      "sha256": "e0f8ad81bc310a00c15b8dec5d8f1e1b7915d311afc643c97babc79058d74d34"
+      "sha256": "f1c7ad92ede953757271a411b33863b5482ab61ae83de75ce5e475e01f993210"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_bursting/validation_windows.json",
-      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params.json",
-      "sha256": "be51c7f7ad0d0e9a207687c120cf772048739a10638acba35e77a074f56c147d"
+      "sha256": "eeb166072632d361016b669b432d995fb7f1d96ce86cb63c66db7d4ddcc0dec5"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params_auto.json",
-      "sha256": "9405c7e86a107b2fa0cb392c082c658a2457653de81293c3ca041aa7fd0c1a8f"
+      "sha256": "e33aa80d81289faae5c819bd451b852738d91fe98fff8891dbda5d0895b89287"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params_dummy.json",
-      "sha256": "f4b7e414b281873ccd3b5a58b763fa771810ec1af4c7130d21fbf7d3e60bd0b9"
+      "sha256": "3e2720ce48c0080a56f97e45340bb5e731e35788c16500157b4d3534ed9d2af0"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params_forest.json",
-      "sha256": "d73fab60a6e2679c4d36fe18a58fb76cb9f1c491764e853c0ac881773ee73dbf"
+      "sha256": "9106508782575e603e230fb8b220092de2ee48d33dae50dd6cc3ca58db146b04"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params_gbrt.json",
-      "sha256": "ae1c08a434b4f865455c4b682f22314442ca03f132a587682b492483fd9abfaa"
+      "sha256": "a38e789ca8c07460022cf5b3d7a52b1963b4540d98059a9672bd82998ed72860"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/best_params_gp.json",
-      "sha256": "73d6559bcf29aa1f997d6a92346956c376fae874e223aa7ae938c89069824c9a"
+      "sha256": "4576a8126322d3f8d0763ff293a628af05a3c675a82f093bab055a64b98ca8eb"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png",
-      "sha256": "75f84b913c70d054afa148ca01620a8402574783548995d8e4c1f9c77ad086e6"
+      "sha256": "f43c7ed251bce2e3a25d25c79eb5099e645c791a98481f6776ad1f016b4f70ed"
     },
     {
       "extension": ".png",
       "file": "02_bo_optimization/periodic_spiking/optimizer_convergence.png",
-      "sha256": "9ced75f129c4b143dd513296a179d87c7e578e3aa2464d55e7a5f3bb1d3188cf"
+      "sha256": "da280fe27deb1bcba4a34442efd4b490a15f4b0ac3cf36ff8b8f6c967b0cd718"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_spiking/optimizer_history.csv",
-      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv",
-      "sha256": "174208dfdc64352ce3189edcaf3274510a3e0b45cab5b30a0278dccc0276beea"
+      "sha256": "125620576009c5cd2ecfce18decbf7cd03af7f830a8e5600cca3b9ab7b2b8dd2"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_spiking/optimizer_results.csv",
-      "sha256": "8cf9e5194fa97e86412987e045b6d0dda85cef93cb22e2259ad92f47524042d1"
+      "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/optimizer_summary.json",
-      "sha256": "0e43b59a1ebaf2ce70906233a8d6b247f545089041f5b07a32b2ae76b6848e7d"
+      "sha256": "9092733fa346b1a18240a1b545dcaf4739772f409e983385f18bef3a588b2c7a"
     },
     {
       "extension": ".csv",
       "file": "02_bo_optimization/periodic_spiking/optimizer_validation_summary.csv",
-      "sha256": "c858065e645d15ce6eb1c3f6807b814909fcd51f905afa88eaa2b957baf1a4bd"
+      "sha256": "4be239e152f184d40989ffd787966e227123d142e2836474eb4edf2f5b6563a2"
     },
     {
       "extension": ".json",
       "file": "02_bo_optimization/periodic_spiking/validation_windows.json",
-      "sha256": "f3b423ec3864c8f3a784b156aa513e5aa1854557abca638189bcfda7faf55b61"
+      "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
     },
     {
       "extension": ".json",
       "file": "03_linear_feedback/best_rollout/metrics.json",
-      "sha256": "46189e09a7e59dc2d064957428b2dde072134f418e1458e4ec866a24cd84d057"
+      "sha256": "dac9c6874d0c12b7f9b78115ceb52170be54f0a1be0e239b1af17223ce2ea2a8"
     },
     {
       "extension": ".csv",
       "file": "03_linear_feedback/best_rollout/rollout.csv",
-      "sha256": "116b5c96f92e1d1aaf9daf1f80a93174cf9872683597812b05fbd9c9a451477a"
+      "sha256": "53dfbd3d996aa00216b20e0ab452aab5eb35026281dd3c3de03d0a4e2c1cb69b"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/control_error.png",
-      "sha256": "bf23452846177a0c1fe6554681b0400816b22b64bab2398139d1bf9f79f6a8e6"
+      "sha256": "7a367519a68b6952f8557dd2f35be0096e914ac1007b130aac7e469451de8136"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/control_signal.png",
-      "sha256": "a21d1b4528d7fbfe161c4abb4f901d175f187e8006520b2806d61c93ec373bfe"
+      "sha256": "51aa9f8745667c9288fbf7e423ed065957248c78f4f99aebba1341d00754cf21"
     },
     {
       "extension": ".json",
       "file": "03_linear_feedback/control_summary.json",
-      "sha256": "41e0722d023efb51beb7c74e107283f99adf0d14b1d2250a0ea68bb9fcc314eb"
+      "sha256": "feba1909f7073d07b56633d3966ab774ed7a0fc26123badb527e3a8996e1c27d"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/control_sweep_summary.png",
-      "sha256": "bb249a6c134f2680ea3369fa3a57bad589593805a4cb8eac87ad693c62690fe5"
+      "sha256": "b2aa748c7b95d0415fa082be0714132eb11ace00abeecc885d9ff68e964f3aa8"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/controlled_all_states.png",
-      "sha256": "e29788e0a54e211ba23c05dc295d081187b9ecedd786e5281a2837693eb6c7b7"
+      "sha256": "14598b820a06827abd347cabf6d9e64263d83900a3ac388e33490e284e81e7e4"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/controlled_vs_uncontrolled_x.png",
-      "sha256": "b239814a12ce2ce5dbb428bb32311fc7839c3547a21fb249195879f28c425c55"
+      "sha256": "ae1bb545b1f388f2b061df803a669275413a1f0b1f9e70215a9d7fbafd2e5a77"
     },
     {
       "extension": ".csv",
       "file": "03_linear_feedback/k_sweep.csv",
-      "sha256": "f753748f407d0ff8588a08a91ffcfac78b4fac73263997fc4242bbb898ca70ec"
+      "sha256": "c81713fbe65dbf66091a4b7538ea0174d3569ef5c0fced91e0cddac5add69f86"
     },
     {
       "extension": ".png",
       "file": "03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png",
-      "sha256": "8e2ffd097262bfc6ad793a72ca8560797bd3bb3649eaa4d8afda4c0766f7c8cc"
+      "sha256": "ae1e18323f55ba745db94a0dcdc0a3369dc51e0ba482ac9b3d25717402884f9c"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/best_rollout/metrics.json",
-      "sha256": "e91dcfaf254cbb956e273c14b1e7b3d17feb6b90ad67d3fb9fecd9fcd2d08ebb"
+      "sha256": "cb942ccb058bf4eaac07a987eb0b253c2f2cab2c7565a93c751e29623aa45e3a"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/best_rollout/rollout.csv",
-      "sha256": "b84603aa45f5b9d658297dee4b7926a35db474c70aa32f0773f56dafa24f0548"
+      "sha256": "52bdcbaa1f4ce8d3288cbabb65faeab737e36b7cea138494f966446b1f36e198"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/candidates/s_0p3/control_summary.json",
-      "sha256": "331bbaff2f28b3248e5699f1cf490b4cd1b3553e9bdb56fd2cd73e8ca7594524"
+      "sha256": "56bf221dcfab0ac11c6461dc42862f5a4a5cff3b2037a0ac73221b987701458d"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/candidates/s_0p3/k_sweep.csv",
-      "sha256": "24657f690c5f1e228059c34cac689ab851a3a198bba6663717688686c4bbe2b8"
+      "sha256": "ebe7aa380da511dcf5a3f7f3a4e3e2e331a263fa5efa56888ffcbc78d3878586"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/candidates/s_0p5/control_summary.json",
-      "sha256": "285d47c873e6a11e237c51f57d9d74da35952b11ed093a6b362751d916f28173"
+      "sha256": "41369398ac95a7c9e13b4aed856428d903d1b6685e0350cfc66af1da738a4fd2"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/candidates/s_0p5/k_sweep.csv",
-      "sha256": "111fa65b36dc8e965998fd16b86ca23a103af606adc3a873f3cf57c0bbe00247"
+      "sha256": "870445b5e217d58cf05aa8a8a5b92a76d2c60043fc0b56d2c7cdc805102649ca"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/candidates/s_0p7/control_summary.json",
-      "sha256": "5d605207114da51c96ca84197830840d1b5c11fdfe1ef18edde8e927ebe0374e"
+      "sha256": "15b315da772fe8997c1541c46b50f5db325f45586641a4f50b65cf2131f97aa6"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/candidates/s_0p7/k_sweep.csv",
-      "sha256": "c92b10132fab8355397689eae9f56c6e96750532a276588d3c02241a59ffc501"
+      "sha256": "927d4c58784ac4beacbd87673cbed588b08ecf102f39e985aea0fbf30d5e0343"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/candidates/s_0p8/control_summary.json",
-      "sha256": "b8dfe3281b35bbbbc695a0512adfbccbe0777efc0a78600533f010289e84a835"
+      "sha256": "d8b9c9beed2455c8b36430143efccefe26903d2e86b3771755f7f973a5678b38"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/candidates/s_0p8/k_sweep.csv",
-      "sha256": "d2cac56a0a3eec39656d9ca92f9c4dcdd756a4314c0a4c4527f52a673856f42f"
+      "sha256": "9ecea38312812da9cda3b65575a400f046a819cb6a3f3291d835133189e2ce1f"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/candidates/s_0p9/control_summary.json",
-      "sha256": "e796782e930f1ba95d88ab4cfbbd879bc9c194a5cecde15ce38fa8e1e8ac33e8"
+      "sha256": "42a9486796ffbb575382e3a540a0c74c9ea7acf32ed8c40ca80006f8cda66d3f"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/candidates/s_0p9/k_sweep.csv",
-      "sha256": "f4f29cb28386bcf34a99819f642a3b7c68648588b8eb0618964a663fcf72d16c"
+      "sha256": "209e399f06001b62583fb40ff533fd9032b351db6ba9cba4fc9fcf8a6a76ee08"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/control_error.png",
-      "sha256": "ad18cc67c588f5becd116f22184e4b9d42946c1c88b89aa7e44b4be8df8ea115"
+      "sha256": "f761fe60262c1cb2a69a860d91b1924e35c6e1462595c345f086e648daf66292"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/control_signal.png",
-      "sha256": "4707873383a99e8e41f3f0cd3991dcbc61e7d073584dfa62fd8e3925f11a48f2"
+      "sha256": "464425f4dc8397f287625f1042a6249182311d89d78b96a98af6182ea4705207"
     },
     {
       "extension": ".json",
       "file": "04_finite_time/control_summary.json",
-      "sha256": "d430dd17952e1b6429ad2127758439f5fa69c307569928dd57c234dfe1124d67"
+      "sha256": "27568a9e97167c6e0c9966e7a302c973b0e03d6aa018ce489cc00bbb294608ec"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/control_sweep_summary.png",
-      "sha256": "9b85ad83ad5f5a031c089863f36c9a71f6b18e3bff3212cc5e18de116ee3e6aa"
+      "sha256": "607212395423bace3efbeb72a039336e2a6bee539b62b721af762b8a0734197d"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/controlled_all_states.png",
-      "sha256": "30d70a275e5160fa33c567710670f38cba681c9a1a8d2017facc74ca4f9b0736"
+      "sha256": "61e44c63b5f35273a00d482dfd7fd33bb4fff88efd17a3b6797216e694cf28ae"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/controlled_vs_uncontrolled_x.png",
-      "sha256": "b3286b7d0fdbea38dc6c895f2fed9938f04878627b151135ef0a0c8eaa7da894"
+      "sha256": "51a70bc601f965938a6b9234a8b765a566628be90ee1a7e36e3e94f3ee451231"
     },
     {
       "extension": ".csv",
       "file": "04_finite_time/k_sweep.csv",
-      "sha256": "c434d324e0d884b1913f98608bcd89b36e1ad9272f8f0791330d01dd8cdc6235"
+      "sha256": "93e560232dba633386f34b52f8a851c5b087872c8fbd1a5770091f79ca7f43ed"
     },
     {
       "extension": ".png",
       "file": "04_finite_time/raw_readout_vs_corrected_feedback_input_x.png",
-      "sha256": "985a41d571e43d50f8078a3462a820f4c1bc2d5de15ebb7281f40a5d061a2aff"
+      "sha256": "d5c477d6e6da65c3988e17f98abca05f71ca9611d66d993f22958246d9cbf41f"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/best_rollout/metrics.json",
-      "sha256": "004671e7e9044676e2e0510246a736b2084b7cb670182892ec443ea53b19da04"
+      "sha256": "8b37835e1e4991ed2bed30822ccebb0afb3baae452a9a88700b2985f89de829e"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/best_rollout/rollout.csv",
-      "sha256": "ec5dd037299c1d8fdb307ad991c1a53f831c5ba6ebc2aba6a6a1f25460f18e95"
+      "sha256": "21ad693f171427fc4c53cb5cd018184baf678eff8272bf2a6435c75feacedb53"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json",
-      "sha256": "5872f3e4f332fc8f8ff686b6a5baf22f39327dde96ddaba49fc8e072d25d8255"
+      "sha256": "fdf28c4f6a8852d9b818885e2462ca961263545e4f4b46e0f543df75a3781630"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv",
-      "sha256": "ba5c68692ec8b6b887e9ef469742183d61f05107abf695dbf0e29f60ce42373b"
+      "sha256": "a65e2ceb68f20fd78e2b227e52f708c9f6abc6072ebc32717fa3cbdb05445741"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json",
-      "sha256": "a295f83ed097d2c3347a438ac2bd5a62de6ed5e51b8262c65f7b552883e25c57"
+      "sha256": "b96c8157fa915b7d50f3a352ea28714f689ded379f0f8a7916af47686e1c4242"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv",
-      "sha256": "79187da69743ab5a41aae3f68d0d959a4a32de521d1b84676df42c5eefb661fd"
+      "sha256": "bcb7cfecb3c3d843d536037bd9b0e6c4c554f3238bdb056771c4a6acf4184383"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_20_sign_minus1/control_summary.json",
-      "sha256": "309ab72939c588b48d94306eff2aa0ce82a821e927fdc35dc535c8b00af00d79"
+      "sha256": "cd677c4e64226398800e8b4c5701b712bb225eebdb16fc934705161deb5ec17f"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv",
-      "sha256": "7ff5de8f4e29880153a42427fa37e647ddfd7e0486431d8da08576944fda72f3"
+      "sha256": "568f57bcab0af0631998b6432b97a8c9ac202109378d4f0574246b79ce91e514"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json",
-      "sha256": "210745babae8893ccc662aacd30c5525868638a8ca1058e239ec4bf13e0e1c99"
+      "sha256": "fc86695573954762421ba0f537fe64e0714c5eb3b24b17bf20cc7037dedbeebf"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv",
-      "sha256": "2df09349e8d50907ac83a9c9d24cf99c0a4f9ccce2eef2c86e11f73e5b4b2c99"
+      "sha256": "50306ad546fd84f99f7b6f3c712b215d883e9297e6678bd3302d5e8dbb061ee5"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json",
-      "sha256": "57cb295e4be022f1c89970fad3e8033d98884aba6f4139bf5cb3ec147563d1dc"
+      "sha256": "bc422bebac1c488f6ae4e17375675feccfb565da67d81d4dbf7aed54391409b5"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv",
-      "sha256": "546b224b4e538bd6641261862d153a3d8dbaf060a1fdba747305267c65dfd401"
+      "sha256": "aea2f553ee723322c8732c8a706b39b8c90c01200d69bbb6419e483e5aaec540"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_320_sign_minus1/control_summary.json",
-      "sha256": "3df65c26932c8c54ac64e05903828f4cf6ca96fb91594ed0ebe0107fdc5914d9"
+      "sha256": "0bce96f4bc5794c8302737ea2be40d14f5a099809ac01a03b265edcf8bd7ee61"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv",
-      "sha256": "b338b014a30c728e4cb794f7fe356ff5dcb981f9688a3522e240600a0642928f"
+      "sha256": "d02a3469ad60e1d25b1f834ca7cbfb8aa40c13c442b20920b0262d50920929c8"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_640_sign_minus1/control_summary.json",
-      "sha256": "cafae7121a949a4b1279609aab2d6a2f0dd91b74eeadfeeaf990b74b40fa866d"
+      "sha256": "43ca6954c82455462b8a640412f7a3d34fb823f094a894649bd5a0798712453d"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv",
-      "sha256": "6fc03b800382e997a566e6d8a01312a796f4d14e2b3b301bee61c126d524c34b"
+      "sha256": "4c9bee1536ce3c2ebb116f859dfbe2b2eb772e63cfae3be1a463501f717bc0a2"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/candidates/delay_80_sign_minus1/control_summary.json",
-      "sha256": "627196a6657b48b71f983f8c856d855bfe814c245092846e6b012cdc1fa698f8"
+      "sha256": "1d2db727da1a762bde2d1e9182b83be5d422c252b6866e3e06439fb91a3d6015"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv",
-      "sha256": "67d3efb7d3cac7df0715dceef71620a16efc164e8dc7e2d2d6b4626bf37304a5"
+      "sha256": "441f664e617394407f1f74fac862bc66a48fa955fea3ce66867f3b288df4e032"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/control_error.png",
-      "sha256": "ed772f6a099e80e7f4d1413d7cd774738542ed4979afac92295ced13a2b16b3a"
+      "sha256": "089c6c3cb7a69a3440cb635072eb39e233103939eafdd09c7346dec711f5fdbf"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/control_signal.png",
-      "sha256": "251178226516728647a9c598ec30966d667cacb4f8c95e6db388d1c17238f954"
+      "sha256": "5f12eb1bfdb6525e80ccd3cb40f80da8ab10196b9c9594b52075c20d1ff62c8a"
     },
     {
       "extension": ".json",
       "file": "05_pyragas/control_summary.json",
-      "sha256": "34bdf9123659145c03185a81bdff416dcd4fc5dda2d042ca04aa393034985fb8"
+      "sha256": "e6331a9854b7756f2dd4b73d646391cd7da8e5972d24d227b392e09e0449fe8c"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/control_sweep_summary.png",
-      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/controlled_all_states.png",
-      "sha256": "45a613fafd2e7ffe7e0dd13ca9f8ce8409b6a2480ecf892324df997e61e7cfe6"
+      "sha256": "aa81c6101f68559e4ff5b660388a3a039fb699adfb0ff32c1304cdd5ec46905d"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/controlled_vs_uncontrolled_x.png",
-      "sha256": "11ef7d278c1c51db55d24fdafbe03b447694626356d14208e0d7bfa4326cb60c"
+      "sha256": "491cf0a2b316adb857c14ec10719a90ce7a6082fb9336eccb8897acf1240a1ed"
     },
     {
       "extension": ".csv",
       "file": "05_pyragas/k_sweep.csv",
-      "sha256": "d952b1a569403ca5089569d7fedee331f20e22dbe5827b2c8355682ef300773e"
+      "sha256": "2ef040a6ceb1c72207fd514f889f6e993c4bbb73487bfbd490cbdb5c424b77c3"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/pyragas_periodic_k_sweep_summary.png",
-      "sha256": "0636257e7c1531f87e25c645d182ca604d1eeb59ef7ee5c9003ff3a45db77c3c"
+      "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/pyragas_periodic_zoom.png",
-      "sha256": "e19c26ab8fdb3f84013a13d1b907230ad961b80846f429a18f6df378570bed89"
+      "sha256": "382ed4fca86fc34a9937feef63723cc486b6f06b7a4fbc0e3b2b6be89a605fc4"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/pyragas_phase_trajectory_3d.png",
-      "sha256": "1bbf6d75c3acb084b0d0922c461974f8ba2016695c3936b8c552ddcc8bacfe6d"
+      "sha256": "8217b580f9c5f483cc9ae99fa92e1da4fa0e65415084b76b835d1f3fb4b801cc"
     },
     {
       "extension": ".png",
       "file": "05_pyragas/raw_readout_vs_corrected_feedback_input_x.png",
-      "sha256": "f884174878a8eceb0fc35ee726fce051346a411127e00b9ab4326f2d612f196a"
+      "sha256": "b6b81256c5417eb1b8ce5e7b0679a4b18141087852cf13fe699adf1314206e0b"
     },
     {
       "extension": ".json",
       "file": "06_comparison_tables/chapter1_final_comparison.json",
-      "sha256": "0fb70ce46f2bcd97a3270b903722ce95a4e0e0600fe2a28882ec3d9fa9e44d9a"
+      "sha256": "cefe2825614a0351b60a4d3e89825dfc7b93576f24e58f137f33fd3b75b74e11"
     },
     {
       "extension": ".csv",
       "file": "06_comparison_tables/controller_final_test_metrics.csv",
-      "sha256": "76b2f4626e7382289d6a8b69bfa61d3ef8641d5ea908bdbceb4df54d0c84b312"
+      "sha256": "edf26a66b7a2de1f6fba7d5693db11622b161552fd799678272190e0bfb9ba14"
     },
     {
       "extension": ".csv",
       "file": "06_comparison_tables/prediction_metrics_all_regimes.csv",
-      "sha256": "b1f96209c7b0a4d6dd74702bedaf698e7376ccd31ac0fcc720e0fe7ddc0aeec1"
+      "sha256": "4c4878a00d37a524470159bee5d0885386caaf1c2557304b7a03f330e7f5dc25"
     },
     {
       "extension": ".json",
@@ -755,7 +810,7 @@
   "final_quality_gates_passed": true,
   "json_errors": [],
   "json_valid": true,
-  "manifest_commit": "2e953b065b3208c1556cf3d56ce690a1f7cd48c5",
+  "manifest_commit": "2ccca0deaacb537ba266ffcb73912821db81330f",
   "manifest_commit_matches_current_commit": true,
   "misplaced_prediction_figures": [],
   "missing_directories": [],

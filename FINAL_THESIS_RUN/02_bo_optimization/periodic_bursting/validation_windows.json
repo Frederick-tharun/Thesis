@@ -1,9 +1,12 @@
 {
   "aggregation": "mean_plus_max",
+  "event_metric_reason": "short windows may contain fewer than two spikes and cannot support an inter-spike-interval comparison",
+  "event_metric_scope": "one_contiguous_240_time_unit_rollout",
   "final_training_end": 105000,
   "heldout_test_end": 150000,
   "heldout_test_start": 105000,
   "index_semantics": "zero_based_half_open_[start,end)",
+  "state_metric_scope": "three_non_overlapping_80_time_unit_windows",
   "test_data_used_for_selection": false,
   "training_end": 81000,
   "training_start": 31000,

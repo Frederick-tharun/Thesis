@@ -1,0 +1,13 @@
+{
+  "definition": "first persistent crossing of the rolling normalized multistate RMSE threshold",
+  "error_threshold": 0.4,
+  "horizon_lyapunov_units": 3.476671975858837,
+  "horizon_steps": 24173,
+  "horizon_time": 241.73000000000002,
+  "largest_lyapunov_exponent": 0.014382459669295647,
+  "persistence_steps": 100,
+  "right_censored_at_rollout_end": false,
+  "rollout_steps": 45000,
+  "rollout_time": 450.0,
+  "smoothing_steps": 100
+}

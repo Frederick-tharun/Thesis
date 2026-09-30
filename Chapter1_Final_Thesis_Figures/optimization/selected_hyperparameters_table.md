@@ -1,5 +1,5 @@
 | Regime | Selected optimizer | Reservoir size | Spectral radius | Leak rate | Input scaling | Sparsity | Ridge regularization | Washout |
 |---|---|---|---|---|---|---|---|---|
-| Periodic spiking | FOREST | 540 | 0.9362 | 0.2551 | 0.1736 | 0.1038 | 2.424e-10 | 352 |
-| Periodic bursting | FOREST | 473 | 1.0331 | 0.7938 | 0.0774 | 0.0316 | 1.476e-10 | 375 |
-| Chaotic bursting | GBRT | 413 | 0.6048 | 0.2557 | 0.1639 | 0.1987 | 2.558e-10 | 499 |
+| Periodic spiking | GBRT | 744 | 0.9833 | 0.1003 | 0.1634 | 0.3114 | 1.151e-07 | 101 |
+| Periodic bursting | GP | 342 | 0.5057 | 0.5292 | 1.0000 | 0.3264 | 1.000e-08 | 967 |
+| Chaotic bursting | GBRT | 326 | 0.5042 | 0.4702 | 0.6462 | 0.0508 | 1.643e-08 | 780 |

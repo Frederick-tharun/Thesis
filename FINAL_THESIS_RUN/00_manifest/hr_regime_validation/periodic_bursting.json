@@ -1,0 +1,73 @@
+{
+  "conditions": {
+    "at_least_20_detected_spikes": true,
+    "burst_timescale_separation": true,
+    "largest_lyapunov_exponent_consistent_with_zero": true,
+    "multi_isi_cycle_repeats": true,
+    "retained_state_statistics_stable": true
+  },
+  "detected_spike_count": 53,
+  "dt": 0.01,
+  "expected_regime": "periodic_bursting",
+  "initial_state": [
+    0.1,
+    0.0,
+    0.0
+  ],
+  "interpretation": "periodic bursting with a repeating ISI cycle",
+  "isi_diagnostics": {
+    "best_short_lag": 8,
+    "best_short_lag_normalized_mae": 9.87303029880895e-05,
+    "cycle_max_abs_error": 0.010000000000001563,
+    "cycle_normalized_max_error": 0.00036201111095646214,
+    "expected_cycle_length": 8,
+    "interval_count": 52,
+    "isi_cv": 1.1648726373683362,
+    "isi_max": 114.86,
+    "isi_max_min_ratio": 11.097584541062803,
+    "isi_mean": 27.623461538461534,
+    "isi_min": 10.35,
+    "isi_std": 32.177814495550486
+  },
+  "largest_lyapunov_exponent": 3.7061467206777284e-05,
+  "lyapunov_convergence_tail_fraction": 0.2,
+  "lyapunov_convergence_tail_samples": 3000,
+  "lyapunov_convergence_tail_span": 0.006489645565708491,
+  "lyapunov_estimation_steps": 150000,
+  "lyapunov_estimation_time": 1500.0,
+  "lyapunov_method": "Benettin tangent-linear method with RK4",
+  "lyapunov_renormalization_steps": 10,
+  "lyapunov_separation_multiplier": 3.0,
+  "lyapunov_tail_std": 0.0010392771290403478,
+  "minimum_chaotic_lyapunov_exponent": 0.001,
+  "parameters": {
+    "I": 3.0,
+    "a": 1.0,
+    "b": 3.0,
+    "c": 1.0,
+    "d": 5.0,
+    "r": 0.003,
+    "s": 4.0,
+    "xr": -1.6
+  },
+  "passed": true,
+  "retained_steps": 150000,
+  "retained_time": 1500.0,
+  "stationarity_diagnostics": {
+    "maximum_normalized_mean_shift": 0.17055515180116443,
+    "maximum_normalized_std_shift": 0.021276862343256733,
+    "normalized_mean_shift_by_state": [
+      0.11723817345416095,
+      0.17055515180116443,
+      0.0019677531214202554
+    ],
+    "normalized_std_shift_by_state": [
+      0.021276862343256733,
+      0.020825468818386466,
+      0.002712516652490202
+    ],
+    "quarter_length_steps": 37500
+  },
+  "transient_steps": 200000,
+  "transient_time": 2000.0
+}

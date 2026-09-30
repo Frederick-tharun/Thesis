@@ -1,0 +1,74 @@
+{
+  "conditions": {
+    "at_least_20_detected_spikes": true,
+    "largest_lyapunov_exponent_consistent_with_zero": true,
+    "no_burst_timescale_separation": true,
+    "regular_inter_spike_intervals": true,
+    "retained_state_statistics_stable": true,
+    "single_isi_cycle_repeats": true
+  },
+  "detected_spike_count": 74,
+  "dt": 0.01,
+  "expected_regime": "periodic_spiking",
+  "initial_state": [
+    0.1,
+    0.0,
+    0.0
+  ],
+  "interpretation": "regular tonic periodic spiking",
+  "isi_diagnostics": {
+    "best_short_lag": 5,
+    "best_short_lag_normalized_mae": 5.844961203068002e-05,
+    "cycle_max_abs_error": 0.00999999999999801,
+    "cycle_normalized_max_error": 0.0004968217022607802,
+    "expected_cycle_length": 1,
+    "interval_count": 73,
+    "isi_cv": 0.00020074157381885324,
+    "isi_max": 20.13,
+    "isi_max_min_ratio": 1.000497017892644,
+    "isi_mean": 20.127945205479453,
+    "isi_min": 20.12,
+    "isi_std": 0.004040515398287587
+  },
+  "largest_lyapunov_exponent": -0.0002929076237785211,
+  "lyapunov_convergence_tail_fraction": 0.2,
+  "lyapunov_convergence_tail_samples": 3000,
+  "lyapunov_convergence_tail_span": 0.005220668816774054,
+  "lyapunov_estimation_steps": 150000,
+  "lyapunov_estimation_time": 1500.0,
+  "lyapunov_method": "Benettin tangent-linear method with RK4",
+  "lyapunov_renormalization_steps": 10,
+  "lyapunov_separation_multiplier": 3.0,
+  "lyapunov_tail_std": 0.0010590966830720668,
+  "minimum_chaotic_lyapunov_exponent": 0.001,
+  "parameters": {
+    "I": 4.0,
+    "a": 1.0,
+    "b": 3.0,
+    "c": 1.0,
+    "d": 5.0,
+    "r": 0.006,
+    "s": 4.0,
+    "xr": -1.6
+  },
+  "passed": true,
+  "retained_steps": 150000,
+  "retained_time": 1500.0,
+  "stationarity_diagnostics": {
+    "maximum_normalized_mean_shift": 0.016301126667547988,
+    "maximum_normalized_std_shift": 0.00908139052810122,
+    "normalized_mean_shift_by_state": [
+      0.004456919438495968,
+      0.00892075524116931,
+      0.016301126667547988
+    ],
+    "normalized_std_shift_by_state": [
+      0.00908139052810122,
+      0.004823473363100138,
+      0.005808270742141522
+    ],
+    "quarter_length_steps": 37500
+  },
+  "transient_steps": 200000,
+  "transient_time": 2000.0
+}

@@ -1,14 +1,14 @@
 | Regime | Optimizer | Rank | Validation NRMSE (x) | Validation NRMSE (all) | Best score |
 |---|---|---:|---:|---:|---:|
-| periodic_spiking | Random forest | 1 | 2.622e-05 | 1.825e-05 | 2.986e-05 |
-|  | Gaussian process | 2 | 0.0001409 | 9.582e-05 | 0.0001399 |
-|  | GBRT | 3 | 0.0003666 | 0.0002481 | 0.0003885 |
-|  | Random search | 4 | 0.000378 | 0.0002595 | 0.0003944 |
-| periodic_bursting | Random forest | 1 | 0.0001403 | 0.0001159 | 0.0001625 |
-|  | GBRT | 2 | 0.0001779 | 0.000149 | 0.0002131 |
-|  | Gaussian process | 3 | 0.0004246 | 0.0003769 | 0.0005909 |
-|  | Random search | 4 | 0.0008342 | 0.0006908 | 0.001016 |
-| chaotic_bursting | GBRT | 1 | 0.0005964 | 0.000444 | 0.0006412 |
-|  | Gaussian process | 2 | 0.002563 | 0.001923 | 0.003074 |
-|  | Random forest | 3 | 0.005307 | 0.003893 | 0.006167 |
-|  | Random search | 4 | 0.009939 | 0.007334 | 0.01146 |
+| periodic_spiking | GBRT | 1 | 4.128e-05 | 3.358e-05 | 3.98e-05 |
+|  | Random forest | 2 | 0.1262 | 0.1045 | 0.131 |
+|  | Random search | 3 | 0.4582 | 0.4012 | 0.4721 |
+|  | Gaussian process | 4 | 0.9609 | 0.9795 | 1.306 |
+| periodic_bursting | Gaussian process | 1 | 0.0006762 | 0.0004659 | 0.0007921 |
+|  | Random forest | 2 | 0.002025 | 0.001393 | 0.002223 |
+|  | GBRT | 3 | 0.0526 | 0.03876 | 0.0553 |
+|  | Random search | 4 | 0.06477 | 0.04332 | 0.08011 |
+| chaotic_bursting | GBRT | 1 | 0.0272 | 0.02202 | 0.0303 |
+|  | Random forest | 2 | 0.02509 | 0.02053 | 0.03122 |
+|  | Gaussian process | 3 | 0.05301 | 0.04335 | 0.06596 |
+|  | Random search | 4 | 0.3262 | 0.2683 | 0.403 |

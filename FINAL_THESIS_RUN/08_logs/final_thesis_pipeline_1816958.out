@@ -1,0 +1,2208 @@
+### Starting TaskPrologue of job 1816958 on tg080 at Sat Sep 19 11:56:01 PM CEST 2026
+Running on cores 2-3,18-19,34-35,50-51 with governor powersave
+Sat Sep 19 23:56:01 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:1B:00.0 Off |                  N/A |
+| 35%   58C    P3             93W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+========================================================================
+CHAPTER 1 DEFINITIVE ONE-PASS PIPELINE
+========================================================================
+Project dir : /home/hpc/dsnf/dsnf129h/Thesis
+Final root  : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958
+Job ID      : 1816958
+Git commit  : 2ccca0deaacb537ba266ffcb73912821db81330f
+Git branch  : main
+Started UTC : 2026-09-19T21:56:04+00:00
+========================================================================
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_spiking
+[DataLoader] HR input current I: 4.0
+[DataLoader] Burn-in: 200000 steps (2000.00 time units)
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 74 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=9.060258 best=9.060258 x_nrmse=3.374555 all_nrmse=2.430138 penalty=3.547 N=688 p=0.081 rho=1.046 leak=0.518 scale=0.474 ridge=3.2e-08 washout=486
+[GP] iter   2/30 score=8.029125 best=8.029125 x_nrmse=2.914322 all_nrmse=2.187373 penalty=3.035 N=434 p=0.067 rho=0.956 leak=0.139 scale=0.736 ridge=4.9e-04 washout=51
+[GP] iter   3/30 score=1000000.000000 best=8.029125 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.224 rho=0.928 leak=0.105 scale=0.072 ridge=4.2e-06 washout=430
+[GP] iter   4/30 score=6.528603 best=6.528603 x_nrmse=2.377261 all_nrmse=1.998431 penalty=2.177 N=276 p=0.341 rho=0.663 leak=0.163 scale=0.637 ridge=8.2e-07 washout=984
+[GP] iter   5/30 score=1.796140 best=1.796140 x_nrmse=0.825070 all_nrmse=0.946839 penalty=0.111 N=507 p=0.304 rho=0.976 leak=0.415 scale=0.063 ridge=5.1e-04 washout=585
+[GP] iter   6/30 score=9.134162 best=1.796140 x_nrmse=3.423806 all_nrmse=2.380974 penalty=3.583 N=462 p=0.025 rho=0.662 leak=0.269 scale=0.699 ridge=1.1e-05 washout=842
+[GP] iter   7/30 score=5.000146 best=1.796140 x_nrmse=2.030233 all_nrmse=1.861939 penalty=1.215 N=345 p=0.149 rho=0.628 leak=0.629 scale=0.454 ridge=1.1e-07 washout=589
+[GP] iter   8/30 score=5.947557 best=1.796140 x_nrmse=2.117910 all_nrmse=1.769957 penalty=1.928 N=267 p=0.298 rho=0.815 leak=0.377 scale=0.930 ridge=4.3e-05 washout=360
+[GP] iter   9/30 score=8.777598 best=1.796140 x_nrmse=3.286282 all_nrmse=2.108010 penalty=3.447 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-08 washout=1000
+[GP] iter  10/30 score=1000000.000000 best=1.796140 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.350 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=333359.338131 best=1.796140 x_nrmse=333345.168262 all_nrmse=333342.159248 penalty=333344.877 N=250 p=0.350 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=110
+[GP] iter  12/30 score=5.760839 best=1.796140 x_nrmse=2.101479 all_nrmse=1.714923 penalty=1.799 N=348 p=0.145 rho=0.500 leak=0.627 scale=0.794 ridge=2.1e-08 washout=941
+[GP] iter  13/30 score=8.294195 best=1.796140 x_nrmse=3.075289 all_nrmse=2.050811 penalty=3.204 N=800 p=0.067 rho=0.523 leak=0.780 scale=0.644 ridge=1.0e-08 washout=590
+[GP] iter  14/30 score=8.856225 best=1.796140 x_nrmse=3.278202 all_nrmse=2.409627 penalty=3.437 N=250 p=0.350 rho=0.500 leak=0.396 scale=0.368 ridge=1.0e-03 washout=1000
+[GP] iter  15/30 score=8.540769 best=1.796140 x_nrmse=3.165538 all_nrmse=2.118735 penalty=3.322 N=352 p=0.350 rho=0.500 leak=0.469 scale=0.737 ridge=1.0e-03 washout=50
+[GP] iter  16/30 score=6.421450 best=1.796140 x_nrmse=2.398913 all_nrmse=1.907369 penalty=2.117 N=800 p=0.141 rho=1.200 leak=0.518 scale=1.000 ridge=7.5e-07 washout=884
+[GP] iter  17/30 score=3.217743 best=1.796140 x_nrmse=1.162724 all_nrmse=1.554443 penalty=0.325 N=250 p=0.020 rho=1.200 leak=0.150 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  18/30 score=9.237253 best=1.796140 x_nrmse=3.476716 all_nrmse=2.340880 penalty=3.656 N=417 p=0.339 rho=0.972 leak=0.443 scale=0.989 ridge=4.1e-07 washout=965
+[GP] iter  19/30 score=8.260496 best=1.796140 x_nrmse=3.006608 all_nrmse=2.271389 penalty=3.137 N=272 p=0.350 rho=0.542 leak=0.200 scale=0.801 ridge=1.0e-08 washout=1000
+[GP] iter  20/30 score=6.795639 best=1.796140 x_nrmse=2.498738 all_nrmse=1.967807 penalty=2.330 N=800 p=0.350 rho=1.200 leak=0.645 scale=0.596 ridge=8.1e-04 washout=50
+[GP] iter  21/30 score=6.432070 best=1.796140 x_nrmse=2.404471 all_nrmse=1.825156 penalty=2.142 N=250 p=0.350 rho=0.500 leak=0.681 scale=1.000 ridge=1.0e-08 washout=50
+[GP] iter  22/30 score=1.305964 best=1.305964 x_nrmse=0.960853 all_nrmse=0.979470 penalty=0.000 N=250 p=0.090 rho=0.500 leak=0.421 scale=0.210 ridge=1.0e-03 washout=986
+[GP] iter  23/30 score=3.928460 best=1.305964 x_nrmse=1.752963 all_nrmse=1.357152 penalty=1.296 N=250 p=0.020 rho=0.500 leak=0.800 scale=0.411 ridge=1.0e-08 washout=1000
+[GP] iter  24/30 score=4.885622 best=1.305964 x_nrmse=1.755903 all_nrmse=1.608426 penalty=1.312 N=250 p=0.350 rho=0.500 leak=0.279 scale=1.000 ridge=1.0e-03 washout=1000
+[GP] iter  25/30 score=2.928908 best=1.305964 x_nrmse=1.060996 all_nrmse=0.950598 penalty=0.721 N=250 p=0.020 rho=0.500 leak=0.735 scale=0.505 ridge=1.0e-08 washout=1000
+[GP] iter  26/30 score=5.914552 best=1.305964 x_nrmse=2.168682 all_nrmse=1.754971 penalty=1.875 N=250 p=0.020 rho=1.200 leak=0.800 scale=0.526 ridge=1.0e-08 washout=1000
+[GP] iter  27/30 score=8.109778 best=1.305964 x_nrmse=2.953566 all_nrmse=2.099709 penalty=3.100 N=250 p=0.350 rho=1.200 leak=0.800 scale=0.839 ridge=1.0e-03 washout=1000
+[GP] iter  28/30 score=3.706183 best=1.305964 x_nrmse=1.618733 all_nrmse=1.683695 penalty=0.752 N=250 p=0.350 rho=1.200 leak=0.198 scale=0.687 ridge=1.0e-03 washout=50
+[GP] iter  29/30 score=6.590286 best=1.305964 x_nrmse=2.489260 all_nrmse=1.887108 penalty=2.208 N=601 p=0.020 rho=1.200 leak=0.800 scale=0.857 ridge=1.0e-08 washout=503
+[GP] iter  30/30 score=6.772041 best=1.305964 x_nrmse=2.585439 all_nrmse=1.994800 penalty=2.289 N=250 p=0.350 rho=0.500 leak=0.390 scale=0.586 ridge=1.0e-08 washout=1000
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=8.934234 best=8.934234 x_nrmse=3.347282 all_nrmse=2.253663 penalty=3.494 N=527 p=0.144 rho=0.580 leak=0.643 scale=0.665 ridge=2.5e-06 washout=446
+[DUMMY] iter   2/30 score=6.959381 best=6.959381 x_nrmse=2.570181 all_nrmse=1.925284 penalty=2.439 N=389 p=0.109 rho=0.719 leak=0.568 scale=0.707 ridge=1.6e-06 washout=967
+[DUMMY] iter   3/30 score=8.363851 best=6.959381 x_nrmse=3.246059 all_nrmse=2.542171 penalty=2.696 N=561 p=0.304 rho=1.070 leak=0.530 scale=0.203 ridge=2.0e-05 washout=677
+[DUMMY] iter   4/30 score=5.548452 best=5.548452 x_nrmse=1.883911 all_nrmse=1.804326 penalty=1.714 N=721 p=0.239 rho=0.963 leak=0.123 scale=0.645 ridge=4.7e-06 washout=410
+[DUMMY] iter   5/30 score=6.581328 best=5.548452 x_nrmse=2.424491 all_nrmse=1.974210 penalty=2.206 N=414 p=0.202 rho=1.099 leak=0.768 scale=0.501 ridge=5.5e-06 washout=703
+[DUMMY] iter   6/30 score=7.837832 best=5.548452 x_nrmse=2.822030 all_nrmse=2.162456 penalty=2.940 N=685 p=0.198 rho=1.022 leak=0.505 scale=0.217 ridge=6.1e-05 washout=478
+[DUMMY] iter   7/30 score=7.191100 best=5.548452 x_nrmse=2.777625 all_nrmse=2.173839 penalty=2.493 N=774 p=0.098 rho=0.761 leak=0.732 scale=0.429 ridge=2.6e-07 washout=196
+[DUMMY] iter   8/30 score=7.836707 best=5.548452 x_nrmse=3.079744 all_nrmse=2.315537 penalty=2.859 N=555 p=0.153 rho=0.836 leak=0.754 scale=0.194 ridge=2.5e-04 washout=202
+[DUMMY] iter   9/30 score=0.472142 best=0.472142 x_nrmse=0.458224 all_nrmse=0.401167 penalty=0.000 N=614 p=0.172 rho=0.733 leak=0.399 scale=0.102 ridge=9.4e-04 washout=617
+[DUMMY] iter  10/30 score=6.904710 best=0.472142 x_nrmse=2.641359 all_nrmse=1.912046 penalty=2.362 N=792 p=0.099 rho=0.876 leak=0.723 scale=0.594 ridge=1.8e-07 washout=986
+[DUMMY] iter  11/30 score=6.883823 best=0.472142 x_nrmse=2.537191 all_nrmse=2.090491 penalty=2.356 N=695 p=0.275 rho=0.745 leak=0.411 scale=0.443 ridge=4.9e-06 washout=422
+[DUMMY] iter  12/30 score=5.854770 best=0.472142 x_nrmse=2.140504 all_nrmse=1.916534 penalty=1.817 N=389 p=0.107 rho=1.045 leak=0.520 scale=0.276 ridge=4.9e-06 washout=164
+[DUMMY] iter  13/30 score=3.856134 best=0.472142 x_nrmse=1.286017 all_nrmse=1.525130 penalty=0.763 N=685 p=0.156 rho=0.854 leak=0.125 scale=0.339 ridge=2.3e-04 washout=394
+[DUMMY] iter  14/30 score=3.878558 best=0.472142 x_nrmse=1.386817 all_nrmse=1.470681 penalty=0.772 N=687 p=0.165 rho=1.070 leak=0.296 scale=0.117 ridge=4.3e-04 washout=547
+[DUMMY] iter  15/30 score=7.938466 best=0.472142 x_nrmse=2.998255 all_nrmse=2.475107 penalty=2.832 N=530 p=0.045 rho=0.975 leak=0.594 scale=0.181 ridge=2.9e-04 washout=933
+[DUMMY] iter  16/30 score=7.540266 best=0.472142 x_nrmse=2.959030 all_nrmse=2.115938 penalty=2.540 N=384 p=0.048 rho=0.911 leak=0.375 scale=0.479 ridge=3.0e-06 washout=102
+[DUMMY] iter  17/30 score=7.706568 best=0.472142 x_nrmse=2.907145 all_nrmse=2.601512 penalty=2.670 N=473 p=0.168 rho=0.940 leak=0.348 scale=0.157 ridge=1.5e-06 washout=178
+[DUMMY] iter  18/30 score=6.373770 best=0.472142 x_nrmse=2.365419 all_nrmse=1.764272 penalty=2.126 N=606 p=0.024 rho=0.533 leak=0.675 scale=0.728 ridge=7.2e-06 washout=853
+[DUMMY] iter  19/30 score=9.488601 best=0.472142 x_nrmse=3.553469 all_nrmse=2.709789 penalty=3.697 N=778 p=0.197 rho=0.669 leak=0.477 scale=0.340 ridge=1.1e-04 washout=66
+[DUMMY] iter  20/30 score=7.186320 best=0.472142 x_nrmse=2.716524 all_nrmse=2.020922 penalty=2.524 N=355 p=0.297 rho=1.126 leak=0.709 scale=0.708 ridge=2.0e-08 washout=413
+[DUMMY] iter  21/30 score=7.383047 best=0.472142 x_nrmse=2.786051 all_nrmse=2.262416 penalty=2.560 N=392 p=0.235 rho=0.813 leak=0.261 scale=0.393 ridge=5.5e-07 washout=146
+[DUMMY] iter  22/30 score=3.461745 best=0.472142 x_nrmse=1.501577 all_nrmse=1.399624 penalty=0.749 N=472 p=0.131 rho=0.651 leak=0.699 scale=0.246 ridge=1.0e-05 washout=430
+[DUMMY] iter  23/30 score=8.017185 best=0.472142 x_nrmse=2.922399 all_nrmse=2.369190 penalty=2.993 N=648 p=0.299 rho=0.986 leak=0.698 scale=0.135 ridge=2.2e-06 washout=295
+[DUMMY] iter  24/30 score=6.462102 best=0.472142 x_nrmse=2.352594 all_nrmse=1.783590 penalty=2.198 N=682 p=0.089 rho=0.531 leak=0.555 scale=0.924 ridge=8.0e-05 washout=62
+[DUMMY] iter  25/30 score=8.899274 best=0.472142 x_nrmse=3.329564 all_nrmse=2.235175 penalty=3.487 N=475 p=0.020 rho=0.945 leak=0.701 scale=0.825 ridge=5.3e-04 washout=557
+[DUMMY] iter  26/30 score=2.997461 best=0.472142 x_nrmse=1.103158 all_nrmse=1.329667 penalty=0.240 N=475 p=0.292 rho=0.640 leak=0.156 scale=0.850 ridge=5.8e-04 washout=83
+[DUMMY] iter  27/30 score=6.393066 best=0.472142 x_nrmse=2.280909 all_nrmse=1.961147 penalty=2.136 N=252 p=0.143 rho=0.885 leak=0.295 scale=0.775 ridge=2.1e-05 washout=567
+[DUMMY] iter  28/30 score=8.223606 best=0.472142 x_nrmse=2.985232 all_nrmse=2.281684 penalty=3.127 N=546 p=0.024 rho=0.650 leak=0.165 scale=0.724 ridge=4.0e-04 washout=318
+[DUMMY] iter  29/30 score=8.141062 best=0.472142 x_nrmse=2.944580 all_nrmse=2.449064 penalty=3.037 N=409 p=0.233 rho=0.846 leak=0.322 scale=0.210 ridge=1.2e-05 washout=245
+[DUMMY] iter  30/30 score=6.918581 best=0.472142 x_nrmse=2.600605 all_nrmse=2.208800 penalty=2.321 N=614 p=0.174 rho=0.714 leak=0.585 scale=0.355 ridge=7.3e-04 washout=777
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=2.618429 best=2.618429 x_nrmse=1.282068 all_nrmse=1.409490 penalty=0.222 N=353 p=0.038 rho=0.953 leak=0.506 scale=0.370 ridge=3.4e-08 washout=526
+[FOREST] iter   2/30 score=0.130967 best=0.130967 x_nrmse=0.126230 all_nrmse=0.104474 penalty=0.000 N=589 p=0.297 rho=0.612 leak=0.144 scale=0.179 ridge=5.4e-04 washout=768
+[FOREST] iter   3/30 score=4.367057 best=0.130967 x_nrmse=1.534150 all_nrmse=1.556877 penalty=1.026 N=723 p=0.067 rho=0.869 leak=0.144 scale=0.578 ridge=4.4e-06 washout=188
+[FOREST] iter   4/30 score=1.388734 best=0.130967 x_nrmse=0.572126 all_nrmse=0.555657 penalty=0.391 N=611 p=0.337 rho=0.511 leak=0.703 scale=0.101 ridge=1.9e-04 washout=525
+[FOREST] iter   5/30 score=8.952489 best=0.130967 x_nrmse=3.355662 all_nrmse=2.219470 penalty=3.522 N=622 p=0.329 rho=0.869 leak=0.458 scale=0.973 ridge=3.6e-04 washout=91
+[FOREST] iter   6/30 score=9.072636 best=0.130967 x_nrmse=3.401227 all_nrmse=2.288890 penalty=3.580 N=733 p=0.286 rho=0.947 leak=0.609 scale=0.784 ridge=2.0e-04 washout=495
+[FOREST] iter   7/30 score=9.380650 best=0.130967 x_nrmse=3.518506 all_nrmse=2.670855 penalty=3.653 N=658 p=0.063 rho=0.814 leak=0.574 scale=0.331 ridge=1.2e-04 washout=668
+[FOREST] iter   8/30 score=9.172730 best=0.130967 x_nrmse=3.482480 all_nrmse=2.247399 penalty=3.636 N=531 p=0.269 rho=0.896 leak=0.762 scale=0.784 ridge=1.4e-06 washout=934
+[FOREST] iter   9/30 score=5.891222 best=0.130967 x_nrmse=1.943549 all_nrmse=1.843552 penalty=1.961 N=472 p=0.340 rho=1.043 leak=0.498 scale=0.318 ridge=7.7e-04 washout=680
+[FOREST] iter  10/30 score=0.954694 best=0.130967 x_nrmse=0.425902 all_nrmse=0.449138 penalty=0.169 N=371 p=0.312 rho=0.552 leak=0.343 scale=0.168 ridge=2.3e-04 washout=556
+[FOREST] iter  11/30 score=1.862961 best=0.130967 x_nrmse=0.815066 all_nrmse=1.151299 penalty=0.163 N=581 p=0.259 rho=0.711 leak=0.231 scale=0.132 ridge=8.8e-05 washout=730
+[FOREST] iter  12/30 score=10.718860 best=0.130967 x_nrmse=4.109919 all_nrmse=4.749658 penalty=3.654 N=257 p=0.327 rho=0.614 leak=0.651 scale=0.087 ridge=1.8e-04 washout=487
+[FOREST] iter  13/30 score=1000000.000000 best=0.130967 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=602 p=0.325 rho=0.563 leak=0.409 scale=0.054 ridge=7.1e-05 washout=581
+[FOREST] iter  14/30 score=0.886591 best=0.130967 x_nrmse=0.362124 all_nrmse=0.575345 penalty=0.111 N=402 p=0.204 rho=0.907 leak=0.345 scale=0.089 ridge=5.4e-08 washout=551
+[FOREST] iter  15/30 score=1000000.000000 best=0.130967 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=317 p=0.283 rho=0.527 leak=0.236 scale=0.066 ridge=2.8e-06 washout=182
+[FOREST] iter  16/30 score=3.564119 best=0.130967 x_nrmse=1.544550 all_nrmse=1.362010 penalty=1.062 N=495 p=0.220 rho=0.540 leak=0.159 scale=0.244 ridge=2.3e-05 washout=800
+[FOREST] iter  17/30 score=2.475917 best=0.130967 x_nrmse=1.046363 all_nrmse=1.532408 penalty=0.276 N=416 p=0.320 rho=0.980 leak=0.262 scale=0.101 ridge=7.5e-06 washout=673
+[FOREST] iter  18/30 score=5.469988 best=0.130967 x_nrmse=1.923939 all_nrmse=2.007485 penalty=1.549 N=551 p=0.113 rho=0.550 leak=0.216 scale=0.246 ridge=1.9e-06 washout=459
+[FOREST] iter  19/30 score=666666.826291 best=0.130967 x_nrmse=666666.817289 all_nrmse=666666.787700 penalty=666666.667 N=349 p=0.134 rho=0.560 leak=0.279 scale=0.098 ridge=3.1e-05 washout=259
+[FOREST] iter  20/30 score=1000000.000000 best=0.130967 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=576 p=0.266 rho=0.554 leak=0.168 scale=0.100 ridge=1.3e-07 washout=827
+[FOREST] iter  21/30 score=2.942040 best=0.130967 x_nrmse=1.107047 all_nrmse=1.468975 penalty=0.449 N=756 p=0.200 rho=0.713 leak=0.238 scale=0.101 ridge=1.7e-05 washout=587
+[FOREST] iter  22/30 score=666679.346469 best=0.130967 x_nrmse=666671.075011 all_nrmse=666672.074956 penalty=666670.891 N=505 p=0.062 rho=0.556 leak=0.100 scale=0.115 ridge=8.5e-08 washout=985
+[FOREST] iter  23/30 score=333333.961515 best=0.130967 x_nrmse=333333.706876 all_nrmse=333333.669415 penalty=333333.333 N=390 p=0.292 rho=0.947 leak=0.114 scale=0.101 ridge=5.5e-06 washout=653
+[FOREST] iter  24/30 score=6.600032 best=0.130967 x_nrmse=2.645915 all_nrmse=2.101888 penalty=2.174 N=731 p=0.261 rho=0.549 leak=0.472 scale=0.191 ridge=2.4e-04 washout=534
+[FOREST] iter  25/30 score=0.959690 best=0.130967 x_nrmse=0.347246 all_nrmse=0.308455 penalty=0.242 N=614 p=0.347 rho=0.530 leak=0.361 scale=0.129 ridge=2.4e-07 washout=347
+[FOREST] iter  26/30 score=2.017353 best=0.130967 x_nrmse=1.047877 all_nrmse=1.018206 penalty=0.436 N=787 p=0.306 rho=0.528 leak=0.442 scale=0.102 ridge=2.8e-04 washout=426
+[FOREST] iter  27/30 score=0.889086 best=0.130967 x_nrmse=0.432161 all_nrmse=0.428468 penalty=0.153 N=567 p=0.303 rho=0.566 leak=0.790 scale=0.101 ridge=3.3e-06 washout=293
+[FOREST] iter  28/30 score=333335.297365 best=0.130967 x_nrmse=333334.222519 all_nrmse=333334.103648 penalty=333333.928 N=313 p=0.327 rho=0.522 leak=0.277 scale=0.110 ridge=9.0e-08 washout=340
+[FOREST] iter  29/30 score=0.878554 best=0.130967 x_nrmse=0.470200 all_nrmse=0.436378 penalty=0.128 N=502 p=0.041 rho=0.575 leak=0.484 scale=0.100 ridge=3.2e-04 washout=658
+[FOREST] iter  30/30 score=2.476040 best=0.130967 x_nrmse=1.061059 all_nrmse=1.003538 penalty=0.570 N=638 p=0.211 rho=0.511 leak=0.671 scale=0.100 ridge=3.8e-06 washout=244
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=8.660297 best=8.660297 x_nrmse=3.235604 all_nrmse=2.091454 penalty=3.379 N=437 p=0.291 rho=0.529 leak=0.504 scale=0.938 ridge=4.0e-07 washout=696
+[GBRT] iter   2/30 score=4.649801 best=4.649801 x_nrmse=1.573367 all_nrmse=1.700896 penalty=1.314 N=790 p=0.176 rho=1.126 leak=0.207 scale=0.249 ridge=1.1e-06 washout=623
+[GBRT] iter   3/30 score=4.569293 best=4.569293 x_nrmse=1.617511 all_nrmse=1.600979 penalty=1.133 N=594 p=0.083 rho=0.864 leak=0.367 scale=0.939 ridge=1.1e-04 washout=217
+[GBRT] iter   4/30 score=3.905974 best=3.905974 x_nrmse=1.418699 all_nrmse=1.566502 penalty=0.718 N=530 p=0.273 rho=0.825 leak=0.104 scale=0.381 ridge=7.5e-06 washout=870
+[GBRT] iter   5/30 score=4.326120 best=3.905974 x_nrmse=1.510812 all_nrmse=1.661907 penalty=0.999 N=773 p=0.029 rho=1.180 leak=0.756 scale=0.432 ridge=1.9e-05 washout=768
+[GBRT] iter   6/30 score=7.172131 best=3.905974 x_nrmse=2.693090 all_nrmse=1.926118 penalty=2.540 N=655 p=0.063 rho=0.924 leak=0.562 scale=0.753 ridge=7.9e-07 washout=730
+[GBRT] iter   7/30 score=5.460030 best=3.905974 x_nrmse=1.921036 all_nrmse=1.875921 penalty=1.606 N=525 p=0.278 rho=0.822 leak=0.170 scale=0.352 ridge=1.1e-06 washout=105
+[GBRT] iter   8/30 score=6.240571 best=3.905974 x_nrmse=2.256383 all_nrmse=2.154564 penalty=1.977 N=294 p=0.259 rho=1.145 leak=0.550 scale=0.188 ridge=1.1e-04 washout=875
+[GBRT] iter   9/30 score=5.371909 best=3.905974 x_nrmse=1.831430 all_nrmse=1.666091 penalty=1.635 N=581 p=0.322 rho=0.555 leak=0.111 scale=0.997 ridge=9.2e-05 washout=922
+[GBRT] iter  10/30 score=8.084350 best=3.905974 x_nrmse=2.903674 all_nrmse=2.385636 penalty=3.023 N=479 p=0.312 rho=0.532 leak=0.107 scale=0.505 ridge=4.2e-04 washout=769
+[GBRT] iter  11/30 score=1.730573 best=1.730573 x_nrmse=0.846383 all_nrmse=0.936834 penalty=0.111 N=643 p=0.122 rho=1.157 leak=0.101 scale=0.472 ridge=6.1e-06 washout=239
+[GBRT] iter  12/30 score=7.216931 best=1.730573 x_nrmse=2.509149 all_nrmse=2.220132 penalty=2.594 N=533 p=0.049 rho=0.529 leak=0.101 scale=0.476 ridge=2.4e-04 washout=561
+[GBRT] iter  13/30 score=4.536865 best=1.730573 x_nrmse=1.478147 all_nrmse=1.624515 penalty=1.198 N=584 p=0.298 rho=1.184 leak=0.105 scale=0.961 ridge=5.3e-08 washout=93
+[GBRT] iter  14/30 score=4.833222 best=1.730573 x_nrmse=1.629355 all_nrmse=1.764703 penalty=1.291 N=595 p=0.096 rho=1.035 leak=0.102 scale=0.889 ridge=6.7e-06 washout=228
+[GBRT] iter  15/30 score=1.218527 best=1.218527 x_nrmse=0.942676 all_nrmse=0.946922 penalty=0.000 N=794 p=0.242 rho=1.171 leak=0.101 scale=0.205 ridge=4.8e-05 washout=285
+[GBRT] iter  16/30 score=2.621413 best=1.218527 x_nrmse=1.325833 all_nrmse=1.482099 penalty=0.111 N=613 p=0.172 rho=1.058 leak=0.101 scale=0.466 ridge=8.1e-05 washout=403
+[GBRT] iter  17/30 score=1.723731 best=1.218527 x_nrmse=0.961567 all_nrmse=1.025585 penalty=0.000 N=411 p=0.293 rho=0.918 leak=0.101 scale=0.472 ridge=4.2e-05 washout=334
+[GBRT] iter  18/30 score=8.129895 best=1.218527 x_nrmse=3.121278 all_nrmse=2.565428 penalty=2.901 N=799 p=0.028 rho=0.516 leak=0.410 scale=0.288 ridge=7.8e-07 washout=583
+[GBRT] iter  19/30 score=0.715298 best=0.715298 x_nrmse=0.345060 all_nrmse=0.492512 penalty=0.056 N=579 p=0.213 rho=0.939 leak=0.101 scale=0.170 ridge=1.1e-04 washout=367
+[GBRT] iter  20/30 score=0.000040 best=0.000040 x_nrmse=0.000041 all_nrmse=0.000034 penalty=0.000 N=744 p=0.311 rho=0.983 leak=0.100 scale=0.163 ridge=1.2e-07 washout=101
+[GBRT] iter  21/30 score=1.705236 best=0.000040 x_nrmse=1.153934 all_nrmse=1.322385 penalty=0.056 N=797 p=0.268 rho=0.855 leak=0.101 scale=0.172 ridge=1.1e-07 washout=407
+[GBRT] iter  22/30 score=1.495729 best=0.000040 x_nrmse=0.727114 all_nrmse=0.850899 penalty=0.111 N=701 p=0.238 rho=0.947 leak=0.101 scale=0.346 ridge=3.8e-06 washout=132
+[GBRT] iter  23/30 score=2.013072 best=0.000040 x_nrmse=0.812659 all_nrmse=1.067794 penalty=0.214 N=351 p=0.034 rho=0.849 leak=0.101 scale=0.123 ridge=3.0e-04 washout=118
+[GBRT] iter  24/30 score=3.301743 best=0.000040 x_nrmse=1.438201 all_nrmse=1.497846 penalty=0.607 N=264 p=0.301 rho=1.019 leak=0.101 scale=0.392 ridge=1.3e-04 washout=219
+[GBRT] iter  25/30 score=1.891301 best=0.000040 x_nrmse=1.406953 all_nrmse=1.441519 penalty=0.000 N=666 p=0.100 rho=1.106 leak=0.101 scale=0.425 ridge=4.4e-05 washout=356
+[GBRT] iter  26/30 score=1000000.000000 best=0.000040 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=788 p=0.276 rho=0.865 leak=0.100 scale=0.107 ridge=5.8e-08 washout=657
+[GBRT] iter  27/30 score=5.378582 best=0.000040 x_nrmse=1.938341 all_nrmse=2.430659 penalty=1.422 N=296 p=0.119 rho=1.050 leak=0.358 scale=0.115 ridge=5.2e-07 washout=653
+[GBRT] iter  28/30 score=10.451300 best=0.000040 x_nrmse=4.501112 all_nrmse=4.288819 penalty=3.658 N=261 p=0.062 rho=1.119 leak=0.237 scale=0.094 ridge=2.1e-08 washout=919
+[GBRT] iter  29/30 score=0.773115 best=0.000040 x_nrmse=0.711134 all_nrmse=0.668757 penalty=0.000 N=618 p=0.252 rho=1.200 leak=0.655 scale=0.069 ridge=6.7e-04 washout=706
+[GBRT] iter  30/30 score=4.148078 best=0.000040 x_nrmse=1.816677 all_nrmse=1.614275 penalty=1.044 N=275 p=0.265 rho=1.134 leak=0.100 scale=0.845 ridge=3.6e-06 washout=313
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/best_params_gbrt.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/optimizer_summary.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/optimizer_history.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/optimizer_results.csv
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+    gbrt | score=0.000040 | x_nrmse=0.000041 | N=744 | rho=0.983 | leak=0.100 | scale=0.163 | washout=101
+  forest | score=0.130967 | x_nrmse=0.126230 | N=589 | rho=0.612 | leak=0.144 | scale=0.179 | washout=768
+   dummy | score=0.472142 | x_nrmse=0.458224 | N=614 | rho=0.733 | leak=0.399 | scale=0.102 | washout=617
+      gp | score=1.305964 | x_nrmse=0.960853 | N=250 | rho=0.500 | leak=0.421 | scale=0.210 | washout=986
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_spiking/best_params_auto.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_spiking/results_full_zoom.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_spiking/results_all_states.png
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: periodic_bursting
+[DataLoader] HR input current I: 3.0
+[DataLoader] Burn-in: 200000 steps (2000.00 time units)
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 53 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=13.017051 best=13.017051 x_nrmse=4.897032 all_nrmse=2.171583 penalty=4.339 N=688 p=0.081 rho=1.046 leak=0.518 scale=0.474 ridge=3.2e-08 washout=486
+[GP] iter   2/30 score=1.593183 best=1.593183 x_nrmse=0.764451 all_nrmse=0.504154 penalty=0.172 N=434 p=0.067 rho=0.956 leak=0.139 scale=0.736 ridge=4.9e-04 washout=51
+[GP] iter   3/30 score=1000000.000000 best=1.593183 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.224 rho=0.928 leak=0.105 scale=0.072 ridge=4.2e-06 washout=430
+[GP] iter   4/30 score=0.298698 best=0.298698 x_nrmse=0.272189 all_nrmse=0.182353 penalty=0.000 N=276 p=0.341 rho=0.663 leak=0.163 scale=0.637 ridge=8.2e-07 washout=984
+[GP] iter   5/30 score=1.164989 best=0.298698 x_nrmse=1.023730 all_nrmse=0.702462 penalty=0.000 N=507 p=0.304 rho=0.976 leak=0.415 scale=0.063 ridge=5.1e-04 washout=585
+[GP] iter   6/30 score=10.098053 best=0.298698 x_nrmse=3.793219 all_nrmse=1.681857 penalty=3.532 N=462 p=0.025 rho=0.662 leak=0.269 scale=0.699 ridge=1.1e-05 washout=842
+[GP] iter   7/30 score=0.007147 best=0.007147 x_nrmse=0.006684 all_nrmse=0.004814 penalty=0.000 N=345 p=0.149 rho=0.628 leak=0.629 scale=0.454 ridge=1.1e-07 washout=589
+[GP] iter   8/30 score=5.297388 best=0.007147 x_nrmse=1.896641 all_nrmse=1.179704 penalty=1.666 N=267 p=0.298 rho=0.815 leak=0.377 scale=0.930 ridge=4.3e-05 washout=360
+[GP] iter   9/30 score=1.253772 best=0.007147 x_nrmse=0.396951 all_nrmse=0.354697 penalty=0.237 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-08 washout=1000
+[GP] iter  10/30 score=1000000.000000 best=0.007147 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.350 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=666667.033677 best=0.007147 x_nrmse=666667.056538 all_nrmse=666666.932290 penalty=666666.667 N=250 p=0.350 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=109
+[GP] iter  12/30 score=0.001120 best=0.001120 x_nrmse=0.001033 all_nrmse=0.000738 penalty=0.000 N=383 p=0.047 rho=0.628 leak=0.620 scale=0.733 ridge=1.7e-08 washout=910
+[GP] iter  13/30 score=0.243365 best=0.001120 x_nrmse=0.218057 all_nrmse=0.154172 penalty=0.000 N=311 p=0.350 rho=0.500 leak=0.387 scale=0.391 ridge=3.6e-04 washout=1000
+[GP] iter  14/30 score=0.331551 best=0.001120 x_nrmse=0.289124 all_nrmse=0.197309 penalty=0.000 N=736 p=0.323 rho=0.501 leak=0.758 scale=0.635 ridge=2.3e-05 washout=273
+[GP] iter  15/30 score=2.239502 best=0.001120 x_nrmse=1.290722 all_nrmse=0.552851 penalty=0.462 N=250 p=0.350 rho=0.525 leak=0.465 scale=0.714 ridge=3.5e-04 washout=50
+[GP] iter  16/30 score=3.094688 best=0.001120 x_nrmse=1.291832 all_nrmse=0.854339 penalty=0.690 N=250 p=0.350 rho=0.500 leak=0.229 scale=1.000 ridge=1.0e-08 washout=1000
+[GP] iter  17/30 score=19.700953 best=0.001120 x_nrmse=7.214652 all_nrmse=2.771773 penalty=7.049 N=800 p=0.020 rho=1.200 leak=0.655 scale=0.583 ridge=5.8e-05 washout=50
+[GP] iter  18/30 score=0.000792 best=0.000792 x_nrmse=0.000676 all_nrmse=0.000466 penalty=0.000 N=342 p=0.326 rho=0.506 leak=0.529 scale=1.000 ridge=1.0e-08 washout=967
+[GP] iter  19/30 score=6.435272 best=0.000792 x_nrmse=2.254890 all_nrmse=0.996242 penalty=1.520 N=800 p=0.350 rho=1.200 leak=0.375 scale=0.147 ridge=1.0e-08 washout=1000
+[GP] iter  20/30 score=0.021228 best=0.000792 x_nrmse=0.017815 all_nrmse=0.011577 penalty=0.000 N=250 p=0.350 rho=0.500 leak=0.681 scale=1.000 ridge=1.0e-08 washout=1000
+[GP] iter  21/30 score=11.490874 best=0.000792 x_nrmse=3.419860 all_nrmse=1.732064 penalty=2.367 N=800 p=0.020 rho=1.200 leak=0.800 scale=0.741 ridge=1.0e-08 washout=495
+[GP] iter  22/30 score=1000000.000000 best=0.000792 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=681 p=0.340 rho=1.194 leak=0.264 scale=0.058 ridge=7.5e-04 washout=682
+[GP] iter  23/30 score=3.866370 best=0.000792 x_nrmse=1.383144 all_nrmse=1.112630 penalty=0.842 N=800 p=0.350 rho=1.200 leak=0.410 scale=0.219 ridge=1.0e-08 washout=1000
+[GP] iter  24/30 score=14.462196 best=0.000792 x_nrmse=5.190542 all_nrmse=2.322120 penalty=4.975 N=793 p=0.119 rho=1.123 leak=0.781 scale=0.701 ridge=1.8e-08 washout=492
+[GP] iter  25/30 score=14.538112 best=0.000792 x_nrmse=4.262373 all_nrmse=1.469622 penalty=3.520 N=434 p=0.238 rho=0.888 leak=0.548 scale=0.467 ridge=3.3e-04 washout=519
+[GP] iter  26/30 score=1.163076 best=0.000792 x_nrmse=0.351944 all_nrmse=0.370368 penalty=0.180 N=250 p=0.350 rho=0.500 leak=0.199 scale=0.774 ridge=1.0e-08 washout=1000
+[GP] iter  27/30 score=6.471356 best=0.000792 x_nrmse=2.531875 all_nrmse=1.557858 penalty=1.678 N=361 p=0.124 rho=0.837 leak=0.531 scale=0.719 ridge=3.0e-04 washout=83
+[GP] iter  28/30 score=8.889915 best=0.000792 x_nrmse=3.580886 all_nrmse=1.479252 penalty=2.785 N=392 p=0.214 rho=0.690 leak=0.570 scale=0.699 ridge=7.8e-05 washout=292
+[GP] iter  29/30 score=0.002879 best=0.000792 x_nrmse=0.002646 all_nrmse=0.001873 penalty=0.000 N=250 p=0.020 rho=0.500 leak=0.800 scale=0.322 ridge=1.0e-08 washout=1000
+[GP] iter  30/30 score=14.508202 best=0.000792 x_nrmse=5.551803 all_nrmse=2.044906 penalty=4.963 N=343 p=0.250 rho=0.867 leak=0.311 scale=0.633 ridge=1.5e-04 washout=309
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=1.599559 best=1.599559 x_nrmse=1.012925 all_nrmse=0.504149 penalty=0.326 N=527 p=0.144 rho=0.580 leak=0.643 scale=0.665 ridge=2.5e-06 washout=446
+[DUMMY] iter   2/30 score=0.347936 best=0.347936 x_nrmse=0.357066 all_nrmse=0.177044 penalty=0.000 N=389 p=0.109 rho=0.719 leak=0.568 scale=0.707 ridge=1.6e-06 washout=967
+[DUMMY] iter   3/30 score=12.561634 best=0.347936 x_nrmse=5.123748 all_nrmse=1.522629 penalty=4.084 N=561 p=0.304 rho=1.070 leak=0.530 scale=0.203 ridge=2.0e-05 washout=677
+[DUMMY] iter   4/30 score=5.003371 best=0.347936 x_nrmse=1.689912 all_nrmse=1.423849 penalty=0.979 N=721 p=0.239 rho=0.963 leak=0.123 scale=0.645 ridge=4.7e-06 washout=410
+[DUMMY] iter   5/30 score=6.135775 best=0.347936 x_nrmse=2.037107 all_nrmse=1.269814 penalty=1.778 N=414 p=0.202 rho=1.099 leak=0.768 scale=0.501 ridge=5.5e-06 washout=703
+[DUMMY] iter   6/30 score=16.760054 best=0.347936 x_nrmse=6.459996 all_nrmse=2.378308 penalty=5.530 N=685 p=0.198 rho=1.022 leak=0.505 scale=0.217 ridge=6.1e-05 washout=478
+[DUMMY] iter   7/30 score=0.453921 best=0.347936 x_nrmse=0.322196 all_nrmse=0.246592 penalty=0.000 N=774 p=0.098 rho=0.761 leak=0.732 scale=0.429 ridge=2.6e-07 washout=196
+[DUMMY] iter   8/30 score=11.947495 best=0.347936 x_nrmse=4.917863 all_nrmse=1.492040 penalty=4.065 N=555 p=0.153 rho=0.836 leak=0.754 scale=0.194 ridge=2.5e-04 washout=202
+[DUMMY] iter   9/30 score=1.146442 best=0.347936 x_nrmse=1.026203 all_nrmse=0.662191 penalty=0.000 N=614 p=0.172 rho=0.733 leak=0.399 scale=0.102 ridge=9.4e-04 washout=617
+[DUMMY] iter  10/30 score=5.724744 best=0.347936 x_nrmse=2.366901 all_nrmse=1.125384 penalty=1.444 N=792 p=0.099 rho=0.876 leak=0.723 scale=0.594 ridge=1.8e-07 washout=986
+[DUMMY] iter  11/30 score=14.080597 best=0.347936 x_nrmse=5.051893 all_nrmse=2.308750 penalty=5.126 N=695 p=0.275 rho=0.745 leak=0.411 scale=0.443 ridge=4.9e-06 washout=422
+[DUMMY] iter  12/30 score=1.796688 best=0.347936 x_nrmse=0.963041 all_nrmse=0.318810 penalty=0.409 N=389 p=0.107 rho=1.045 leak=0.520 scale=0.276 ridge=4.9e-06 washout=164
+[DUMMY] iter  13/30 score=11.220493 best=0.347936 x_nrmse=4.202840 all_nrmse=1.886626 penalty=3.001 N=685 p=0.156 rho=0.854 leak=0.125 scale=0.339 ridge=2.3e-04 washout=394
+[DUMMY] iter  14/30 score=2.431577 best=0.347936 x_nrmse=0.999174 all_nrmse=0.897015 penalty=0.389 N=687 p=0.165 rho=1.070 leak=0.296 scale=0.117 ridge=4.3e-04 washout=547
+[DUMMY] iter  15/30 score=4.340568 best=0.347936 x_nrmse=2.040950 all_nrmse=0.894134 penalty=1.094 N=530 p=0.045 rho=0.975 leak=0.594 scale=0.181 ridge=2.9e-04 washout=933
+[DUMMY] iter  16/30 score=5.489239 best=0.347936 x_nrmse=2.003395 all_nrmse=1.069340 penalty=1.173 N=384 p=0.048 rho=0.911 leak=0.375 scale=0.479 ridge=3.0e-06 washout=102
+[DUMMY] iter  17/30 score=3.371444 best=0.347936 x_nrmse=1.839008 all_nrmse=0.610390 penalty=0.789 N=473 p=0.168 rho=0.940 leak=0.348 scale=0.157 ridge=1.5e-06 washout=178
+[DUMMY] iter  18/30 score=1.248137 best=0.347936 x_nrmse=0.416702 all_nrmse=0.412684 penalty=0.202 N=606 p=0.024 rho=0.533 leak=0.675 scale=0.728 ridge=7.2e-06 washout=853
+[DUMMY] iter  19/30 score=13.745994 best=0.347936 x_nrmse=5.453503 all_nrmse=1.879486 penalty=4.865 N=778 p=0.197 rho=0.669 leak=0.477 scale=0.340 ridge=1.1e-04 washout=66
+[DUMMY] iter  20/30 score=0.080110 best=0.080110 x_nrmse=0.064768 all_nrmse=0.043315 penalty=0.000 N=355 p=0.297 rho=1.126 leak=0.709 scale=0.708 ridge=2.0e-08 washout=413
+[DUMMY] iter  21/30 score=17.382056 best=0.080110 x_nrmse=6.588223 all_nrmse=2.598873 penalty=6.093 N=392 p=0.235 rho=0.813 leak=0.261 scale=0.393 ridge=5.5e-07 washout=146
+[DUMMY] iter  22/30 score=1.244470 best=0.080110 x_nrmse=0.413436 all_nrmse=0.404007 penalty=0.193 N=472 p=0.131 rho=0.651 leak=0.699 scale=0.246 ridge=1.0e-05 washout=430
+[DUMMY] iter  23/30 score=1.131298 best=0.080110 x_nrmse=0.293595 all_nrmse=0.331319 penalty=0.203 N=648 p=0.299 rho=0.986 leak=0.698 scale=0.135 ridge=2.2e-06 washout=295
+[DUMMY] iter  24/30 score=9.467450 best=0.080110 x_nrmse=3.869480 all_nrmse=1.082800 penalty=3.328 N=682 p=0.089 rho=0.531 leak=0.555 scale=0.924 ridge=8.0e-05 washout=62
+[DUMMY] iter  25/30 score=14.175423 best=0.080110 x_nrmse=5.409405 all_nrmse=2.166630 penalty=4.790 N=475 p=0.020 rho=0.945 leak=0.701 scale=0.825 ridge=5.3e-04 washout=557
+[DUMMY] iter  26/30 score=32.208278 best=0.080110 x_nrmse=12.335416 all_nrmse=4.171638 penalty=12.392 N=475 p=0.292 rho=0.640 leak=0.156 scale=0.850 ridge=5.8e-04 washout=83
+[DUMMY] iter  27/30 score=2.604489 best=0.080110 x_nrmse=1.418067 all_nrmse=0.835540 penalty=0.416 N=252 p=0.143 rho=0.885 leak=0.295 scale=0.775 ridge=2.1e-05 washout=567
+[DUMMY] iter  28/30 score=12.494944 best=0.080110 x_nrmse=4.906328 all_nrmse=2.158038 penalty=4.128 N=546 p=0.024 rho=0.650 leak=0.165 scale=0.724 ridge=4.0e-04 washout=318
+[DUMMY] iter  29/30 score=2.823097 best=0.080110 x_nrmse=1.304803 all_nrmse=0.723737 penalty=0.588 N=409 p=0.233 rho=0.846 leak=0.322 scale=0.210 ridge=1.2e-05 washout=245
+[DUMMY] iter  30/30 score=10.115137 best=0.080110 x_nrmse=3.797258 all_nrmse=1.301098 penalty=3.497 N=614 p=0.174 rho=0.714 leak=0.585 scale=0.355 ridge=7.3e-04 washout=777
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=1.111520 best=1.111520 x_nrmse=0.290039 all_nrmse=0.265236 penalty=0.207 N=353 p=0.038 rho=0.953 leak=0.506 scale=0.370 ridge=3.4e-08 washout=526
+[FOREST] iter   2/30 score=0.857520 best=0.857520 x_nrmse=0.679956 all_nrmse=0.468197 penalty=0.000 N=589 p=0.297 rho=0.612 leak=0.144 scale=0.179 ridge=5.4e-04 washout=768
+[FOREST] iter   3/30 score=15.977317 best=0.857520 x_nrmse=5.890003 all_nrmse=2.552695 penalty=5.243 N=723 p=0.067 rho=0.869 leak=0.144 scale=0.578 ridge=4.4e-06 washout=188
+[FOREST] iter   4/30 score=4.365625 best=0.857520 x_nrmse=1.940316 all_nrmse=1.049555 penalty=0.985 N=611 p=0.337 rho=0.511 leak=0.703 scale=0.101 ridge=1.9e-04 washout=525
+[FOREST] iter   5/30 score=23.767815 best=0.857520 x_nrmse=8.862115 all_nrmse=3.279694 penalty=9.051 N=622 p=0.329 rho=0.869 leak=0.458 scale=0.973 ridge=3.6e-04 washout=91
+[FOREST] iter   6/30 score=11.472616 best=0.857520 x_nrmse=4.256011 all_nrmse=1.924068 penalty=3.675 N=733 p=0.286 rho=0.947 leak=0.609 scale=0.784 ridge=2.0e-04 washout=495
+[FOREST] iter   7/30 score=5.854981 best=0.857520 x_nrmse=2.290086 all_nrmse=0.959184 penalty=1.611 N=658 p=0.063 rho=0.814 leak=0.574 scale=0.331 ridge=1.2e-04 washout=668
+[FOREST] iter   8/30 score=17.958629 best=0.857520 x_nrmse=6.522802 all_nrmse=2.189824 penalty=6.537 N=531 p=0.269 rho=0.896 leak=0.762 scale=0.784 ridge=1.4e-06 washout=934
+[FOREST] iter   9/30 score=2.124143 best=0.857520 x_nrmse=1.235583 all_nrmse=0.537821 penalty=0.448 N=369 p=0.148 rho=0.788 leak=0.262 scale=0.364 ridge=4.9e-04 washout=543
+[FOREST] iter  10/30 score=12.593696 best=0.857520 x_nrmse=4.793404 all_nrmse=1.985095 penalty=3.894 N=352 p=0.143 rho=1.125 leak=0.109 scale=0.432 ridge=2.1e-04 washout=837
+[FOREST] iter  11/30 score=1000000.000000 best=0.857520 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=460 p=0.217 rho=0.859 leak=0.249 scale=0.067 ridge=1.2e-08 washout=512
+[FOREST] iter  12/30 score=0.483296 best=0.483296 x_nrmse=0.397392 all_nrmse=0.273199 penalty=0.000 N=299 p=0.239 rho=0.599 leak=0.379 scale=0.139 ridge=7.5e-06 washout=655
+[FOREST] iter  13/30 score=0.072112 best=0.072112 x_nrmse=0.065931 all_nrmse=0.046124 penalty=0.000 N=297 p=0.039 rho=0.734 leak=0.691 scale=0.177 ridge=5.0e-07 washout=522
+[FOREST] iter  14/30 score=1000000.000000 best=0.072112 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=390 p=0.260 rho=0.808 leak=0.115 scale=0.053 ridge=2.4e-08 washout=812
+[FOREST] iter  15/30 score=0.008942 best=0.008942 x_nrmse=0.008345 all_nrmse=0.005886 penalty=0.000 N=368 p=0.137 rho=0.716 leak=0.737 scale=0.254 ridge=6.6e-08 washout=587
+[FOREST] iter  16/30 score=0.013173 best=0.008942 x_nrmse=0.011877 all_nrmse=0.008266 penalty=0.000 N=480 p=0.162 rho=0.529 leak=0.526 scale=0.224 ridge=2.9e-08 washout=924
+[FOREST] iter  17/30 score=0.032956 best=0.008942 x_nrmse=0.029726 all_nrmse=0.020720 penalty=0.000 N=365 p=0.133 rho=0.755 leak=0.385 scale=0.173 ridge=6.4e-08 washout=285
+[FOREST] iter  18/30 score=0.004155 best=0.004155 x_nrmse=0.003831 all_nrmse=0.002697 penalty=0.000 N=309 p=0.071 rho=0.751 leak=0.662 scale=0.237 ridge=1.7e-08 washout=949
+[FOREST] iter  19/30 score=0.321899 best=0.004155 x_nrmse=0.289888 all_nrmse=0.200268 penalty=0.000 N=394 p=0.207 rho=0.676 leak=0.400 scale=0.132 ridge=1.8e-06 washout=777
+[FOREST] iter  20/30 score=0.240933 best=0.004155 x_nrmse=0.232722 all_nrmse=0.157563 penalty=0.000 N=261 p=0.244 rho=0.623 leak=0.160 scale=0.169 ridge=1.4e-06 washout=275
+[FOREST] iter  21/30 score=0.417674 best=0.004155 x_nrmse=0.387104 all_nrmse=0.269900 penalty=0.000 N=390 p=0.041 rho=0.624 leak=0.257 scale=0.136 ridge=1.6e-05 washout=137
+[FOREST] iter  22/30 score=0.002223 best=0.002223 x_nrmse=0.002025 all_nrmse=0.001393 penalty=0.000 N=458 p=0.162 rho=0.531 leak=0.183 scale=0.262 ridge=1.2e-08 washout=982
+[FOREST] iter  23/30 score=0.579143 best=0.002223 x_nrmse=0.551148 all_nrmse=0.386382 penalty=0.000 N=280 p=0.282 rho=0.652 leak=0.171 scale=0.136 ridge=1.5e-06 washout=901
+[FOREST] iter  24/30 score=5.301298 best=0.002223 x_nrmse=2.248501 all_nrmse=1.146909 penalty=1.172 N=473 p=0.190 rho=1.072 leak=0.112 scale=0.391 ridge=1.2e-08 washout=227
+[FOREST] iter  25/30 score=1000000.000000 best=0.002223 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=270 p=0.055 rho=1.119 leak=0.102 scale=0.135 ridge=2.0e-04 washout=548
+[FOREST] iter  26/30 score=1.785213 best=0.002223 x_nrmse=0.974926 all_nrmse=0.420707 penalty=0.288 N=548 p=0.050 rho=0.628 leak=0.111 scale=0.184 ridge=1.1e-08 washout=67
+[FOREST] iter  27/30 score=36.963219 best=0.002223 x_nrmse=12.928512 all_nrmse=3.260704 penalty=14.178 N=752 p=0.036 rho=1.186 leak=0.121 scale=0.142 ridge=1.7e-04 washout=916
+[FOREST] iter  28/30 score=26.686050 best=0.002223 x_nrmse=9.160903 all_nrmse=2.390693 penalty=10.627 N=396 p=0.153 rho=1.090 leak=0.236 scale=0.136 ridge=3.1e-04 washout=384
+[FOREST] iter  29/30 score=3.686862 best=0.002223 x_nrmse=1.632270 all_nrmse=0.939615 penalty=0.815 N=560 p=0.088 rho=0.979 leak=0.329 scale=0.135 ridge=2.4e-04 washout=145
+[FOREST] iter  30/30 score=0.380736 best=0.002223 x_nrmse=0.374362 all_nrmse=0.255257 penalty=0.000 N=441 p=0.237 rho=0.870 leak=0.266 scale=0.135 ridge=8.5e-08 washout=414
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=1.074948 best=1.074948 x_nrmse=0.721004 all_nrmse=0.309951 penalty=0.172 N=437 p=0.291 rho=0.529 leak=0.504 scale=0.938 ridge=4.0e-07 washout=696
+[GBRT] iter   2/30 score=5.328554 best=1.074948 x_nrmse=1.570487 all_nrmse=1.345457 penalty=1.239 N=790 p=0.176 rho=1.126 leak=0.207 scale=0.249 ridge=1.1e-06 washout=623
+[GBRT] iter   3/30 score=24.118224 best=1.074948 x_nrmse=9.314374 all_nrmse=3.290069 penalty=8.835 N=594 p=0.083 rho=0.864 leak=0.367 scale=0.939 ridge=1.1e-04 washout=217
+[GBRT] iter   4/30 score=5.766340 best=1.074948 x_nrmse=2.460811 all_nrmse=1.166304 penalty=1.479 N=530 p=0.273 rho=0.825 leak=0.104 scale=0.381 ridge=7.5e-06 washout=870
+[GBRT] iter   5/30 score=9.035114 best=1.074948 x_nrmse=3.644035 all_nrmse=1.629125 penalty=2.910 N=773 p=0.029 rho=1.180 leak=0.756 scale=0.432 ridge=1.9e-05 washout=768
+[GBRT] iter   6/30 score=16.086889 best=1.074948 x_nrmse=5.950270 all_nrmse=2.170860 penalty=5.692 N=655 p=0.063 rho=0.924 leak=0.562 scale=0.753 ridge=7.9e-07 washout=730
+[GBRT] iter   7/30 score=5.846614 best=1.074948 x_nrmse=2.182271 all_nrmse=0.836996 penalty=1.633 N=525 p=0.278 rho=0.822 leak=0.170 scale=0.352 ridge=1.1e-06 washout=105
+[GBRT] iter   8/30 score=1.835054 best=1.074948 x_nrmse=0.765711 all_nrmse=0.623877 penalty=0.366 N=294 p=0.259 rho=1.145 leak=0.550 scale=0.188 ridge=1.1e-04 washout=875
+[GBRT] iter   9/30 score=0.350297 best=0.350297 x_nrmse=0.350846 all_nrmse=0.188766 penalty=0.000 N=457 p=0.296 rho=0.563 leak=0.295 scale=0.986 ridge=1.6e-08 washout=476
+[GBRT] iter  10/30 score=8.539710 best=0.350297 x_nrmse=3.596507 all_nrmse=1.317706 penalty=2.416 N=392 p=0.090 rho=0.699 leak=0.458 scale=0.981 ridge=2.8e-08 washout=318
+[GBRT] iter  11/30 score=0.055296 best=0.055296 x_nrmse=0.052597 all_nrmse=0.038757 penalty=0.000 N=418 p=0.303 rho=0.513 leak=0.412 scale=0.421 ridge=6.2e-05 washout=533
+[GBRT] iter  12/30 score=11.384146 best=0.055296 x_nrmse=4.223170 all_nrmse=1.283057 penalty=3.986 N=322 p=0.316 rho=0.594 leak=0.383 scale=0.511 ridge=6.5e-04 washout=503
+[GBRT] iter  13/30 score=24.286704 best=0.055296 x_nrmse=9.318210 all_nrmse=3.068359 penalty=9.385 N=321 p=0.057 rho=0.542 leak=0.303 scale=0.874 ridge=9.3e-05 washout=193
+[GBRT] iter  14/30 score=1.394082 best=0.055296 x_nrmse=0.781183 all_nrmse=0.272966 penalty=0.315 N=646 p=0.302 rho=0.527 leak=0.583 scale=0.706 ridge=1.1e-07 washout=194
+[GBRT] iter  15/30 score=3.862223 best=0.055296 x_nrmse=1.911845 all_nrmse=1.050570 penalty=0.725 N=569 p=0.304 rho=0.521 leak=0.411 scale=0.797 ridge=2.6e-04 washout=370
+[GBRT] iter  16/30 score=0.085707 best=0.055296 x_nrmse=0.076528 all_nrmse=0.052964 penalty=0.000 N=428 p=0.224 rho=0.505 leak=0.498 scale=0.162 ridge=4.6e-07 washout=776
+[GBRT] iter  17/30 score=0.261102 best=0.055296 x_nrmse=0.235706 all_nrmse=0.163706 penalty=0.000 N=373 p=0.269 rho=0.511 leak=0.723 scale=0.176 ridge=3.1e-06 washout=623
+[GBRT] iter  18/30 score=0.238247 best=0.055296 x_nrmse=0.235995 all_nrmse=0.170690 penalty=0.000 N=296 p=0.279 rho=0.504 leak=0.780 scale=0.828 ridge=2.6e-05 washout=79
+[GBRT] iter  19/30 score=0.108785 best=0.055296 x_nrmse=0.098009 all_nrmse=0.068145 penalty=0.000 N=426 p=0.237 rho=0.509 leak=0.460 scale=0.183 ridge=6.0e-07 washout=838
+[GBRT] iter  20/30 score=1.277714 best=0.055296 x_nrmse=0.442514 all_nrmse=0.377513 penalty=0.198 N=400 p=0.076 rho=0.515 leak=0.349 scale=0.923 ridge=3.9e-07 washout=422
+[GBRT] iter  21/30 score=0.794866 best=0.055296 x_nrmse=0.657777 all_nrmse=0.454667 penalty=0.000 N=420 p=0.041 rho=0.506 leak=0.591 scale=0.138 ridge=1.3e-05 washout=167
+[GBRT] iter  22/30 score=333333.942358 best=0.055296 x_nrmse=333333.938042 all_nrmse=333333.748573 penalty=333333.333 N=257 p=0.024 rho=0.514 leak=0.106 scale=0.174 ridge=7.6e-05 washout=997
+[GBRT] iter  23/30 score=15.676415 best=0.055296 x_nrmse=5.629387 all_nrmse=2.263731 penalty=4.707 N=784 p=0.079 rho=1.140 leak=0.162 scale=0.544 ridge=3.5e-04 washout=968
+[GBRT] iter  24/30 score=6.049875 best=0.055296 x_nrmse=2.839441 all_nrmse=1.033402 penalty=1.498 N=250 p=0.027 rho=0.963 leak=0.115 scale=0.832 ridge=4.7e-07 washout=990
+[GBRT] iter  25/30 score=12.031559 best=0.055296 x_nrmse=4.353397 all_nrmse=2.037798 penalty=3.966 N=641 p=0.128 rho=1.066 leak=0.654 scale=0.499 ridge=2.7e-04 washout=996
+[GBRT] iter  26/30 score=0.141607 best=0.055296 x_nrmse=0.124378 all_nrmse=0.085360 penalty=0.000 N=482 p=0.038 rho=0.699 leak=0.357 scale=0.111 ridge=2.2e-07 washout=999
+[GBRT] iter  27/30 score=0.205770 best=0.055296 x_nrmse=0.188632 all_nrmse=0.133554 penalty=0.000 N=590 p=0.023 rho=0.672 leak=0.464 scale=0.400 ridge=5.9e-05 washout=830
+[GBRT] iter  28/30 score=8.774758 best=0.055296 x_nrmse=3.339607 all_nrmse=1.771881 penalty=2.693 N=329 p=0.021 rho=0.916 leak=0.108 scale=0.899 ridge=1.8e-04 washout=315
+[GBRT] iter  29/30 score=4.463806 best=0.055296 x_nrmse=1.788110 all_nrmse=0.620042 penalty=1.492 N=284 p=0.094 rho=0.594 leak=0.496 scale=0.755 ridge=7.4e-05 washout=998
+[GBRT] iter  30/30 score=2.040203 best=0.055296 x_nrmse=1.147269 all_nrmse=0.629633 penalty=0.215 N=668 p=0.038 rho=0.628 leak=0.106 scale=0.817 ridge=6.7e-05 washout=211
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/best_params_gbrt.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/optimizer_summary.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/optimizer_history.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/optimizer_results.csv
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+      gp | score=0.000792 | x_nrmse=0.000676 | N=342 | rho=0.506 | leak=0.529 | scale=1.000 | washout=967
+  forest | score=0.002223 | x_nrmse=0.002025 | N=458 | rho=0.531 | leak=0.183 | scale=0.262 | washout=982
+    gbrt | score=0.055296 | x_nrmse=0.052597 | N=418 | rho=0.513 | leak=0.412 | scale=0.421 | washout=533
+   dummy | score=0.080110 | x_nrmse=0.064768 | N=355 | rho=1.126 | leak=0.709 | scale=0.708 | washout=413
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/periodic_bursting/best_params_auto.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_bursting/results_full_zoom.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/periodic_bursting/results_all_states.png
+
+[DataLoader] Generating Hindmarsh–Rose data
+[DataLoader] HR mode: chaotic_bursting
+[DataLoader] HR input current I: 3.25
+[DataLoader] Burn-in: 400000 steps (4000.00 time units)
+[DataLoader] Loaded HR: 150000 steps x 3 states
+[DataLoader] Time: 0.00s to 1499.99s
+[DataLoader] Preprocessing done
+[DataLoader] Spike detection done — 45 HR x-spikes detected
+
+========================================================================
+AUTO OPTIMIZER COMPARISON
+========================================================================
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gp
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GP] iter   1/30 score=5.853529 best=5.853529 x_nrmse=2.215070 all_nrmse=2.149224 penalty=1.662 N=688 p=0.081 rho=1.046 leak=0.518 scale=0.474 ridge=3.2e-08 washout=486
+[GP] iter   2/30 score=10.641090 best=5.853529 x_nrmse=3.107765 all_nrmse=2.786537 penalty=2.307 N=434 p=0.067 rho=0.956 leak=0.139 scale=0.736 ridge=4.9e-04 washout=51
+[GP] iter   3/30 score=1000000.000000 best=5.853529 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=796 p=0.224 rho=0.928 leak=0.105 scale=0.072 ridge=4.2e-06 washout=430
+[GP] iter   4/30 score=1.231612 best=1.231612 x_nrmse=0.752596 all_nrmse=0.850229 penalty=0.074 N=276 p=0.341 rho=0.663 leak=0.163 scale=0.637 ridge=8.2e-07 washout=984
+[GP] iter   5/30 score=0.872585 best=0.872585 x_nrmse=0.695892 all_nrmse=0.645902 penalty=0.000 N=507 p=0.304 rho=0.976 leak=0.415 scale=0.063 ridge=5.1e-04 washout=585
+[GP] iter   6/30 score=8.464088 best=0.872585 x_nrmse=3.187727 all_nrmse=2.670164 penalty=2.702 N=462 p=0.025 rho=0.662 leak=0.269 scale=0.699 ridge=1.1e-05 washout=842
+[GP] iter   7/30 score=0.089128 best=0.089128 x_nrmse=0.072007 all_nrmse=0.058726 penalty=0.000 N=345 p=0.149 rho=0.628 leak=0.629 scale=0.454 ridge=1.1e-07 washout=589
+[GP] iter   8/30 score=1.354002 best=0.089128 x_nrmse=0.731789 all_nrmse=0.749409 penalty=0.000 N=267 p=0.298 rho=0.815 leak=0.377 scale=0.930 ridge=4.3e-05 washout=360
+[GP] iter   9/30 score=1.412630 best=0.089128 x_nrmse=0.765471 all_nrmse=0.741875 penalty=0.084 N=626 p=0.020 rho=0.500 leak=0.800 scale=1.000 ridge=1.0e-08 washout=1000
+[GP] iter  10/30 score=1000000.000000 best=0.089128 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=662 p=0.350 rho=1.200 leak=0.100 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  11/30 score=2.425386 best=0.089128 x_nrmse=1.149973 all_nrmse=2.014527 penalty=0.102 N=250 p=0.350 rho=1.200 leak=0.570 scale=0.050 ridge=1.0e-03 washout=110
+[GP] iter  12/30 score=1.431100 best=0.089128 x_nrmse=0.904822 all_nrmse=0.817547 penalty=0.041 N=250 p=0.350 rho=1.200 leak=0.606 scale=0.889 ridge=1.0e-03 washout=1000
+[GP] iter  13/30 score=12.957397 best=0.089128 x_nrmse=3.683915 all_nrmse=3.241904 penalty=3.541 N=800 p=0.336 rho=1.200 leak=0.800 scale=0.679 ridge=1.0e-03 washout=1000
+[GP] iter  14/30 score=1.120924 best=0.089128 x_nrmse=0.850438 all_nrmse=0.825090 penalty=0.000 N=250 p=0.350 rho=1.188 leak=0.490 scale=0.198 ridge=1.0e-03 washout=1000
+[GP] iter  15/30 score=0.495524 best=0.089128 x_nrmse=0.426667 all_nrmse=0.354097 penalty=0.000 N=800 p=0.020 rho=0.500 leak=0.800 scale=0.050 ridge=1.0e-08 washout=1000
+[GP] iter  16/30 score=7.731361 best=0.089128 x_nrmse=2.772770 all_nrmse=2.558715 penalty=2.153 N=592 p=0.242 rho=0.528 leak=0.439 scale=0.357 ridge=5.1e-04 washout=573
+[GP] iter  17/30 score=2.256942 best=0.089128 x_nrmse=1.145411 all_nrmse=1.243897 penalty=0.243 N=250 p=0.020 rho=1.200 leak=0.150 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  18/30 score=3.235819 best=0.089128 x_nrmse=1.020622 all_nrmse=1.231067 penalty=0.222 N=746 p=0.248 rho=0.553 leak=0.545 scale=0.581 ridge=1.8e-06 washout=781
+[GP] iter  19/30 score=0.065963 best=0.065963 x_nrmse=0.053005 all_nrmse=0.043346 penalty=0.000 N=250 p=0.350 rho=0.500 leak=0.188 scale=0.781 ridge=1.0e-08 washout=1000
+[GP] iter  20/30 score=0.089224 best=0.065963 x_nrmse=0.070273 all_nrmse=0.057524 penalty=0.000 N=250 p=0.020 rho=0.500 leak=0.800 scale=0.359 ridge=1.0e-08 washout=53
+[GP] iter  21/30 score=5.006409 best=0.065963 x_nrmse=1.823131 all_nrmse=1.638320 penalty=1.531 N=250 p=0.350 rho=1.200 leak=0.402 scale=0.598 ridge=1.0e-03 washout=50
+[GP] iter  22/30 score=8.334367 best=0.065963 x_nrmse=2.967311 all_nrmse=2.558363 penalty=2.842 N=602 p=0.023 rho=0.500 leak=0.592 scale=1.000 ridge=1.0e-03 washout=1000
+[GP] iter  23/30 score=10.648892 best=0.065963 x_nrmse=3.960176 all_nrmse=3.173095 penalty=3.543 N=389 p=0.020 rho=0.500 leak=0.210 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  24/30 score=1.070369 best=0.065963 x_nrmse=0.855573 all_nrmse=0.823747 penalty=0.000 N=724 p=0.350 rho=0.500 leak=0.674 scale=0.050 ridge=1.0e-08 washout=50
+[GP] iter  25/30 score=2.043466 best=0.065963 x_nrmse=1.473591 all_nrmse=1.708173 penalty=0.000 N=800 p=0.350 rho=0.500 leak=0.477 scale=0.050 ridge=1.0e-03 washout=50
+[GP] iter  26/30 score=0.974258 best=0.065963 x_nrmse=0.758921 all_nrmse=0.778580 penalty=0.000 N=250 p=0.350 rho=1.200 leak=0.468 scale=1.000 ridge=1.0e-08 washout=50
+[GP] iter  27/30 score=0.578761 best=0.065963 x_nrmse=0.496337 all_nrmse=0.413906 penalty=0.000 N=250 p=0.020 rho=1.200 leak=0.691 scale=0.678 ridge=1.0e-08 washout=50
+[GP] iter  28/30 score=1.356846 best=0.065963 x_nrmse=0.954553 all_nrmse=0.926303 penalty=0.000 N=250 p=0.350 rho=1.200 leak=0.706 scale=1.000 ridge=1.0e-03 washout=50
+[GP] iter  29/30 score=1.261588 best=0.065963 x_nrmse=0.927316 all_nrmse=0.936329 penalty=0.000 N=250 p=0.350 rho=1.200 leak=0.737 scale=0.210 ridge=1.0e-03 washout=1000
+[GP] iter  30/30 score=1000000.000000 best=0.065963 x_nrmse=1000000.000000 all_nrmse=1000000.000000 penalty=1000000.000 N=800 p=0.350 rho=1.200 leak=0.589 scale=0.050 ridge=1.0e-08 washout=50
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/best_params_gp.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : dummy
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[DUMMY] iter   1/30 score=2.267260 best=2.267260 x_nrmse=1.054264 all_nrmse=1.049993 penalty=0.144 N=527 p=0.144 rho=0.580 leak=0.643 scale=0.665 ridge=2.5e-06 washout=446
+[DUMMY] iter   2/30 score=1.845362 best=1.845362 x_nrmse=0.892457 all_nrmse=0.861803 penalty=0.111 N=389 p=0.109 rho=0.719 leak=0.568 scale=0.707 ridge=1.6e-06 washout=967
+[DUMMY] iter   3/30 score=8.397166 best=1.845362 x_nrmse=3.323522 all_nrmse=2.443104 penalty=3.147 N=561 p=0.304 rho=1.070 leak=0.530 scale=0.203 ridge=2.0e-05 washout=677
+[DUMMY] iter   4/30 score=10.093763 best=1.845362 x_nrmse=3.646004 all_nrmse=3.223166 penalty=3.733 N=721 p=0.239 rho=0.963 leak=0.123 scale=0.645 ridge=4.7e-06 washout=410
+[DUMMY] iter   5/30 score=0.928376 best=0.928376 x_nrmse=0.726546 all_nrmse=0.665665 penalty=0.000 N=414 p=0.202 rho=1.099 leak=0.768 scale=0.501 ridge=5.5e-06 washout=703
+[DUMMY] iter   6/30 score=6.430524 best=0.928376 x_nrmse=2.770177 all_nrmse=2.547727 penalty=1.799 N=685 p=0.198 rho=1.022 leak=0.505 scale=0.217 ridge=6.1e-05 washout=478
+[DUMMY] iter   7/30 score=4.096821 best=0.928376 x_nrmse=1.737804 all_nrmse=1.405672 penalty=1.310 N=774 p=0.098 rho=0.761 leak=0.732 scale=0.429 ridge=2.6e-07 washout=196
+[DUMMY] iter   8/30 score=1.103187 best=0.928376 x_nrmse=0.889493 all_nrmse=0.989982 penalty=0.000 N=555 p=0.153 rho=0.836 leak=0.754 scale=0.194 ridge=2.5e-04 washout=202
+[DUMMY] iter   9/30 score=0.908781 best=0.908781 x_nrmse=0.761328 all_nrmse=0.676517 penalty=0.000 N=614 p=0.172 rho=0.733 leak=0.399 scale=0.102 ridge=9.4e-04 washout=617
+[DUMMY] iter  10/30 score=11.539928 best=0.908781 x_nrmse=4.177507 all_nrmse=3.812870 penalty=4.357 N=792 p=0.099 rho=0.876 leak=0.723 scale=0.594 ridge=1.8e-07 washout=986
+[DUMMY] iter  11/30 score=7.519072 best=0.908781 x_nrmse=2.540133 all_nrmse=2.729910 penalty=1.548 N=695 p=0.275 rho=0.745 leak=0.411 scale=0.443 ridge=4.9e-06 washout=422
+[DUMMY] iter  12/30 score=0.831705 best=0.831705 x_nrmse=0.575821 all_nrmse=0.483921 penalty=0.000 N=389 p=0.107 rho=1.045 leak=0.520 scale=0.276 ridge=4.9e-06 washout=164
+[DUMMY] iter  13/30 score=7.666520 best=0.831705 x_nrmse=2.114928 all_nrmse=2.413558 penalty=1.007 N=685 p=0.156 rho=0.854 leak=0.125 scale=0.339 ridge=2.3e-04 washout=394
+[DUMMY] iter  14/30 score=1.481226 best=0.831705 x_nrmse=0.818077 all_nrmse=0.924345 penalty=0.056 N=687 p=0.165 rho=1.070 leak=0.296 scale=0.117 ridge=4.3e-04 washout=547
+[DUMMY] iter  15/30 score=2.591859 best=0.831705 x_nrmse=1.083391 all_nrmse=1.164200 penalty=0.135 N=530 p=0.045 rho=0.975 leak=0.594 scale=0.181 ridge=2.9e-04 washout=933
+[DUMMY] iter  16/30 score=6.385899 best=0.831705 x_nrmse=2.500972 all_nrmse=2.385920 penalty=1.925 N=384 p=0.048 rho=0.911 leak=0.375 scale=0.479 ridge=3.0e-06 washout=102
+[DUMMY] iter  17/30 score=0.411056 best=0.411056 x_nrmse=0.334127 all_nrmse=0.272506 penalty=0.000 N=473 p=0.168 rho=0.940 leak=0.348 scale=0.157 ridge=1.5e-06 washout=178
+[DUMMY] iter  18/30 score=3.128844 best=0.411056 x_nrmse=0.970522 all_nrmse=1.001585 penalty=0.333 N=606 p=0.024 rho=0.533 leak=0.675 scale=0.728 ridge=7.2e-06 washout=853
+[DUMMY] iter  19/30 score=13.288691 best=0.411056 x_nrmse=4.986457 all_nrmse=3.734774 penalty=5.143 N=778 p=0.197 rho=0.669 leak=0.477 scale=0.340 ridge=1.1e-04 washout=66
+[DUMMY] iter  20/30 score=0.474024 best=0.411056 x_nrmse=0.382233 all_nrmse=0.318276 penalty=0.000 N=355 p=0.297 rho=1.126 leak=0.709 scale=0.708 ridge=2.0e-08 washout=413
+[DUMMY] iter  21/30 score=2.947265 best=0.411056 x_nrmse=1.419804 all_nrmse=1.576435 penalty=0.000 N=392 p=0.235 rho=0.813 leak=0.261 scale=0.393 ridge=5.5e-07 washout=146
+[DUMMY] iter  22/30 score=0.418806 best=0.411056 x_nrmse=0.347033 all_nrmse=0.288567 penalty=0.000 N=472 p=0.131 rho=0.651 leak=0.699 scale=0.246 ridge=1.0e-05 washout=430
+[DUMMY] iter  23/30 score=0.402963 best=0.402963 x_nrmse=0.326200 all_nrmse=0.268335 penalty=0.000 N=648 p=0.299 rho=0.986 leak=0.698 scale=0.135 ridge=2.2e-06 washout=295
+[DUMMY] iter  24/30 score=9.207398 best=0.402963 x_nrmse=2.229247 all_nrmse=2.015398 penalty=1.086 N=682 p=0.089 rho=0.531 leak=0.555 scale=0.924 ridge=8.0e-05 washout=62
+[DUMMY] iter  25/30 score=13.140786 best=0.402963 x_nrmse=4.965848 all_nrmse=3.570330 penalty=5.098 N=475 p=0.020 rho=0.945 leak=0.701 scale=0.825 ridge=5.3e-04 washout=557
+[DUMMY] iter  26/30 score=13.797841 best=0.402963 x_nrmse=3.646583 all_nrmse=3.186195 penalty=3.166 N=475 p=0.292 rho=0.640 leak=0.156 scale=0.850 ridge=5.8e-04 washout=83
+[DUMMY] iter  27/30 score=1.183807 best=0.402963 x_nrmse=0.894037 all_nrmse=0.958006 penalty=0.000 N=252 p=0.143 rho=0.885 leak=0.295 scale=0.775 ridge=2.1e-05 washout=567
+[DUMMY] iter  28/30 score=11.741470 best=0.402963 x_nrmse=4.357283 all_nrmse=3.518806 penalty=4.522 N=546 p=0.024 rho=0.650 leak=0.165 scale=0.724 ridge=4.0e-04 washout=318
+[DUMMY] iter  29/30 score=0.429487 best=0.402963 x_nrmse=0.363825 all_nrmse=0.298523 penalty=0.000 N=409 p=0.233 rho=0.846 leak=0.322 scale=0.210 ridge=1.2e-05 washout=245
+[DUMMY] iter  30/30 score=9.878999 best=0.402963 x_nrmse=3.485610 all_nrmse=2.878720 penalty=3.095 N=614 p=0.174 rho=0.714 leak=0.585 scale=0.355 ridge=7.3e-04 washout=777
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/best_params_dummy.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : forest
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[FOREST] iter   1/30 score=0.220100 best=0.220100 x_nrmse=0.184932 all_nrmse=0.150246 penalty=0.000 N=353 p=0.038 rho=0.953 leak=0.506 scale=0.370 ridge=3.4e-08 washout=526
+[FOREST] iter   2/30 score=0.433996 best=0.220100 x_nrmse=0.366523 all_nrmse=0.297705 penalty=0.000 N=589 p=0.297 rho=0.612 leak=0.144 scale=0.179 ridge=5.4e-04 washout=768
+[FOREST] iter   3/30 score=14.115166 best=0.220100 x_nrmse=3.192773 all_nrmse=3.143607 penalty=2.818 N=723 p=0.067 rho=0.869 leak=0.144 scale=0.578 ridge=4.4e-06 washout=188
+[FOREST] iter   4/30 score=1.143008 best=0.220100 x_nrmse=0.830365 all_nrmse=0.829105 penalty=0.000 N=611 p=0.337 rho=0.511 leak=0.703 scale=0.101 ridge=1.9e-04 washout=525
+[FOREST] iter   5/30 score=9.890089 best=0.220100 x_nrmse=3.791935 all_nrmse=3.347259 penalty=3.953 N=622 p=0.329 rho=0.869 leak=0.458 scale=0.973 ridge=3.6e-04 washout=91
+[FOREST] iter   6/30 score=10.256680 best=0.220100 x_nrmse=3.629011 all_nrmse=3.258007 penalty=3.778 N=733 p=0.286 rho=0.947 leak=0.609 scale=0.784 ridge=2.0e-04 washout=495
+[FOREST] iter   7/30 score=8.384725 best=0.220100 x_nrmse=3.051447 all_nrmse=2.807705 penalty=2.897 N=658 p=0.063 rho=0.814 leak=0.574 scale=0.331 ridge=1.2e-04 washout=668
+[FOREST] iter   8/30 score=7.058255 best=0.220100 x_nrmse=2.529190 all_nrmse=2.385139 penalty=2.051 N=531 p=0.269 rho=0.896 leak=0.762 scale=0.784 ridge=1.4e-06 washout=934
+[FOREST] iter   9/30 score=0.421101 best=0.220100 x_nrmse=0.356308 all_nrmse=0.294089 penalty=0.000 N=306 p=0.205 rho=1.029 leak=0.252 scale=0.098 ridge=3.3e-07 washout=859
+[FOREST] iter  10/30 score=0.443745 best=0.220100 x_nrmse=0.361338 all_nrmse=0.294604 penalty=0.000 N=536 p=0.158 rho=0.859 leak=0.276 scale=0.209 ridge=1.6e-06 washout=596
+[FOREST] iter  11/30 score=0.335042 best=0.220100 x_nrmse=0.278756 all_nrmse=0.227700 penalty=0.000 N=556 p=0.130 rho=0.757 leak=0.271 scale=0.125 ridge=9.0e-06 washout=174
+[FOREST] iter  12/30 score=0.466833 best=0.220100 x_nrmse=0.385447 all_nrmse=0.315106 penalty=0.000 N=604 p=0.269 rho=0.625 leak=0.353 scale=0.165 ridge=1.4e-05 washout=782
+[FOREST] iter  13/30 score=0.436005 best=0.220100 x_nrmse=0.356568 all_nrmse=0.290008 penalty=0.000 N=609 p=0.095 rho=0.886 leak=0.370 scale=0.160 ridge=3.9e-06 washout=489
+[FOREST] iter  14/30 score=0.058207 best=0.058207 x_nrmse=0.045639 all_nrmse=0.037408 penalty=0.000 N=616 p=0.092 rho=0.574 leak=0.362 scale=0.149 ridge=1.4e-08 washout=364
+[FOREST] iter  15/30 score=0.224879 best=0.058207 x_nrmse=0.177883 all_nrmse=0.144690 penalty=0.000 N=619 p=0.067 rho=0.634 leak=0.299 scale=0.137 ridge=1.0e-07 washout=63
+[FOREST] iter  16/30 score=0.133090 best=0.058207 x_nrmse=0.105958 all_nrmse=0.086038 penalty=0.000 N=615 p=0.048 rho=0.940 leak=0.101 scale=0.253 ridge=2.0e-07 washout=328
+[FOREST] iter  17/30 score=0.259831 best=0.058207 x_nrmse=0.221942 all_nrmse=0.185704 penalty=0.000 N=619 p=0.026 rho=0.673 leak=0.205 scale=0.278 ridge=1.0e-07 washout=856
+[FOREST] iter  18/30 score=0.085694 best=0.058207 x_nrmse=0.067643 all_nrmse=0.055313 penalty=0.000 N=623 p=0.052 rho=0.652 leak=0.153 scale=0.267 ridge=2.2e-08 washout=495
+[FOREST] iter  19/30 score=0.031215 best=0.031215 x_nrmse=0.025091 all_nrmse=0.020528 penalty=0.000 N=621 p=0.072 rho=0.700 leak=0.148 scale=0.272 ridge=1.7e-08 washout=407
+[FOREST] iter  20/30 score=0.058395 best=0.031215 x_nrmse=0.046104 all_nrmse=0.037787 penalty=0.000 N=780 p=0.023 rho=0.674 leak=0.176 scale=0.199 ridge=1.3e-08 washout=178
+[FOREST] iter  21/30 score=1.177798 best=0.031215 x_nrmse=0.695755 all_nrmse=0.788375 penalty=0.046 N=753 p=0.083 rho=1.153 leak=0.278 scale=0.261 ridge=1.1e-08 washout=478
+[FOREST] iter  22/30 score=0.328140 best=0.031215 x_nrmse=0.267883 all_nrmse=0.218419 penalty=0.000 N=798 p=0.067 rho=0.749 leak=0.168 scale=0.186 ridge=1.5e-05 washout=144
+[FOREST] iter  23/30 score=1.190499 best=0.031215 x_nrmse=0.441878 all_nrmse=0.532178 penalty=0.111 N=723 p=0.064 rho=0.701 leak=0.171 scale=0.297 ridge=4.0e-08 washout=103
+[FOREST] iter  24/30 score=0.607199 best=0.031215 x_nrmse=0.483417 all_nrmse=0.579181 penalty=0.000 N=452 p=0.078 rho=0.513 leak=0.222 scale=0.305 ridge=2.4e-08 washout=695
+[FOREST] iter  25/30 score=0.568157 best=0.031215 x_nrmse=0.477222 all_nrmse=0.401888 penalty=0.000 N=258 p=0.030 rho=1.118 leak=0.260 scale=0.317 ridge=1.6e-07 washout=487
+[FOREST] iter  26/30 score=4.525517 best=0.031215 x_nrmse=1.606522 all_nrmse=2.113092 penalty=0.775 N=623 p=0.055 rho=1.080 leak=0.169 scale=0.323 ridge=1.2e-06 washout=291
+[FOREST] iter  27/30 score=2.082659 best=0.031215 x_nrmse=0.866610 all_nrmse=1.004229 penalty=0.371 N=286 p=0.029 rho=0.895 leak=0.103 scale=0.318 ridge=3.0e-04 washout=387
+[FOREST] iter  28/30 score=4.752410 best=0.031215 x_nrmse=2.039244 all_nrmse=1.832289 penalty=1.478 N=747 p=0.088 rho=0.795 leak=0.528 scale=0.316 ridge=1.5e-08 washout=197
+[FOREST] iter  29/30 score=0.040090 best=0.031215 x_nrmse=0.033385 all_nrmse=0.027269 penalty=0.000 N=628 p=0.051 rho=0.784 leak=0.636 scale=0.228 ridge=1.8e-08 washout=150
+[FOREST] iter  30/30 score=0.289471 best=0.031215 x_nrmse=0.230654 all_nrmse=0.186914 penalty=0.000 N=660 p=0.034 rho=0.686 leak=0.789 scale=0.207 ridge=2.5e-07 washout=404
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/best_params_forest.json
+
+======================================================================
+HYPERPARAMETER OPTIMIZATION
+======================================================================
+Optimizer     : gbrt
+Series        : explicit_training_portion_only
+Input size    : 3
+BO calls      : 30
+Random starts : 8
+Reservoir seed: 42
+Evaluation seeds: [42, 43, 44]
+Validation    : 3 locked recursive windows, aggregation=mean_plus_max
+======================================================================
+[GBRT] iter   1/30 score=0.445587 best=0.445587 x_nrmse=0.371236 all_nrmse=0.304003 penalty=0.000 N=437 p=0.291 rho=0.529 leak=0.504 scale=0.938 ridge=4.0e-07 washout=696
+[GBRT] iter   2/30 score=5.921851 best=0.445587 x_nrmse=2.057131 all_nrmse=2.424863 penalty=1.729 N=790 p=0.176 rho=1.126 leak=0.207 scale=0.249 ridge=1.1e-06 washout=623
+[GBRT] iter   3/30 score=7.424723 best=0.445587 x_nrmse=2.866408 all_nrmse=2.772491 penalty=2.411 N=594 p=0.083 rho=0.864 leak=0.367 scale=0.939 ridge=1.1e-04 washout=217
+[GBRT] iter   4/30 score=4.117294 best=0.445587 x_nrmse=1.314517 all_nrmse=1.573711 penalty=0.464 N=530 p=0.273 rho=0.825 leak=0.104 scale=0.381 ridge=7.5e-06 washout=870
+[GBRT] iter   5/30 score=10.323609 best=0.445587 x_nrmse=3.688261 all_nrmse=2.911117 penalty=3.810 N=773 p=0.029 rho=1.180 leak=0.756 scale=0.432 ridge=1.9e-05 washout=768
+[GBRT] iter   6/30 score=13.752864 best=0.445587 x_nrmse=3.330164 all_nrmse=3.071656 penalty=3.079 N=655 p=0.063 rho=0.924 leak=0.562 scale=0.753 ridge=7.9e-07 washout=730
+[GBRT] iter   7/30 score=3.249065 best=0.445587 x_nrmse=1.481620 all_nrmse=1.705401 penalty=0.143 N=525 p=0.278 rho=0.822 leak=0.170 scale=0.352 ridge=1.1e-06 washout=105
+[GBRT] iter   8/30 score=0.612111 best=0.445587 x_nrmse=0.565976 all_nrmse=0.456321 penalty=0.000 N=294 p=0.259 rho=1.145 leak=0.550 scale=0.188 ridge=1.1e-04 washout=875
+[GBRT] iter   9/30 score=2.941906 best=0.445587 x_nrmse=1.074778 all_nrmse=1.112998 penalty=0.308 N=428 p=0.310 rho=0.649 leak=0.612 scale=0.829 ridge=2.9e-06 washout=913
+[GBRT] iter  10/30 score=0.030298 best=0.030298 x_nrmse=0.027200 all_nrmse=0.022021 penalty=0.000 N=326 p=0.051 rho=0.504 leak=0.470 scale=0.646 ridge=1.6e-08 washout=780
+[GBRT] iter  11/30 score=0.405019 best=0.030298 x_nrmse=0.346941 all_nrmse=0.279195 penalty=0.000 N=429 p=0.057 rho=0.952 leak=0.553 scale=0.982 ridge=1.6e-07 washout=221
+[GBRT] iter  12/30 score=0.159516 best=0.030298 x_nrmse=0.136648 all_nrmse=0.110350 penalty=0.000 N=285 p=0.107 rho=0.924 leak=0.571 scale=0.626 ridge=5.1e-08 washout=243
+[GBRT] iter  13/30 score=1.514324 best=0.030298 x_nrmse=1.005738 all_nrmse=1.058207 penalty=0.096 N=683 p=0.340 rho=0.966 leak=0.578 scale=0.985 ridge=4.9e-08 washout=762
+[GBRT] iter  14/30 score=4.639571 best=0.030298 x_nrmse=1.655355 all_nrmse=2.005254 penalty=0.666 N=628 p=0.088 rho=0.996 leak=0.205 scale=0.967 ridge=9.3e-08 washout=189
+[GBRT] iter  15/30 score=5.794862 best=0.030298 x_nrmse=2.023825 all_nrmse=2.109926 penalty=1.640 N=661 p=0.340 rho=0.753 leak=0.557 scale=0.988 ridge=2.4e-07 washout=913
+[GBRT] iter  16/30 score=3.456669 best=0.030298 x_nrmse=1.511788 all_nrmse=1.585060 penalty=0.635 N=340 p=0.070 rho=1.147 leak=0.560 scale=0.604 ridge=1.8e-04 washout=120
+[GBRT] iter  17/30 score=0.086760 best=0.030298 x_nrmse=0.068223 all_nrmse=0.055832 penalty=0.000 N=313 p=0.248 rho=0.581 leak=0.684 scale=0.129 ridge=2.0e-08 washout=106
+[GBRT] iter  18/30 score=0.644813 best=0.030298 x_nrmse=0.575318 all_nrmse=0.473921 penalty=0.000 N=522 p=0.042 rho=1.170 leak=0.742 scale=0.279 ridge=1.5e-08 washout=139
+[GBRT] iter  19/30 score=7.196891 best=0.030298 x_nrmse=2.553110 all_nrmse=2.433342 penalty=1.714 N=648 p=0.075 rho=0.597 leak=0.337 scale=0.787 ridge=3.6e-08 washout=856
+[GBRT] iter  20/30 score=0.059600 best=0.030298 x_nrmse=0.049585 all_nrmse=0.040490 penalty=0.000 N=278 p=0.029 rho=0.582 leak=0.780 scale=0.772 ridge=1.4e-08 washout=330
+[GBRT] iter  21/30 score=0.521223 best=0.030298 x_nrmse=0.386040 all_nrmse=0.340394 penalty=0.000 N=309 p=0.021 rho=1.186 leak=0.219 scale=0.254 ridge=5.4e-08 washout=703
+[GBRT] iter  22/30 score=8.046403 best=0.030298 x_nrmse=3.085751 all_nrmse=2.508217 penalty=2.742 N=779 p=0.047 rho=1.047 leak=0.147 scale=0.994 ridge=6.1e-08 washout=96
+[GBRT] iter  23/30 score=1.736547 best=0.030298 x_nrmse=0.876880 all_nrmse=0.834277 penalty=0.111 N=655 p=0.050 rho=0.957 leak=0.641 scale=0.768 ridge=4.6e-08 washout=219
+[GBRT] iter  24/30 score=0.252572 best=0.030298 x_nrmse=0.206635 all_nrmse=0.169384 penalty=0.000 N=327 p=0.085 rho=0.750 leak=0.143 scale=0.182 ridge=5.7e-07 washout=848
+[GBRT] iter  25/30 score=0.379829 best=0.030298 x_nrmse=0.306438 all_nrmse=0.250117 penalty=0.000 N=286 p=0.028 rho=0.943 leak=0.522 scale=0.183 ridge=7.8e-07 washout=85
+[GBRT] iter  26/30 score=0.408050 best=0.030298 x_nrmse=0.334715 all_nrmse=0.271483 penalty=0.000 N=288 p=0.084 rho=0.920 leak=0.164 scale=0.353 ridge=8.4e-07 washout=580
+[GBRT] iter  27/30 score=5.738688 best=0.030298 x_nrmse=2.085646 all_nrmse=1.890481 penalty=1.561 N=719 p=0.094 rho=0.810 leak=0.600 scale=0.617 ridge=1.2e-08 washout=241
+[GBRT] iter  28/30 score=0.489037 best=0.030298 x_nrmse=0.404215 all_nrmse=0.334136 penalty=0.000 N=330 p=0.022 rho=1.169 leak=0.480 scale=0.762 ridge=8.0e-07 washout=685
+[GBRT] iter  29/30 score=0.397546 best=0.030298 x_nrmse=0.330405 all_nrmse=0.268181 penalty=0.000 N=313 p=0.242 rho=0.520 leak=0.360 scale=0.895 ridge=7.9e-07 washout=444
+[GBRT] iter  30/30 score=0.409323 best=0.030298 x_nrmse=0.340774 all_nrmse=0.280350 penalty=0.000 N=279 p=0.068 rho=1.050 leak=0.779 scale=0.541 ridge=5.0e-07 washout=799
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/best_params_gbrt.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/optimizer_summary.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/optimizer_history.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/optimizer_results.csv
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/optimizer_convergence.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png
+
+========================================================================
+OPTIMIZER RANKING
+========================================================================
+    gbrt | score=0.030298 | x_nrmse=0.027200 | N=326 | rho=0.504 | leak=0.470 | scale=0.646 | washout=780
+  forest | score=0.031215 | x_nrmse=0.025091 | N=621 | rho=0.700 | leak=0.148 | scale=0.272 | washout=407
+      gp | score=0.065963 | x_nrmse=0.053005 | N=250 | rho=0.500 | leak=0.188 | scale=0.781 | washout=1000
+   dummy | score=0.402963 | x_nrmse=0.326200 | N=648 | rho=0.986 | leak=0.698 | scale=0.135 | washout=295
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/02_bo_optimization/chaotic_bursting/best_params_auto.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/01_prediction_all_regimes/chaotic_bursting/results_all_states.png
+[Control] Controller: linear_feedback
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.092917
+[Control] Validation coarse K=0.175833
+[Control] Validation coarse K=0.258750
+[Control] Validation coarse K=0.341667
+[Control] Validation coarse K=0.424583
+[Control] Validation coarse K=0.507500
+[Control] Validation coarse K=0.590417
+[Control] Validation coarse K=0.673333
+[Control] Validation coarse K=0.756250
+[Control] Validation coarse K=0.839167
+[Control] Validation coarse K=0.922083
+[Control] Validation coarse K=1.005000
+[Control] Validation coarse K=1.087917
+[Control] Validation coarse K=1.170833
+[Control] Validation coarse K=1.253750
+[Control] Validation coarse K=1.336667
+[Control] Validation coarse K=1.419583
+[Control] Validation coarse K=1.502500
+[Control] Validation coarse K=1.585417
+[Control] Validation coarse K=1.668333
+[Control] Validation coarse K=1.751250
+[Control] Validation coarse K=1.834167
+[Control] Validation coarse K=1.917083
+[Control] Validation coarse K=2.000000
+[Control] Validation refined K=0.872333
+[Control] Validation refined K=0.903754
+[Control] Validation refined K=0.935175
+[Control] Validation refined K=0.966596
+[Control] Validation refined K=0.998018
+[Control] Validation refined K=1.029439
+[Control] Validation refined K=1.060860
+[Control] Validation refined K=1.092281
+[Control] Validation refined K=1.123702
+[Control] Validation refined K=1.155123
+[Control] Validation refined K=1.186544
+[Control] Validation refined K=1.217965
+[Control] Validation refined K=1.249386
+[Control] Validation refined K=1.280807
+[Control] Validation refined K=1.312228
+[Control] Validation refined K=1.343649
+[Control] Validation refined K=1.375070
+[Control] Validation refined K=1.406491
+[Control] Validation refined K=1.437912
+[Control] Validation refined K=1.469333
+[Control] Selected K=1.170833 on controller validation (score=0.000815338)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/best_rollout/rollout.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/control_summary.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/controlled_all_states.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/control_signal.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/control_error.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/03_linear_feedback/control_sweep_summary.png
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p3
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.021763
+[Control] Validation refined K=0.033526
+[Control] Validation refined K=0.045289
+[Control] Validation refined K=0.057053
+[Control] Validation refined K=0.068816
+[Control] Validation refined K=0.080579
+[Control] Validation refined K=0.092342
+[Control] Validation refined K=0.104105
+[Control] Validation refined K=0.115868
+[Control] Validation refined K=0.127632
+[Control] Validation refined K=0.139395
+[Control] Validation refined K=0.151158
+[Control] Validation refined K=0.162921
+[Control] Validation refined K=0.174684
+[Control] Validation refined K=0.186447
+[Control] Validation refined K=0.198211
+[Control] Validation refined K=0.209974
+[Control] Validation refined K=0.221737
+[Control] Validation refined K=0.233500
+[Control] Selected K=0.010000 on controller validation (score=0.00207234)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p3/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p3/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p5
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.025031
+[Control] Validation refined K=0.040061
+[Control] Validation refined K=0.055092
+[Control] Validation refined K=0.070123
+[Control] Validation refined K=0.085154
+[Control] Validation refined K=0.100184
+[Control] Validation refined K=0.115215
+[Control] Validation refined K=0.130246
+[Control] Validation refined K=0.145276
+[Control] Validation refined K=0.160307
+[Control] Validation refined K=0.175338
+[Control] Validation refined K=0.190368
+[Control] Validation refined K=0.205399
+[Control] Validation refined K=0.220430
+[Control] Validation refined K=0.235461
+[Control] Validation refined K=0.250491
+[Control] Validation refined K=0.265522
+[Control] Validation refined K=0.280553
+[Control] Validation refined K=0.295583
+[Control] Selected K=0.040061 on controller validation (score=0.00132678)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p5/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p5/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p7
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.031566
+[Control] Validation refined K=0.053132
+[Control] Validation refined K=0.074697
+[Control] Validation refined K=0.096263
+[Control] Validation refined K=0.117829
+[Control] Validation refined K=0.139395
+[Control] Validation refined K=0.160961
+[Control] Validation refined K=0.182526
+[Control] Validation refined K=0.204092
+[Control] Validation refined K=0.225658
+[Control] Validation refined K=0.247224
+[Control] Validation refined K=0.268789
+[Control] Validation refined K=0.290355
+[Control] Validation refined K=0.311921
+[Control] Validation refined K=0.333487
+[Control] Validation refined K=0.355053
+[Control] Validation refined K=0.376618
+[Control] Validation refined K=0.398184
+[Control] Validation refined K=0.419750
+[Control] Selected K=0.182526 on controller validation (score=0.000903226)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p7/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p7/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p8
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.159000
+[Control] Validation refined K=0.182526
+[Control] Validation refined K=0.206053
+[Control] Validation refined K=0.229579
+[Control] Validation refined K=0.253105
+[Control] Validation refined K=0.276632
+[Control] Validation refined K=0.300158
+[Control] Validation refined K=0.323684
+[Control] Validation refined K=0.347211
+[Control] Validation refined K=0.370737
+[Control] Validation refined K=0.394263
+[Control] Validation refined K=0.417789
+[Control] Validation refined K=0.441316
+[Control] Validation refined K=0.464842
+[Control] Validation refined K=0.488368
+[Control] Validation refined K=0.511895
+[Control] Validation refined K=0.535421
+[Control] Validation refined K=0.558947
+[Control] Validation refined K=0.582474
+[Control] Validation refined K=0.606000
+[Control] Selected K=0.417789 on controller validation (score=0.000778767)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p8/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p8/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p9
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Validation coarse K=0.010000
+[Control] Validation coarse K=0.072083
+[Control] Validation coarse K=0.134167
+[Control] Validation coarse K=0.196250
+[Control] Validation coarse K=0.258333
+[Control] Validation coarse K=0.320417
+[Control] Validation coarse K=0.382500
+[Control] Validation coarse K=0.444583
+[Control] Validation coarse K=0.506667
+[Control] Validation coarse K=0.568750
+[Control] Validation coarse K=0.630833
+[Control] Validation coarse K=0.692917
+[Control] Validation coarse K=0.755000
+[Control] Validation coarse K=0.817083
+[Control] Validation coarse K=0.879167
+[Control] Validation coarse K=0.941250
+[Control] Validation coarse K=1.003333
+[Control] Validation coarse K=1.065417
+[Control] Validation coarse K=1.127500
+[Control] Validation coarse K=1.189583
+[Control] Validation coarse K=1.251667
+[Control] Validation coarse K=1.313750
+[Control] Validation coarse K=1.375833
+[Control] Validation coarse K=1.437917
+[Control] Validation coarse K=1.500000
+[Control] Validation refined K=0.655667
+[Control] Validation refined K=0.679193
+[Control] Validation refined K=0.702719
+[Control] Validation refined K=0.726246
+[Control] Validation refined K=0.749772
+[Control] Validation refined K=0.773298
+[Control] Validation refined K=0.796825
+[Control] Validation refined K=0.820351
+[Control] Validation refined K=0.843877
+[Control] Validation refined K=0.867404
+[Control] Validation refined K=0.890930
+[Control] Validation refined K=0.914456
+[Control] Validation refined K=0.937982
+[Control] Validation refined K=0.961509
+[Control] Validation refined K=0.985035
+[Control] Validation refined K=1.008561
+[Control] Validation refined K=1.032088
+[Control] Validation refined K=1.055614
+[Control] Validation refined K=1.079140
+[Control] Validation refined K=1.102667
+[Control] Selected K=0.843877 on controller validation (score=0.000744885)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p9/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/candidates/s_0p9/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: finite_time
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Selected K=0.843877 on controller validation (score=0.000744885)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/best_rollout/rollout.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/control_summary.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/controlled_all_states.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/control_signal.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/control_error.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/04_finite_time/control_sweep_summary.png
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_20_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 20
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.030636
+[Control] Validation refined K=0.041273
+[Control] Validation refined K=0.051909
+[Control] Validation refined K=0.062545
+[Control] Validation refined K=0.073182
+[Control] Validation refined K=0.083818
+[Control] Validation refined K=0.094455
+[Control] Validation refined K=0.105091
+[Control] Validation refined K=0.115727
+[Control] Validation refined K=0.126364
+[Control] Validation refined K=0.137000
+[Control] Selected K=0.030636 on controller validation (score=179.561)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_20_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_80_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 80
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.030636
+[Control] Validation refined K=0.041273
+[Control] Validation refined K=0.051909
+[Control] Validation refined K=0.062545
+[Control] Validation refined K=0.073182
+[Control] Validation refined K=0.083818
+[Control] Validation refined K=0.094455
+[Control] Validation refined K=0.105091
+[Control] Validation refined K=0.115727
+[Control] Validation refined K=0.126364
+[Control] Validation refined K=0.137000
+[Control] Selected K=0.020000 on controller validation (score=453.704)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_80_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_320_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 320
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.683000
+[Control] Validation refined K=0.693636
+[Control] Validation refined K=0.704273
+[Control] Validation refined K=0.714909
+[Control] Validation refined K=0.725545
+[Control] Validation refined K=0.736182
+[Control] Validation refined K=0.746818
+[Control] Validation refined K=0.757455
+[Control] Validation refined K=0.768091
+[Control] Validation refined K=0.778727
+[Control] Validation refined K=0.789364
+[Control] Selected K=0.800000 on controller validation (score=3368.22)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_320_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_640_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 640
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.033000
+[Control] Validation refined K=0.054273
+[Control] Validation refined K=0.075545
+[Control] Validation refined K=0.096818
+[Control] Validation refined K=0.118091
+[Control] Validation refined K=0.139364
+[Control] Validation refined K=0.160636
+[Control] Validation refined K=0.181909
+[Control] Validation refined K=0.203182
+[Control] Validation refined K=0.224455
+[Control] Validation refined K=0.245727
+[Control] Validation refined K=0.267000
+[Control] Selected K=0.150000 on controller validation (score=3367.55)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_640_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1280_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 1280
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.683000
+[Control] Validation refined K=0.693636
+[Control] Validation refined K=0.704273
+[Control] Validation refined K=0.714909
+[Control] Validation refined K=0.725545
+[Control] Validation refined K=0.736182
+[Control] Validation refined K=0.746818
+[Control] Validation refined K=0.757455
+[Control] Validation refined K=0.768091
+[Control] Validation refined K=0.778727
+[Control] Validation refined K=0.789364
+[Control] Selected K=0.800000 on controller validation (score=3367.26)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1600_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 1600
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.683000
+[Control] Validation refined K=0.693636
+[Control] Validation refined K=0.704273
+[Control] Validation refined K=0.714909
+[Control] Validation refined K=0.725545
+[Control] Validation refined K=0.736182
+[Control] Validation refined K=0.746818
+[Control] Validation refined K=0.757455
+[Control] Validation refined K=0.768091
+[Control] Validation refined K=0.778727
+[Control] Validation refined K=0.789364
+[Control] Selected K=0.800000 on controller validation (score=3367.35)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_2400_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 2400
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.488000
+[Control] Validation refined K=0.509273
+[Control] Validation refined K=0.530545
+[Control] Validation refined K=0.551818
+[Control] Validation refined K=0.573091
+[Control] Validation refined K=0.594364
+[Control] Validation refined K=0.615636
+[Control] Validation refined K=0.636909
+[Control] Validation refined K=0.658182
+[Control] Validation refined K=0.679455
+[Control] Validation refined K=0.700727
+[Control] Validation refined K=0.722000
+[Control] Selected K=0.605000 on controller validation (score=0.142253)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_3200_sign_minus1
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 3200
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Validation coarse K=0.020000
+[Control] Validation coarse K=0.085000
+[Control] Validation coarse K=0.150000
+[Control] Validation coarse K=0.215000
+[Control] Validation coarse K=0.280000
+[Control] Validation coarse K=0.345000
+[Control] Validation coarse K=0.410000
+[Control] Validation coarse K=0.475000
+[Control] Validation coarse K=0.540000
+[Control] Validation coarse K=0.605000
+[Control] Validation coarse K=0.670000
+[Control] Validation coarse K=0.735000
+[Control] Validation coarse K=0.800000
+[Control] Validation refined K=0.163000
+[Control] Validation refined K=0.184273
+[Control] Validation refined K=0.205545
+[Control] Validation refined K=0.226818
+[Control] Validation refined K=0.248091
+[Control] Validation refined K=0.269364
+[Control] Validation refined K=0.290636
+[Control] Validation refined K=0.311909
+[Control] Validation refined K=0.333182
+[Control] Validation refined K=0.354455
+[Control] Validation refined K=0.375727
+[Control] Validation refined K=0.397000
+[Control] Selected K=0.290636 on controller validation (score=35.0194)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json
+[Control] Validation-only run: controller test was not evaluated.
+[Control] Controller: pyragas
+[Control] Output dir : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas
+[Control] Target raw : [-0.93552691 -3.43879076  3.23680201]
+[Control] Controller validation/test windows: [9000, 27000) / [27000, 45000)
+[Control] Pyragas delay: 2400
+[Control] Pyragas sign : -1
+[Control] Pyragas history signal: raw_readout
+[Control] Selected K=0.605000 on controller validation (score=0.142253)
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/best_rollout/rollout.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/k_sweep.csv
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/best_rollout/metrics.json
+[Save] -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/control_summary.json
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/controlled_vs_uncontrolled_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/raw_readout_vs_corrected_feedback_input_x.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/controlled_all_states.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/pyragas_phase_trajectory_3d.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/pyragas_periodic_zoom.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/control_signal.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/control_error.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/pyragas_periodic_k_sweep_summary.png
+[Plot] Saved -> /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/05_pyragas/control_sweep_summary.png
+{
+  "bo_invocations": [
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "periodic_spiking",
+      "training_selection_samples": 105000
+    },
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "periodic_bursting",
+      "training_selection_samples": 105000
+    },
+    {
+      "heldout_array_passed_to_selection": false,
+      "heldout_samples": 45000,
+      "optimizers_compared": [
+        "gp",
+        "dummy",
+        "forest",
+        "gbrt"
+      ],
+      "overall_bo_stage_invocations": 1,
+      "regime": "chaotic_bursting",
+      "training_selection_samples": 105000
+    }
+  ],
+  "controller_model_identity": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
+  "final_root": "/home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958",
+  "git_commit": "2ccca0deaacb537ba266ffcb73912821db81330f",
+  "package_validation": {
+    "absolute_path_findings": [],
+    "clean_repository_at_run_start": true,
+    "controller_summaries": [
+      {
+        "control_model_source": "validation_selected",
+        "controller": "linear_feedback",
+        "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "03_linear_feedback",
+        "stable": true
+      },
+      {
+        "control_model_source": "validation_selected",
+        "controller": "finite_time",
+        "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "04_finite_time",
+        "stable": true
+      },
+      {
+        "control_model_source": "validation_selected",
+        "controller": "pyragas",
+        "model_identity_hash": "af57f2876959402a289009761517e036c9716ebf209135d0599d1f68b586753a",
+        "reference_type": "empirical_quiet_state_reference",
+        "section": "05_pyragas",
+        "stable": true
+      }
+    ],
+    "csv_errors": [],
+    "csv_valid": true,
+    "duplicate_hash_groups": [
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+          "02_bo_optimization/periodic_bursting/optimizer_results.csv"
+        ],
+        "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
+      },
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+          "02_bo_optimization/periodic_spiking/optimizer_results.csv"
+        ],
+        "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
+      },
+      {
+        "extension": ".csv",
+        "files": [
+          "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+          "02_bo_optimization/chaotic_bursting/optimizer_results.csv"
+        ],
+        "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "02_bo_optimization/chaotic_bursting/validation_windows.json",
+          "02_bo_optimization/periodic_bursting/validation_windows.json",
+          "02_bo_optimization/periodic_spiking/validation_windows.json"
+        ],
+        "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+          "01_prediction_all_regimes/periodic_bursting/metrics.json"
+        ],
+        "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+          "01_prediction_all_regimes/periodic_spiking/metrics.json"
+        ],
+        "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
+      },
+      {
+        "extension": ".json",
+        "files": [
+          "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+          "01_prediction_all_regimes/chaotic_bursting/metrics.json"
+        ],
+        "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
+      },
+      {
+        "extension": ".png",
+        "files": [
+          "05_pyragas/control_sweep_summary.png",
+          "05_pyragas/pyragas_periodic_k_sweep_summary.png"
+        ],
+        "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
+      }
+    ],
+    "duplicate_prediction_violations": [],
+    "errors": [],
+    "expected_commit": "2ccca0deaacb537ba266ffcb73912821db81330f",
+    "expected_controller_summaries_present": true,
+    "file_hashes": [
+      {
+        "extension": ".csv",
+        "file": "00_manifest/bo_invocations.csv",
+        "sha256": "184e1900c5e8be7c5a6a925706c45bef3a197809bcb2f8cf92b6880ea8a1d95a"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/hr_regime_validation/chaotic_bursting.json",
+        "sha256": "b108724021e7859ea363367df258ebb0bfcbacec704afdb23057d9d28f187f5d"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/hr_regime_validation/periodic_bursting.json",
+        "sha256": "4a9ab7e998cf85658da90c9b8afedcad78563727a405e429349275ff4e1565cd"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/hr_regime_validation/periodic_spiking.json",
+        "sha256": "f8719ad7bb412219f57f7ab1583982e8720bc2513e5c9260b9883464f4f13941"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/run_manifest.json",
+        "sha256": "dbe20665a5b58b094077d05b75325d2be9fc92e1543364e63b742d15c14140c6"
+      },
+      {
+        "extension": ".json",
+        "file": "00_manifest/source_hashes.json",
+        "sha256": "385d85b60b071653200efc6b7bed4e69d398c0b990178e8e3ee23e83f400fd87"
+      },
+      {
+        "extension": ".csv",
+        "file": "00_manifest/stage_timings.csv",
+        "sha256": "b7110fa13b1ab674a2961ba075bfbf52cf03d898d0da8da338706bf7d6d529ac"
+      },
+      {
+        "extension": ".csv",
+        "file": "01_prediction_all_regimes/chaotic_bursting/baseline_metrics.csv",
+        "sha256": "8656a4947e28da014752debba14ade1cd662f32b8996c1bcdeabe1cb8ecef4c2"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/baseline_metrics.json",
+        "sha256": "78e44dc4a85aa52cba2376830ebdd8b95d902de37c1f2dbfc1ad5808a3e58958"
+      },
+      {
+        "extension": ".csv",
+        "file": "01_prediction_all_regimes/chaotic_bursting/chaotic_error_growth.csv",
+        "sha256": "1af2335bccf1254091c07ed62c1faec06de627798acc7de765fd15edd831520e"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/chaotic_valid_prediction_horizon.json",
+        "sha256": "a1e4f32f5df363a754bda73a964e83bbb0cabd7f84434b74db1b6449fdf78e90"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/heldout_test_metrics.json",
+        "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/metrics.json",
+        "sha256": "b5b7393c49f6d737e2ccfd1a6fea21a75b8a8b747520859b3f3dd52c9d59be51"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_all_states.png",
+        "sha256": "ef559db38bcae3885617ef9f8eb5294e1af94f731be7dec527da0b702b3d789c"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_full_zoom.png",
+        "sha256": "7e9b292432164de88d030d996211540391742d5fda877ca58758fa2d51b98cc2"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/results_zoom_comparison.png",
+        "sha256": "22fd79859d9ad07fa663c5d5d10456579fed51a890660fa76e5ff975fffaf025"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/chaotic_bursting/selected_model.json",
+        "sha256": "ce833145ad6d0ea4a774a4002cd7d822e226e88202fe74e2c0b4318cf7d04396"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/chaotic_bursting/spike_event_comparison.png",
+        "sha256": "e485e5645b75439ef2e9fa24bb9ca3ef995c6c009a6e0a6127f5c6d3d7b013ac"
+      },
+      {
+        "extension": ".csv",
+        "file": "01_prediction_all_regimes/periodic_bursting/baseline_metrics.csv",
+        "sha256": "f42442cd6261f008aa9aba7e2856e530f2c569cbd726a14aedf1fed006658c95"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/baseline_metrics.json",
+        "sha256": "9c452d5939532d6dffa879cf742b79531f665cf4317885e46e77a5374dfce759"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/heldout_test_metrics.json",
+        "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/metrics.json",
+        "sha256": "38fdfc2a87ab0f0144aabfb40ccaf44095d02b486a1fc6edba1cf172cef305fd"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_all_states.png",
+        "sha256": "42f43084c7aebc1348666851a1968494b4019a0fef369a307258f21ad6ff345e"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_full_zoom.png",
+        "sha256": "4ee47d409bd97ca8cb3578053c76dbde1e44f0197d5f785e992bbe4853e6c95f"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/results_zoom_comparison.png",
+        "sha256": "2f40d16d3b944aba720c33992bec5f8817665f3dbc317214a92f43509724d8d2"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_bursting/selected_model.json",
+        "sha256": "d0e542d465749b59da3694ca05f821f3e10009af6ca58a35a26013041f0b15d9"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_bursting/spike_event_comparison.png",
+        "sha256": "0eb5e43c9183deae3dd9ee8fbf53155c10f9c8ec30c01f53935f184855394e10"
+      },
+      {
+        "extension": ".csv",
+        "file": "01_prediction_all_regimes/periodic_spiking/baseline_metrics.csv",
+        "sha256": "5ac2c681d9055211237224060f76fd9b4a2722357c75ae43045d149c6549dce4"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/baseline_metrics.json",
+        "sha256": "c05f59eb0c8ea4169e54e0d1331fdf25f22ec77bc29b6866dedaf3eaed5f9ae8"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/heldout_test_metrics.json",
+        "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/metrics.json",
+        "sha256": "ae5bd13ccd7fa8530e0401efc4d432b72a0e6ad2986dfd7cfacfd6131b87b912"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_all_states.png",
+        "sha256": "e49a4d3cfb9c84e919d929c2ffcc292d5e64bf621e6a2620ea22d529e9e6f86d"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_full_zoom.png",
+        "sha256": "384a2fd89e25006023536dd73bb9233485f580f46dfdc8e32f645991f43cdde9"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/results_zoom_comparison.png",
+        "sha256": "3651dcab291fb299788d39f95ddf11da3cb068654aad54ac438fcaa6c3999534"
+      },
+      {
+        "extension": ".json",
+        "file": "01_prediction_all_regimes/periodic_spiking/selected_model.json",
+        "sha256": "c5a5dcb27a688ca733fbca3bfb87da9ea45233f971f154231c18d2794fb09ada"
+      },
+      {
+        "extension": ".png",
+        "file": "01_prediction_all_regimes/periodic_spiking/spike_event_comparison.png",
+        "sha256": "d00e92417cfbc8cdb8a330c201746314024ab365954527e81fd1b148bcea7aa9"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params.json",
+        "sha256": "b99238540a76803fdfb27b56a4f628ac736a496a75c48927a0209951fc574279"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_auto.json",
+        "sha256": "b9d09f678a4aa7db59ee3a58ee5aadc5c1015e45cc0ea12b73fae7c3bf5ecb17"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_dummy.json",
+        "sha256": "25d20f76099d6182209c662061f77f6f5fb353b752951766b18e574a68807234"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_forest.json",
+        "sha256": "702904d05ef9b6f0a194415bb8ab10753c6c60fe570f2e2c315efcf760b177db"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_gbrt.json",
+        "sha256": "316ba1923cb44c789a0c1df8b550578cd4bf92d021d39202e34eb0417f795eec"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/best_params_gp.json",
+        "sha256": "4d1d93dd0966c3a76c17af086554381ac7a3645c90add140e70cf5f440994000"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/chaotic_bursting/bo_objective_landscape_best_optimizer.png",
+        "sha256": "6d497704fdfcf3424bf883f74a6aaf7f56945739cd244d69dce75a313de8ff61"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_convergence.png",
+        "sha256": "eb0ab4349858d494a167c92c93468863816988057ca2fcc7928021142af6d41c"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_history.csv",
+        "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_ranking_table.csv",
+        "sha256": "10ccfa3200f2884133a7fa828fe51b36d642dfd0b2322e7e2179a78ada6fac45"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_results.csv",
+        "sha256": "f3d8f5ae5c44244c2c204ef0b2e064f826dec0098ab9ee57181dade0efd9e7e3"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_summary.json",
+        "sha256": "809115c1c33db4a30eecbbdc5af85f73dc66f82bb832d5a64c2db5c897ba5deb"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/chaotic_bursting/optimizer_validation_summary.csv",
+        "sha256": "869369cb851e1248f1a56ce8d51ba86d9cb7303aaa1b36f2dea26a4ca1df26b2"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/chaotic_bursting/validation_windows.json",
+        "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params.json",
+        "sha256": "552d432f0e9c4b9ac54e7c04e84029c63606180f1dfa70ec5c48ad544e89a3cb"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_auto.json",
+        "sha256": "3d9f4342bde8010fe082e841999c7cec73712c0aa438329291fc2488c63a8c85"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_dummy.json",
+        "sha256": "78b6f1d9e56fc3e2140f9da3656b94d41ff0fa4f6d6bf25ee2c6cae37f8355aa"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_forest.json",
+        "sha256": "3ca80200ee76183e1280aa6323794538ab9aee1768fe14dd0810e603896bd4fa"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_gbrt.json",
+        "sha256": "c83089ee64c7992b71b17ecc27012271fbab3df7d8704f8e8691b3861827bb73"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/best_params_gp.json",
+        "sha256": "dc31cd2adbe59a4ce919f53336deea64f1df50501bc302cf4c7c2a029f19c738"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_bursting/bo_objective_landscape_best_optimizer.png",
+        "sha256": "b5ed23ee4504c246175c2634599b281bbbeaa142ec49e3659719bc5a2c4f8a71"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_convergence.png",
+        "sha256": "e99416aaadbf0330dacb369c1a6e9578562b984c4dd6045104245b5fec0eee53"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_history.csv",
+        "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_ranking_table.csv",
+        "sha256": "e08c347721a1c50ea352fe5faf1d8e85b3b1d3b9e2c9e6f0c86b2e3567405dda"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_results.csv",
+        "sha256": "c09d23dbd9807c855e3774bb7fe7e3e97879227ccadac0d73b0b8378b083df29"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_summary.json",
+        "sha256": "e4a938cb0ae3a71ee7f27b6475703578b30c9a721548b361ee547cb02c33ca94"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_bursting/optimizer_validation_summary.csv",
+        "sha256": "f1c7ad92ede953757271a411b33863b5482ab61ae83de75ce5e475e01f993210"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_bursting/validation_windows.json",
+        "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params.json",
+        "sha256": "eeb166072632d361016b669b432d995fb7f1d96ce86cb63c66db7d4ddcc0dec5"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_auto.json",
+        "sha256": "e33aa80d81289faae5c819bd451b852738d91fe98fff8891dbda5d0895b89287"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_dummy.json",
+        "sha256": "3e2720ce48c0080a56f97e45340bb5e731e35788c16500157b4d3534ed9d2af0"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_forest.json",
+        "sha256": "9106508782575e603e230fb8b220092de2ee48d33dae50dd6cc3ca58db146b04"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_gbrt.json",
+        "sha256": "a38e789ca8c07460022cf5b3d7a52b1963b4540d98059a9672bd82998ed72860"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/best_params_gp.json",
+        "sha256": "4576a8126322d3f8d0763ff293a628af05a3c675a82f093bab055a64b98ca8eb"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_spiking/bo_objective_landscape_best_optimizer.png",
+        "sha256": "f43c7ed251bce2e3a25d25c79eb5099e645c791a98481f6776ad1f016b4f70ed"
+      },
+      {
+        "extension": ".png",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_convergence.png",
+        "sha256": "da280fe27deb1bcba4a34442efd4b490a15f4b0ac3cf36ff8b8f6c967b0cd718"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_history.csv",
+        "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_ranking_table.csv",
+        "sha256": "125620576009c5cd2ecfce18decbf7cd03af7f830a8e5600cca3b9ab7b2b8dd2"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_results.csv",
+        "sha256": "dcec90680ed0a0b09e71d0bc92811b53bd3d8d46d4f6693c1ae17fb8c2ad7248"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_summary.json",
+        "sha256": "9092733fa346b1a18240a1b545dcaf4739772f409e983385f18bef3a588b2c7a"
+      },
+      {
+        "extension": ".csv",
+        "file": "02_bo_optimization/periodic_spiking/optimizer_validation_summary.csv",
+        "sha256": "4be239e152f184d40989ffd787966e227123d142e2836474eb4edf2f5b6563a2"
+      },
+      {
+        "extension": ".json",
+        "file": "02_bo_optimization/periodic_spiking/validation_windows.json",
+        "sha256": "239919097aa0a87198363611eb1731ebff90f9a0d97d991e8f417650d32965ba"
+      },
+      {
+        "extension": ".json",
+        "file": "03_linear_feedback/best_rollout/metrics.json",
+        "sha256": "dac9c6874d0c12b7f9b78115ceb52170be54f0a1be0e239b1af17223ce2ea2a8"
+      },
+      {
+        "extension": ".csv",
+        "file": "03_linear_feedback/best_rollout/rollout.csv",
+        "sha256": "53dfbd3d996aa00216b20e0ab452aab5eb35026281dd3c3de03d0a4e2c1cb69b"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_error.png",
+        "sha256": "7a367519a68b6952f8557dd2f35be0096e914ac1007b130aac7e469451de8136"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_signal.png",
+        "sha256": "51aa9f8745667c9288fbf7e423ed065957248c78f4f99aebba1341d00754cf21"
+      },
+      {
+        "extension": ".json",
+        "file": "03_linear_feedback/control_summary.json",
+        "sha256": "feba1909f7073d07b56633d3966ab774ed7a0fc26123badb527e3a8996e1c27d"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/control_sweep_summary.png",
+        "sha256": "b2aa748c7b95d0415fa082be0714132eb11ace00abeecc885d9ff68e964f3aa8"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/controlled_all_states.png",
+        "sha256": "14598b820a06827abd347cabf6d9e64263d83900a3ac388e33490e284e81e7e4"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/controlled_vs_uncontrolled_x.png",
+        "sha256": "ae1bb545b1f388f2b061df803a669275413a1f0b1f9e70215a9d7fbafd2e5a77"
+      },
+      {
+        "extension": ".csv",
+        "file": "03_linear_feedback/k_sweep.csv",
+        "sha256": "c81713fbe65dbf66091a4b7538ea0174d3569ef5c0fced91e0cddac5add69f86"
+      },
+      {
+        "extension": ".png",
+        "file": "03_linear_feedback/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "ae1e18323f55ba745db94a0dcdc0a3369dc51e0ba482ac9b3d25717402884f9c"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/best_rollout/metrics.json",
+        "sha256": "cb942ccb058bf4eaac07a987eb0b253c2f2cab2c7565a93c751e29623aa45e3a"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/best_rollout/rollout.csv",
+        "sha256": "52bdcbaa1f4ce8d3288cbabb65faeab737e36b7cea138494f966446b1f36e198"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p3/control_summary.json",
+        "sha256": "56bf221dcfab0ac11c6461dc42862f5a4a5cff3b2037a0ac73221b987701458d"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p3/k_sweep.csv",
+        "sha256": "ebe7aa380da511dcf5a3f7f3a4e3e2e331a263fa5efa56888ffcbc78d3878586"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p5/control_summary.json",
+        "sha256": "41369398ac95a7c9e13b4aed856428d903d1b6685e0350cfc66af1da738a4fd2"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p5/k_sweep.csv",
+        "sha256": "870445b5e217d58cf05aa8a8a5b92a76d2c60043fc0b56d2c7cdc805102649ca"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p7/control_summary.json",
+        "sha256": "15b315da772fe8997c1541c46b50f5db325f45586641a4f50b65cf2131f97aa6"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p7/k_sweep.csv",
+        "sha256": "927d4c58784ac4beacbd87673cbed588b08ecf102f39e985aea0fbf30d5e0343"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p8/control_summary.json",
+        "sha256": "d8b9c9beed2455c8b36430143efccefe26903d2e86b3771755f7f973a5678b38"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p8/k_sweep.csv",
+        "sha256": "9ecea38312812da9cda3b65575a400f046a819cb6a3f3291d835133189e2ce1f"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/candidates/s_0p9/control_summary.json",
+        "sha256": "42a9486796ffbb575382e3a540a0c74c9ea7acf32ed8c40ca80006f8cda66d3f"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/candidates/s_0p9/k_sweep.csv",
+        "sha256": "209e399f06001b62583fb40ff533fd9032b351db6ba9cba4fc9fcf8a6a76ee08"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_error.png",
+        "sha256": "f761fe60262c1cb2a69a860d91b1924e35c6e1462595c345f086e648daf66292"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_signal.png",
+        "sha256": "464425f4dc8397f287625f1042a6249182311d89d78b96a98af6182ea4705207"
+      },
+      {
+        "extension": ".json",
+        "file": "04_finite_time/control_summary.json",
+        "sha256": "27568a9e97167c6e0c9966e7a302c973b0e03d6aa018ce489cc00bbb294608ec"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/control_sweep_summary.png",
+        "sha256": "607212395423bace3efbeb72a039336e2a6bee539b62b721af762b8a0734197d"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/controlled_all_states.png",
+        "sha256": "61e44c63b5f35273a00d482dfd7fd33bb4fff88efd17a3b6797216e694cf28ae"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/controlled_vs_uncontrolled_x.png",
+        "sha256": "51a70bc601f965938a6b9234a8b765a566628be90ee1a7e36e3e94f3ee451231"
+      },
+      {
+        "extension": ".csv",
+        "file": "04_finite_time/k_sweep.csv",
+        "sha256": "93e560232dba633386f34b52f8a851c5b087872c8fbd1a5770091f79ca7f43ed"
+      },
+      {
+        "extension": ".png",
+        "file": "04_finite_time/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "d5c477d6e6da65c3988e17f98abca05f71ca9611d66d993f22958246d9cbf41f"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/best_rollout/metrics.json",
+        "sha256": "8b37835e1e4991ed2bed30822ccebb0afb3baae452a9a88700b2985f89de829e"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/best_rollout/rollout.csv",
+        "sha256": "21ad693f171427fc4c53cb5cd018184baf678eff8272bf2a6435c75feacedb53"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_1280_sign_minus1/control_summary.json",
+        "sha256": "fdf28c4f6a8852d9b818885e2462ca961263545e4f4b46e0f543df75a3781630"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_1280_sign_minus1/k_sweep.csv",
+        "sha256": "a65e2ceb68f20fd78e2b227e52f708c9f6abc6072ebc32717fa3cbdb05445741"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_1600_sign_minus1/control_summary.json",
+        "sha256": "b96c8157fa915b7d50f3a352ea28714f689ded379f0f8a7916af47686e1c4242"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_1600_sign_minus1/k_sweep.csv",
+        "sha256": "bcb7cfecb3c3d843d536037bd9b0e6c4c554f3238bdb056771c4a6acf4184383"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_20_sign_minus1/control_summary.json",
+        "sha256": "cd677c4e64226398800e8b4c5701b712bb225eebdb16fc934705161deb5ec17f"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_20_sign_minus1/k_sweep.csv",
+        "sha256": "568f57bcab0af0631998b6432b97a8c9ac202109378d4f0574246b79ce91e514"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_2400_sign_minus1/control_summary.json",
+        "sha256": "fc86695573954762421ba0f537fe64e0714c5eb3b24b17bf20cc7037dedbeebf"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_2400_sign_minus1/k_sweep.csv",
+        "sha256": "50306ad546fd84f99f7b6f3c712b215d883e9297e6678bd3302d5e8dbb061ee5"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_3200_sign_minus1/control_summary.json",
+        "sha256": "bc422bebac1c488f6ae4e17375675feccfb565da67d81d4dbf7aed54391409b5"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_3200_sign_minus1/k_sweep.csv",
+        "sha256": "aea2f553ee723322c8732c8a706b39b8c90c01200d69bbb6419e483e5aaec540"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_320_sign_minus1/control_summary.json",
+        "sha256": "0bce96f4bc5794c8302737ea2be40d14f5a099809ac01a03b265edcf8bd7ee61"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_320_sign_minus1/k_sweep.csv",
+        "sha256": "d02a3469ad60e1d25b1f834ca7cbfb8aa40c13c442b20920b0262d50920929c8"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_640_sign_minus1/control_summary.json",
+        "sha256": "43ca6954c82455462b8a640412f7a3d34fb823f094a894649bd5a0798712453d"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_640_sign_minus1/k_sweep.csv",
+        "sha256": "4c9bee1536ce3c2ebb116f859dfbe2b2eb772e63cfae3be1a463501f717bc0a2"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/candidates/delay_80_sign_minus1/control_summary.json",
+        "sha256": "1d2db727da1a762bde2d1e9182b83be5d422c252b6866e3e06439fb91a3d6015"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/candidates/delay_80_sign_minus1/k_sweep.csv",
+        "sha256": "441f664e617394407f1f74fac862bc66a48fa955fea3ce66867f3b288df4e032"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_error.png",
+        "sha256": "089c6c3cb7a69a3440cb635072eb39e233103939eafdd09c7346dec711f5fdbf"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_signal.png",
+        "sha256": "5f12eb1bfdb6525e80ccd3cb40f80da8ab10196b9c9594b52075c20d1ff62c8a"
+      },
+      {
+        "extension": ".json",
+        "file": "05_pyragas/control_summary.json",
+        "sha256": "e6331a9854b7756f2dd4b73d646391cd7da8e5972d24d227b392e09e0449fe8c"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/control_sweep_summary.png",
+        "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/controlled_all_states.png",
+        "sha256": "aa81c6101f68559e4ff5b660388a3a039fb699adfb0ff32c1304cdd5ec46905d"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/controlled_vs_uncontrolled_x.png",
+        "sha256": "491cf0a2b316adb857c14ec10719a90ce7a6082fb9336eccb8897acf1240a1ed"
+      },
+      {
+        "extension": ".csv",
+        "file": "05_pyragas/k_sweep.csv",
+        "sha256": "2ef040a6ceb1c72207fd514f889f6e993c4bbb73487bfbd490cbdb5c424b77c3"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_periodic_k_sweep_summary.png",
+        "sha256": "1917e897e722bb238eb648188dae61b21f319242e9af9195b00749ceddc66a0f"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_periodic_zoom.png",
+        "sha256": "382ed4fca86fc34a9937feef63723cc486b6f06b7a4fbc0e3b2b6be89a605fc4"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/pyragas_phase_trajectory_3d.png",
+        "sha256": "8217b580f9c5f483cc9ae99fa92e1da4fa0e65415084b76b835d1f3fb4b801cc"
+      },
+      {
+        "extension": ".png",
+        "file": "05_pyragas/raw_readout_vs_corrected_feedback_input_x.png",
+        "sha256": "b6b81256c5417eb1b8ce5e7b0679a4b18141087852cf13fe699adf1314206e0b"
+      },
+      {
+        "extension": ".json",
+        "file": "06_comparison_tables/chapter1_final_comparison.json",
+        "sha256": "cefe2825614a0351b60a4d3e89825dfc7b93576f24e58f137f33fd3b75b74e11"
+      },
+      {
+        "extension": ".csv",
+        "file": "06_comparison_tables/controller_final_test_metrics.csv",
+        "sha256": "edf26a66b7a2de1f6fba7d5693db11622b161552fd799678272190e0bfb9ba14"
+      },
+      {
+        "extension": ".csv",
+        "file": "06_comparison_tables/prediction_metrics_all_regimes.csv",
+        "sha256": "4c4878a00d37a524470159bee5d0885386caaf1c2557304b7a03f330e7f5dc25"
+      },
+      {
+        "extension": ".json",
+        "file": "07_report_figures/figure_index.json",
+        "sha256": "e9301d1c51a014458f54b0d3587581d738fd052ea123e3ce9a1d01ef8156011e"
+      }
+    ],
+    "final_quality_gates_passed": true,
+    "json_errors": [],
+    "json_valid": true,
+    "manifest_commit": "2ccca0deaacb537ba266ffcb73912821db81330f",
+    "manifest_commit_matches_current_commit": true,
+    "misplaced_prediction_figures": [],
+    "missing_directories": [],
+    "missing_required_files": [],
+    "no_unexpected_absolute_paths": true,
+    "no_unnecessary_duplicate_prediction_figures": true,
+    "periodic_spiking_quality_gate_passed": true,
+    "png_errors": [],
+    "png_readable": true,
+    "required_directories": [
+      "00_manifest",
+      "01_prediction_all_regimes",
+      "02_bo_optimization",
+      "03_linear_feedback",
+      "04_finite_time",
+      "05_pyragas",
+      "06_comparison_tables",
+      "07_report_figures",
+      "08_logs"
+    ],
+    "required_files_present": true,
+    "same_control_model_identity": true,
+    "schema_version": "chapter1_package_validation_v1",
+    "top_level_directories": [
+      "00_manifest",
+      "01_prediction_all_regimes",
+      "02_bo_optimization",
+      "03_linear_feedback",
+      "04_finite_time",
+      "05_pyragas",
+      "06_comparison_tables",
+      "07_report_figures",
+      "08_logs"
+    ],
+    "unexpected_directories": [],
+    "valid": true,
+    "warnings": [
+      "identical PNG/CSV/JSON files are listed for review; only cross-section prediction duplicates are fatal"
+    ]
+  }
+}
+Final package validation: PASS
+========================================================================
+PIPELINE COMPLETE
+Definitive package: /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958
+Validation report : /home/hpc/dsnf/dsnf129h/Thesis_evidence_20260624/FINAL_THESIS_RUN_1816958/00_manifest/final_package_validation.json
+Completed UTC     : 2026-09-20T02:09:14+00:00
+========================================================================
