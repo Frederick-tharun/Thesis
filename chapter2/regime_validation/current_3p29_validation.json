@@ -1,0 +1,112 @@
+{
+  "current": 3.29,
+  "hypothesis": "periodic_bursting",
+  "frozen_dataset": {
+    "path": "chapter2/outputs/data/fixed_I_3p29.npz",
+    "transient_time": 1000.0,
+    "spike_count": 32,
+    "cycle_error_by_lag": {
+      "1": 1.7261345693475276,
+      "2": 1.610237864819437,
+      "3": 1.7166607242907352,
+      "4": 0.08084347781795952,
+      "5": 1.7144501604441504,
+      "6": 1.610237864819437,
+      "7": 1.7261345693475276,
+      "8": 0.016737126266999476,
+      "9": 1.7261345693475276,
+      "10": 1.610237864819437,
+      "11": 1.718555493302094,
+      "12": 0.0754749656191107
+    },
+    "lag8_max_error_first_half": 0.016737126266999476,
+    "lag8_max_error_second_half": 0.013894972749961728
+  },
+  "rerun_reproduces_frozen_dataset_max_abs_diff": 0.0,
+  "chapter1_validation": {
+    "transient_time": 2000.0,
+    "passed": true,
+    "conditions": {
+      "at_least_20_detected_spikes": true,
+      "retained_state_statistics_stable": true,
+      "burst_timescale_separation": true,
+      "multi_isi_cycle_repeats": true,
+      "largest_lyapunov_exponent_consistent_with_zero": true
+    },
+    "cycle_normalized_max_error": 0.0006220581831754969,
+    "isi_max_min_ratio": 5.042899408284025,
+    "stationarity": {
+      "quarter_length_steps": 25000,
+      "normalized_mean_shift_by_state": [
+        0.010479678864092365,
+        0.018354513544141426,
+        0.00886445947765999
+      ],
+      "normalized_std_shift_by_state": [
+        0.0021917432648740328,
+        0.015858803896284277,
+        0.005635519752265663
+      ],
+      "maximum_normalized_mean_shift": 0.018354513544141426,
+      "maximum_normalized_std_shift": 0.015858803896284277
+    },
+    "lyapunov_1000_time_units": {
+      "current": 3.29,
+      "estimation_time": 1000.0,
+      "largest_lyapunov_exponent": 0.0044484237661250444,
+      "tail_std": 0.0015166724127858807,
+      "ratio_to_tail_std": 2.9330155468141026,
+      "running_estimate_by_time": {
+        "200": 0.02037163207013058,
+        "400": 0.01990705370211816,
+        "600": 0.005402246150946266,
+        "800": 0.0034338224818184367,
+        "1000": 0.0044484237661250444
+      }
+    }
+  },
+  "lyapunov_5000_time_units": [
+    {
+      "current": 3.29,
+      "estimation_time": 5000.0,
+      "largest_lyapunov_exponent": 0.000549547405353548,
+      "tail_std": 0.00032778263029301194,
+      "ratio_to_tail_std": 1.676560484191294,
+      "running_estimate_by_time": {
+        "1000": 0.0044484237661250444,
+        "2000": 0.0012105540281047566,
+        "3000": 0.001195658823827096,
+        "4000": 0.0010305404104578517,
+        "5000": 0.000549547405353548
+      }
+    },
+    {
+      "current": 3.2,
+      "estimation_time": 5000.0,
+      "largest_lyapunov_exponent": 0.010765837574890897,
+      "tail_std": 0.000445686870061389,
+      "ratio_to_tail_std": 24.155608563043394,
+      "running_estimate_by_time": {
+        "1000": 0.014935259754160372,
+        "2000": 0.013097561941011252,
+        "3000": 0.012606729570203722,
+        "4000": 0.011998521647689055,
+        "5000": 0.010765837574890897
+      }
+    },
+    {
+      "current": 3.34,
+      "estimation_time": 5000.0,
+      "largest_lyapunov_exponent": 0.011868118604310276,
+      "tail_std": 0.0003391187781686947,
+      "ratio_to_tail_std": 34.99693726310396,
+      "running_estimate_by_time": {
+        "1000": 0.008347623437621961,
+        "2000": 0.010443266687163416,
+        "3000": 0.010359349438605253,
+        "4000": 0.011561882642604306,
+        "5000": 0.011868118604310276
+      }
+    }
+  ]
+}
