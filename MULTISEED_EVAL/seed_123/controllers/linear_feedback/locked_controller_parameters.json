@@ -1,5 +1,5 @@
 {
-  "control_k": 1.005,
+  "control_k": 1.1708333333333334,
   "controller": "linear_feedback",
   "evaluation_seed": 123,
   "finite_s": 0.8,

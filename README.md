@@ -107,17 +107,17 @@ The repository keeps compact CSV, JSON, Markdown, and per-seed metric evidence i
 
 | Regime | Selected optimizer | x NRMSE | All-state NRMSE |
 |---|---:|---:|---:|
-| Periodic spiking | Random forest | 0.0000726 | 0.0000445 |
-| Periodic bursting | Random forest | 0.04037 | 0.02754 |
-| Chaotic bursting | GBRT | 0.002275 | 0.001528 |
+| Periodic spiking | GBRT | 0.0000102 | 0.0000083 |
+| Periodic bursting | Gaussian process | 0.000190 | 0.000117 |
+| Chaotic bursting | GBRT | 0.369 | 0.257 |
 
 ### Controller test results from the definitive run
 
 | Controller | Locked parameters | Controller-test result |
 |---|---|---|
-| Linear feedback | `K = 1.005` | State RMSE `2.36e-06`; 100% spike reduction |
-| Global finite-time feedback | `s = 0.9`, `K = 0.914456` | State RMSE `2.50e-04`; 100% spike reduction |
-| Pyragas delayed feedback | Delay `1600`, sign `-1`, `K = 0.768091` | Recurrence error `0.01343`; correlation `0.99991` |
+| Linear feedback | `K = 1.171` | State RMSE `6.19e-05`; 100% spike reduction |
+| Global finite-time feedback | `s = 0.9`, `K = 0.844` | State RMSE `2.07e-04`; 100% spike reduction |
+| Pyragas delayed feedback | Delay `2400`, sign `-1`, `K = 0.605` | Periodicity RMSE `7.83e-03`; spikes 6 to 7 |
 
 Linear and finite-time feedback regulate toward an empirical quiet-state reference derived from training data. Pyragas control has a different objective: it transforms irregular bursting into a regular periodic-spiking trajectory.
 
@@ -125,12 +125,12 @@ Linear and finite-time feedback regulate toward an empirical quiet-state referen
 
 | Quantity | Result across five seeds |
 |---|---:|
-| Held-out prediction x NRMSE | `0.002295 ± 0.000891` |
-| Held-out all-state NRMSE | `0.001545 ± 0.000600` |
+| Held-out prediction x NRMSE | `0.392 ± 0.138` |
+| Held-out all-state NRMSE | `0.274 ± 0.097` |
 | Linear feedback success | `5/5` |
 | Global finite-time feedback success | `5/5` |
 | Pyragas delayed-feedback success | `5/5` |
-| Representative seed | `42` |
+| Representative seed (median rule) | `456` |
 
 Detailed aggregate tables are in `MULTISEED_EVAL/multiseed_summary.md` and the accompanying CSV and JSON files.
 

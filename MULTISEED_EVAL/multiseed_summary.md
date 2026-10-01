@@ -6,10 +6,10 @@ Seeds evaluated: 42, 123, 456, 789, 2026
 
 | Metric | Mean | Std | Median | Min | Max | n |
 |---|---:|---:|---:|---:|---:|---:|
-| rmse_recursive_x | 0.00113242 | 0.000439613 | 0.00112259 | 0.000552447 | 0.0017368 | 5 |
-| nrmse_recursive_x | 0.00229513 | 0.000890988 | 0.00227522 | 0.00111968 | 0.00352006 | 5 |
-| rmse_recursive_all_states | 0.00156634 | 0.000607848 | 0.00154171 | 0.000772024 | 0.00240705 | 5 |
-| nrmse_recursive_all_states | 0.00154472 | 0.000599842 | 0.00152762 | 0.000755556 | 0.00237103 | 5 |
+| rmse_recursive_x | 0.189782 | 0.0669054 | 0.205541 | 0.0811625 | 0.254968 | 5 |
+| nrmse_recursive_x | 0.392047 | 0.138211 | 0.424601 | 0.167663 | 0.526705 | 5 |
+| rmse_recursive_all_states | 0.257349 | 0.0894912 | 0.276408 | 0.113293 | 0.347309 | 5 |
+| nrmse_recursive_all_states | 0.273657 | 0.0965317 | 0.295316 | 0.117741 | 0.369353 | 5 |
 
 ## Controller success
 
@@ -21,4 +21,4 @@ Seeds evaluated: 42, 123, 456, 789, 2026
 
 ## Representative seed
 
-Representative seed: **42** using the median prediction-NRMSE rule.
+Representative seed: **456** using the median prediction-NRMSE rule.

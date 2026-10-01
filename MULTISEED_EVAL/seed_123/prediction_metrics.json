@@ -1,15 +1,15 @@
 {
   "heldout_steps": 45000,
-  "model_identity_hash": "4a0b5da71e579826602c7727908e43b700d7a77071c5f30ec5983dc4fac64234",
-  "nrmse_recursive_all_states": 0.002371034829355932,
-  "nrmse_recursive_x": 0.003520061850855306,
+  "model_identity_hash": "221c5c217d3cb47ce216802b44465a7e0ae74f319f74d04f21b8bdfc573f26bd",
+  "nrmse_recursive_all_states": 0.3289466981834668,
+  "nrmse_recursive_x": 0.4717924531874169,
   "reference_seed": 42,
   "regime": "chaotic_bursting",
-  "rmse_recursive_all_states": 0.002407052709097672,
-  "rmse_recursive_x": 0.001736795526917291,
-  "runtime_seconds": 4.791268616972957,
+  "rmse_recursive_all_states": 0.3081304742411995,
+  "rmse_recursive_x": 0.22838549556646667,
+  "runtime_seconds": 5.5347513479646295,
   "seed": 123,
   "stable": true,
   "training_steps": 105000,
-  "washout": 499
+  "washout": 780
 }
