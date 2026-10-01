@@ -79,6 +79,11 @@ COLOR = {"linear_feedback": "#0f9b8e", "finite_time": "#6a4c93", "pyragas": "#c9
 
 SPIKE_THRESHOLD = float(getattr(config, "SPIKE_THRESHOLD", 1.0))
 
+# Figures are drawn wider than the 15 cm text block and shrink when placed
+# at \textwidth. Sizes below are the intended printed sizes in points and
+# are scaled by the shrink factor of each figure.
+PRINT_WIDTH_IN = 15.0 / 2.54
+
 
 # ============================================================
 # Data loading and verification
@@ -170,6 +175,7 @@ def _save(fig, basename):
 # ============================================================
 
 def build_regulation_figure():
+    k = 11.0 / PRINT_WIDTH_IN  # printed-size scale for this figure
     controllers = ("linear_feedback", "finite_time")
     data = {c: _load_rollout(c) for c in controllers}
     summary = {c: _load_summary(c) for c in controllers}
@@ -185,36 +191,36 @@ def build_regulation_figure():
     fig, ax_wave = plt.subplots(1, 1, figsize=(11.0, 4.8))
 
     # Single panel: the waveform carries the result. Sustained suppression
-    # over the remaining horizon is a number (4 -> 0 spikes, 100% reduction)
+    # over the remaining horizon is a number (6 -> 0 spikes, 100% reduction)
     # and lives in the comparison table, not in a second panel.
     zoom = (float(time[0]), onset_t + 110.0)
     mask = (time >= zoom[0]) & (time <= zoom[1])
+    # Before switch-on the controlled rollouts are identical to the
+    # uncontrolled one, so they are drawn only from the switch-on onwards.
+    mask_on = mask & (time >= onset_t)
 
     ax_wave.plot(time[mask], ref["uncontrolled_x"][mask], color=COLOR_UNCONTROLLED,
-                 linewidth=1.3, label="Uncontrolled ESN (free-running)")
-    ax_wave.plot(time[mask], data["linear_feedback"]["controlled_x"][mask],
-                 color=COLOR["linear_feedback"], linewidth=2.0, linestyle="--",
-                 label="Linear feedback")
-    ax_wave.plot(time[mask], data["finite_time"]["controlled_x"][mask],
-                 color=COLOR["finite_time"], linewidth=1.3, linestyle=":",
-                 label="Finite-time feedback")
-    ax_wave.axhline(target_x, color="black", linestyle=(0, (1, 3)), linewidth=1.0,
-                    label="Quiet-state target")
-    ax_wave.axvline(onset_t, color=COLOR_ONSET, linestyle="-.", linewidth=1.5)
-    ax_wave.annotate(
-        "control on", xy=(onset_t, 1.55), xytext=(onset_t - 7, 1.55),
-        color=COLOR_ONSET, fontsize=9.5, fontweight="bold", va="center", ha="right",
-        arrowprops=dict(arrowstyle="->", color=COLOR_ONSET, linewidth=1.2),
-    )
+                 linewidth=1.3 * k, label="Uncontrolled ESN", zorder=2)
+    ax_wave.plot(time[mask_on], data["linear_feedback"]["controlled_x"][mask_on],
+                 color=COLOR["linear_feedback"], linewidth=2.6 * k, linestyle="--",
+                 label="Linear feedback", zorder=3)
+    ax_wave.plot(time[mask_on], data["finite_time"]["controlled_x"][mask_on],
+                 color=COLOR["finite_time"], linewidth=1.6 * k, linestyle=":",
+                 label="Finite-time feedback", zorder=4)
+    ax_wave.axhline(target_x, color="black", linestyle=(0, (1, 3)), linewidth=0.9 * k,
+                    label="Quiet-state target", zorder=5)
+    ax_wave.axvline(onset_t, color=COLOR_ONSET, linestyle="-.", linewidth=1.5 * k,
+                    label="Control switched on")
 
     ax_wave.set_xlim(zoom)
-    ax_wave.set_xlabel("Time", fontsize=11)
-    ax_wave.set_ylabel("Hindmarsh-Rose $x$ state", fontsize=11)
+    ax_wave.set_xlabel("Time", fontsize=10 * k)
+    ax_wave.set_ylabel("$x$", fontsize=10 * k, rotation=0, labelpad=8 * k)
     ax_wave.grid(True, alpha=0.18)
+    ax_wave.tick_params(axis="both", labelsize=9 * k)
     # Legend outside the axes: the controlled trace is a flat line near the
     # bottom of the panel, so any in-axes placement sits on top of data.
-    ax_wave.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=4,
-                   fontsize=8.5, frameon=False)
+    ax_wave.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=3,
+                   fontsize=9 * k, frameon=False)
     _save(fig, "regulation_controllers")
 
 
@@ -223,6 +229,7 @@ def build_regulation_figure():
 # ============================================================
 
 def build_pyragas_figure():
+    k = 14.5 / PRINT_WIDTH_IN  # printed-size scale for this figure
     data = _load_rollout("pyragas")
     summary = _load_summary("pyragas")
     _verify("pyragas", data, summary)
@@ -237,32 +244,28 @@ def build_pyragas_figure():
     # single closed loop" is a statement the comparison table cannot make --
     # and a closed orbit embedded in the attractor is exactly what Pyragas
     # delayed feedback is designed to stabilize.
-    fig = plt.figure(figsize=(14.5, 5.0))
-    outer = fig.add_gridspec(1, 2, width_ratios=[1.65, 1.0], wspace=0.10,
-                             left=0.055, right=0.95, top=0.88, bottom=0.13)
+    fig = plt.figure(figsize=(14.5, 6.6))
+    outer = fig.add_gridspec(1, 2, width_ratios=[1.45, 1.0], wspace=0.04,
+                             left=0.07, right=0.97, top=0.84, bottom=0.14)
     ax_wave = fig.add_subplot(outer[0])
 
     zoom = (float(time[0]), onset_t + 110.0)
     mask = (time >= zoom[0]) & (time <= zoom[1])
 
     ax_wave.plot(time[mask], data["uncontrolled_x"][mask], color=COLOR_UNCONTROLLED,
-                 linewidth=1.3, label="Uncontrolled ESN (free-running)")
+                 linewidth=1.3 * k, label="Uncontrolled ESN")
     ax_wave.plot(time[mask], data["controlled_x"][mask], color=COLOR["pyragas"],
-                 linewidth=1.5, linestyle="--", label="Pyragas-controlled")
-    ax_wave.axvline(onset_t, color=COLOR_ONSET, linestyle="-.", linewidth=1.5)
-    ax_wave.annotate(
-        "control on", xy=(onset_t, 1.55), xytext=(onset_t - 7, 1.55),
-        color=COLOR_ONSET, fontsize=9.5, fontweight="bold", va="center", ha="right",
-        arrowprops=dict(arrowstyle="->", color=COLOR_ONSET, linewidth=1.2),
-    )
+                 linewidth=1.5 * k, linestyle="--", label="Pyragas-controlled ESN")
+    ax_wave.axvline(onset_t, color=COLOR_ONSET, linestyle="-.", linewidth=1.5 * k,
+                    label="Control switched on")
     ax_wave.set_xlim(zoom)
-    ax_wave.set_xlabel("Time", fontsize=11)
-    ax_wave.set_ylabel("Hindmarsh-Rose $x$ state", fontsize=11)
+    ax_wave.set_xlabel("Time", fontsize=10 * k)
+    ax_wave.set_ylabel("$x$", fontsize=10 * k, rotation=0, labelpad=8 * k)
     ax_wave.grid(True, alpha=0.18)
-    ax_wave.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=3,
-                   fontsize=8.5, frameon=False)
-    ax_wave.text(0.008, 0.96, "(a)", transform=ax_wave.transAxes, fontsize=12,
-                 fontweight="bold", va="top")
+    ax_wave.tick_params(axis="both", labelsize=9 * k)
+    ax_wave.set_title("(a)", fontsize=11 * k, fontweight="bold", loc="left")
+    from matplotlib.ticker import MultipleLocator
+    ax_wave.xaxis.set_major_locator(MultipleLocator(50))
 
     # ---- (b) phase portrait: attractor vs. stabilized closed orbit -------
     ax3d = fig.add_subplot(outer[1], projection="3d")
@@ -270,19 +273,24 @@ def build_pyragas_figure():
     sl = slice(onset_idx, None, stride)
 
     ax3d.plot(data["uncontrolled_x"][sl], data["uncontrolled_y"][sl], data["uncontrolled_z"][sl],
-              color=COLOR_UNCONTROLLED, linewidth=0.8, alpha=0.75,
-              label="Uncontrolled (chaotic attractor)")
+              color=COLOR_UNCONTROLLED, linewidth=0.8 * k, alpha=0.75)
     ax3d.plot(data["controlled_x"][sl], data["controlled_y"][sl], data["controlled_z"][sl],
-              color=COLOR["pyragas"], linewidth=1.3,
-              label="Pyragas-controlled (closed orbit)")
+              color=COLOR["pyragas"], linewidth=1.3 * k)
 
-    ax3d.set_xlabel(r"$x$", fontsize=10.5, labelpad=2)
-    ax3d.set_ylabel(r"$y$", fontsize=10.5, labelpad=2)
-    ax3d.set_zlabel(r"$z$", fontsize=10.5, labelpad=2)
-    ax3d.tick_params(axis="both", labelsize=7.5)
+    from matplotlib.ticker import MaxNLocator
+    for axis in (ax3d.xaxis, ax3d.yaxis, ax3d.zaxis):
+        axis.set_major_locator(MaxNLocator(3))
+    ax3d.set_xlabel(r"$x$", fontsize=10 * k, labelpad=4 * k)
+    ax3d.set_ylabel(r"$y$", fontsize=10 * k, labelpad=9 * k)
+    ax3d.set_zlabel(r"$z$", fontsize=10 * k, labelpad=4 * k)
+    ax3d.tick_params(axis="both", labelsize=8 * k, pad=1 * k)
     ax3d.view_init(elev=24, azim=-58)
-    ax3d.legend(loc="upper center", bbox_to_anchor=(0.5, 1.06), fontsize=8.5, frameon=False)
-    ax3d.text2D(0.02, 0.96, "(b)", transform=ax3d.transAxes, fontsize=12, fontweight="bold")
+    ax3d.set_box_aspect(None, zoom=0.85)  # keep the z label inside the canvas
+    ax3d.set_title("(b)", fontsize=11 * k, fontweight="bold", loc="left")
+
+    handles, labels = ax_wave.get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, 1.0),
+               ncol=3, fontsize=9 * k, frameon=False)
 
     _save(fig, "pyragas_controller")
 
