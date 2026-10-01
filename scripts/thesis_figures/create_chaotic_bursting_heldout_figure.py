@@ -154,7 +154,7 @@ def create_figure(time, reference, prediction, saved) -> None:
     offset_axis.set_title("(c) Spike-timing offset", fontsize=fs(9),
                           fontweight="bold", pad=8, loc="left")
     offset_axis.set_xlabel("Reference spike time", fontsize=fs(10))
-    offset_axis.set_ylabel(r"$\Delta t$", fontsize=fs(12), rotation=0, labelpad=22)
+    offset_axis.set_ylabel("Offset", fontsize=fs(10), labelpad=6)
     offset_axis.set_xlim(time[0] - 10.0, time[-1] + 10.0)
     offset_axis.tick_params(axis="both", labelsize=fs(9))
     offset_axis.grid(True, alpha=0.20)
