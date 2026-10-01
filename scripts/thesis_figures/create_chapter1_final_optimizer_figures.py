@@ -106,28 +106,31 @@ def build_convergence_figure():
             winner_iteration = iteration
             break
 
-    fig, ax = plt.subplots(figsize=(8.0, 5.2))
+    # Drawn at its printed size (0.85 of the 15 cm text width), so the
+    # font sizes below are the sizes on the page.
+    fig, ax = plt.subplots(figsize=(5.0, 3.3))
     for opt in OPTIMIZER_ORDER:
         xs = [pair[0] for pair in curves[opt]]
         ys = [pair[1] for pair in curves[opt]]
         ax.plot(
             xs, ys,
-            marker="o", markersize=3.5, linewidth=1.6,
+            marker="o", markersize=2.5, linewidth=1.2,
             color=OPTIMIZER_COLOR[opt], label=OPTIMIZER_DISPLAY[opt],
         )
 
     ax.scatter(
         [winner_iteration], [winner_score],
-        marker="*", s=260, color=OPTIMIZER_COLOR[winner_name],
+        marker="*", s=140, color=OPTIMIZER_COLOR[winner_name],
         edgecolor="black", linewidth=0.8, zorder=5,
         label=f"Selected ({OPTIMIZER_DISPLAY[winner_name]})",
     )
 
     ax.set_yscale("log")
-    ax.set_xlabel("Candidate evaluation", fontsize=11)
-    ax.set_ylabel("Best composite validation score so far\n(lower is better)", fontsize=10.5)
+    ax.set_xlabel("Candidate evaluation", fontsize=10)
+    ax.set_ylabel("Best validation score so far\n(lower is better)", fontsize=10)
+    ax.tick_params(axis="both", labelsize=9)
     ax.grid(True, which="both", alpha=0.20)
-    ax.legend(loc="upper right", fontsize=9, frameon=True)
+    ax.legend(loc="upper right", fontsize=8.5, frameon=True)
     fig.tight_layout()
 
     png_path = OUTPUT_ROOT / f"{CONVERGENCE_REGIME}_optimizer_convergence.png"

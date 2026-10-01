@@ -89,7 +89,7 @@ def spike_peaks(x: np.ndarray, threshold: float) -> np.ndarray:
     )
 
 
-FONT_SCALE = 3.0  # same text scaling as create_chapter1_final_prediction_figures.py
+FONT_SCALE = 2.1  # same text scaling as create_chapter1_final_prediction_figures.py
 
 
 def fs(points: float) -> float:
@@ -162,7 +162,7 @@ def create_figure(time, reference, prediction, saved) -> None:
     handles, labels = state_axes[0].get_legend_handles_labels()
     figure.legend(handles, labels, loc="upper center", ncol=2, fontsize=fs(10),
                   frameon=True, bbox_to_anchor=(0.5, 1.0))
-    figure.subplots_adjust(left=0.075, right=0.98, top=0.74, bottom=0.09)
+    figure.subplots_adjust(left=0.075, right=0.98, top=0.86, bottom=0.09)
 
     OUTPUT_PDF.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(OUTPUT_PDF, bbox_inches="tight")

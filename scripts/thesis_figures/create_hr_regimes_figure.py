@@ -3,7 +3,7 @@ from __future__ import annotations
 """Generate the Section 2.1 figure showing the three Hindmarsh-Rose regimes.
 
 Three stacked panels, one per regime, each showing the fast membrane
-potential x(t) together with the slow adaptation current z(t) over the
+potential x(t) together with the slow adaptation variable z(t) over the
 full retained record. The z overlay is what makes the
 fast-slow mechanism visible: z is almost constant under tonic spiking,
 sweeps up and down once per burst under periodic bursting, and repeats
@@ -60,7 +60,7 @@ COLOR_Z = "#e0952b"
 # Rendered at 7.0 in wide for a 15 cm (~5.9 in) text block, a ~0.84x
 # shrink; FONT_SCALE compensates so on-page text lands near 9-10 pt
 # against the 12 pt body text.
-FONT_SCALE = 1.2
+FONT_SCALE = 1.35
 
 
 def fs(points: float) -> float:
@@ -139,7 +139,7 @@ def build_figure() -> plt.Figure:
         plt.Line2D([], [], color=COLOR_X, linewidth=1.5,
                    label=r"$x$, fast membrane potential"),
         plt.Line2D([], [], color=COLOR_Z, linewidth=1.5,
-                   label=r"$z$, slow adaptation current (shared scale)"),
+                   label=r"$z$, slow adaptation variable (shared scale)"),
     ]
     fig.legend(
         handles=handles, loc="lower center", bbox_to_anchor=(0.5, 0.005),

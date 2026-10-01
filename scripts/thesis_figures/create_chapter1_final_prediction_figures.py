@@ -180,7 +180,7 @@ STATE_LABELS = (r"$x$", r"$y$", r"$z$")
 # compensation, text sized for the render canvas would print at roughly
 # 0.45x its nominal point size and become illegible on paper. FONT_SCALE
 # counteracts that shrink so on-page text reads at its intended size.
-FONT_SCALE = 3.0
+FONT_SCALE = 2.1
 
 
 def fs(points: float) -> float:
@@ -368,7 +368,7 @@ def build_figure(regime: str, time, reference, prediction, nrmse_x, nrmse_all):
         handles, labels, loc="upper center", ncol=2, fontsize=fs(10),
         frameon=True, bbox_to_anchor=(0.5, 1.0),
     )
-    fig.subplots_adjust(left=0.075, right=0.98, top=0.74, bottom=0.09)
+    fig.subplots_adjust(left=0.075, right=0.98, top=0.86, bottom=0.09)
     return fig
 
 
