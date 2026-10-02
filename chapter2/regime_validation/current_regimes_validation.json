@@ -1,0 +1,328 @@
+{
+  "host": "tg069",
+  "currents": [
+    {
+      "current": 1.67,
+      "stated_regime": "periodic_bursting",
+      "frozen_dataset": {
+        "spike_count": 14,
+        "cycle_error_by_lag": {
+          "1": 1.5029287395820548,
+          "2": 0.00014504234120660332,
+          "3": 1.5029287395820548,
+          "4": 0.00014504234120660332,
+          "5": 1.5027836972408484,
+          "6": 0.00014504234120660332,
+          "7": 1.5027836972408484,
+          "8": 0.00014504234120660332,
+          "9": 1.5027836972408484,
+          "10": 0.00014504234120660332,
+          "11": 1.5027836972408484,
+          "12": 0.00014504234120650027
+        }
+      },
+      "chapter1_protocol": {
+        "transient_time": 2000.0,
+        "retained_time": 1500.0,
+        "spike_count": 20,
+        "cycle_length_tested": 2,
+        "cycle_error_by_lag": {
+          "1": 1.4759798482622126,
+          "2": 0.00014244159894450566,
+          "3": 1.4759798482622126,
+          "4": 0.00014244159894450566,
+          "5": 1.4758374066632682,
+          "6": 0.00014244159894450566,
+          "7": 1.4758374066632682,
+          "8": 0.00014244159894450566,
+          "9": 1.4758374066632682,
+          "10": 0.00014244159894450566,
+          "11": 1.4758374066632682,
+          "12": 0.00014244159894450566
+        },
+        "passed": true,
+        "conditions": {
+          "at_least_20_detected_spikes": true,
+          "retained_state_statistics_stable": true,
+          "burst_timescale_separation": true,
+          "multi_isi_cycle_repeats": true,
+          "largest_lyapunov_exponent_consistent_with_zero": true
+        },
+        "isi_cv": 0.7368627587957255,
+        "isi_max_min_ratio": 5.90625,
+        "cycle_normalized_max_error": 0.00014244159894450566,
+        "best_short_lag_normalized_mae": 2.5136752754900853e-05,
+        "stationarity": {
+          "quarter_length_steps": 37500,
+          "normalized_mean_shift_by_state": [
+            0.19974201123657012,
+            0.24552363045959502,
+            0.1272085564551803
+          ],
+          "normalized_std_shift_by_state": [
+            0.11240715348465409,
+            0.02320398380036167,
+            0.06202962482981441
+          ],
+          "maximum_normalized_mean_shift": 0.24552363045959502,
+          "maximum_normalized_std_shift": 0.11240715348465409
+        },
+        "lyapunov_1500_time_units": {
+          "estimation_time": 1500.0,
+          "largest_lyapunov_exponent": 4.72167599410194e-05,
+          "tail_std": 0.0007129495624648856,
+          "ratio_to_tail_std": 0.0662273496287403
+        }
+      },
+      "lyapunov_5000_time_units": {
+        "estimation_time": 5000.0,
+        "largest_lyapunov_exponent": -6.0999051500941105e-06,
+        "tail_std": 0.0002131379899405841,
+        "ratio_to_tail_std": 0.028619511480776207
+      }
+    },
+    {
+      "current": 3.5,
+      "stated_regime": "periodic_spiking",
+      "frozen_dataset": {
+        "spike_count": 32,
+        "cycle_error_by_lag": {
+          "1": 0.01733022981612668,
+          "2": 0.0009452852626977476,
+          "3": 0.0170151347285608,
+          "4": 0.0012603803502637381,
+          "5": 0.016069849465863054,
+          "6": 0.0018905705253956073,
+          "7": 0.015754754378297063,
+          "8": 0.0022056656129615976,
+          "9": 0.015439659290731073,
+          "10": 0.002520760700527588,
+          "11": 0.015124564203165193,
+          "12": 0.0031509508756594573
+        }
+      },
+      "chapter1_protocol": {
+        "transient_time": 2000.0,
+        "retained_time": 1500.0,
+        "spike_count": 47,
+        "cycle_length_tested": 1,
+        "cycle_error_by_lag": {
+          "1": 0.005355614149231297,
+          "2": 0.00031503612642541656,
+          "3": 0.005040578022805881,
+          "4": 0.0006300722528507211,
+          "5": 0.005040578022805881,
+          "6": 0.0006300722528508331,
+          "7": 0.005040578022805881,
+          "8": 0.0009451083792761377,
+          "9": 0.004725541896380576,
+          "10": 0.0009451083792761377,
+          "11": 0.00441050576995516,
+          "12": 0.0009451083792761377
+        },
+        "passed": false,
+        "conditions": {
+          "at_least_20_detected_spikes": true,
+          "retained_state_statistics_stable": true,
+          "regular_inter_spike_intervals": true,
+          "single_isi_cycle_repeats": false,
+          "no_burst_timescale_separation": true,
+          "largest_lyapunov_exponent_consistent_with_zero": true
+        },
+        "isi_cv": 0.0015394149089469533,
+        "isi_max_min_ratio": 1.0053695514845231,
+        "cycle_normalized_max_error": 0.005355614149231297,
+        "best_short_lag_normalized_mae": 0.00017183788714111086,
+        "stationarity": {
+          "quarter_length_steps": 37500,
+          "normalized_mean_shift_by_state": [
+            0.027096005302476397,
+            0.018856969254365585,
+            0.015533109800108599
+          ],
+          "normalized_std_shift_by_state": [
+            0.036011050528438254,
+            0.023329434971239352,
+            0.013529232588029997
+          ],
+          "maximum_normalized_mean_shift": 0.027096005302476397,
+          "maximum_normalized_std_shift": 0.036011050528438254
+        },
+        "lyapunov_1500_time_units": {
+          "estimation_time": 1500.0,
+          "largest_lyapunov_exponent": -0.00035579118400267464,
+          "tail_std": 0.0011324542585834081,
+          "ratio_to_tail_std": 0.3141770904263589
+        }
+      },
+      "lyapunov_5000_time_units": {
+        "estimation_time": 5000.0,
+        "largest_lyapunov_exponent": 3.518909972099621e-06,
+        "tail_std": 0.0003811219731163803,
+        "ratio_to_tail_std": 0.009233028322471132
+      }
+    },
+    {
+      "current": 3.2,
+      "stated_regime": "chaotic_bursting",
+      "frozen_dataset": {
+        "spike_count": 31,
+        "cycle_error_by_lag": {
+          "1": 1.981885154383146,
+          "2": 1.9051892354408193,
+          "3": 1.932424112779523,
+          "4": 1.9239719094675112,
+          "5": 1.9724938173698,
+          "6": 1.954650277044442,
+          "7": 1.9724938173697995,
+          "8": 1.973745995638246,
+          "9": 1.8695021547901038,
+          "10": 1.9734329510711346,
+          "11": 1.8911022299208002,
+          "12": 1.9640416140577885
+        }
+      },
+      "chapter1_protocol": {
+        "transient_time": 4000.0,
+        "retained_time": 1500.0,
+        "spike_count": 44,
+        "cycle_length_tested": null,
+        "cycle_error_by_lag": {
+          "1": 1.8805574171439627,
+          "2": 1.8077712295925774,
+          "3": 1.8339148398151157,
+          "4": 1.817575083426029,
+          "5": 1.8143071321482116,
+          "6": 1.837182791092933,
+          "7": 1.8778836388257487,
+          "8": 1.8778836388257485,
+          "9": 1.8778836388257485,
+          "10": 1.877586552345947,
+          "11": 1.83658861813333,
+          "12": 1.8255964183806717
+        },
+        "passed": true,
+        "conditions": {
+          "at_least_20_detected_spikes": true,
+          "retained_state_statistics_stable": true,
+          "burst_timescale_separation": true,
+          "irregular_inter_spike_intervals": true,
+          "no_short_repeating_isi_cycle": true,
+          "resolved_positive_largest_lyapunov_exponent": true
+        },
+        "isi_cv": 0.6709004492538091,
+        "isi_max_min_ratio": 6.442820292347378,
+        "cycle_normalized_max_error": null,
+        "best_short_lag_normalized_mae": 0.3551931001157052,
+        "stationarity": {
+          "quarter_length_steps": 37500,
+          "normalized_mean_shift_by_state": [
+            0.055644865659027994,
+            0.028376036222498794,
+            0.08101432912290842
+          ],
+          "normalized_std_shift_by_state": [
+            0.07340063859403217,
+            0.055016132612549146,
+            0.16182048015692507
+          ],
+          "maximum_normalized_mean_shift": 0.08101432912290842,
+          "maximum_normalized_std_shift": 0.16182048015692507
+        },
+        "lyapunov_1500_time_units": {
+          "estimation_time": 1500.0,
+          "largest_lyapunov_exponent": 0.013004462475598649,
+          "tail_std": 0.0010624283906401123,
+          "ratio_to_tail_std": 12.240319056010419
+        }
+      },
+      "lyapunov_5000_time_units": {
+        "estimation_time": 5000.0,
+        "largest_lyapunov_exponent": 0.00965491277734341,
+        "tail_std": 0.0003586815958229977,
+        "ratio_to_tail_std": 26.917781368709868
+      }
+    },
+    {
+      "current": 3.34,
+      "stated_regime": "chaotic_bursting",
+      "frozen_dataset": {
+        "spike_count": 28,
+        "cycle_error_by_lag": {
+          "1": 1.243196015901446,
+          "2": 1.1983749071687562,
+          "3": 1.0182058450919576,
+          "4": 1.1715412170722117,
+          "5": 1.2272727272727273,
+          "6": 1.0400266480276088,
+          "7": 1.2092853086365818,
+          "8": 1.2166572015202481,
+          "9": 1.0636167052553407,
+          "10": 1.1874645057009305,
+          "11": 0.9937311607181862,
+          "12": 1.1871696299855838
+        }
+      },
+      "chapter1_protocol": {
+        "transient_time": 4000.0,
+        "retained_time": 1500.0,
+        "spike_count": 43,
+        "cycle_length_tested": null,
+        "cycle_error_by_lag": {
+          "1": 1.1933361008840282,
+          "2": 1.1547491850470597,
+          "3": 1.048706623746946,
+          "4": 1.134741154613076,
+          "5": 1.1350269836192757,
+          "6": 0.9929699675379913,
+          "7": 1.1550350140532593,
+          "8": 1.1158764402038914,
+          "9": 1.1678973193322488,
+          "10": 1.180187966598839,
+          "11": 1.0032598117611828,
+          "12": 1.1870478627476333
+        },
+        "passed": false,
+        "conditions": {
+          "at_least_20_detected_spikes": true,
+          "retained_state_statistics_stable": false,
+          "burst_timescale_separation": true,
+          "irregular_inter_spike_intervals": true,
+          "no_short_repeating_isi_cycle": true,
+          "resolved_positive_largest_lyapunov_exponent": true
+        },
+        "isi_cv": 0.41224127602447663,
+        "isi_max_min_ratio": 3.489564698867025,
+        "cycle_normalized_max_error": null,
+        "best_short_lag_normalized_mae": 0.3225836848175066,
+        "stationarity": {
+          "quarter_length_steps": 37500,
+          "normalized_mean_shift_by_state": [
+            0.0013460774428052135,
+            0.029413044729066612,
+            0.3999110027218246
+          ],
+          "normalized_std_shift_by_state": [
+            0.010095366614577604,
+            0.057359152304797066,
+            0.09831367029467203
+          ],
+          "maximum_normalized_mean_shift": 0.3999110027218246,
+          "maximum_normalized_std_shift": 0.09831367029467203
+        },
+        "lyapunov_1500_time_units": {
+          "estimation_time": 1500.0,
+          "largest_lyapunov_exponent": 0.01313212275727469,
+          "tail_std": 0.0011248692244228396,
+          "ratio_to_tail_std": 11.674355091377548
+        }
+      },
+      "lyapunov_5000_time_units": {
+        "estimation_time": 5000.0,
+        "largest_lyapunov_exponent": 0.010561495431329443,
+        "tail_std": 0.0004652211238734443,
+        "ratio_to_tail_std": 22.702097753846886
+      }
+    }
+  ]
+}
